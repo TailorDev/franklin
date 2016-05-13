@@ -1,5 +1,5 @@
 {
-  "presets": ["es2015", "stage-0", "react", "airbnb"],
+  "presets": ["airbnb"],
   "env": {
     "dev": {
       "plugins": ["react-hot-loader/babel"]

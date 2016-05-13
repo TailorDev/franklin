@@ -106,10 +106,6 @@ if (TARGET === 'build') {
       // The filename of non-entry chunks
       chunkFilename: '[chunkhash].js'
     },
-    module: {
-      loaders: [
-      ]
-    },
     plugins: [
       new webpack.DefinePlugin({
         'process.env': {
