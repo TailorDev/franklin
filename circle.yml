@@ -1,0 +1,10 @@
+machine:
+  node:
+    version: 5.1.0
+  environment:
+    MOCHA_FILE: "$CIRCLE_TEST_REPORTS/test-results.xml"
+
+test:
+  override:
+    - npm run lint
+    - npm run test:ci
