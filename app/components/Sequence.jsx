@@ -9,7 +9,7 @@ const Sequence = (props) => (
   <g>
     {props.nucleotides.map((nucleotide, index) =>
       <Nucleotide
-        x={5 + (10 * index)}
+        x={5 + (12 * index)}
         y={30}
         type={nucleotide}
         position={0}

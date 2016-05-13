@@ -1,0 +1,23 @@
+@charset 'utf-8';
+
+// Overridde foundation settings
+@import 'settings';
+
+/* -- Foundation stuffs -- */
+@import '~foundation-sites/scss/foundation';
+@include foundation-global-styles;
+@include foundation-typography;
+@include foundation-forms;
+@include foundation-button;
+
+/* -- Monod styles -- */
+
+// Application layout
+@import 'layout';
+@import 'fonts';
+
+// Components
+@import 'components/header';
+@import 'components/footer';
+@import 'components/toolbar';
+@import 'components/visualizer';

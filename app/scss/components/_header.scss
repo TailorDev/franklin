@@ -1,0 +1,16 @@
+/*
+ * Header component
+ */
+
+header.main {
+  background-color: $dark-yeah;
+
+  h1 {
+    margin-left: 1rem;
+    color: $kashmir;
+
+    small {
+      color: $yeah;
+    }
+  }
+}

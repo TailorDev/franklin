@@ -13,10 +13,12 @@ const someNucleotides = 'AAACGAAAACT'.split('');
 const App = (props) =>
   <div className="layout">
     <Header />
-    <Visualizer
-      nucleotides={someNucleotides}
-    />
-    <Toolbar />
+    <div className="content">
+      <Visualizer
+        nucleotides={someNucleotides}
+      />
+      <Toolbar />
+    </div>
     <Footer version={props.version} />
   </div>
   ;

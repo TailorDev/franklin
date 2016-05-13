@@ -23,7 +23,7 @@ export default () => (
     <div className="export">
       <h4>Export</h4>
 
-      <button>Download SVG</button>
+      <button className="button">Download SVG</button>
     </div>
   </div>
 );

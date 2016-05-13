@@ -5,6 +5,8 @@ const childProcess = require('child_process');
 
 // Webpack plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // Read `package.json` file
 const pkg = require('./package.json');
@@ -64,6 +66,12 @@ const common = {
         test: /\.jsx?$/,
         loaders: ['babel'],
         include: PATHS.app
+      },
+      // Franklin fonts
+      {
+        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        loaders: ['file?name=[path][name].[ext]&context=./app'],
+        include: PATHS.app
       }
     ]
   },
@@ -89,6 +97,16 @@ if (TARGET === 'dev' || !TARGET) {
       'webpack/hot/only-dev-server',
       PATHS.app
     ],
+    module: {
+      loaders: [
+        {
+          test: /\.scss$/,
+          // Loaders are applied from right to left
+          loaders: ['style', 'css', 'sass'],
+          include: PATHS.app
+        }
+      ]
+    },
     plugins: [
       new webpack.HotModuleReplacementPlugin()
     ]
@@ -106,12 +124,24 @@ if (TARGET === 'build') {
       // The filename of non-entry chunks
       chunkFilename: '[chunkhash].js'
     },
+    module: {
+      loaders: [
+        // Extract CSS during build
+        {
+          test: /\.(css|scss)$/,
+          loader: ExtractTextPlugin.extract('style', 'css!sass')
+        }
+      ]
+    },
     plugins: [
       new webpack.DefinePlugin({
         'process.env': {
           'NODE_ENV': JSON.stringify('production')
         }
       }),
+      new CleanPlugin([ PATHS.build ]),
+      // Output extracted CSS to a file
+      new ExtractTextPlugin('[name].[chunkhash].css'),
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.OccurrenceOrderPlugin(),
       // Minification with Uglify

@@ -1,0 +1,32 @@
+/*
+ * Palette
+ * cf. http://www.colourlovers.com/palette/1319037/Whoa_CSL!_Yeah!
+ */
+$oh-baby: #FF2865;
+$kashmir: #A35682;
+$light-yeah: #D91178;
+$yeah: #611752;
+$dark-yeah: #26222E;
+$grey: #f6f6f6;
+
+/* -- Foundation overridden settings -- */
+
+// Colors
+$foundation-palette: (
+  primary: $kashmir,
+  secondary: $dark-yeah,
+  alert: $oh-baby
+);
+
+// Global
+$global-radius: 5px;
+$global-rounded: 1000px;
+
+// Fonts
+$common-font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+$body-font-family: 'LatoLatinLight', $common-font-family;
+$header-font-family: 'LatoLatin', $common-font-family;
+
+/* -- Franklin settings -- */
+$footer-font-family: 'LatoLatin', $common-font-family;
+$footer-font-size: 0.8rem;
