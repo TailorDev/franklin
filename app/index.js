@@ -1,14 +1,18 @@
-import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
+
 import App from './components/App';
 
-const rootEl = document.getElementById('root');
+
+const appElement = document.getElementById('root');
+const appVersion = appElement.getAttribute('data-app-version');
+
 ReactDOM.render(
   <AppContainer>
-    <App />
+    <App version={appVersion} />
   </AppContainer>,
-  rootEl
+  appElement
 );
 
 if (module.hot) {
@@ -16,9 +20,9 @@ if (module.hot) {
     const NextApp = require('./components/App').default;
     ReactDOM.render(
       <AppContainer>
-        <NextApp />
+        <NextApp version={appVersion} />
       </AppContainer>,
-      rootEl
+      appElement
     );
   });
 }
