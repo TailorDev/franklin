@@ -1,0 +1,10 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "yoda": [1, "always"]
+  }
+}
