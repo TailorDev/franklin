@@ -25,7 +25,7 @@ const Visualizer = (props) =>
 ;
 
 Visualizer.propTypes = {
-  nucleotides: array.isRequired
+  nucleotides: array.isRequired,
 };
 
 export default Visualizer;
