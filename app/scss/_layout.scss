@@ -1,6 +1,6 @@
 /*
- * Franklin Layout
- */
+* Franklin Layout
+*/
 
 /* -- variables -- */
 $main-header-height: 70px;
@@ -9,50 +9,44 @@ $vertical-handler-width: 40px;
 
 /* -- mixins -- */
 @function header-height($breakpoint) {
-    @if $breakpoint == small {
-        @return $main-header-height * .5;
-    }
-    @return $main-header-height;
+   @if $breakpoint == small{
+    @return $main-header-height * .5;
+  }
+  @return $main-header-height;
 };
-
-@function editor-height($breakpoint){
-    $header-footer-height: header-height($breakpoint) + footer-height($breakpoint);
-
-    @return calc(100vh - #{$header-footer-height});
+@function editor-height($breakpoint) {
+  $header-footer-height: header-height($breakpoint) + footer-height($breakpoint);
+  @return calc(100vh - #{$header-footer-height});
 };
-
 @function footer-height($breakpoint) {
-    @if $breakpoint == small {
-        @return $main-footer-height * .9;
-    }
-    @return $main-footer-height;
+   @if $breakpoint == small{
+    @return $main-footer-height * .9;
+  }
+  @return $main-footer-height;
 };
 
 /* -- styles -- */
 .layout {
-    header.main {
-        height: header-height(small);
-
-        @include breakpoint(medium) {
-            height: header-height(medium);
-        }
+  header.main {
+    height: header-height(small);
+    @include breakpoint(medium) {
+      height: header-height(medium);
     }
+  }
 
-    .content {
-        display: flex;
-        height: editor-height(small);
-        width: 100%;
-
-        @include breakpoint(medium) {
-            height: editor-height(medium);
-        }
+  .content {
+    display: flex;
+    height: editor-height(small);
+    width: 100%;
+    @include breakpoint(medium) {
+      height: editor-height(medium);
     }
+  }
 
-    footer.main {
-        height: footer-height(small);
-
-        @include breakpoint(medium) {
-            height: footer-height(medium);
-        }
+  footer.main {
+    height: footer-height(small);
+    @include breakpoint(medium) {
+      height: footer-height(medium);
     }
+  }
 }
