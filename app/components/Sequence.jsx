@@ -12,7 +12,7 @@ const Sequence = (props) => (
         x={5 + (12 * index)}
         y={30}
         type={nucleotide}
-        position={0}
+        position={index + 1}
         key={index}
       />
     )}

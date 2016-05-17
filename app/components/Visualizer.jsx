@@ -14,11 +14,10 @@ const Visualizer = (props) =>
     version="1.1"
     baseProfile="full"
     width="75%"
-    height="600"
     xmlns="http://www.w3.org/2000/svg"
     className="visualizer"
   >
-    <rect width="100%" height="100%" style={rectStyle} rx="5" />
+    <rect width="100%" style={rectStyle} rx="5" />
 
     <Sequence nucleotides={props.nucleotides} />
   </svg>

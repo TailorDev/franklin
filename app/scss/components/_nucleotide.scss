@@ -1,0 +1,32 @@
+.nucleotide {
+  fill: transparent;
+
+  text {
+    font-family: Consolas, 'Courier new';
+    font-size: 20;
+    fill: #333;
+
+    &:hover {
+      fill: #ff639f;
+      cursor: pointer;
+    }
+  }
+
+  .position {
+    visibility: hidden;
+  }
+
+  &:hover {
+    .position {
+      visibility: visible;
+    }
+
+    rect {
+      fill: #ff9071;
+    }
+
+    text {
+      fill: #fff;
+    }
+  }
+}

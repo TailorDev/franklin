@@ -57,7 +57,13 @@ const common = {
   },
   module: {
     // Loaders that run *before* others loaders
+    // Loaders that run *before* others loaders
     preLoaders: [
+      {
+        test: /\.jsx?$/,
+        loaders: ['eslint'],
+        include: PATHS.app
+      }
     ],
     // Loaders are transformations that are applied on a resource file of
     // an application
