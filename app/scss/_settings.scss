@@ -1,12 +1,13 @@
 /*
  * Palette
- * cf. http://www.colourlovers.com/palette/1319037/Whoa_CSL!_Yeah!
+ * cf. http://www.colorhunt.co/c/30285
  */
-$oh-baby: #FF2865;
-$kashmir: #A35682;
-$light-yeah: #D91178;
-$yeah: #611752;
-$dark-yeah: #26222E;
+$oh-baby: #efecea;
+$kashmir: #e04462;
+$kitty: #f9c535;
+$yeah: #334854;
+$light-yeah: lighten($yeah, 10%);
+$dark-yeah: darken($yeah, 10%);
 $grey: #f6f6f6;
 
 /* -- Foundation overridden settings -- */
