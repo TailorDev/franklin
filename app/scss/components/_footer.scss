@@ -5,7 +5,7 @@
 footer.main {
   padding: 0.5rem 1rem;
   background-color: $dark-yeah;
-  color: $white;
+  color: $oh-baby;
   font-family: $footer-font-family;
   font-size: $footer-font-size;
 
@@ -18,9 +18,9 @@ footer.main {
     margin-top: 0.1rem;
 
     .git-ref {
-      padding: 0.3rem 0.5rem 0.3rem;
+      padding: 0.3rem 0.5rem;
       border-radius: $global-radius;
-      background-color: $yeah;
+      background-color: $light-yeah;
       color: $white;
     }
   }
