@@ -49,8 +49,8 @@ export default class App extends Component {
           <Dropzone
             className="dropzone"
             onDrop={this.onDrop}
-            disableClick="true"
-            multiple="false"
+            disableClick
+            multiple={false}
           >
             <Visualizer
               {...this.state}

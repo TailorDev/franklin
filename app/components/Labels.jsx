@@ -72,8 +72,12 @@ export default class Labels extends React.Component {
 
     return (
       <ul className="annotations">
-        {this.state.labels.map((label) =>
-          <Label name={label.name} color={label.color} />
+        {this.state.labels.map((label, index) =>
+          <Label
+            name={label.name}
+            color={label.color}
+            key={index}
+          />
         )}
 
         <li className="annotation new">
