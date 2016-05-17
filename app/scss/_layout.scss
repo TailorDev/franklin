@@ -41,6 +41,16 @@ $vertical-handler-width: 40px;
     @include breakpoint(medium) {
       height: editor-height(medium);
     }
+
+    .dropzone {
+      height: 100%;
+      flex: 1 1 50%;
+    }
+
+    .toolbar {
+      height: 100%;
+      width: 300px;
+    }
   }
 
   footer.main {
