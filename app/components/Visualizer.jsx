@@ -20,12 +20,12 @@ const Visualizer = (props) =>
   >
     <rect width="100%" height="100%" style={rectStyle} rx="5" />
 
-    <Sequence nucleotides={props.nucleotides} />
+    <Sequence sequence={props.sequence} />
   </svg>
 ;
 
 Visualizer.propTypes = {
-  nucleotides: array.isRequired,
+  sequence: array.isRequired,
 };
 
 export default Visualizer;

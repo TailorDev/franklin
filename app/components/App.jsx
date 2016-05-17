@@ -9,13 +9,13 @@ import Footer from './Footer';
 const { string } = PropTypes;
 
 
-const someNucleotides = 'AAACGAAAACT'.split('');
+const sequenceSample = 'AAACGAAAACT'.split('');
 
 export default class App extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { nucleotides: someNucleotides };
+    this.state = { sequence: sequenceSample };
 
     this.reader = new FileReader();
 
@@ -26,10 +26,10 @@ export default class App extends Component {
   onFileLoadEnd(evt) {
     if (evt.target.readyState === FileReader.DONE) {
       const parts = evt.target.result.split('\n');
-      const sequence = parts.slice(1).join('');
+      const sequenceString = parts.slice(1).join('');
 
       this.setState({
-        nucleotides: sequence.split(''),
+        sequence: sequenceString.split(''),
       });
     }
   }
@@ -51,7 +51,7 @@ export default class App extends Component {
             className="dropzone"
           >
             <Visualizer
-              nucleotides={this.state.nucleotides}
+              sequence={this.state.sequence}
             />
           </Dropzone>
           <Toolbar />
