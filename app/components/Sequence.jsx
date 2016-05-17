@@ -7,7 +7,7 @@ const { array } = PropTypes;
 
 const Sequence = (props) => (
   <g>
-    {props.nucleotides.map((nucleotide, index) =>
+    {props.sequence.map((nucleotide, index) =>
       <Nucleotide
         x={5 + (12 * index)}
         y={30}
@@ -20,7 +20,7 @@ const Sequence = (props) => (
 );
 
 Sequence.propTypes = {
-  nucleotides: array.isRequired,
+  sequence: array.isRequired,
   // TODO: add other attrs, cf. https://github.com/TailorDev/franklin/issues/3
 };
 

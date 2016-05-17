@@ -15,7 +15,7 @@ describe('<Sequence />', () => {
   it('renders as many Nucleotide as needed', () => {
     const wrapper = shallow(
       <Sequence
-        nucleotides={sequence}
+        sequence={sequence}
       />
     );
     expect(wrapper.find(Nucleotide)).to.have.length(sequence.length);

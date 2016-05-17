@@ -13,18 +13,19 @@ const Visualizer = (props) =>
   <svg
     version="1.1"
     baseProfile="full"
-    width="75%"
+    width="100%"
+    height="100%"
     xmlns="http://www.w3.org/2000/svg"
     className="visualizer"
   >
-    <rect width="100%" style={rectStyle} rx="5" />
+    <rect width="100%" height="100%" style={rectStyle} rx="5" />
 
-    <Sequence nucleotides={props.nucleotides} />
+    <Sequence sequence={props.sequence} />
   </svg>
 ;
 
 Visualizer.propTypes = {
-  nucleotides: array.isRequired,
+  sequence: array.isRequired,
 };
 
 export default Visualizer;

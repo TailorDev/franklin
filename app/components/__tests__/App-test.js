@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { expect } from 'chai';
 
 // see: https://github.com/mochajs/mocha/issues/1847
@@ -13,7 +13,7 @@ describe('<App />', () => {
   const version = 'dummy';
 
   it('renders Header component', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <App
         version={version}
       />
