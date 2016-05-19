@@ -5,7 +5,8 @@ const { bool, func, number, string } = PropTypes;
 export default class Nucleotide extends Component {
 
   shouldComponentUpdate(nextProps) {
-    return this.props.isSelected !== nextProps.isSelected;
+    return (this.props.isSelected !== nextProps.isSelected) ||
+     (this.props.isInSelectionRange !== nextProps.isInSelectionRange);
   }
 
   render() {
@@ -16,13 +17,19 @@ export default class Nucleotide extends Component {
         transform={`translate(${this.props.x}, ${this.props.y})`}
         onClick={this.props.onClick}
       >
-        <text x="5" y="43" fill="#333">{this.props.type}</text>
+        <g
+          className={
+            this.props.isInSelectionRange ? 'type in-selection' : 'type'
+          }
+        >
+          <text x="5" y="43">{this.props.type}</text>
+        </g>
 
         <g
           className={this.props.isSelected ? 'position selected' : 'position'}
         >
           <rect
-            className="background"
+            className="position-background"
             x={-(this.props.position.toString().length - 1) * 10 / 2}
             y="0"
             width={this.props.position.toString().length * 10 + 10}
@@ -32,7 +39,7 @@ export default class Nucleotide extends Component {
           />
 
           <rect
-            className="border"
+            className="type-highlight"
             x="0"
             y="20"
             width="20"
@@ -61,6 +68,7 @@ Nucleotide.propTypes = {
   type: string.isRequired,
   position: number.isRequired,
   isSelected: bool.isRequired,
+  isInSelectionRange: bool.isRequired,
   // events
   onClick: func.isRequired,
 };

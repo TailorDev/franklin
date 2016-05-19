@@ -6,13 +6,27 @@
     font-size: 20;
   }
 
+  .type {
+    fill: $body-font-color;
+
+    &.in-selection {
+      text {
+        fill: $primary-color;
+      }
+    }
+  }
+
   .position {
     visibility: hidden;
     stroke: $light-yeah;
     stroke-width: 6;
 
-    .background {
+    .position-background {
       fill: $light-yeah;
+    }
+
+    .type-highlight {
+      stroke-opacity: 0.2;
     }
 
     text {
@@ -24,7 +38,7 @@
       visibility: visible;
       stroke: $primary-color;
 
-      .background {
+      .position-background {
         fill: $primary-color;
       }
     }

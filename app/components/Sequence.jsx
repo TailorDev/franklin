@@ -50,6 +50,10 @@ export default class Sequence extends Component {
                 position={index + 1}
                 key={index}
                 isSelected={this.state.selection.includes(index)}
+                isInSelectionRange={
+                  index <= this.state.selection.max() &&
+                  index >= this.state.selection.min()
+                }
                 onClick={boundClick}
               />
             );
