@@ -14,11 +14,21 @@ export default class Sequence extends Component {
     };
   }
 
+  clearSelection() {
+    this.setState({ selection: this.state.selection.clear() });
+  }
+
   updateSelection(selected) {
-    this.setState({
-      selection: this.state.selection.has(selected) ?
-        this.state.selection.delete(selected) :
-        this.state.selection.add(selected),
+    this.setState((previousState) => {
+      let previousSelection = previousState.selection;
+      if (2 <= previousState.selection.size) {
+        previousSelection = previousState.selection.slice(1);
+      }
+      return {
+        selection: previousSelection.has(selected) ?
+          previousSelection.delete(selected) :
+          previousSelection.add(selected),
+      };
     });
   }
 
