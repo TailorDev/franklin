@@ -4,29 +4,37 @@
   text {
     font-family: Consolas, 'Courier new';
     font-size: 20;
-    fill: #333;
-
-    &:hover {
-      fill: #ff639f;
-      cursor: pointer;
-    }
   }
 
   .position {
     visibility: hidden;
-  }
+    stroke: $light-yeah;
+    stroke-width: 6;
 
-  &:hover {
-    .position {
-      visibility: visible;
-    }
-
-    rect {
-      fill: #ff9071;
+    .background {
+      fill: $light-yeah;
     }
 
     text {
-      fill: #fff;
+      stroke-width: 0;
+      fill: $white;
+    }
+
+    &.selected {
+      visibility: visible;
+      stroke: $primary-color;
+
+      .background {
+        fill: $primary-color;
+      }
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    .position {
+      visibility: visible;
     }
   }
 }

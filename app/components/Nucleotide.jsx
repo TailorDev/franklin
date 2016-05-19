@@ -3,12 +3,44 @@ import React, { PropTypes } from 'react';
 const { number, string } = PropTypes;
 
 const Nucleotide = (props) => (
-  <g className="nucleotide" title="click to start selection">
-    <rect x={props.x - 7} y="0" rx="2" ry="2" width="22" height="20" />
-    <text x={props.x - 5} y="15" className="position">{props.position}</text>
-    <rect x={props.x - 3} y="15" rx="5" ry="5" width="15" height="20" />
+  <g
+    className="nucleotide"
+    title="click to start selection"
+    transform={`translate(${props.x}, ${props.y})`}
+  >
+    <text x="5" y="43" fill="#333">{props.type}</text>
 
-    <text x={props.x} y={props.y}>{props.type}</text>
+    <g
+      className="position"
+    >
+      <rect
+        className="background"
+        x={-(props.position.toString().length - 1) * 10 / 2}
+        y="0"
+        width={props.position.toString().length * 10 + 10}
+        height="25"
+        rx="2"
+        ry="2"
+      />
+
+      <rect
+        className="border"
+        x="0"
+        y="20"
+        width="20"
+        height="30"
+        rx="5"
+        ry="5"
+      />
+
+      <text
+        x={5 - ((props.position.toString().length - 1) * 10 / 2)}
+        y="18"
+      >
+        {props.position}
+      </text>
+
+    </g>
   </g>
 );
 
