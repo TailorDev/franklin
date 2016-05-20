@@ -4,5 +4,11 @@
 
 .visualizer {
   padding-left: 1rem;
-  background-color: #f6f6f6;
+  max-height: 100%;
+  overflow-y: scroll;
+  background-color: $grey;
+
+  svg {
+    fill: $grey;
+  }
 }

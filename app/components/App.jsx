@@ -15,7 +15,10 @@ export default class App extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { sequence: sequenceSample };
+    this.state = {
+      sequence: sequenceSample,
+      nucleotidesPerRow: 80,
+    };
 
     this.reader = new FileReader();
 
@@ -52,6 +55,7 @@ export default class App extends Component {
           >
             <Visualizer
               sequence={this.state.sequence}
+              nucleotidesPerRow={this.state.nucleotidesPerRow}
             />
           </Dropzone>
           <Toolbar />
