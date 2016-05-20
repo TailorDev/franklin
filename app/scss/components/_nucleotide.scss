@@ -4,29 +4,51 @@
   text {
     font-family: Consolas, 'Courier new';
     font-size: 20;
-    fill: #333;
+  }
 
-    &:hover {
-      fill: #ff639f;
-      cursor: pointer;
+  .type {
+    fill: $body-font-color;
+
+    &.in-selection {
+      text {
+        fill: $primary-color;
+      }
     }
   }
 
   .position {
     visibility: hidden;
-  }
+    stroke: $light-yeah;
+    stroke-width: 6;
 
-  &:hover {
-    .position {
-      visibility: visible;
+    .position-background {
+      fill: $light-yeah;
     }
 
-    rect {
-      fill: #ff9071;
+    .type-highlight {
+      stroke-opacity: 0.2;
     }
 
     text {
-      fill: #fff;
+      stroke-width: 0;
+      fill: $white;
+    }
+
+    &.selected {
+      visibility: visible;
+      stroke: $primary-color;
+
+      .position-background {
+        fill: $primary-color;
+      }
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    .position {
+      visibility: visible;
     }
   }
 }
