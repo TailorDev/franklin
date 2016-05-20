@@ -17,7 +17,6 @@ export default class App extends Component {
 
     this.state = {
       sequence: sequenceSample,
-      nucleotidesPerRow: 80,
     };
 
     this.reader = new FileReader();
@@ -48,14 +47,13 @@ export default class App extends Component {
 
         <div className="content">
           <Dropzone
+            className="dropzone"
             onDrop={this.onDrop}
             disableClick="true"
             multiple="false"
-            className="dropzone"
           >
             <Visualizer
-              sequence={this.state.sequence}
-              nucleotidesPerRow={this.state.nucleotidesPerRow}
+              {...this.state}
             />
           </Dropzone>
           <Toolbar />
