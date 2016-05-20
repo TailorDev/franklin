@@ -9,6 +9,22 @@ export default class Nucleotide extends Component {
      (this.props.isInSelectionRange !== nextProps.isInSelectionRange);
   }
 
+  getPositionLength() {
+    return this.props.position.toString().length;
+  }
+
+  getPositionBackgroundXCoordinate() {
+    return -(this.getPositionLength() - 1) * 10 / 2;
+  }
+
+  getPositionBackgroundWidth() {
+    return this.getPositionLength() * 10 + 10;
+  }
+
+  getPositionTextXCoordinate() {
+    return 5 - ((this.getPositionLength() - 1) * 10 / 2);
+  }
+
   render() {
     return (
       <g
@@ -30,9 +46,9 @@ export default class Nucleotide extends Component {
         >
           <rect
             className="position-background"
-            x={-(this.props.position.toString().length - 1) * 10 / 2}
+            x={this.getPositionBackgroundXCoordinate()}
             y="0"
-            width={this.props.position.toString().length * 10 + 10}
+            width={this.getPositionBackgroundWidth()}
             height="25"
             rx="2"
             ry="2"
@@ -49,7 +65,7 @@ export default class Nucleotide extends Component {
           />
 
           <text
-            x={5 - ((this.props.position.toString().length - 1) * 10 / 2)}
+            x={this.getPositionTextXCoordinate()}
             y="18"
           >
             {this.props.position}
