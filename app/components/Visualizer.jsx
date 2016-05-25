@@ -9,6 +9,7 @@ export default class Visualizer extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this.lastResize = Date.now();
     this.state = {
       nucleotidesPerRow: 80,
       rowHeight: 50,
@@ -18,8 +19,22 @@ export default class Visualizer extends Component {
     };
   }
 
+  componentDidMount() {
+    window.addEventListener(
+      'resize',
+      () => { this.handleResize(this.props.sequence); }
+    );
+  }
+
   componentWillReceiveProps(nextProps) {
     this.updateVisualizerDimensions(nextProps.sequence);
+  }
+
+  handleResize(sequence) {
+    if (500 < (Date.now() - this.lastResize)) {
+      this.lastResize = Date.now();
+      this.updateVisualizerDimensions(sequence);
+    }
   }
 
   updateVisualizerDimensions(sequence) {
@@ -27,7 +42,6 @@ export default class Visualizer extends Component {
     // Width must fit the wrapper maximal dimension, i.e. 100%
     const width = this.refs.wrapper.clientWidth;
     const nt = Math.trunc((width - 20) / nucleotideWidth);
-    console.log('nucleotidesPerRow', nt);
     // Should contain each row
     const height = 10 + (Math.trunc(sequence.length / nt) + 1) * rowHeight;
     this.setState({

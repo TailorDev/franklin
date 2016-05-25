@@ -1,0 +1,20 @@
+@import 'settings';
+@function header-height($breakpoint) {
+   @if $breakpoint == small{
+    @return $main-header-height * .5;
+  }
+  @return $main-header-height;
+};
+@function editor-height($breakpoint) {
+  $header-footer-height: header-height($breakpoint) + footer-height($breakpoint);
+  @return calc(100vh - #{$header-footer-height});
+};
+@function footer-height($breakpoint) {
+   @if $breakpoint == small{
+    @return $main-footer-height * .9;
+  }
+  @return $main-footer-height;
+};
+@function visualizer-width() {
+   @return calc(100vw - #{$toolbar-width});
+};

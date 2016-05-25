@@ -10,14 +10,15 @@ $light-yeah: lighten($yeah, 10%);
 $dark-yeah: darken($yeah, 10%);
 $grey: #f6f6f6;
 
+/* -- Layout -- */
+$main-header-height: 70px;
+$main-footer-height: 35px;
+$toolbar-width: 300px;
+
 /* -- Foundation overridden settings -- */
 
 // Colors
-$foundation-palette: (
-  primary: $kashmir,
-  secondary: $dark-yeah,
-  alert: $oh-baby
-);
+$foundation-palette: ( primary: $kashmir, secondary: $dark-yeah, alert: $oh-baby );
 
 // Global
 $global-radius: 5px;

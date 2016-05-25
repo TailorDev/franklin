@@ -6,7 +6,8 @@ export default class Nucleotide extends Component {
 
   shouldComponentUpdate(nextProps) {
     return (this.props.isSelected !== nextProps.isSelected) ||
-     (this.props.isInSelectionRange !== nextProps.isInSelectionRange);
+      (this.props.isInSelectionRange !== nextProps.isInSelectionRange) ||
+      (this.props.x !== nextProps.x) || (this.props.y !== nextProps.y);
   }
 
   getPositionLength() {

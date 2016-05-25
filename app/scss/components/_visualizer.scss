@@ -1,12 +1,13 @@
 /*
  * Visualizer component
  */
+@import '../mixins';
 
 .visualizer {
-  width: 100%;
+  width: visualizer-width();
   height: 100%;
   max-height: 100%;
-  overflow-y: scroll;
+  overflow: scroll;
   background-color: $grey;
 
   svg {
