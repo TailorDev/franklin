@@ -6,6 +6,8 @@ export default class Controller {
 
     this.events.on('action:drop-file', this.onDropFile.bind(this));
     this.events.on('action:new-label', this.onNewLabel.bind(this));
+    this.events.on('action:clear-selection', this.onClearSelection.bind(this));
+    this.events.on('action:update-selection', this.onUpdateSelection.bind(this));
   }
 
   on(events, callback) {
@@ -24,5 +26,13 @@ export default class Controller {
 
   onNewLabel({ label }) {
     this.store.addNewLabel(label);
+  }
+
+  onClearSelection() {
+    this.store.clearSelection();
+  }
+
+  onUpdateSelection({ selected }) {
+    this.store.updateSelection(selected);
   }
 }

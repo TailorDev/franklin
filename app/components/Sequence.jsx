@@ -3,38 +3,21 @@ import Immutable from 'immutable';
 
 import Nucleotide from './Nucleotide';
 
-const { instanceOf, number } = PropTypes;
+const { object, instanceOf, number } = PropTypes;
 
 export default class Sequence extends Component {
 
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      selection: new Immutable.OrderedSet(),
-    };
+  shouldComponentUpdate(nextProps) {
+    return (this.props.sequence !== nextProps.sequence) ||
+      (this.props.nucleotidesPerRow !== nextProps.nucleotidesPerRow);
   }
 
   clearSelection() {
-    this.setState({ selection: this.state.selection.clear() });
-  }
-
-  updateSelection(selected) {
-    this.setState((previousState) => {
-      let previousSelection = previousState.selection;
-      if (2 <= previousState.selection.size) {
-        previousSelection = previousState.selection.slice(1);
-      }
-      return {
-        selection: previousSelection.has(selected) ?
-          previousSelection.delete(selected) :
-          previousSelection.add(selected),
-      };
-    });
+    this.context.controller.dispatch('action:clear-selection');
   }
 
   handleNucleotideClick(newIndex) {
-    this.updateSelection(newIndex);
+    this.context.controller.dispatch('action:update-selection', { selected: newIndex });
   }
 
   render() {
@@ -54,11 +37,7 @@ export default class Sequence extends Component {
                 type={nucleotide}
                 position={index + 1}
                 key={index}
-                isSelected={this.state.selection.includes(index)}
-                isInSelectionRange={
-                  index <= this.state.selection.max() &&
-                  index >= this.state.selection.min()
-                }
+                index={index}
                 onClick={boundClick}
               />
             );
@@ -75,4 +54,8 @@ Sequence.propTypes = {
   rowHeight: number.isRequired,
   nucleotideWidth: number.isRequired,
   // TODO: add other attrs, cf. https://github.com/TailorDev/franklin/issues/3
+};
+
+Sequence.contextTypes = {
+  controller: object.isRequired,
 };

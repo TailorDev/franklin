@@ -14,6 +14,8 @@ const appElement = document.getElementById('root');
 const appVersion = appElement.getAttribute('data-app-version');
 
 const events = new EventEmitter();
+events.setMaxListeners(0);
+
 const store = new Store(events);
 const controller = new Controller({ store }, events);
 
