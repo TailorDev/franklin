@@ -5,7 +5,7 @@ const { string } = PropTypes;
 
 const Label = (props) =>
   <li className="annotation">
-    <span style={{ backgroundColor: props.color }}>&nbsp;</span> {props.name}
+    <i className="fa fa-tag" aria-hidden="true" style={{ color: props.color }}></i> {props.name}
   </li>
 ;
 

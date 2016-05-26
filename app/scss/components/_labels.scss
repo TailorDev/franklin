@@ -13,21 +13,11 @@ ul.annotations {
       opacity: 0.3;
     }
 
-    span:not(.colorpicker-button) {
-      display: inline-block;
-      position: relative;
-      top: 6px;
-      width: 14px;
-      height: 14px;
-      border-radius: 100px;
-      margin-right: 0.4rem;
-    }
-
     &.new {
       margin-top: 1rem;
 
       .colorpicker-button {
-        color: $white;
+        color: $body-font-color;
 
         &:hover {
           cursor: pointer;

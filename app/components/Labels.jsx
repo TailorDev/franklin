@@ -9,7 +9,7 @@ const { instanceOf, func } = PropTypes;
 
 const defaultLabel = {
   name: '',
-  color: '#1abc9c',
+  color: '#f6f6f6',
 };
 
 export default class Labels extends Component {
