@@ -23,10 +23,4 @@ describe('<Visualizer />', () => {
     expect(wrapper.instance().state.visualizerWidth).to.equal('100%');
     expect(wrapper.instance().state.visualizerHeight).to.equal('100%');
   });
-
-  it('updates SVG dimensions when resizing browser window', () => {
-    // TODO
-    // We need a headless browser like PhantomJS to ensure full DOM rendering
-    // with element properties like element.clientWidth
-  });
 });
