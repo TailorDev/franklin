@@ -100,7 +100,7 @@ export default class Labels extends Component {
             <input
               type="text"
               value={this.state.newLabel.name}
-              placeholder="Tag name"
+              placeholder="Label name"
               className="input-group-field"
               onChange={this.handleNameChange}
             />
