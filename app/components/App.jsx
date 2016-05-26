@@ -1,13 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import Dropzone from 'react-dropzone';
 import Immutable from 'immutable';
+import { Events } from '../Store';
 
 import Header from './Header';
 import Visualizer from './Visualizer';
 import Toolbar from './Toolbar';
 import Footer from './Footer';
 
-const { string } = PropTypes;
+const { object, string } = PropTypes;
 
 
 const sequenceSample = 'AAACGAAAACT'.split('');
@@ -34,37 +35,34 @@ export default class App extends Component {
     super(props, context);
 
     this.state = {
-      sequence: sequenceSample,
+      sequence: new Immutable.List(sequenceSample),
       labels: new Immutable.List(someLabels),
     };
 
-    this.reader = new FileReader();
-
-    this.reader.onloadend = this.onFileLoadEnd.bind(this);
     this.onDrop = this.onDrop.bind(this);
     this.onCreateNewLabel = this.onCreateNewLabel.bind(this);
     this.onRemoveLabel = this.onRemoveLabel.bind(this);
   }
 
-  onFileLoadEnd(evt) {
-    if (evt.target.readyState === FileReader.DONE) {
-      const parts = evt.target.result.split('\n');
-      const sequenceString = parts.slice(1).join('');
+  getChildContext() {
+    // Pass the controller to child components.
+    return {
+      controller: this.props.controller,
+    };
+  }
 
-      this.setState({
-        sequence: sequenceString.split(''),
-      });
-    }
+  componentDidMount() {
+    this.props.controller.on(Events.CHANGE, (state) => {
+      this.setState(state);
+    });
   }
 
   onDrop(files) {
-    this.reader.readAsText(files[0]);
+    this.props.controller.dispatch('action:drop-file', { file: files[0] });
   }
 
   onCreateNewLabel(label) {
-    this.setState((previousState) => ({
-      labels: previousState.labels.push(label),
-    }));
+    this.props.controller.dispatch('action:new-label', { label });
   }
 
   onEditLabel(index, label) {
@@ -135,4 +133,9 @@ export default class App extends Component {
 
 App.propTypes = {
   version: string.isRequired,
+  controller: object.isRequired,
+};
+
+App.childContextTypes = {
+  controller: object,
 };

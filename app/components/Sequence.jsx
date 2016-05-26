@@ -1,9 +1,9 @@
-import Immutable from 'immutable';
 import React, { Component, PropTypes } from 'react';
+import Immutable from 'immutable';
 
 import Nucleotide from './Nucleotide';
 
-const { array, number } = PropTypes;
+const { instanceOf, number } = PropTypes;
 
 export default class Sequence extends Component {
 
@@ -46,6 +46,7 @@ export default class Sequence extends Component {
             const boundClick = this.handleNucleotideClick.bind(this, index);
             const x = 10 + (nucleotideWidth * (index % nucleotidesPerRow));
             const y = 10 + (rowHeight * Math.trunc(index / nucleotidesPerRow));
+
             return (
               <Nucleotide
                 x={x}
@@ -69,7 +70,7 @@ export default class Sequence extends Component {
 }
 
 Sequence.propTypes = {
-  sequence: array.isRequired,
+  sequence: instanceOf(Immutable.List).isRequired,
   nucleotidesPerRow: number.isRequired,
   rowHeight: number.isRequired,
   nucleotideWidth: number.isRequired,
