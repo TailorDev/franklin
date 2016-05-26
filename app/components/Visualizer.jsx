@@ -22,12 +22,21 @@ export default class Visualizer extends Component {
   componentDidMount() {
     window.addEventListener(
       'resize',
-      () => { this.handleResize(this.props.sequence); }
+      () => { this.handleResize(this.props.sequence); },
+      false
     );
   }
 
   componentWillReceiveProps(nextProps) {
     this.updateVisualizerDimensions(nextProps.sequence);
+  }
+
+  componentDidUnmount() {
+    window.removeEventListener(
+      'resize',
+      () => { this.handleResize(this.props.sequence); },
+      false
+    );
   }
 
   handleResize(sequence) {
