@@ -47,6 +47,6 @@ describe('<Labels />', () => {
     wrapper.find('.button').simulate('click');
 
     expect(spy.calledOnce).to.be.true;
-    expect(spy.calledWith({ name: 'foo', color: '#ccc' })).to.be.true;
+    expect(spy.calledWith({ name: 'foo', color: '#f6f6f6' })).to.be.true;
   });
 });

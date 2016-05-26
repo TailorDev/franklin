@@ -62,8 +62,10 @@ export default class Labels extends Component {
   }
 
   handleSubmit(event) {
-    // Prevent page reload
-    event.preventDefault();
+    if (event) {
+      // Prevent page reload
+      event.preventDefault();
+    }
     this.props.onCreateNewLabel(this.state.newLabel);
     this.setState({ newLabel: defaultLabel });
   }
