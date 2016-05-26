@@ -13,28 +13,16 @@ const { string } = PropTypes;
 const sequenceSample = 'AAACGAAAACT'.split('');
 const someLabels = [
   {
-    name: 'Poke',
-    color: '#aaa',
-  },
-  {
-    name: 'Lambda',
-    color: '#ddd',
+    name: 'Exon',
+    color: '#334854',
   },
   {
     name: 'Primer',
-    color: '#f00',
+    color: '#f9c535',
   },
   {
     name: 'SNP',
-    color: '#f0f',
-  },
-  {
-    name: 'Lambda',
-    color: '#ccc',
-  },
-  {
-    name: 'Second',
-    color: '#00f',
+    color: '#e04462',
   },
 ];
 
