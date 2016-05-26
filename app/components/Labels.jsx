@@ -66,6 +66,12 @@ export default class Labels extends Component {
       // Prevent page reload
       event.preventDefault();
     }
+
+    // Prevent empty label name
+    if (!this.state.newLabel.name.length) {
+      return;
+    }
+
     this.props.onCreateNewLabel(this.state.newLabel);
     this.setState({ newLabel: defaultLabel });
   }
