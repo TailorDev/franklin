@@ -16,6 +16,9 @@ describe('<Sequence />', () => {
     const wrapper = mount(
       <Sequence
         sequence={sequence}
+        nucleotidesPerRow={5}
+        rowHeight={50}
+        nucleotideWidth={12}
       />
     );
     expect(wrapper.find(Nucleotide)).to.have.length(sequence.length);
@@ -45,6 +48,9 @@ describe('<Sequence />', () => {
     const wrapper = mount(
       <Sequence
         sequence={sequence}
+        nucleotidesPerRow={80}
+        rowHeight={50}
+        nucleotideWidth={12}
       />
     );
     wrapper.find('.nucleotide').first().simulate('click');
@@ -58,6 +64,9 @@ describe('<Sequence />', () => {
     const wrapper = mount(
       <Sequence
         sequence={sequence}
+        nucleotidesPerRow={80}
+        rowHeight={50}
+        nucleotideWidth={12}
       />
     );
     wrapper.find('.nucleotide').first().simulate('click');
@@ -71,6 +80,9 @@ describe('<Sequence />', () => {
     const wrapper = mount(
       <Sequence
         sequence={sequence}
+        nucleotidesPerRow={80}
+        rowHeight={50}
+        nucleotideWidth={12}
       />
     );
     wrapper.find('.nucleotide').first().simulate('click');
@@ -96,6 +108,9 @@ describe('<Sequence />', () => {
     const wrapper = mount(
       <Sequence
         sequence={sequence}
+        nucleotidesPerRow={80}
+        rowHeight={50}
+        nucleotideWidth={12}
       />
     );
     wrapper.find('.nucleotide').first().simulate('click');
