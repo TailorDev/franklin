@@ -70,11 +70,9 @@ export default class App extends Component {
   }
 
   onCreateNewLabel(label) {
-    this.setState((previousState) => {
-      return {
-        labels: previousState.labels.push(label),
-      };
-    });
+    this.setState((previousState) => ({
+      labels: previousState.labels.push(label),
+    }));
   }
 
   render() {

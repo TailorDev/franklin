@@ -1,9 +1,10 @@
 import React, { PropTypes, Component } from 'react';
+import Immutable from 'immutable';
 
 import Label from './Label';
 import { SwatchesPicker } from 'react-color';
 
-const { object, func } = PropTypes;
+const { instanceOf, func } = PropTypes;
 
 
 const defaultLabel = {
@@ -40,28 +41,24 @@ export default class Labels extends Component {
   }
 
   handleColorChange(color) {
-    this.setState((previousState) => {
-      return {
-        newLabel: {
-          name: previousState.newLabel.name,
-          color: color.hex,
-        },
-        displayColorPicker: false,
-      };
-    });
+    this.setState((previousState) => ({
+      newLabel: {
+        name: previousState.newLabel.name,
+        color: color.hex,
+      },
+      displayColorPicker: false,
+    }));
   }
 
   handleNameChange(event) {
     event.persist();
 
-    this.setState((previousState) => {
-      return {
-        newLabel: {
-          name: event.target.value,
-          color: previousState.newLabel.color,
-        },
-      };
-    });
+    this.setState((previousState) => ({
+      newLabel: {
+        name: event.target.value,
+        color: previousState.newLabel.color,
+      },
+    }));
   }
 
   handleSubmit() {
@@ -119,6 +116,6 @@ export default class Labels extends Component {
 }
 
 Labels.propTypes = {
-  labels: object.isRequired,
+  labels: instanceOf(Immutable.List).isRequired,
   onCreateNewLabel: func.isRequired,
 };
