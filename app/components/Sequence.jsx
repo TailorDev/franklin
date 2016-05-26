@@ -3,9 +3,10 @@ import React, { Component, PropTypes } from 'react';
 
 import Nucleotide from './Nucleotide';
 
-const { array } = PropTypes;
+const { array, number } = PropTypes;
 
 export default class Sequence extends Component {
+
   constructor(props, context) {
     super(props, context);
 
@@ -41,11 +42,14 @@ export default class Sequence extends Component {
       <g>
         {
           this.props.sequence.map((nucleotide, index) => {
+            const { rowHeight, nucleotidesPerRow, nucleotideWidth } = this.props;
             const boundClick = this.handleNucleotideClick.bind(this, index);
+            const x = 10 + (nucleotideWidth * (index % nucleotidesPerRow));
+            const y = 10 + (rowHeight * Math.trunc(index / nucleotidesPerRow));
             return (
               <Nucleotide
-                x={5 + (12 * index)}
-                y={30}
+                x={x}
+                y={y}
                 type={nucleotide}
                 position={index + 1}
                 key={index}
@@ -66,5 +70,8 @@ export default class Sequence extends Component {
 
 Sequence.propTypes = {
   sequence: array.isRequired,
+  nucleotidesPerRow: number.isRequired,
+  rowHeight: number.isRequired,
+  nucleotideWidth: number.isRequired,
   // TODO: add other attrs, cf. https://github.com/TailorDev/franklin/issues/3
 };

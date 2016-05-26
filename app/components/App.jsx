@@ -15,7 +15,9 @@ export default class App extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { sequence: sequenceSample };
+    this.state = {
+      sequence: sequenceSample,
+    };
 
     this.reader = new FileReader();
 
@@ -45,13 +47,13 @@ export default class App extends Component {
 
         <div className="content">
           <Dropzone
+            className="dropzone"
             onDrop={this.onDrop}
             disableClick="true"
             multiple="false"
-            className="dropzone"
           >
             <Visualizer
-              sequence={this.state.sequence}
+              {...this.state}
             />
           </Dropzone>
           <Toolbar />
