@@ -10,6 +10,10 @@
 @include foundation-forms;
 @include foundation-button;
 
+/* -- FontAwesome -- */
+$fa-font-path: '~font-awesome/fonts';
+@import '~font-awesome/scss/font-awesome.scss';
+
 /* -- Monod styles -- */
 
 // Application
