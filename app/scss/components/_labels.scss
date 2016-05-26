@@ -8,6 +8,13 @@ ul.annotations {
 
   li.annotation {
     margin-left: 0;
+    font-size: 1.1rem;
+
+    &:hover {
+      .label-tools {
+        display: inline;
+      }
+    }
 
     &.inactive {
       opacity: 0.3;
@@ -39,6 +46,32 @@ ul.annotations {
         right: 0;
         bottom: 0;
         left: 0;
+      }
+    }
+
+    & > i {
+      margin-right: 0.4rem;
+    }
+
+    .label-tools {
+      display: none;
+      background-color: $primary-color;
+      color: $white;
+      padding: 0.2rem 0.5rem;
+      margin-left: 0.5rem;
+      border-radius: $global-radius;
+
+      i {
+        opacity: 0.6;
+
+        &:not(:last-child) {
+          margin-right: 1rem;
+        }
+
+        &:hover {
+          cursor: pointer;
+          opacity: 1;
+        }
       }
     }
   }
