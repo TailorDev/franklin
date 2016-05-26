@@ -1,0 +1,61 @@
+/*
+ * Labels component
+ */
+
+ul.annotations {
+  list-style: none inside;
+  margin-left: 0;
+
+  li.annotation {
+    margin-left: 0;
+
+    &.inactive {
+      opacity: 0.3;
+    }
+
+    span {
+      display: inline-block;
+      position: relative;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      border-radius: 100px;
+      margin-right: 0.4rem;
+    }
+
+    &.new {
+      margin-top: 1rem;
+
+      .colorpicker-button {
+        @include button;
+        @include flex-grid-column(2);
+
+        display: inline-block;
+      }
+
+      .colorpicker-panel {
+        position: absolute;
+        z-index: 2;
+        top: 25%;
+        left: 25%;
+      }
+
+      .colorpicker-overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+      input,
+      button {
+        display: inline-block;
+      }
+
+      input {
+        @include flex-grid-column(6);
+      }
+    }
+  }
+}

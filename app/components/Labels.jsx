@@ -1,78 +1,78 @@
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
 
 import Label from './Label';
 import { SwatchesPicker } from 'react-color';
 
+const { object, func } = PropTypes;
 
-const testLabels = [
-  {
-    name: 'Poke',
-    color: '#aaa',
-  },
-  {
-    name: 'Lambda',
-    color: '#ddd',
-  },
-  {
-    name: 'Primer',
-    color: '#f00',
-  },
-  {
-    name: 'SNP',
-    color: '#f0f',
-  },
-  {
-    name: 'Lambda',
-    color: '#ccc',
-  },
-  {
-    name: 'Second',
-    color: '#00f',
-  },
-];
 
-export default class Labels extends React.Component {
+const defaultLabel = {
+  name: '',
+  color: '#ccc',
+};
+
+export default class Labels extends Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      labels: testLabels,
       displayColorPicker: false,
+      newLabel: defaultLabel,
     };
 
-    this.handleClick = this.handleClick.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this.handleColorpickerClick = this.handleColorpickerClick.bind(this);
+    this.handleColorpickerClose = this.handleColorpickerClose.bind(this);
+    this.handleColorChange = this.handleColorChange.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleClick() {
+  handleColorpickerClick() {
     this.setState({
       displayColorPicker: !this.state.displayColorPicker,
     });
   }
 
-  handleClose() {
+  handleColorpickerClose() {
     this.setState({
       displayColorPicker: false,
     });
   }
 
+  handleColorChange(color) {
+    this.setState((previousState) => {
+      return {
+        newLabel: {
+          name: previousState.newLabel.name,
+          color: color.hex,
+        },
+        displayColorPicker: false,
+      };
+    });
+  }
+
+  handleNameChange(event) {
+    event.persist();
+
+    this.setState((previousState) => {
+      return {
+        newLabel: {
+          name: event.target.value,
+          color: previousState.newLabel.color,
+        },
+      };
+    });
+  }
+
+  handleSubmit() {
+    this.props.onCreateNewLabel(this.state.newLabel);
+    this.setState({ newLabel: defaultLabel });
+  }
+
   render() {
-    const popover = {
-      position: 'absolute',
-      zIndex: '2',
-    };
-
-    const cover = {
-      position: 'fixed',
-      top: '0',
-      right: '0',
-      bottom: '0',
-      left: '0',
-    };
-
     return (
       <ul className="annotations">
-        {this.state.labels.map((label, index) =>
+        {this.props.labels.map((label, index) =>
           <Label
             name={label.name}
             color={label.color}
@@ -81,16 +81,44 @@ export default class Labels extends React.Component {
         )}
 
         <li className="annotation new">
-          <input type="text" placeholder="New" />
+          <input
+            type="text"
+            value={this.state.newLabel.name}
+            onChange={this.handleNameChange}
+          />
 
-          <button onClick={this.handleClick}>Pick Color</button>
+          <div
+            className="colorpicker-button"
+            onClick={this.handleColorpickerClick}
+            style={{ background: this.state.newLabel.color }}
+          />
+
           {this.state.displayColorPicker ?
-            <div style={popover}>
-              <div style={cover} onClick={this.handleClose} />
-              <SwatchesPicker />
-            </div> : null}
+            <div className="colorpicker-panel">
+              <div
+                className="colorpicker-overlay"
+                onClick={this.handleColorpickerClose}
+              />
+              <SwatchesPicker
+                color={this.state.newLabel.color}
+                onChange={this.handleColorChange}
+              />
+            </div> : null
+          }
+
+          <input
+            type="submit"
+            value="Add label"
+            className="button"
+            onClick={this.handleSubmit}
+          />
         </li>
       </ul>
     );
   }
 }
+
+Labels.propTypes = {
+  labels: object.isRequired,
+  onCreateNewLabel: func.isRequired,
+};
