@@ -9,7 +9,7 @@ const { instanceOf, func } = PropTypes;
 
 const defaultLabel = {
   name: '',
-  color: '#ccc',
+  color: '#1abc9c',
 };
 
 export default class Labels extends Component {
@@ -61,7 +61,9 @@ export default class Labels extends Component {
     }));
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
+    // Prevent page reload
+    event.preventDefault();
     this.props.onCreateNewLabel(this.state.newLabel);
     this.setState({ newLabel: defaultLabel });
   }
@@ -78,17 +80,32 @@ export default class Labels extends Component {
         )}
 
         <li className="annotation new">
-          <input
-            type="text"
-            value={this.state.newLabel.name}
-            onChange={this.handleNameChange}
-          />
+          <form className="input-group">
+            <span
+              className="input-group-label colorpicker-button"
+              onClick={this.handleColorpickerClick}
+              style={{ background: this.state.newLabel.color }}
+            >
+              <i className="fa fa-eyedropper" aria-hidden="true"></i>
+            </span>
 
-          <div
-            className="colorpicker-button"
-            onClick={this.handleColorpickerClick}
-            style={{ background: this.state.newLabel.color }}
-          />
+            <input
+              type="text"
+              value={this.state.newLabel.name}
+              placeholder="Tag name"
+              className="input-group-field"
+              onChange={this.handleNameChange}
+            />
+
+            <div className="input-group-button">
+              <input
+                type="submit"
+                value="Add"
+                className="button"
+                onClick={this.handleSubmit}
+              />
+            </div>
+          </form>
 
           {this.state.displayColorPicker ?
             <div className="colorpicker-panel">
@@ -102,13 +119,6 @@ export default class Labels extends Component {
               />
             </div> : null
           }
-
-          <input
-            type="submit"
-            value="Add label"
-            className="button"
-            onClick={this.handleSubmit}
-          />
         </li>
       </ul>
     );

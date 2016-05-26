@@ -13,7 +13,7 @@ ul.annotations {
       opacity: 0.3;
     }
 
-    span {
+    span:not(.colorpicker-button) {
       display: inline-block;
       position: relative;
       top: 6px;
@@ -27,34 +27,28 @@ ul.annotations {
       margin-top: 1rem;
 
       .colorpicker-button {
-        @include button;
-        @include flex-grid-column(2);
+        color: $white;
 
-        display: inline-block;
+        &:hover {
+          cursor: pointer;
+          opacity: 0.8;
+        }
       }
 
       .colorpicker-panel {
         position: absolute;
         z-index: 2;
-        top: 25%;
-        left: 25%;
+        right: 235px;
+        margin-top: -258px;
       }
 
       .colorpicker-overlay {
         position: fixed;
+        background-color: rgba($white, 0.9);
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
-      }
-
-      input,
-      button {
-        display: inline-block;
-      }
-
-      input {
-        @include flex-grid-column(6);
       }
     }
   }
