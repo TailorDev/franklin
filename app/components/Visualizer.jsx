@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import debounce from 'lodash.debounce';
 
 import Sequence from './Sequence';
 
@@ -9,7 +10,6 @@ export default class Visualizer extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.lastResize = Date.now();
     this.state = {
       nucleotidesPerRow: 80,
       rowHeight: 50,
@@ -22,7 +22,7 @@ export default class Visualizer extends Component {
   componentDidMount() {
     window.addEventListener(
       'resize',
-      () => { this.handleResize(this.props.sequence); },
+      debounce(() => { this.handleResize(this.props.sequence); }, 500),
       false
     );
   }
@@ -31,7 +31,7 @@ export default class Visualizer extends Component {
     this.updateVisualizerDimensions(nextProps.sequence);
   }
 
-  componentDidUnmount() {
+  componentWillUnmount() {
     window.removeEventListener(
       'resize',
       () => { this.handleResize(this.props.sequence); },
@@ -40,10 +40,7 @@ export default class Visualizer extends Component {
   }
 
   handleResize(sequence) {
-    if (500 < (Date.now() - this.lastResize)) {
-      this.lastResize = Date.now();
-      this.updateVisualizerDimensions(sequence);
-    }
+    this.updateVisualizerDimensions(sequence);
   }
 
   updateVisualizerDimensions(sequence) {
