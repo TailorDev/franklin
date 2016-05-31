@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 
-const { string } = PropTypes;
+const { func, string } = PropTypes;
 
 import LabelTools from './LabelTools';
 import LabelRemove from './LabelRemove';
@@ -15,12 +15,17 @@ class Label extends Component {
     };
 
     this.toggleActionRemove = this.toggleActionRemove.bind(this);
+    this.handleLabelRemove = this.handleLabelRemove.bind(this);
   }
 
   toggleActionRemove() {
     this.setState({
       displayRemoveForm: !this.state.displayRemoveForm,
     });
+  }
+
+  handleLabelRemove() {
+    this.props.onRemoveLabel();
   }
 
   render() {
@@ -38,6 +43,7 @@ class Label extends Component {
         {this.state.displayRemoveForm ?
           <LabelRemove
             onActionRemoveCancelClick={this.toggleActionRemove}
+            onLabelRemove={this.handleLabelRemove}
           /> : null
         }
       </li>
@@ -48,6 +54,7 @@ class Label extends Component {
 Label.propTypes = {
   name: string.isRequired,
   color: string.isRequired,
+  onRemoveLabel: func.isRequired,
 };
 
 export default Label;

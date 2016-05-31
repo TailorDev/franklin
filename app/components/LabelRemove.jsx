@@ -8,10 +8,15 @@ class LabelRemove extends Component {
     super(props, context);
 
     this.handleActionRemoveCancelClick = this.handleActionRemoveCancelClick.bind(this);
+    this.handleRemoveClick = this.handleRemoveClick.bind(this);
   }
 
   handleActionRemoveCancelClick() {
     this.props.onActionRemoveCancelClick();
+  }
+
+  handleRemoveClick() {
+    this.props.onLabelRemove();
   }
 
   render() {
@@ -21,7 +26,12 @@ class LabelRemove extends Component {
           Are you sure you want to remove this label and related annotations?
         </p>
         <div className="action-buttons">
-          <button className="remove">Remove</button>
+          <button
+            className="remove"
+            onClick={this.handleRemoveClick}
+          >
+            Remove
+          </button>
           <button
             className="cancel"
             onClick={this.handleActionRemoveCancelClick}
@@ -36,6 +46,7 @@ class LabelRemove extends Component {
 
 LabelRemove.propTypes = {
   onActionRemoveCancelClick: func.isRequired,
+  onLabelRemove: func.isRequired,
 };
 
 export default LabelRemove;

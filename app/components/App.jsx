@@ -40,6 +40,7 @@ export default class App extends Component {
     this.reader.onloadend = this.onFileLoadEnd.bind(this);
     this.onDrop = this.onDrop.bind(this);
     this.onCreateNewLabel = this.onCreateNewLabel.bind(this);
+    this.onRemoveLabel = this.onRemoveLabel.bind(this);
   }
 
   onFileLoadEnd(evt) {
@@ -63,6 +64,12 @@ export default class App extends Component {
     }));
   }
 
+  onRemoveLabel(index) {
+    this.setState((previousState) => ({
+      labels: previousState.labels.splice(index, 1),
+    }));
+  }
+
   render() {
     return (
       <div className="layout">
@@ -82,6 +89,7 @@ export default class App extends Component {
           <Toolbar
             labels={this.state.labels}
             onCreateNewLabel={this.onCreateNewLabel}
+            onRemoveLabel={(index) => { this.onRemoveLabel(index); }}
           />
         </div>
 
