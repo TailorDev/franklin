@@ -73,7 +73,7 @@ export default class App extends Component {
     }));
   }
 
-  onActivateLabel(index) {
+  onToggleLabel(index) {
     this.setState((previousState) => ({
       labels: previousState.labels.update(
         index,
@@ -107,7 +107,7 @@ export default class App extends Component {
           <Toolbar
             labels={this.state.labels}
             onCreateNewLabel={this.onCreateNewLabel}
-            onActivateLabel={(index) => { this.onActivateLabel(index); }}
+            onToggleLabel={(index) => { this.onToggleLabel(index); }}
             onRemoveLabel={(index) => { this.onRemoveLabel(index); }}
           />
         </div>

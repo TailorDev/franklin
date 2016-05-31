@@ -15,7 +15,7 @@ class Label extends Component {
     };
 
     this.toggleActionRemove = this.toggleActionRemove.bind(this);
-    this.handleActivateLabel = this.handleActivateLabel.bind(this);
+    this.handleToggleLabel = this.handleToggleLabel.bind(this);
     this.handleLabelRemove = this.handleLabelRemove.bind(this);
   }
 
@@ -25,8 +25,8 @@ class Label extends Component {
     });
   }
 
-  handleActivateLabel() {
-    this.props.onActivateLabel();
+  handleToggleLabel() {
+    this.props.onToggleLabel();
   }
 
   handleLabelRemove() {
@@ -44,14 +44,14 @@ class Label extends Component {
       >
         <span
           className="label-name"
-          onClick={this.handleActivateLabel}
+          onClick={this.handleToggleLabel}
         >
           <i className="fa fa-tag" aria-hidden="true" style={{ color: this.props.color }}></i>
           {this.props.name}
         </span>
 
         <LabelTools
-          onActionActivateClick={this.handleActivateLabel}
+          onActionToggleClick={this.handleToggleLabel}
           onActionRemoveClick={this.toggleActionRemove}
         />
 
@@ -70,7 +70,7 @@ Label.propTypes = {
   name: string.isRequired,
   color: string.isRequired,
   isActive: bool.isRequired,
-  onActivateLabel: func.isRequired,
+  onToggleLabel: func.isRequired,
   onRemoveLabel: func.isRequired,
 };
 
