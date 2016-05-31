@@ -30,7 +30,7 @@ class Label extends Component {
 
   render() {
     return (
-      <li className={`annotation ${this.state.displayRemoveForm ? 'in-action remove' : ''}`}>
+      <li className={`label ${this.state.displayRemoveForm ? 'in-action remove' : ''}`}>
         <span className="label-name">
           <i className="fa fa-tag" aria-hidden="true" style={{ color: this.props.color }}></i>
           {this.props.name}

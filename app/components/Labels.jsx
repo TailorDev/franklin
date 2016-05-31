@@ -83,7 +83,7 @@ export default class Labels extends Component {
 
   render() {
     return (
-      <ul className="annotations">
+      <ul className="labels">
         {this.props.labels.map((label, index) =>
           <Label
             key={index}

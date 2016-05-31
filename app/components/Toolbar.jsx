@@ -4,8 +4,8 @@ import Labels from './Labels';
 
 export default (props) =>
   <div className="toolbar">
-    <div className="annotation-panel">
-      <h4>Annotations</h4>
+    <div className="label-panel">
+      <h4>Labels</h4>
       <Labels {...props} />
     </div>
 
