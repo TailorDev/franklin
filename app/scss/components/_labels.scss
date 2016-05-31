@@ -6,18 +6,61 @@ ul.annotations {
   list-style: none inside;
   margin-left: 0;
 
-  li.annotation {
+  li.annotation,
+  li.new {
     margin-left: 0;
     font-size: 1.1rem;
 
     &:hover {
       .label-tools {
-        display: inline;
+        opacity: 1;
       }
     }
 
     &.inactive {
       opacity: 0.3;
+    }
+
+    &.in-action {
+      border: 1px solid $primary-color;
+      border-radius: $global-radius;
+
+      .label-name {
+        display: block;
+        background-color: $primary-color;
+        color: $white !important;
+      }
+
+      .label-tools {
+        display: none;
+      }
+
+      p {
+        font-size: 1rem;
+        color: lighten($body-font-color, 20%);
+      }
+
+      .action-buttons {
+        @include button-group( 'button' );
+        margin-bottom: 0;
+      }
+
+      &.remove {
+        .action-remove {
+          display: block;
+
+          button {
+            &.remove {
+              @include button;
+              margin-right: 0.5rem;
+            }
+
+            &.cancel {
+              @include button( $background: $grey, $background-hover: darken($grey, 10%), $color: $body-font-color );
+            }
+          }
+        }
+      }
     }
 
     &.new {
@@ -49,17 +92,22 @@ ul.annotations {
       }
     }
 
-    & > i {
-      margin-right: 0.4rem;
+    .label-name {
+      padding: 0.2rem 0.5rem;
+
+      & > i {
+        margin-right: 0.4rem;
+      }
     }
 
     .label-tools {
-      display: none;
+      opacity: 0;
       background-color: $primary-color;
       color: $white;
       padding: 0.2rem 0.5rem;
       margin-left: 0.5rem;
       border-radius: $global-radius;
+      transition: all 0.3s;
 
       i {
         opacity: 0.6;
@@ -73,6 +121,11 @@ ul.annotations {
           opacity: 1;
         }
       }
+    }
+
+    .action-remove {
+      padding: 0.2rem 0.5rem;
+      display: none;
     }
   }
 }

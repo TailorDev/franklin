@@ -87,7 +87,7 @@ export default class Labels extends Component {
           />
         )}
 
-        <li className="annotation new">
+        <li className="new">
           <form className="input-group">
             <span
               className="input-group-label colorpicker-button"
