@@ -22,6 +22,7 @@ ul.annotations {
     }
 
     &.in-action {
+      margin-bottom: 0.5rem;
       border: 1px solid $primary-color;
       border-radius: $global-radius;
 
@@ -46,12 +47,18 @@ ul.annotations {
       }
 
       &.remove {
+        border: 1px solid $alert-color;
+
+        .label-name {
+          background-color: $alert-color;
+        }
+
         .action-remove {
           display: block;
 
           button {
             &.remove {
-              @include button;
+              @include button($background: $alert-color);
               margin-right: 0.5rem;
             }
 

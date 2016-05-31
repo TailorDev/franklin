@@ -4,7 +4,7 @@
  */
 $oh-baby: #efecea;
 $kashmir: #e04462;
-$kitty: #f9c535;
+$kitty: #5ec3a0;
 $yeah: #334854;
 $light-yeah: lighten($yeah, 10%);
 $dark-yeah: darken($yeah, 10%);
@@ -18,7 +18,7 @@ $toolbar-width: 300px;
 /* -- Foundation overridden settings -- */
 
 // Colors
-$foundation-palette: ( primary: $kashmir, secondary: $dark-yeah, alert: $oh-baby );
+$foundation-palette: ( primary: $kitty, secondary: $dark-yeah, alert: $kashmir );
 
 // Global
 $global-radius: 5px;
