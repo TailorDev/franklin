@@ -6,8 +6,7 @@ ul.labels {
   list-style: none inside;
   margin-left: 0;
 
-  li.label,
-  li.new {
+  li {
     margin-left: 0;
     font-size: 1.1rem;
 
@@ -19,6 +18,31 @@ ul.labels {
 
     &.inactive {
       opacity: 0.3;
+    }
+
+    .colorpicker-button {
+      color: $body-font-color;
+
+      &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+      }
+    }
+
+    .colorpicker-panel {
+      position: absolute;
+      z-index: 2;
+      right: 235px;
+      margin-top: -258px;
+    }
+
+    .colorpicker-overlay {
+      position: fixed;
+      background-color: rgba($white, 0.9);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
     }
 
     &.in-action {
@@ -58,7 +82,7 @@ ul.labels {
 
           button {
             &.remove {
-              @include button($background: $alert-color);
+              @include button($background: $alert-color, $background-hover: darken($alert-color, 10%));
               margin-right: 0.5rem;
             }
 
@@ -72,31 +96,6 @@ ul.labels {
 
     &.new {
       margin-top: 1rem;
-
-      .colorpicker-button {
-        color: $body-font-color;
-
-        &:hover {
-          cursor: pointer;
-          opacity: 0.8;
-        }
-      }
-
-      .colorpicker-panel {
-        position: absolute;
-        z-index: 2;
-        right: 235px;
-        margin-top: -258px;
-      }
-
-      .colorpicker-overlay {
-        position: fixed;
-        background-color: rgba($white, 0.9);
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-      }
     }
 
     .label-name {
