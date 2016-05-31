@@ -15,14 +15,17 @@ const someLabels = [
   {
     name: 'Exon',
     color: '#334854',
+    isActive: true,
   },
   {
     name: 'Primer',
     color: '#f9c535',
+    isActive: true,
   },
   {
     name: 'SNP',
     color: '#e04462',
+    isActive: true,
   },
 ];
 
@@ -70,6 +73,21 @@ export default class App extends Component {
     }));
   }
 
+  onActivateLabel(index) {
+    this.setState((previousState) => ({
+      labels: previousState.labels.update(
+        index,
+        (label) => (
+          {
+            name: label.name,
+            color: label.color,
+            isActive: !label.isActive,
+          }
+        )
+      ),
+    }));
+  }
+
   render() {
     return (
       <div className="layout">
@@ -89,6 +107,7 @@ export default class App extends Component {
           <Toolbar
             labels={this.state.labels}
             onCreateNewLabel={this.onCreateNewLabel}
+            onActivateLabel={(index) => { this.onActivateLabel(index); }}
             onRemoveLabel={(index) => { this.onRemoveLabel(index); }}
           />
         </div>

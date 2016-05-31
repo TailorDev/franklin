@@ -102,6 +102,10 @@ ul.labels {
     .label-name {
       padding: 0.2rem 0.5rem;
 
+      &:hover {
+        cursor: pointer;
+      }
+
       & > i {
         margin-right: 0.4rem;
       }

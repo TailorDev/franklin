@@ -21,12 +21,17 @@ export default class Labels extends Component {
       newLabel: defaultLabel,
     };
 
+    this.onActivateLabel = this.onActivateLabel.bind(this);
     this.onRemoveLabel = this.onRemoveLabel.bind(this);
     this.handleColorpickerClick = this.handleColorpickerClick.bind(this);
     this.handleColorpickerClose = this.handleColorpickerClose.bind(this);
     this.handleColorChange = this.handleColorChange.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  onActivateLabel(index) {
+    this.props.onActivateLabel(index);
   }
 
   onRemoveLabel(index) {
@@ -89,6 +94,8 @@ export default class Labels extends Component {
             key={index}
             name={label.name}
             color={label.color}
+            isActive={label.isActive}
+            onActivateLabel={() => { this.onActivateLabel(index); }}
             onRemoveLabel={() => { this.onRemoveLabel(index); }}
           />
         )}
@@ -142,5 +149,6 @@ export default class Labels extends Component {
 Labels.propTypes = {
   labels: instanceOf(Immutable.List).isRequired,
   onCreateNewLabel: func.isRequired,
+  onActivateLabel: func.isRequired,
   onRemoveLabel: func.isRequired,
 };
