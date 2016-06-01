@@ -11,6 +11,11 @@ export default class Labels extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this.state = {
+      displayNewLabelForm: false,
+    };
+
+    this.toggleNewLabelForm = this.toggleNewLabelForm.bind(this);
     this.onToggleLabel = this.onToggleLabel.bind(this);
     this.onRemoveLabel = this.onRemoveLabel.bind(this);
     this.onEditLabel = this.onEditLabel.bind(this);
@@ -31,6 +36,13 @@ export default class Labels extends Component {
 
   onCreateNewLabel(label) {
     this.props.onCreateNewLabel(label);
+    this.toggleNewLabelForm();
+  }
+
+  toggleNewLabelForm() {
+    this.setState({
+      displayNewLabelForm: !this.state.displayNewLabelForm,
+    });
   }
 
   render() {
@@ -49,9 +61,19 @@ export default class Labels extends Component {
         )}
 
         <li className="new">
-          <LabelForm
-            onCreateNewLabel={this.onCreateNewLabel}
-          />
+          {this.state.displayNewLabelForm ?
+            <LabelForm
+              onCreateNewLabel={this.onCreateNewLabel}
+              onCancel={this.toggleNewLabelForm}
+            />
+            :
+            <button
+              className="button"
+              onClick={this.toggleNewLabelForm}
+            >
+              New label
+            </button>
+          }
         </li>
       </ul>
     );
