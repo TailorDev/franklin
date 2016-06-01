@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { expect } from 'chai';
 import Immutable from 'immutable';
 import sinon from 'sinon';
@@ -31,22 +31,23 @@ describe('<Labels />', () => {
 
   it('allows to create new labels', () => {
     const spy = sinon.spy();
-    const wrapper = shallow(
+    const wrapper = mount(
       <Labels
         labels={dummyLabels}
         onCreateNewLabel={spy}
       />
     );
 
+    wrapper.find('button.new-label').simulate('click');
     wrapper.find('input[type="text"]').simulate('change', {
       persist: () => {},
       target: {
         value: 'foo'
       }
     });
-    wrapper.find('.button').simulate('click');
+    wrapper.find('.button.submit').simulate('click');
 
     expect(spy.calledOnce).to.be.true;
-    expect(spy.calledWith({ name: 'foo', color: '#f6f6f6' })).to.be.true;
+    expect(spy.calledWith({ name: 'foo', color: '#f6f6f6', isActive: true })).to.be.true;
   });
 });

@@ -68,7 +68,7 @@ export default class Labels extends Component {
             />
             :
             <button
-              className="button"
+              className="button new-label"
               onClick={this.toggleNewLabelForm}
             >
               New label
