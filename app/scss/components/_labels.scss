@@ -20,6 +20,30 @@ ul.labels {
       opacity: 0.3;
     }
 
+    .label-form {
+      padding: 0.5rem;
+      background-color: $grey;
+      border-radius: $global-radius;
+
+      .action-buttons {
+        @include button-group( '.button' );
+        margin-bottom: 0;
+
+        .button {
+          margin-bottom: 0 !important;
+
+          &.submit {
+            @include button;
+            margin-right: 0.5rem;
+          }
+
+          &.cancel {
+            @include button( $background: darken($grey, 5%), $background-hover: darken($grey, 10%), $color: $body-font-color );
+          }
+        }
+      }
+    }
+
     .colorpicker-button {
       color: $body-font-color;
 
@@ -65,11 +89,6 @@ ul.labels {
         color: lighten($body-font-color, 20%);
       }
 
-      .action-buttons {
-        @include button-group( 'button' );
-        margin-bottom: 0;
-      }
-
       &.remove {
         border: 1px solid $alert-color;
 
@@ -91,6 +110,14 @@ ul.labels {
             }
           }
         }
+      }
+    }
+
+    &.edit {
+      border: 0;
+
+      .label-name {
+        display: none;
       }
     }
 

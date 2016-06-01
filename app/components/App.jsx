@@ -67,6 +67,20 @@ export default class App extends Component {
     }));
   }
 
+  onEditLabel(index, label) {
+    this.setState((previousState) => ({
+      labels: previousState.labels.update(
+        index,
+        () => (
+          {
+            name: label.name,
+            color: label.color,
+            isActive: true,
+          }
+        )),
+    }));
+  }
+
   onRemoveLabel(index) {
     this.setState((previousState) => ({
       labels: previousState.labels.splice(index, 1),
@@ -108,6 +122,7 @@ export default class App extends Component {
             labels={this.state.labels}
             onCreateNewLabel={this.onCreateNewLabel}
             onToggleLabel={(index) => { this.onToggleLabel(index); }}
+            onEditLabel={(index, label) => { this.onEditLabel(index, label); }}
             onRemoveLabel={(index) => { this.onRemoveLabel(index); }}
           />
         </div>

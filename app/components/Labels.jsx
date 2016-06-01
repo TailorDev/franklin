@@ -13,11 +13,16 @@ export default class Labels extends Component {
 
     this.onToggleLabel = this.onToggleLabel.bind(this);
     this.onRemoveLabel = this.onRemoveLabel.bind(this);
+    this.onEditLabel = this.onEditLabel.bind(this);
     this.onCreateNewLabel = this.onCreateNewLabel.bind(this);
   }
 
   onToggleLabel(index) {
     this.props.onToggleLabel(index);
+  }
+
+  onEditLabel(index, label) {
+    this.props.onEditLabel(index, label);
   }
 
   onRemoveLabel(index) {
@@ -38,6 +43,7 @@ export default class Labels extends Component {
             color={label.color}
             isActive={label.isActive}
             onToggleLabel={() => { this.onToggleLabel(index); }}
+            onEditLabel={(editedLabel) => { this.onEditLabel(index, editedLabel); }}
             onRemoveLabel={() => { this.onRemoveLabel(index); }}
           />
         )}
@@ -56,5 +62,6 @@ Labels.propTypes = {
   labels: instanceOf(Immutable.List).isRequired,
   onCreateNewLabel: func.isRequired,
   onToggleLabel: func.isRequired,
+  onEditLabel: func.isRequired,
   onRemoveLabel: func.isRequired,
 };

@@ -8,11 +8,16 @@ class LabelTools extends Component {
     super(props, context);
 
     this.handleActionToggleClick = this.handleActionToggleClick.bind(this);
+    this.handleActionEditClick = this.handleActionEditClick.bind(this);
     this.handleActionRemoveClick = this.handleActionRemoveClick.bind(this);
   }
 
   handleActionToggleClick() {
     this.props.onActionToggleClick();
+  }
+
+  handleActionEditClick() {
+    this.props.onActionEditClick();
   }
 
   handleActionRemoveClick() {
@@ -32,6 +37,7 @@ class LabelTools extends Component {
           className="fa fa-pencil"
           aria-hidden="true"
           title="Edit"
+          onClick={this.handleActionEditClick}
         />
         <i
           className="fa fa-trash-o"
@@ -46,6 +52,7 @@ class LabelTools extends Component {
 
 LabelTools.propTypes = {
   onActionToggleClick: func.isRequired,
+  onActionEditClick: func.isRequired,
   onActionRemoveClick: func.isRequired,
 };
 

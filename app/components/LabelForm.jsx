@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 
 import { SwatchesPicker } from 'react-color';
 
-const { func } = PropTypes;
+const { func, object } = PropTypes;
 const defaultLabel = {
   name: '',
   color: '#f6f6f6',
@@ -14,9 +14,14 @@ class LabelForm extends Component {
   constructor(props, context) {
     super(props, context);
 
+    let label = defaultLabel;
+    if (this.props.label) {
+      label = this.props.label;
+    }
+
     this.state = {
       displayColorPicker: false,
-      newLabel: defaultLabel,
+      label,
     };
 
     this.handleColorpickerClick = this.handleColorpickerClick.bind(this);
@@ -24,6 +29,7 @@ class LabelForm extends Component {
     this.handleColorChange = this.handleColorChange.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
   }
 
   handleColorpickerClick() {
@@ -40,8 +46,8 @@ class LabelForm extends Component {
 
   handleColorChange(color) {
     this.setState((previousState) => ({
-      newLabel: {
-        name: previousState.newLabel.name,
+      label: {
+        name: previousState.label.name,
         color: color.hex,
         isActive: true,
       },
@@ -53,9 +59,9 @@ class LabelForm extends Component {
     event.persist();
 
     this.setState((previousState) => ({
-      newLabel: {
+      label: {
         name: event.target.value,
-        color: previousState.newLabel.color,
+        color: previousState.label.color,
         isActive: true,
       },
     }));
@@ -68,40 +74,57 @@ class LabelForm extends Component {
     }
 
     // Prevent empty label name
-    if (!this.state.newLabel.name.length) {
+    if (!this.state.label.name.length) {
       return;
     }
 
-    this.props.onCreateNewLabel(this.state.newLabel);
-    this.setState({ newLabel: defaultLabel });
+    if (this.props.onCreateNewLabel) {
+      this.props.onCreateNewLabel(this.state.label);
+    } else {
+      this.props.onEditLabel(this.state.label);
+    }
+
+    this.setState({ label: defaultLabel });
+  }
+
+  handleCancel() {
+    this.props.onCancel();
   }
 
   render() {
     return (
-      <div className="label-form">
-        <form className="input-group">
-          <span
-            className="input-group-label colorpicker-button"
-            onClick={this.handleColorpickerClick}
-            style={{ background: this.state.newLabel.color }}
-          >
-            <i className="fa fa-eyedropper" aria-hidden="true"></i>
-          </span>
+      <div className="label-form-wrapper">
+        <form className="label-form">
+          <div className="input-group">
+            <span
+              className="input-group-label colorpicker-button"
+              onClick={this.handleColorpickerClick}
+              style={{ background: this.state.label.color }}
+            >
+              <i className="fa fa-eyedropper" aria-hidden="true"></i>
+            </span>
 
-          <input
-            type="text"
-            value={this.state.newLabel.name}
-            placeholder="Label name"
-            className="input-group-field"
-            onChange={this.handleNameChange}
-          />
+            <input
+              type="text"
+              value={this.state.label.name}
+              placeholder="Label name"
+              className="input-group-field"
+              onChange={this.handleNameChange}
+            />
+          </div>
 
-          <div className="input-group-button">
+          <div className="action-buttons">
             <input
               type="submit"
-              value="Add"
-              className="button"
+              value={this.props.onCreateNewLabel ? 'Add' : 'Save'}
+              className="button submit"
               onClick={this.handleSubmit}
+            />
+            <input
+              type="reset"
+              value="Cancel"
+              className="button cancel"
+              onClick={this.handleCancel}
             />
           </div>
         </form>
@@ -113,7 +136,7 @@ class LabelForm extends Component {
               onClick={this.handleColorpickerClose}
             />
             <SwatchesPicker
-              color={this.state.newLabel.color}
+              color={this.state.label.color}
               onChange={this.handleColorChange}
             />
           </div> : null
@@ -124,7 +147,10 @@ class LabelForm extends Component {
 }
 
 LabelForm.propTypes = {
-  onCreateNewLabel: func.isRequired,
+  onCreateNewLabel: func,
+  onEditLabel: func,
+  onCancel: func.isRequired,
+  label: object,
 };
 
 export default LabelForm;
