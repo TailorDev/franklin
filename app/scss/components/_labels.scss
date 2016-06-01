@@ -5,6 +5,7 @@
 ul.labels {
   list-style: none inside;
   margin-left: 0;
+  line-height: 1.6 !important;
 
   li {
     margin-left: 0;
@@ -13,6 +14,7 @@ ul.labels {
     &:hover {
       .label-tools {
         opacity: 1;
+        display: inline-block;
       }
     }
 
@@ -94,6 +96,7 @@ ul.labels {
 
         .label-name {
           background-color: $alert-color;
+          max-width: 100%;
         }
 
         .action-remove {
@@ -126,7 +129,11 @@ ul.labels {
     }
 
     .label-name {
-      padding: 0.2rem 0.5rem;
+      display: inline-block;
+      max-width: 150px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
       &:hover {
         cursor: pointer;
@@ -138,10 +145,12 @@ ul.labels {
     }
 
     .label-tools {
+      vertical-align: top;
       opacity: 0;
+      display: none;
       background-color: $primary-color;
       color: $white;
-      padding: 0.2rem 0.5rem;
+      padding: 0 0.5rem;
       margin-left: 0.5rem;
       border-radius: $global-radius;
       transition: all 0.3s;
