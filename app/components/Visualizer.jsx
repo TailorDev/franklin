@@ -62,20 +62,47 @@ export default class Visualizer extends Component {
   render() {
     return (
       <div className="visualizer" ref="wrapper">
-        <svg
-          version="1.1"
-          baseProfile="full"
-          width={this.state.visualizerWidth}
-          height={this.state.visualizerHeight}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect width="100%" height="100%" />
 
-          <Sequence
-            sequence={this.props.sequence}
-            {...this.state}
-          />
-        </svg>
+        {this.props.sequence.length ?
+          <svg
+            version="1.1"
+            baseProfile="full"
+            width={this.state.visualizerWidth}
+            height={this.state.visualizerHeight}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect width="100%" height="100%" />
+
+            <Sequence
+              sequence={this.props.sequence}
+              {...this.state}
+            />
+          </svg>
+          :
+          <div className="help">
+            <h4>Drag &amp; drop your sequence file here</h4>
+
+            <i className="fa fa-file big" aria-hidden="true"></i>
+            <i className="fa fa-arrow-right big" aria-hidden="true"></i>
+            <i className="fa fa-square-o big" aria-hidden="true"></i>
+
+
+            <p>
+              Your FASTA file content should look like the following:
+            </p>
+
+            <pre>
+                >gi|671162122:c7086083-7083225 Drosophila melanogaster chromosome 3R{'\n'}
+                ATGGTCACTCTAATCGCAGTCTGCAATTTACGTGTTTCCAACTTAACGCCCCCAAGTTAATAGCCGTAAT{'\n'}
+                CATTTGAAAAGAAAGGCACGCACGCACAACGCCATGCGGATCGAACCTGGGGACTCCTTTTGGACGAAAA{'\n'}
+                AGGCGATGTTTTCCAACGCAGAAAGGCAGTACTTTGAGACGGTCCGTCCGCGGAAGACCAGTGTGAGTAA{'\n'}
+                AAGTTGACCGTCGATGGCGATTTCACAAGTGACGTTTAAGTGGCGGGAACTTCTACTCACAAATCCCTGA{'\n'}
+                GCCCTGTGATATGATTTATTTTATGGAGCCGTGATCCGGACGAAAAATGCACACACATTTCTACAAAAAT{'\n'}
+                ATGTACATCGCGGTGCGATTGTGTCGCTTAAAGCACACGTACACCCACTGTCACACTCACACTCACATGC{'\n'}
+            </pre>
+          </div>
+        }
+
       </div>
     );
   }
