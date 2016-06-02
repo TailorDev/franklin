@@ -28,19 +28,19 @@ class LabelTools extends Component {
     return (
       <span className="label-tools">
         <i
-          className="fa fa-adjust"
+          className="fa fa-adjust toggle"
           aria-hidden="true"
           title="Toggle active"
           onClick={this.handleActionToggleClick}
         />
         <i
-          className="fa fa-pencil"
+          className="fa fa-pencil edit"
           aria-hidden="true"
           title="Edit"
           onClick={this.handleActionEditClick}
         />
         <i
-          className="fa fa-trash-o"
+          className="fa fa-trash-o remove"
           aria-hidden="true"
           title="Remove"
           onClick={this.handleActionRemoveClick}
