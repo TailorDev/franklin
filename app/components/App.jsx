@@ -21,7 +21,22 @@ export default class App extends Component {
     super(props, context);
 
     this.state = props.controller.getState();
-    this.onDrop = this.onDrop.bind(this);
+    this.onDropAccepted = this.onDropAccepted.bind(this);
+=======
+    this.state = {
+      sequence: [],
+      labels: new Immutable.List(someLabels),
+      modalIsOpen: true,
+    };
+
+    this.reader = new FileReader();
+
+    this.reader.onloadend = this.onFileLoadEnd.bind(this);
+    this.onDropAccepted = this.onDropAccepted.bind(this);
+    this.onDropRejected = this.onDropRejected.bind(this);
+    this.onCreateNewLabel = this.onCreateNewLabel.bind(this);
+    this.onRemoveLabel = this.onRemoveLabel.bind(this);
+>>>>>>> Add style to active dropzone
     this.startDemo = this.startDemo.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
@@ -39,7 +54,7 @@ export default class App extends Component {
     });
   }
 
-  onDrop(files) {
+  onDropAccepted(files) {
     this.props.controller.dispatch('action:drop-file', {
       file: files[0],
     });
@@ -97,8 +112,10 @@ export default class App extends Component {
           <Loader />
           <Dropzone
             className="dropzone"
-            onDrop={this.onDrop}
+            activeClassName="drag-enter"
+            onDropAccepted={this.onDropAccepted}
             disableClick
+            disablePreview
             multiple={false}
           >
             <Visualizer sequence={this.state.sequence} />

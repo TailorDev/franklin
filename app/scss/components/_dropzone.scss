@@ -2,4 +2,11 @@
  * Dropzone component
  */
 
-.dropzone {}
+.dropzone {
+  background-color: $grey;
+  transition: all 0.5s;
+
+  &.drag-enter {
+    background-color: rgba($light-yeah, 0.3);
+  }
+}
