@@ -1,0 +1,13 @@
+/*
+ * Loader component
+ */
+
+.loader {
+  position: absolute;
+  background: rgba(230, 230, 230, 0.75);
+  height: 100%;
+  width: 100%;
+  padding-top: 15%;
+  font-size: 2rem;
+  text-align: center;
+}

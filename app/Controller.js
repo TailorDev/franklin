@@ -6,8 +6,15 @@ export default class Controller {
 
     this.events.on('action:drop-file', this.onDropFile.bind(this));
     this.events.on('action:new-label', this.onNewLabel.bind(this));
+    this.events.on('action:edit-label', this.onEditLabel.bind(this));
+    this.events.on('action:remove-label', this.onRemoveLabel.bind(this));
+    this.events.on('action:toggle-label', this.onToggleLabel.bind(this));
     this.events.on('action:clear-selection', this.onClearSelection.bind(this));
     this.events.on('action:update-selection', this.onUpdateSelection.bind(this));
+  }
+
+  getState() {
+    return this.store.getState();
   }
 
   on(events, callback) {
@@ -26,6 +33,18 @@ export default class Controller {
 
   onNewLabel({ label }) {
     this.store.addNewLabel(label);
+  }
+
+  onEditLabel({ index, label }) {
+    this.store.updateLabelAt(index, label);
+  }
+
+  onRemoveLabel({ index }) {
+    this.store.removeLabelAt(index);
+  }
+
+  onToggleLabel({ index }) {
+    this.store.toggleLabelAt(index);
   }
 
   onClearSelection() {

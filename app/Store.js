@@ -4,7 +4,28 @@ import Immutable from 'immutable';
 export const Events = {
   CHANGE: 'store:change',
   CHANGE_SELECTION: 'store:change-selection',
+  LOADING_START: 'store:loading-start',
+  LOADING_END: 'store:loading-end',
 };
+
+const defaultSequence = new Immutable.List('AAACGAAAACT'.split(''));
+const defaultLabels = new Immutable.List([
+  {
+    name: 'Exon',
+    color: '#334854',
+    isActive: true,
+  },
+  {
+    name: 'Primer',
+    color: '#f9c535',
+    isActive: true,
+  },
+  {
+    name: 'SNP',
+    color: '#e04462',
+    isActive: true,
+  },
+]);
 
 export default class Store {
 
@@ -13,31 +34,100 @@ export default class Store {
     this.reader = new FileReader();
 
     this.state = {
-      sequence: new Immutable.List(),
-      labels: new Immutable.List(),
+      sequence: defaultSequence,
+      labels: defaultLabels,
       selection: new Immutable.OrderedSet(),
     };
 
-    this.reader.onloadend = this.onFileLoadEnd.bind(this);
+    // file reader
+    this.offset = 0;
+    this.file = null;
+    this.fileParts = [];
+    this.reader.onload = this.onFileLoad.bind(this);
+  }
+
+  getState() {
+    return this.state;
   }
 
   loadFromFile(file) {
-    this.reader.readAsText(file);
+    this.events.emit(Events.LOADING_START);
+
+    // reset
+    this.offset = 0;
+    this.file = file;
+    this.fileParts = [];
+
+    this.loadFileChunk();
+  }
+
+  loadFileChunk() {
+    const end = this.offset + (10 * 1024); // chunk size
+    const blob = this.file.slice(this.offset, end);
+    this.offset = end;
+
+    this.reader.readAsText(blob);
+  }
+
+  onFileLoad(event) {
+    if (null === event.target.error) {
+      let parts = event.target.result.split('\n');
+
+      if (/>/.test(parts[0])) {
+        parts = parts.slice(1);
+      }
+
+      this.fileParts = this.fileParts.concat(parts);
+    }
+
+    if (this.offset >= this.file.size) {
+      this.state.sequence = new Immutable.List(
+        this.fileParts.join('').split('')
+      );
+
+      this.events.emit(Events.LOADING_END);
+      this.events.emit(Events.CHANGE, this.state);
+
+      return;
+    }
+
+    this.loadFileChunk();
   }
 
   addNewLabel(label) {
-    this.state.labels.push(label);
+    this.state.labels = this.state.labels.push(label);
+
     this.events.emit(Events.CHANGE, this.state);
   }
 
-  onFileLoadEnd(event) {
-    if (event.target.readyState === FileReader.DONE) {
-      const parts = event.target.result.split('\n');
-      const sequenceString = parts.slice(1).join('');
+  updateLabelAt(index, label) {
+    this.state.labels = this.state.labels.update(index, () => (
+      {
+        name: label.name,
+        color: label.color,
+        isActive: true,
+      }
+    ));
 
-      this.state.sequence = new Immutable.List(sequenceString.split(''));
-      this.events.emit(Events.CHANGE, this.state);
-    }
+    this.events.emit(Events.CHANGE, this.state);
+  }
+
+  removeLabelAt(index) {
+    this.state.labels = this.state.labels.splice(index, 1);
+
+    this.events.emit(Events.CHANGE, this.state);
+  }
+
+  toggleLabelAt(index) {
+    this.state.labels = this.state.labels.update(index, (label) => (
+      {
+        name: label.name,
+        color: label.color,
+        isActive: !label.isActive,
+      }
+    ));
+
+    this.events.emit(Events.CHANGE, this.state);
   }
 
   clearSelection() {
