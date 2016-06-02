@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Dropzone from 'react-dropzone';
+import Immutable from 'immutable';
 
 import Header from './Header';
 import Visualizer from './Visualizer';
@@ -10,6 +11,23 @@ const { string } = PropTypes;
 
 
 const sequenceSample = 'AAACGAAAACT'.split('');
+const someLabels = [
+  {
+    name: 'Exon',
+    color: '#334854',
+    isActive: true,
+  },
+  {
+    name: 'Primer',
+    color: '#f9c535',
+    isActive: true,
+  },
+  {
+    name: 'SNP',
+    color: '#e04462',
+    isActive: true,
+  },
+];
 
 export default class App extends Component {
   constructor(props, context) {
@@ -17,12 +35,15 @@ export default class App extends Component {
 
     this.state = {
       sequence: sequenceSample,
+      labels: new Immutable.List(someLabels),
     };
 
     this.reader = new FileReader();
 
     this.reader.onloadend = this.onFileLoadEnd.bind(this);
     this.onDrop = this.onDrop.bind(this);
+    this.onCreateNewLabel = this.onCreateNewLabel.bind(this);
+    this.onRemoveLabel = this.onRemoveLabel.bind(this);
   }
 
   onFileLoadEnd(evt) {
@@ -40,6 +61,47 @@ export default class App extends Component {
     this.reader.readAsText(files[0]);
   }
 
+  onCreateNewLabel(label) {
+    this.setState((previousState) => ({
+      labels: previousState.labels.push(label),
+    }));
+  }
+
+  onEditLabel(index, label) {
+    this.setState((previousState) => ({
+      labels: previousState.labels.update(
+        index,
+        () => (
+          {
+            name: label.name,
+            color: label.color,
+            isActive: true,
+          }
+        )),
+    }));
+  }
+
+  onRemoveLabel(index) {
+    this.setState((previousState) => ({
+      labels: previousState.labels.splice(index, 1),
+    }));
+  }
+
+  onToggleLabel(index) {
+    this.setState((previousState) => ({
+      labels: previousState.labels.update(
+        index,
+        (label) => (
+          {
+            name: label.name,
+            color: label.color,
+            isActive: !label.isActive,
+          }
+        )
+      ),
+    }));
+  }
+
   render() {
     return (
       <div className="layout">
@@ -49,14 +111,20 @@ export default class App extends Component {
           <Dropzone
             className="dropzone"
             onDrop={this.onDrop}
-            disableClick="true"
-            multiple="false"
+            disableClick
+            multiple={false}
           >
             <Visualizer
               {...this.state}
             />
           </Dropzone>
-          <Toolbar />
+          <Toolbar
+            labels={this.state.labels}
+            onCreateNewLabel={this.onCreateNewLabel}
+            onToggleLabel={(index) => { this.onToggleLabel(index); }}
+            onEditLabel={(index, label) => { this.onEditLabel(index, label); }}
+            onRemoveLabel={(index) => { this.onRemoveLabel(index); }}
+          />
         </div>
 
         <Footer version={this.props.version} />

@@ -3,41 +3,9 @@
  */
 
 .toolbar {
+  overflow-y: scroll;
+
   & > * {
     padding: 1rem;
-  }
-
-  ul.annotations {
-    list-style: none inside;
-
-    li.annotation {
-      margin-left: 0;
-
-      &.inactive {
-        opacity: 0.3;
-      }
-
-      span {
-        display: inline-block;
-        position: relative;
-        top: 3px;
-        width: 14px;
-        height: 14px;
-        border-radius: 100px;
-        margin-right: 0.4rem;
-
-        &.primer {
-          background-color: #ff2865;
-        }
-
-        &.snp {
-          background-color: #29cdb5;
-        }
-
-        &.lambda {
-          background-color: #ff9071;
-        }
-      }
-    }
   }
 }

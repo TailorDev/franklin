@@ -73,6 +73,14 @@ const common = {
         loaders: ['babel'],
         include: PATHS.app
       },
+      // FontAwesome, KaTeX
+      {
+          test: /\.(ttf|eot|svg|woff(2)?)(\?v=.+)?$/,
+          loaders: ['file?name=fonts/[name].[ext]'],
+          include: [
+            path.join(__dirname, 'node_modules/font-awesome/fonts/'),
+          ]
+      },
       // Franklin fonts
       {
         test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,

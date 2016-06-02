@@ -9,6 +9,11 @@
 @include foundation-typography;
 @include foundation-forms;
 @include foundation-button;
+@include foundation-button-group;
+
+/* -- FontAwesome -- */
+$fa-font-path: '~font-awesome/fonts';
+@import '~font-awesome/scss/font-awesome.scss';
 
 /* -- Monod styles -- */
 
@@ -24,3 +29,4 @@
 @import 'components/visualizer';
 @import 'components/nucleotide';
 @import 'components/dropzone';
+@import 'components/labels';
