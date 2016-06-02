@@ -14,8 +14,8 @@ import Label from '../Label';
 describe('<Labels />', () => {
 
   const dummyLabels = Immutable.List([
-    { name: 'label 1', color: '#000' },
-    { name: 'label 2', color: '#fff' },
+    { name: 'label 1', color: '#000', isActive: true },
+    { name: 'label 2', color: '#fff', isActive: true },
   ]);
 
   it('renders a list of labels', () => {
@@ -23,6 +23,9 @@ describe('<Labels />', () => {
       <Labels
         labels={dummyLabels}
         onCreateNewLabel={() => {}}
+        onToggleLabel={() => {}}
+        onEditLabel={() => {}}
+        onRemoveLabel={() => {}}
       />
     );
 
@@ -35,6 +38,9 @@ describe('<Labels />', () => {
       <Labels
         labels={dummyLabels}
         onCreateNewLabel={spy}
+        onToggleLabel={() => {}}
+        onEditLabel={() => {}}
+        onRemoveLabel={() => {}}
       />
     );
 
