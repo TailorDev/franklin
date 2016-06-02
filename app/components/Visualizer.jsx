@@ -91,7 +91,6 @@ export default class Visualizer extends Component {
             <i className="fa fa-arrow-right big" aria-hidden="true"></i>
             <i className="fa fa-square-o big" aria-hidden="true"></i>
 
-
             <p>
               Your FASTA file content must look like the following:
             </p>
