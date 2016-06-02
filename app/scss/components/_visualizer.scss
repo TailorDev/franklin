@@ -26,5 +26,11 @@
       margin: 3rem 1rem;
       font-size: 4rem;
     }
+
+    p {
+      &.message {
+        color: $alert-color;
+      }
+    }
   }
 }

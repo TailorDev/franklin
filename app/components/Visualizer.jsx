@@ -82,13 +82,18 @@ export default class Visualizer extends Component {
           <div className="help">
             <h4>Drag &amp; drop your sequence file here</h4>
 
+            <p className="message">
+              Your file will be loaded locally (in your web browser), nothing
+              will be uploaded to our servers.
+            </p>
+
             <i className="fa fa-file big" aria-hidden="true"></i>
             <i className="fa fa-arrow-right big" aria-hidden="true"></i>
             <i className="fa fa-square-o big" aria-hidden="true"></i>
 
 
             <p>
-              Your FASTA file content should look like the following:
+              Your FASTA file content must look like the following:
             </p>
 
             <pre>
