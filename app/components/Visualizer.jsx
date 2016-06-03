@@ -3,6 +3,7 @@ import debounce from 'lodash.debounce';
 import Immutable from 'immutable';
 
 import Sequence from './Sequence';
+import Annotation from './Annotation';
 
 const { instanceOf } = PropTypes;
 
@@ -72,6 +73,13 @@ export default class Visualizer extends Component {
             xmlns="http://www.w3.org/2000/svg"
           >
             <rect width="100%" height="100%" />
+
+            <Annotation
+              positionFrom={10}
+              positionTo={50}
+              label={{ name: 'toto', color: '#ccc' }}
+              comment={'Lorem Ipsum'}
+            />
 
             <Sequence
               sequence={this.props.sequence}
