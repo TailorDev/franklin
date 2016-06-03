@@ -57,8 +57,6 @@ export default class App extends Component {
           className="modal-content"
           isOpen={this.state.modalIsOpen}
           shouldCloseOnOverlayClick={false}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
         >
           <h2>Disclaimer</h2>
 
