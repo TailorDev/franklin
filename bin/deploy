@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+DEPLOY_SCRIPT=/app/scripts/franklin/bin/deploy
+
+if [[ ! -f "$DEPLOY_SCRIPT" ]] ; then
+    echo 'No deploy script found, aborting!'
+    exit 1
+fi
+
+export REPO_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd)"
+exec "$DEPLOY_SCRIPT" "$@"

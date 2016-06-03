@@ -1,15 +1,29 @@
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+const express = require('express');
+const compression = require('compression');
+const path = require('path');
 
-new WebpackDevServer(webpack(config), {
-  hot: true,
-  historyApiFallback: true,
-  publicPath: '/'
-}).listen(3000, 'localhost', function (err, result) {
-  if (err) {
-    return console.log(err);
-  }
+const app = express();
 
-  console.log('Listening at http://localhost:3000/');
+// config
+const staticPath = path.join(__dirname, '/build');
+
+app.set('port', process.env.PORT || 3000);
+
+// middlewares
+app.use(compression());
+app.use(express.static(staticPath));
+
+app.get('/', (req, res) => {
+  res.sendFile('index.html', {
+    root: staticPath,
+  });
 });
+
+// Listen only when doing: `node app/server.js`
+if (require.main === module) {
+  app.listen(app.get('port'), () => {
+    console.log(`Running at localhost: ${app.get('port')}`);
+  });
+}
+
+module.exports = app;

@@ -17,7 +17,7 @@
     "test:watch": "npm run test -- --watch --reporter min",
     "test:ci": "npm run test -- --reporter mocha-circleci-reporter",
     "postinstall": "npm run build",
-    "start": "echo 'Not Implemented!' && exit 1",
+    "start": "NODE_ENV=production node server.js",
     "cov": "nyc --extension .jsx npm run test"
   },
   "devDependencies": {
@@ -63,7 +63,10 @@
     "webpack-dev-server": "^1.12.1",
     "webpack-merge": "^0.12.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "compression": "^1.6.1",
+    "express": "^4.13.4"
+  },
   "engines": {
     "node": "^5.7"
   },
