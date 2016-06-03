@@ -42,26 +42,6 @@ describe('<Sequence />', () => {
     expect(wrapper.find('.nucleotide')).to.have.length(sequence.size);
   });
 
-  it('renders multiple rows when needed', () => {
-    const wrapper = mount(
-      <Sequence
-        sequence={sequence}
-        nucleotidesPerRow={5}
-        rowHeight={50}
-        nucleotideWidth={12}
-      />,
-      { context }
-    );
-    expect(wrapper.find(Nucleotide).at(0).prop('x')).to.equal(10);
-    expect(wrapper.find(Nucleotide).at(0).prop('y')).to.equal(10);
-    expect(wrapper.find(Nucleotide).at(1).prop('x')).to.equal(22);
-    expect(wrapper.find(Nucleotide).at(1).prop('y')).to.equal(10);
-    expect(wrapper.find(Nucleotide).at(5).prop('x')).to.equal(10);
-    expect(wrapper.find(Nucleotide).at(5).prop('y')).to.equal(60);
-    expect(wrapper.find(Nucleotide).at(6).prop('x')).to.equal(22);
-    expect(wrapper.find(Nucleotide).at(6).prop('y')).to.equal(60);
-  });
-
   it('updates selection upon nucleotide click', () => {
     const wrapper = mount(
       <Sequence

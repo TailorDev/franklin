@@ -9,9 +9,16 @@ export default class Nucleotide extends Component {
     super(props, context);
 
     this.state = {
+      x: 0,
+      y: 0,
       isSelected: false,
       isInSelectionRange: false,
     };
+  }
+
+  componentWillMount() {
+    // First rendering
+    this.updateCoordinates();
   }
 
   componentDidMount() {
@@ -35,7 +42,15 @@ export default class Nucleotide extends Component {
   shouldComponentUpdate(nextProps, newState) {
     return (this.state.isSelected !== newState.isSelected) ||
       (this.state.isInSelectionRange !== newState.isInSelectionRange) ||
-      (this.props.x !== nextProps.x) || (this.props.y !== nextProps.y);
+      (this.props.nucleotidesPerRow !== nextProps.nucleotidesPerRow);
+  }
+
+  componentWillUpdate(nextProps) {
+    // On resize, the number of nucleotides per row changes
+    // this is the only case where we need to update coordinates
+    if (this.props.nucleotidesPerRow !== nextProps.nucleotidesPerRow) {
+      this.updateCoordinates();
+    }
   }
 
   getPositionLength() {
@@ -54,12 +69,19 @@ export default class Nucleotide extends Component {
     return 5 - ((this.getPositionLength() - 1) * 10 / 2);
   }
 
+  updateCoordinates() {
+    const { index, rowHeight, nucleotidesPerRow, nucleotideWidth } = this.props;
+    const x = 10 + (nucleotideWidth * (index % nucleotidesPerRow));
+    const y = 10 + (rowHeight * Math.trunc(index / nucleotidesPerRow));
+    this.setState({ x, y });
+  }
+
   render() {
     return (
       <g
         className="nucleotide"
         title="click to start selection"
-        transform={`translate(${this.props.x}, ${this.props.y})`}
+        transform={`translate(${this.state.x}, ${this.state.y})`}
         onClick={this.props.onClick}
       >
         <g className={`type${this.state.isInSelectionRange ? ' in-selection' : ''}`}>
@@ -101,8 +123,9 @@ export default class Nucleotide extends Component {
 }
 
 Nucleotide.propTypes = {
-  x: number.isRequired,
-  y: number.isRequired,
+  nucleotidesPerRow: number.isRequired,
+  rowHeight: number.isRequired,
+  nucleotideWidth: number.isRequired,
   index: number.isRequired,
   // attributes
   type: string.isRequired,

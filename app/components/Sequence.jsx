@@ -25,20 +25,16 @@ export default class Sequence extends Component {
       <g>
         {
           this.props.sequence.map((nucleotide, index) => {
-            const { rowHeight, nucleotidesPerRow, nucleotideWidth } = this.props;
             const boundClick = this.handleNucleotideClick.bind(this, index);
-            const x = 10 + (nucleotideWidth * (index % nucleotidesPerRow));
-            const y = 10 + (rowHeight * Math.trunc(index / nucleotidesPerRow));
 
             return (
               <Nucleotide
-                x={x}
-                y={y}
                 type={nucleotide}
                 position={index + 1}
                 key={index}
                 index={index}
                 onClick={boundClick}
+                {...this.props}
               />
             );
           })
