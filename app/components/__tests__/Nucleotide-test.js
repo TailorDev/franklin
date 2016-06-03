@@ -9,6 +9,16 @@ import Nucleotide from '../Nucleotide';
 
 describe('<Nucleotide />', () => {
 
+  let context;
+
+  before(() => {
+    context = {
+      controller: {
+        on: () => {}
+      }
+    };
+  });
+
   it('renders a Nucleotide as needed', () => {
     const wrapper = mount(
       <Nucleotide
@@ -16,10 +26,12 @@ describe('<Nucleotide />', () => {
         y={30}
         type="A"
         position={20}
+        index={19}
         isSelected={false}
         isInSelectionRange={false}
         onClick={() => {}}
-      />
+      />,
+      { context }
     );
 
     const instance = wrapper.instance();
@@ -39,10 +51,12 @@ describe('<Nucleotide />', () => {
         y={30}
         type="A"
         position={230}
+        index={229}
         isSelected={false}
         isInSelectionRange={false}
         onClick={() => {}}
-      />
+      />,
+      { context }
     );
     let instance = wrapper.instance();
     expect(instance.getPositionLength()).to.equal(3);
@@ -53,10 +67,12 @@ describe('<Nucleotide />', () => {
         y={30}
         type="A"
         position={230123}
+        index={230122}
         isSelected={false}
         isInSelectionRange={false}
         onClick={() => {}}
-      />
+      />,
+      { context }
     );
     instance = wrapper.instance();
     expect(instance.getPositionLength()).to.equal(6);
@@ -69,10 +85,12 @@ describe('<Nucleotide />', () => {
         y={30}
         type="A"
         position={230}
+        index={229}
         isSelected={false}
         isInSelectionRange={false}
         onClick={() => {}}
-      />
+      />,
+      { context }
     );
     let instance = wrapper.instance();
     expect(instance.getPositionBackgroundXCoordinate()).to.equal(-10);
@@ -83,10 +101,12 @@ describe('<Nucleotide />', () => {
         y={30}
         type="A"
         position={230123}
+        index={230122}
         isSelected={false}
         isInSelectionRange={false}
         onClick={() => {}}
-      />
+      />,
+      { context }
     );
     instance = wrapper.instance();
     expect(instance.getPositionBackgroundXCoordinate()).to.equal(-25);
@@ -99,10 +119,12 @@ describe('<Nucleotide />', () => {
         y={30}
         type="A"
         position={230}
+        index={229}
         isSelected={false}
         isInSelectionRange={false}
         onClick={() => {}}
-      />
+      />,
+      { context }
     );
     let instance = wrapper.instance();
     expect(instance.getPositionBackgroundWidth()).to.equal(40);
@@ -113,10 +135,12 @@ describe('<Nucleotide />', () => {
         y={30}
         type="A"
         position={230123}
+        index={230122}
         isSelected={false}
         isInSelectionRange={false}
         onClick={() => {}}
-      />
+      />,
+      { context }
     );
     instance = wrapper.instance();
     expect(instance.getPositionBackgroundWidth()).to.equal(70);
@@ -129,10 +153,12 @@ describe('<Nucleotide />', () => {
         y={30}
         type="A"
         position={230}
+        index={229}
         isSelected={false}
         isInSelectionRange={false}
         onClick={() => {}}
-      />
+      />,
+      { context }
     );
     let instance = wrapper.instance();
     expect(instance.getPositionTextXCoordinate()).to.equal(-5);
@@ -143,10 +169,12 @@ describe('<Nucleotide />', () => {
         y={30}
         type="A"
         position={230123}
+        index={230122}
         isSelected={false}
         isInSelectionRange={false}
         onClick={() => {}}
-      />
+      />,
+      { context }
     );
     instance = wrapper.instance();
     expect(instance.getPositionTextXCoordinate()).to.equal(-20);
