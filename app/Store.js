@@ -69,10 +69,10 @@ export default class Store {
     this.file.source = file;
     this.file.chunks = [];
 
-    this.loadFileChunk();
+    this.readFileChunk();
   }
 
-  loadFileChunk() {
+  readFileChunk() {
     const end = this.file.offset + (10 * 1024); // chunk size
     const blob = this.file.source.slice(this.file.offset, end);
 
@@ -102,7 +102,7 @@ export default class Store {
       return;
     }
 
-    this.loadFileChunk();
+    this.readFileChunk();
   }
 
   addNewLabel(label) {

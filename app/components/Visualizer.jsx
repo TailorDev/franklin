@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import debounce from 'lodash.debounce';
 import Immutable from 'immutable';
 
-import { Events } from '../Store';
 import Sequence from './Sequence';
 
 const { instanceOf, object } = PropTypes;
@@ -35,7 +34,7 @@ export default class Visualizer extends Component {
 
   componentDidUpdate() {
     // Close the loader once updated
-    this.context.controller.store.events.emit(Events.LOADING_END);
+    this.context.controller.dispatch('action:end-visualizer-resize');
   }
 
   componentWillUnmount() {
@@ -52,7 +51,7 @@ export default class Visualizer extends Component {
 
   updateVisualizerDimensions(sequence) {
     // Display loader before re-rendering
-    this.context.controller.store.events.emit(Events.LOADING_START);
+    this.context.controller.dispatch('action:start-visualizer-resize');
 
     const { nucleotideWidth, rowHeight } = this.state;
     // Width must fit the wrapper maximal dimension, i.e. 100%

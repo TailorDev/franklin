@@ -3,31 +3,32 @@ import { Events } from '../Store';
 
 
 export default class Loader extends Component {
+
   constructor(props, context) {
     super(props, context);
 
-    this.state = { loading: false };
+    this.state = { display: 'none' };
   }
 
   componentDidMount() {
     this.context.controller.on(Events.LOADING_START, () => {
-      this.setState({ loading: true });
+      this.setState({ display: 'block' });
     });
+
     this.context.controller.on(Events.LOADING_END, () => {
-      this.setState({ loading: false });
+      this.setState({ display: 'none' });
     });
   }
 
   render() {
-    return this.state.loading ?
-      <div className="loader">
+    return (
+      <div className="loader" style={{ display: this.state.display }}>
         <p className="message">
           Rendering your sequence...<br /><br />
           <i className="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
         </p>
       </div>
-      :
-      null;
+    );
   }
 }
 
