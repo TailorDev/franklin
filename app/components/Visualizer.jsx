@@ -2,9 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import debounce from 'lodash.debounce';
 import Immutable from 'immutable';
 
+import { Events } from '../Store';
 import Sequence from './Sequence';
 
-const { instanceOf } = PropTypes;
+const { instanceOf, object } = PropTypes;
 
 export default class Visualizer extends Component {
 
@@ -32,6 +33,11 @@ export default class Visualizer extends Component {
     this.updateVisualizerDimensions(nextProps.sequence);
   }
 
+  componentDidUpdate() {
+    // Close the loader once updated
+    this.context.controller.store.events.emit(Events.LOADING_END);
+  }
+
   componentWillUnmount() {
     window.removeEventListener(
       'resize',
@@ -45,6 +51,9 @@ export default class Visualizer extends Component {
   }
 
   updateVisualizerDimensions(sequence) {
+    // Display loader before re-rendering
+    this.context.controller.store.events.emit(Events.LOADING_START);
+
     const { nucleotideWidth, rowHeight } = this.state;
     // Width must fit the wrapper maximal dimension, i.e. 100%
     const width = this.refs.wrapper.clientWidth;
@@ -114,4 +123,8 @@ export default class Visualizer extends Component {
 
 Visualizer.propTypes = {
   sequence: instanceOf(Immutable.List).isRequired,
+};
+
+Visualizer.contextTypes = {
+  controller: object.isRequired,
 };
