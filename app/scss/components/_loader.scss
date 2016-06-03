@@ -4,10 +4,20 @@
 
 .loader {
   position: absolute;
-  background: rgba(230, 230, 230, 0.75);
   height: 100%;
   width: 100%;
-  padding-top: 15%;
-  font-size: 2rem;
+  background: rgba($primary-color, 0.9);
+  color: $white;
+  font-size: 1.8rem;
   text-align: center;
+
+  .message {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+  }
 }
