@@ -18,6 +18,7 @@ const defaultSequence = new Immutable.List(
     'ATGTACATCGCGGTGCGATTGTGTCGCTTAAAGCACACGTACACCCACTGTCACACTCACACTCACATGC',
   ].join('').split('')
 );
+
 const defaultLabels = new Immutable.List([
   {
     name: 'Exon',

@@ -1,5 +1,3 @@
-import { Events } from './Store';
-
 export default class Controller {
 
   constructor(components, events) {
@@ -14,8 +12,6 @@ export default class Controller {
     this.events.on('action:clear-selection', this.onClearSelection.bind(this));
     this.events.on('action:update-selection', this.onUpdateSelection.bind(this));
     this.events.on('action:start-demo', this.onStartDemo.bind(this));
-    this.events.on('action:start-visualizer-resize', this.onStartVisualizerResize.bind(this));
-    this.events.on('action:end-visualizer-resize', this.onEndVisualizerResize.bind(this));
   }
 
   getState() {
@@ -62,13 +58,5 @@ export default class Controller {
 
   onStartDemo() {
     this.store.loadDataFromDemo();
-  }
-
-  onStartVisualizerResize() {
-    this.events.emit(Events.LOADING_START);
-  }
-
-  onEndVisualizerResize() {
-    this.events.emit(Events.LOADING_END);
   }
 }
