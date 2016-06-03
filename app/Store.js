@@ -8,7 +8,16 @@ export const Events = {
   LOADING_END: 'store:loading-end',
 };
 
-const defaultSequence = new Immutable.List('AAACGAAAACT'.split(''));
+const defaultSequence = new Immutable.List(
+  [
+    'ATGGTCACTCTAATCGCAGTCTGCAATTTACGTGTTTCCAACTTAACGCCCCCAAGTTAATAGCCGTAAT',
+    'CATTTGAAAAGAAAGGCACGCACGCACAACGCCATGCGGATCGAACCTGGGGACTCCTTTTGGACGAAAA',
+    'AGGCGATGTTTTCCAACGCAGAAAGGCAGTACTTTGAGACGGTCCGTCCGCGGAAGACCAGTGTGAGTAA',
+    'AAGTTGACCGTCGATGGCGATTTCACAAGTGACGTTTAAGTGGCGGGAACTTCTACTCACAAATCCCTGA',
+    'GCCCTGTGATATGATTTATTTTATGGAGCCGTGATCCGGACGAAAAATGCACACACATTTCTACAAAAAT',
+    'ATGTACATCGCGGTGCGATTGTGTCGCTTAAAGCACACGTACACCCACTGTCACACTCACACTCACATGC',
+  ].join('').split('')
+);
 const defaultLabels = new Immutable.List([
   {
     name: 'Exon',
@@ -34,9 +43,10 @@ export default class Store {
     this.reader = new FileReader();
 
     this.state = {
-      sequence: defaultSequence,
+      sequence: new Immutable.List(),
       labels: defaultLabels,
       selection: new Immutable.OrderedSet(),
+      modalIsOpen: true,
     };
 
     // file reader
@@ -145,5 +155,18 @@ export default class Store {
       previousSelection.delete(selected) : previousSelection.add(selected);
 
     this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
+  }
+
+  startDemo() {
+    this.state.sequence = defaultSequence;
+    this.state.modalIsOpen = false;
+
+    this.events.emit(Events.CHANGE, this.state);
+  }
+
+  closeModal() {
+    this.state.modalIsOpen = false;
+
+    this.events.emit(Events.CHANGE, this.state);
   }
 }

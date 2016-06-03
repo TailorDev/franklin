@@ -8,9 +8,29 @@
   height: 100%;
   max-height: 100%;
   overflow: scroll;
-  background-color: $grey;
 
   svg {
-    fill: $grey;
+    fill: rgba($white, 0);
+  }
+
+  .help {
+    padding: 4rem 1rem 2rem;
+    text-align: center;
+    color: darken($grey, 50%);
+
+    h4 {
+      font-weight: bold;
+    }
+
+    i.big {
+      margin: 3rem 1rem;
+      font-size: 4rem;
+    }
+
+    p {
+      &.message {
+        color: $alert-color;
+      }
+    }
   }
 }

@@ -20,7 +20,14 @@ export default class Loader extends Component {
 
   render() {
     return this.state.loading ?
-      <div className="loader">Rendering the sequence...</div> : null;
+      <div className="loader">
+        <p className="message">
+          Rendering your sequence...<br /><br />
+          <i className="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+        </p>
+      </div>
+      :
+      null;
   }
 }
 
