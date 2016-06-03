@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import debounce from 'lodash.debounce';
+import Immutable from 'immutable';
 
 import Sequence from './Sequence';
 
-const { array } = PropTypes;
+const { instanceOf } = PropTypes;
 
 export default class Visualizer extends Component {
 
@@ -49,7 +50,8 @@ export default class Visualizer extends Component {
     const width = this.refs.wrapper.clientWidth;
     const nt = Math.trunc((width - 20) / nucleotideWidth);
     // Should contain each row
-    const height = 10 + (Math.trunc(sequence.length / nt) + 1) * rowHeight;
+    const height = 10 + (Math.trunc(sequence.size / nt) + 1) * rowHeight;
+
     this.setState({
       nucleotidesPerRow: nt,
       visualizerWidth: width,
@@ -80,5 +82,5 @@ export default class Visualizer extends Component {
 }
 
 Visualizer.propTypes = {
-  sequence: array.isRequired,
+  sequence: instanceOf(Immutable.List).isRequired,
 };

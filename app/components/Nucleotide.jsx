@@ -1,12 +1,40 @@
 import React, { Component, PropTypes } from 'react';
+import { Events } from '../Store';
 
-const { bool, func, number, string } = PropTypes;
+const { object, func, number, string } = PropTypes;
 
 export default class Nucleotide extends Component {
 
-  shouldComponentUpdate(nextProps) {
-    return (this.props.isSelected !== nextProps.isSelected) ||
-      (this.props.isInSelectionRange !== nextProps.isInSelectionRange) ||
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      isSelected: false,
+      isInSelectionRange: false,
+    };
+  }
+
+  componentDidMount() {
+    this.context.controller.on(Events.CHANGE_SELECTION, (selection) => {
+      const isSelected = selection.includes(this.props.index);
+      const isInSelectionRange = this.props.index <= selection.max() &&
+        this.props.index >= selection.min();
+
+      if (
+        this.state.isSelected !== isSelected ||
+        this.state.isInSelectionRange !== isInSelectionRange
+      ) {
+        this.setState({
+          isSelected,
+          isInSelectionRange,
+        });
+      }
+    });
+  }
+
+  shouldComponentUpdate(nextProps, newState) {
+    return (this.state.isSelected !== newState.isSelected) ||
+      (this.state.isInSelectionRange !== newState.isInSelectionRange) ||
       (this.props.x !== nextProps.x) || (this.props.y !== nextProps.y);
   }
 
@@ -34,17 +62,11 @@ export default class Nucleotide extends Component {
         transform={`translate(${this.props.x}, ${this.props.y})`}
         onClick={this.props.onClick}
       >
-        <g
-          className={
-            this.props.isInSelectionRange ? 'type in-selection' : 'type'
-          }
-        >
+        <g className={`type${this.state.isInSelectionRange ? ' in-selection' : ''}`}>
           <text x="5" y="43">{this.props.type}</text>
         </g>
 
-        <g
-          className={this.props.isSelected ? 'position selected' : 'position'}
-        >
+        <g className={`position${this.state.isSelected ? ' selected' : ''}`}>
           <rect
             className="position-background"
             x={this.getPositionBackgroundXCoordinate()}
@@ -81,11 +103,14 @@ export default class Nucleotide extends Component {
 Nucleotide.propTypes = {
   x: number.isRequired,
   y: number.isRequired,
+  index: number.isRequired,
   // attributes
   type: string.isRequired,
   position: number.isRequired,
-  isSelected: bool.isRequired,
-  isInSelectionRange: bool.isRequired,
   // events
   onClick: func.isRequired,
+};
+
+Nucleotide.contextTypes = {
+  controller: object.isRequired,
 };

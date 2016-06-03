@@ -18,30 +18,37 @@ describe('<Labels />', () => {
     { name: 'label 2', color: '#fff', isActive: true },
   ]);
 
+  let context, spyOn, spyDispatch;
+
+  before(() => {
+    spyOn = sinon.spy();
+    spyDispatch = sinon.spy();
+
+    context = {
+      controller: {
+        on: spyOn,
+        dispatch: spyDispatch,
+      }
+    };
+  });
+
   it('renders a list of labels', () => {
     const wrapper = shallow(
       <Labels
         labels={dummyLabels}
-        onCreateNewLabel={() => {}}
-        onToggleLabel={() => {}}
-        onEditLabel={() => {}}
-        onRemoveLabel={() => {}}
-      />
+      />,
+      { context }
     );
 
     expect(wrapper.find(Label)).to.have.length(dummyLabels.size);
   });
 
   it('allows to create new labels', () => {
-    const spy = sinon.spy();
     const wrapper = mount(
       <Labels
         labels={dummyLabels}
-        onCreateNewLabel={spy}
-        onToggleLabel={() => {}}
-        onEditLabel={() => {}}
-        onRemoveLabel={() => {}}
-      />
+      />,
+      { context }
     );
 
     wrapper.find('button.new-label').simulate('click');
@@ -53,7 +60,13 @@ describe('<Labels />', () => {
     });
     wrapper.find('.button.submit').simulate('click');
 
-    expect(spy.calledOnce).to.be.true;
-    expect(spy.calledWith({ name: 'foo', color: '#f6f6f6', isActive: true })).to.be.true;
+    expect(spyDispatch.calledOnce).to.be.true;
+    expect(spyDispatch.calledWith('action:new-label', {
+      label: {
+        name: 'foo',
+        color: '#f6f6f6',
+        isActive: true,
+      }
+    })).to.be.true;
   });
 });
