@@ -11,8 +11,8 @@ export default class Controller {
     this.events.on('action:toggle-label', this.onToggleLabel.bind(this));
     this.events.on('action:clear-selection', this.onClearSelection.bind(this));
     this.events.on('action:update-selection', this.onUpdateSelection.bind(this));
-    this.events.on('action:start-demo', this.startDemo.bind(this));
-    this.events.on('action:close-modal', this.closeModal.bind(this));
+    this.events.on('action:start-demo', this.onStartDemo.bind(this));
+    this.events.on('action:close-modal', this.onCloseModel.bind(this));
   }
 
   getState() {

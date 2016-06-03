@@ -43,7 +43,7 @@ export default class Store {
     this.reader = new FileReader();
 
     this.state = {
-      sequence: [],
+      sequence: new Immutable.List(),
       labels: defaultLabels,
       selection: new Immutable.OrderedSet(),
       modalIsOpen: true,

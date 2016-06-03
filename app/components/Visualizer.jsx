@@ -63,7 +63,7 @@ export default class Visualizer extends Component {
     return (
       <div className="visualizer" ref="wrapper">
 
-        {this.props.sequence.length ?
+        {this.props.sequence.size ?
           <svg
             version="1.1"
             baseProfile="full"

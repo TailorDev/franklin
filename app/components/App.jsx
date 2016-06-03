@@ -1,11 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Dropzone from 'react-dropzone';
-<<<<<<< HEAD
 import { Events } from '../Store';
-=======
-import Immutable from 'immutable';
 import Modal from 'react-modal';
->>>>>>> Add welcome modal with a disclaimer
 
 import Header from './Header';
 import Visualizer from './Visualizer';
@@ -22,21 +18,6 @@ export default class App extends Component {
 
     this.state = props.controller.getState();
     this.onDropAccepted = this.onDropAccepted.bind(this);
-=======
-    this.state = {
-      sequence: [],
-      labels: new Immutable.List(someLabels),
-      modalIsOpen: true,
-    };
-
-    this.reader = new FileReader();
-
-    this.reader.onloadend = this.onFileLoadEnd.bind(this);
-    this.onDropAccepted = this.onDropAccepted.bind(this);
-    this.onDropRejected = this.onDropRejected.bind(this);
-    this.onCreateNewLabel = this.onCreateNewLabel.bind(this);
-    this.onRemoveLabel = this.onRemoveLabel.bind(this);
->>>>>>> Add style to active dropzone
     this.startDemo = this.startDemo.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
