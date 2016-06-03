@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import Immutable from 'immutable';
 
 import { SwatchesPicker } from 'react-color';
 
@@ -7,6 +8,7 @@ const defaultLabel = {
   name: '',
   color: '#f6f6f6',
   isActive: true,
+  annotations: new Immutable.List(),
 };
 
 
@@ -50,6 +52,7 @@ class LabelForm extends Component {
         name: previousState.label.name,
         color: color.hex,
         isActive: true,
+        annotations: previousState.label.annotations,
       },
       displayColorPicker: false,
     }));
@@ -63,6 +66,7 @@ class LabelForm extends Component {
         name: event.target.value,
         color: previousState.label.color,
         isActive: true,
+        annotations: previousState.label.annotations,
       },
     }));
   }

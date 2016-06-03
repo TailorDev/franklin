@@ -3,7 +3,7 @@ import debounce from 'lodash.debounce';
 import Immutable from 'immutable';
 
 import Sequence from './Sequence';
-import Annotation from './Annotation';
+import Annotations from './Annotations';
 
 const { instanceOf } = PropTypes;
 
@@ -74,11 +74,9 @@ export default class Visualizer extends Component {
           >
             <rect width="100%" height="100%" />
 
-            <Annotation
-              positionFrom={10}
-              positionTo={50}
-              label={{ name: 'toto', color: '#ccc' }}
-              comment={'Lorem Ipsum'}
+            <Annotations
+              labels={this.props.labels}
+              {...this.state}
             />
 
             <Sequence
@@ -122,4 +120,5 @@ export default class Visualizer extends Component {
 
 Visualizer.propTypes = {
   sequence: instanceOf(Immutable.List).isRequired,
+  labels: instanceOf(Immutable.List).isRequired,
 };

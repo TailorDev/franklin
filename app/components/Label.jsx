@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
+import Immutable from 'immutable';
 
-const { bool, func, string } = PropTypes;
+const { bool, func, instanceOf, string } = PropTypes;
 
 import LabelEdit from './LabelEdit';
 import LabelRemove from './LabelRemove';
@@ -96,6 +97,7 @@ Label.propTypes = {
   name: string.isRequired,
   color: string.isRequired,
   isActive: bool.isRequired,
+  annotations: instanceOf(Immutable.List).isRequired,
   onToggleLabel: func.isRequired,
   onEditLabel: func.isRequired,
   onRemoveLabel: func.isRequired,

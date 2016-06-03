@@ -24,18 +24,38 @@ const defaultLabels = new Immutable.List([
     name: 'Exon',
     color: '#334854',
     isActive: true,
+    annotations: new Immutable.List([
+      {
+        indexFrom: 4,
+        indexTo: 24,
+        positionFrom: 5,
+        positionTo: 25,
+        comment: 'Lorem Ipsum',
+      },
+    ]),
   },
   {
     name: 'Primer',
     color: '#f9c535',
     isActive: true,
+    annotations: new Immutable.List([
+      {
+        indexFrom: 18,
+        indexTo: 215,
+        positionFrom: 145,
+        positionTo: 216,
+        comment: 'Lorem Ipsum',
+      },
+    ]),
   },
   {
     name: 'SNP',
     color: '#e04462',
     isActive: true,
+    annotations: new Immutable.List(),
   },
 ]);
+
 
 export default class Store {
 
@@ -44,7 +64,7 @@ export default class Store {
 
     this.state = {
       sequence: new Immutable.List(),
-      labels: defaultLabels,
+      labels: new Immutable.List(),
       selection: new Immutable.OrderedSet(),
     };
 
@@ -117,6 +137,7 @@ export default class Store {
         name: label.name,
         color: label.color,
         isActive: true,
+        annotations: label.annotations,
       }
     ));
 
@@ -135,6 +156,7 @@ export default class Store {
         name: label.name,
         color: label.color,
         isActive: !label.isActive,
+        annotations: label.annotations,
       }
     ));
 
@@ -160,6 +182,7 @@ export default class Store {
 
   loadDataFromDemo() {
     this.state.sequence = defaultSequence;
+    this.state.labels = defaultLabels;
 
     this.events.emit(Events.CHANGE, this.state);
   }

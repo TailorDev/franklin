@@ -60,9 +60,7 @@ export default class Labels extends Component {
         {this.props.labels.map((label, index) =>
           <Label
             key={index}
-            name={label.name}
-            color={label.color}
-            isActive={label.isActive}
+            {...label}
             onToggleLabel={() => { this.onToggleLabel(index); }}
             onEditLabel={(editedLabel) => { this.onEditLabel(index, editedLabel); }}
             onRemoveLabel={() => { this.onRemoveLabel(index); }}

@@ -106,6 +106,7 @@ export default class App extends Component {
           >
             <Visualizer
               sequence={this.state.sequence}
+              labels={this.state.labels}
             />
           </Dropzone>
           <Toolbar labels={this.state.labels} />
