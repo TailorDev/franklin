@@ -16,7 +16,10 @@ export default class App extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = props.controller.getState();
+    this.state = Object.assign(props.controller.getState(), {
+      modalIsOpen: true,
+    });
+
     this.onDropAccepted = this.onDropAccepted.bind(this);
     this.startDemo = this.startDemo.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -32,6 +35,7 @@ export default class App extends Component {
   componentDidMount() {
     this.props.controller.on(Events.CHANGE, (state) => {
       this.setState(state);
+      this.closeModal();
     });
   }
 
@@ -46,7 +50,7 @@ export default class App extends Component {
   }
 
   closeModal() {
-    this.props.controller.dispatch('action:close-modal');
+    this.setState({ modalIsOpen: false });
   }
 
   render() {

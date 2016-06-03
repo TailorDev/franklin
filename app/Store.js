@@ -45,7 +45,6 @@ export default class Store {
       sequence: new Immutable.List(),
       labels: defaultLabels,
       selection: new Immutable.OrderedSet(),
-      modalIsOpen: true,
     };
 
     // file reader
@@ -62,7 +61,7 @@ export default class Store {
     return this.state;
   }
 
-  loadFromFile(file) {
+  loadDataFromFile(file) {
     this.events.emit(Events.LOADING_START);
 
     this.file.offset = 0;
@@ -158,15 +157,8 @@ export default class Store {
     this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
   }
 
-  startDemo() {
+  loadDataFromDemo() {
     this.state.sequence = defaultSequence;
-    this.state.modalIsOpen = false;
-
-    this.events.emit(Events.CHANGE, this.state);
-  }
-
-  closeModal() {
-    this.state.modalIsOpen = false;
 
     this.events.emit(Events.CHANGE, this.state);
   }
