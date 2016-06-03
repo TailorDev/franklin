@@ -31,7 +31,6 @@ export default class Store {
 
   constructor(events) {
     this.events = events;
-    this.reader = new FileReader();
 
     this.state = {
       sequence: defaultSequence,
@@ -40,10 +39,13 @@ export default class Store {
     };
 
     // file reader
-    this.offset = 0;
-    this.file = null;
-    this.fileParts = [];
-    this.reader.onload = this.onFileLoad.bind(this);
+    this.file = {
+      reader: new FileReader(),
+      offset: 0,
+      source: null,
+      chunks: [],
+    };
+    this.file.reader.onload = this.onFileLoad.bind(this);
   }
 
   getState() {
@@ -53,36 +55,35 @@ export default class Store {
   loadFromFile(file) {
     this.events.emit(Events.LOADING_START);
 
-    // reset
-    this.offset = 0;
-    this.file = file;
-    this.fileParts = [];
+    this.file.offset = 0;
+    this.file.source = file;
+    this.file.chunks = [];
 
     this.loadFileChunk();
   }
 
   loadFileChunk() {
-    const end = this.offset + (10 * 1024); // chunk size
-    const blob = this.file.slice(this.offset, end);
-    this.offset = end;
+    const end = this.file.offset + (10 * 1024); // chunk size
+    const blob = this.file.source.slice(this.file.offset, end);
 
-    this.reader.readAsText(blob);
+    this.file.offset = end;
+    this.file.reader.readAsText(blob);
   }
 
   onFileLoad(event) {
     if (null === event.target.error) {
-      let parts = event.target.result.split('\n');
+      let chunks = event.target.result.split('\n');
 
-      if (/>/.test(parts[0])) {
-        parts = parts.slice(1);
+      if (/>/.test(chunks[0])) {
+        chunks = chunks.slice(1);
       }
 
-      this.fileParts = this.fileParts.concat(parts);
+      this.file.chunks = this.file.chunks.concat(chunks);
     }
 
-    if (this.offset >= this.file.size) {
+    if (this.file.offset >= this.file.source.size) {
       this.state.sequence = new Immutable.List(
-        this.fileParts.join('').split('')
+        this.file.chunks.join('').split('')
       );
 
       this.events.emit(Events.LOADING_END);
