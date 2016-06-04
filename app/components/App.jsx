@@ -16,7 +16,10 @@ export default class App extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = props.controller.getState();
+    this.state = Object.assign({
+      displayModal: true,
+    }, props.controller.getState());
+
     this.onDropAccepted = this.onDropAccepted.bind(this);
     this.startDemo = this.startDemo.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -31,7 +34,11 @@ export default class App extends Component {
 
   componentDidMount() {
     this.props.controller.on(Events.CHANGE, (state) => {
-      this.setState(state);
+      this.setState({
+        labels: state.labels,
+        sequence: state.sequence,
+        displayModal: false,
+      });
     });
   }
 
@@ -46,7 +53,7 @@ export default class App extends Component {
   }
 
   closeModal() {
-    this.props.controller.dispatch('action:close-modal');
+    this.setState({ displayModal: false });
   }
 
   render() {
@@ -55,7 +62,7 @@ export default class App extends Component {
         <Modal
           overlayClassName="modal-overlay"
           className="modal-content"
-          isOpen={this.state.modalIsOpen}
+          isOpen={this.state.displayModal}
           shouldCloseOnOverlayClick={false}
         >
           <h2>Disclaimer</h2>
@@ -97,7 +104,9 @@ export default class App extends Component {
             disablePreview
             multiple={false}
           >
-            <Visualizer sequence={this.state.sequence} />
+            <Visualizer
+              sequence={this.state.sequence}
+            />
           </Dropzone>
           <Toolbar labels={this.state.labels} />
         </div>

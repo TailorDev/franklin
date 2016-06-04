@@ -4,7 +4,7 @@ import Immutable from 'immutable';
 
 import Sequence from './Sequence';
 
-const { instanceOf, object } = PropTypes;
+const { instanceOf } = PropTypes;
 
 export default class Visualizer extends Component {
 
@@ -32,11 +32,6 @@ export default class Visualizer extends Component {
     this.updateVisualizerDimensions(nextProps.sequence);
   }
 
-  componentDidUpdate() {
-    // Close the loader once updated
-    this.context.controller.dispatch('action:end-visualizer-resize');
-  }
-
   componentWillUnmount() {
     window.removeEventListener(
       'resize',
@@ -50,9 +45,6 @@ export default class Visualizer extends Component {
   }
 
   updateVisualizerDimensions(sequence) {
-    // Display loader before re-rendering
-    this.context.controller.dispatch('action:start-visualizer-resize');
-
     const { nucleotideWidth, rowHeight } = this.state;
     // Width must fit the wrapper maximal dimension, i.e. 100%
     const width = this.refs.wrapper.clientWidth;
@@ -122,8 +114,4 @@ export default class Visualizer extends Component {
 
 Visualizer.propTypes = {
   sequence: instanceOf(Immutable.List).isRequired,
-};
-
-Visualizer.contextTypes = {
-  controller: object.isRequired,
 };

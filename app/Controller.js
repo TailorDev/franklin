@@ -1,5 +1,3 @@
-import { Events } from './Store';
-
 export default class Controller {
 
   constructor(components, events) {
@@ -14,9 +12,6 @@ export default class Controller {
     this.events.on('action:clear-selection', this.onClearSelection.bind(this));
     this.events.on('action:update-selection', this.onUpdateSelection.bind(this));
     this.events.on('action:start-demo', this.onStartDemo.bind(this));
-    this.events.on('action:close-modal', this.onCloseModel.bind(this));
-    this.events.on('action:start-visualizer-resize', this.onStartVisualizerResize.bind(this));
-    this.events.on('action:end-visualizer-resize', this.onEndVisualizerResize.bind(this));
   }
 
   getState() {
@@ -34,7 +29,7 @@ export default class Controller {
   }
 
   onDropFile({ file }) {
-    this.store.loadFromFile(file);
+    this.store.loadDataFromFile(file);
   }
 
   onNewLabel({ label }) {
@@ -62,18 +57,6 @@ export default class Controller {
   }
 
   onStartDemo() {
-    this.store.startDemo();
-  }
-
-  onCloseModel() {
-    this.store.closeModal();
-  }
-
-  onStartVisualizerResize() {
-    this.events.emit(Events.LOADING_START);
-  }
-
-  onEndVisualizerResize() {
-    this.events.emit(Events.LOADING_END);
+    this.store.loadDataFromDemo();
   }
 }
