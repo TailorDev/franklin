@@ -19,7 +19,7 @@ export default class Nucleotide extends Component {
 
   componentWillMount() {
     // First rendering
-    this.updateCoordinates();
+    this.updateCoordinates(this.props);
   }
 
   componentDidMount() {
@@ -40,18 +40,18 @@ export default class Nucleotide extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    // On resize, the number of nucleotides per row changes
+    // this is the only case where we need to update coordinates
+    if (this.props.nucleotidesPerRow !== nextProps.nucleotidesPerRow) {
+      this.updateCoordinates(nextProps);
+    }
+  }
+
   shouldComponentUpdate(nextProps, newState) {
     return (this.state.isSelected !== newState.isSelected) ||
       (this.state.isInSelectionRange !== newState.isInSelectionRange) ||
       (this.props.nucleotidesPerRow !== nextProps.nucleotidesPerRow);
-  }
-
-  componentWillUpdate(nextProps) {
-    // On resize, the number of nucleotides per row changes
-    // this is the only case where we need to update coordinates
-    if (this.props.nucleotidesPerRow !== nextProps.nucleotidesPerRow) {
-      this.updateCoordinates();
-    }
   }
 
   getPositionLength() {
@@ -70,9 +70,9 @@ export default class Nucleotide extends Component {
     return 5 - ((this.getPositionLength() - 1) * 10 / 2);
   }
 
-  updateCoordinates() {
+  updateCoordinates(props) {
     this.setState(
-      getNucleotideCoordinates(this.props.index, this.props)
+      getNucleotideCoordinates(props.index, props)
     );
   }
 

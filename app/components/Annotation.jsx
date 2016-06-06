@@ -17,15 +17,15 @@ class Annotation extends Component {
 
   componentWillMount() {
     // First rendering
-    this.updateCoordinates();
+    this.updateCoordinates(this.props);
   }
 
-  componentWillReceiveProps() {
-    this.updateCoordinates();
+  componentWillReceiveProps(nextProps) {
+    this.updateCoordinates(nextProps);
   }
 
-  updateCoordinates() {
-    const { indexFrom, indexTo, nucleotidesPerRow } = this.props;
+  updateCoordinates(props) {
+    const { indexFrom, indexTo, nucleotidesPerRow } = props;
 
     // Prepare segments
     const segments = [];
@@ -39,14 +39,14 @@ class Annotation extends Component {
     segments.push([start, indexTo]);
 
     // Get track number
-    const track = this.props.labels.indexOf(this.props.label);
+    const track = props.labels.indexOf(props.label);
 
     const lines = segments.map((segment) =>
       getAnnotationSegmentCoordinates(
         segment[0],
         segment[1],
         track,
-        this.props
+        props
       )
     );
 
