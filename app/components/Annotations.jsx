@@ -9,11 +9,12 @@ const { instanceOf, number } = PropTypes;
 const Annotations = (props) =>
   <g>
     {
-      props.labels.map((label) =>
-        label.annotations.map((annotation, index) =>
+      props.labels.map((label, labelIndex) =>
+        label.annotations.map((annotation, annotationIndex) =>
           <Annotation
-            key={index}
+            key={annotationIndex}
             label={label}
+            track={labelIndex}
             {...annotation}
             {...props}
           />
