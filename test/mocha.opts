@@ -1,4 +1,3 @@
---bail
 --require test/bootstrap.js
 --compilers jsx?:babel-register
 app/**/*-test.js

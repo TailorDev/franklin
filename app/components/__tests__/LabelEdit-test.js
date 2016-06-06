@@ -65,6 +65,11 @@ describe('<LabelEdit />', () => {
     wrapper.find('.button.submit').simulate('click');
 
     expect(spy.calledOnce).to.be.true;
-    expect(spy.calledWith({ name: 'bar', color: '#000', isActive: true,           annotations: Immutable.List() })).to.be.true;
+    expect(spy.calledWith({
+      name: 'bar',
+      color: '#000',
+      isActive: true,
+      annotations: Immutable.List() })
+    ).to.be.true;
   });
 });
