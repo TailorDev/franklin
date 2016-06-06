@@ -1,6 +1,7 @@
-import Store, { Events } from '../Store';
+import Store, { Events, defaultLabels } from '../Store';
 import sinon from 'sinon';
 import { expect } from 'chai';
+import Immutable from 'immutable';
 
 // see: https://github.com/mochajs/mocha/issues/1847
 const { Promise, beforeEach, afterEach, describe, it } = global;
@@ -12,7 +13,7 @@ describe('Store', () => {
 
   beforeEach(() => {
     eventEmitterSpy = sinon.spy();
-    store = new Store({ emit: eventEmitterSpy });
+    store = new Store({ emit: eventEmitterSpy }, defaultLabels);
   });
 
   describe('labels', () => {
@@ -24,6 +25,7 @@ describe('Store', () => {
           name: 'Will',
           color: '#123456',
           isActive: true,
+          annotations: Immutable.List(),
         });
 
         expect(eventEmitterSpy.calledOnce).to.be.true;
@@ -40,6 +42,7 @@ describe('Store', () => {
           name: 'Will',
           color: '#123456',
           isActive: true,
+          annotations: Immutable.List(),
         });
 
         expect(eventEmitterSpy.calledOnce).to.be.true;

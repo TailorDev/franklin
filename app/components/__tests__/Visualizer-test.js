@@ -6,6 +6,7 @@ import Immutable from 'immutable';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
+import { defaultLabels } from '../../Store';
 import Visualizer from '../Visualizer';
 
 describe('<Visualizer />', () => {
@@ -27,6 +28,7 @@ describe('<Visualizer />', () => {
     const wrapper = mount(
       <Visualizer
         sequence={sequence}
+        labels={defaultLabels}
       />,
       { context, childContextTypes }
     );
@@ -34,7 +36,7 @@ describe('<Visualizer />', () => {
     expect(wrapper.find(Visualizer)).to.have.length(1);
     expect(wrapper.ref('wrapper')).to.have.length(1);
     expect(wrapper.find('svg')).to.have.length(1);
-    expect(wrapper.instance().state.visualizerWidth).to.equal('100%');
-    expect(wrapper.instance().state.visualizerHeight).to.equal('100%');
+    expect(wrapper.instance().state.width).to.equal('100%');
+    expect(wrapper.instance().state.height).to.equal('100%');
   });
 });

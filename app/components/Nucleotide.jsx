@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Events } from '../Store';
+import { getNucleotideCoordinates } from '../utils/positionning';
 
 const { object, func, number, string } = PropTypes;
 
@@ -70,10 +71,9 @@ export default class Nucleotide extends Component {
   }
 
   updateCoordinates() {
-    const { index, rowHeight, nucleotidesPerRow, nucleotideWidth } = this.props;
-    const x = 10 + (nucleotideWidth * (index % nucleotidesPerRow));
-    const y = 10 + (rowHeight * Math.trunc(index / nucleotidesPerRow));
-    this.setState({ x, y });
+    this.setState(
+      getNucleotideCoordinates(this.props.index, this.props)
+    );
   }
 
   render() {
@@ -123,6 +123,7 @@ export default class Nucleotide extends Component {
 }
 
 Nucleotide.propTypes = {
+  visualizerMargin: object.isRequired,
   nucleotidesPerRow: number.isRequired,
   rowHeight: number.isRequired,
   nucleotideWidth: number.isRequired,

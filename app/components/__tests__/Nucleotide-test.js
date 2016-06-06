@@ -22,15 +22,14 @@ describe('<Nucleotide />', () => {
   it('renders a Nucleotide as needed', () => {
     const wrapper = mount(
       <Nucleotide
-        type="A"
-        position={1}
-        index={0}
-        isSelected={false}
-        isInSelectionRange={false}
-        onClick={() => {}}
+        visualizerMargin={{x: 10, y: 10}}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
+        index={0}
+        type="A"
+        position={1}
+        onClick={() => {}}
       />,
       { context }
     );
@@ -41,22 +40,21 @@ describe('<Nucleotide />', () => {
     expect(instance.state.y).to.equal(10);
     expect(instance.props.type).to.equal("A");
     expect(instance.props.position).to.equal(1);
-    expect(instance.props.isSelected).to.be.false;
-    expect(instance.props.isInSelectionRange).to.be.false;
+    expect(instance.state.isSelected).to.be.false;
+    expect(instance.state.isInSelectionRange).to.be.false;
   });
 
   it('renders multiple rows when needed', () => {
     const wrapper = mount(
       <Nucleotide
-        type="A"
-        position={6}
-        index={5}
-        isSelected={false}
-        isInSelectionRange={false}
-        onClick={() => {}}
+        visualizerMargin={{x: 10, y: 10}}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
+        index={5}
+        type="A"
+        position={6}
+        onClick={() => {}}
       />,
       { context }
     );
@@ -69,15 +67,14 @@ describe('<Nucleotide />', () => {
   it('computes the position text length', () => {
     let wrapper = mount(
       <Nucleotide
-        type="A"
-        position={230}
-        index={229}
-        isSelected={false}
-        isInSelectionRange={false}
-        onClick={() => {}}
+        visualizerMargin={{x: 10, y: 10}}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
+        type="A"
+        position={230}
+        index={229}
+        onClick={() => {}}
       />,
       { context }
     );
@@ -86,15 +83,14 @@ describe('<Nucleotide />', () => {
 
     wrapper = mount(
       <Nucleotide
-        type="A"
-        position={230123}
-        index={230122}
-        isSelected={false}
-        isInSelectionRange={false}
-        onClick={() => {}}
+        visualizerMargin={{x: 10, y: 10}}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
+        type="A"
+        position={230123}
+        index={230122}
+        onClick={() => {}}
       />,
       { context }
     );
@@ -105,15 +101,14 @@ describe('<Nucleotide />', () => {
   it('computes the position background x-coordinate', () => {
     let wrapper = mount(
       <Nucleotide
-        type="A"
-        position={230}
-        index={229}
-        isSelected={false}
-        isInSelectionRange={false}
-        onClick={() => {}}
+        visualizerMargin={{x: 10, y: 10}}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
+        type="A"
+        position={230}
+        index={229}
+        onClick={() => {}}
       />,
       { context }
     );
@@ -122,15 +117,14 @@ describe('<Nucleotide />', () => {
 
     wrapper = mount(
       <Nucleotide
-        type="A"
-        position={230123}
-        index={230122}
-        isSelected={false}
-        isInSelectionRange={false}
-        onClick={() => {}}
+        visualizerMargin={{x: 10, y: 10}}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
+        type="A"
+        position={230123}
+        index={230122}
+        onClick={() => {}}
       />,
       { context }
     );
@@ -141,15 +135,14 @@ describe('<Nucleotide />', () => {
   it('computes the position background width', () => {
     let wrapper = mount(
       <Nucleotide
-        type="A"
-        position={230}
-        index={229}
-        isSelected={false}
-        isInSelectionRange={false}
-        onClick={() => {}}
+        visualizerMargin={{x: 10, y: 10}}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
+        type="A"
+        position={230}
+        index={229}
+        onClick={() => {}}
       />,
       { context }
     );
@@ -158,15 +151,14 @@ describe('<Nucleotide />', () => {
 
     wrapper = mount(
       <Nucleotide
-        type="A"
-        position={230123}
-        index={230122}
-        isSelected={false}
-        isInSelectionRange={false}
-        onClick={() => {}}
+        visualizerMargin={{x: 10, y: 10}}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
+        type="A"
+        position={230123}
+        index={230122}
+        onClick={() => {}}
       />,
       { context }
     );
@@ -177,15 +169,14 @@ describe('<Nucleotide />', () => {
   it('computes the position text x-coordinate', () => {
     let wrapper = mount(
       <Nucleotide
-        type="A"
-        position={230}
-        index={229}
-        isSelected={false}
-        isInSelectionRange={false}
-        onClick={() => {}}
+        visualizerMargin={{x: 10, y: 10}}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
+        type="A"
+        position={230}
+        index={229}
+        onClick={() => {}}
       />,
       { context }
     );
@@ -194,15 +185,14 @@ describe('<Nucleotide />', () => {
 
     wrapper = mount(
       <Nucleotide
-        type="A"
-        position={230123}
-        index={230122}
-        isSelected={false}
-        isInSelectionRange={false}
-        onClick={() => {}}
+        visualizerMargin={{x: 10, y: 10}}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
+        type="A"
+        position={230123}
+        index={230122}
+        onClick={() => {}}
       />,
       { context }
     );

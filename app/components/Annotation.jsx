@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import Immutable from 'immutable';
 
-const { number, object, string } = PropTypes;
+import { getAnnotationSegmentCoordinates } from '../utils/positionning';
+
+const { instanceOf, number, object, string } = PropTypes;
 
 
 class Annotation extends Component {
@@ -8,7 +11,7 @@ class Annotation extends Component {
     super(props, context);
 
     this.state = {
-      linesCoordinates: [], // [[x1, x2, y], [x1, x2, y], ...]
+      lines: [], // [[x1, x2, y1, y2], [x1, x2, y1, y2], ...]
     };
   }
 
@@ -22,7 +25,7 @@ class Annotation extends Component {
   }
 
   updateCoordinates() {
-    const { indexFrom, indexTo, rowHeight, nucleotidesPerRow, nucleotideWidth } = this.props;
+    const { indexFrom, indexTo, nucleotidesPerRow } = this.props;
 
     // Prepare segments
     const segments = [];
@@ -35,26 +38,31 @@ class Annotation extends Component {
     }
     segments.push([start, indexTo]);
 
-    const linesCoordinates = segments.map((segment) => {
-      const x1 = 15 + (nucleotideWidth * (segment[0] % nucleotidesPerRow));
-      const x2 = 25 + (nucleotideWidth * (segment[1] % nucleotidesPerRow));
-      const y = rowHeight + 10 + (rowHeight * Math.trunc(segment[0] / nucleotidesPerRow));
-      return [x1, x2, y];
-    });
+    // Get track number
+    const track = this.props.labels.indexOf(this.props.label);
 
-    this.setState({ linesCoordinates });
+    const lines = segments.map((segment) =>
+      getAnnotationSegmentCoordinates(
+        segment[0],
+        segment[1],
+        track,
+        this.props
+      )
+    );
+
+    this.setState({ lines });
   }
 
   render() {
     return (
       <g>
-        {this.state.linesCoordinates.map((lineCoordinates, index) =>
+        {this.state.lines.map((line, index) =>
           <line
             key={index}
-            x1={lineCoordinates[0]}
-            x2={lineCoordinates[1]}
-            y1={lineCoordinates[2]}
-            y2={lineCoordinates[2]}
+            x1={line.x1}
+            x2={line.x2}
+            y1={line.y1}
+            y2={line.y2}
             className="annotation"
             stroke={this.props.label.color}
           />
@@ -70,11 +78,19 @@ Annotation.propTypes = {
   indexTo: number.isRequired,
   positionFrom: number.isRequired,
   positionTo: number.isRequired,
+  labels: instanceOf(Immutable.List).isRequired,
   label: object.isRequired,
   comment: string,
+  visualizerMargin: object.isRequired,
   nucleotidesPerRow: number.isRequired,
-  rowHeight: number.isRequired,
+  nucleotidesRowHeight: number.isRequired,
   nucleotideWidth: number.isRequired,
+  trackHeight: number.isRequired,
+  rowHeight: number.isRequired,
+};
+
+Annotation.contextTypes = {
+  controller: object.isRequired,
 };
 
 export default Annotation;

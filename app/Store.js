@@ -19,7 +19,7 @@ const defaultSequence = new Immutable.List(
   ].join('').split('')
 );
 
-const defaultLabels = new Immutable.List([
+export const defaultLabels = new Immutable.List([
   {
     name: 'Exon',
     color: '#334854',
@@ -32,6 +32,13 @@ const defaultLabels = new Immutable.List([
         positionTo: 25,
         comment: 'Lorem Ipsum',
       },
+      {
+        indexFrom: 300,
+        indexTo: 340,
+        positionFrom: 301,
+        positionTo: 341,
+        comment: 'Lorem Ipsum',
+      },
     ]),
   },
   {
@@ -40,10 +47,17 @@ const defaultLabels = new Immutable.List([
     isActive: true,
     annotations: new Immutable.List([
       {
-        indexFrom: 18,
+        indexFrom: 44,
         indexTo: 215,
-        positionFrom: 145,
+        positionFrom: 45,
         positionTo: 216,
+        comment: 'Lorem Ipsum',
+      },
+      {
+        indexFrom: 18,
+        indexTo: 180,
+        positionFrom: 19,
+        positionTo: 181,
         comment: 'Lorem Ipsum',
       },
     ]),
@@ -52,19 +66,29 @@ const defaultLabels = new Immutable.List([
     name: 'SNP',
     color: '#e04462',
     isActive: true,
-    annotations: new Immutable.List(),
+    annotations: new Immutable.List(
+      [
+        {
+          indexFrom: 200,
+          indexTo: 256,
+          positionFrom: 201,
+          positionTo: 257,
+          comment: 'Lorem Ipsum',
+        },
+      ]
+    ),
   },
 ]);
 
 
 export default class Store {
 
-  constructor(events) {
+  constructor(events, labels) {
     this.events = events;
 
     this.state = {
       sequence: new Immutable.List(),
-      labels: new Immutable.List(),
+      labels: labels || new Immutable.List(),
       selection: new Immutable.OrderedSet(),
     };
 

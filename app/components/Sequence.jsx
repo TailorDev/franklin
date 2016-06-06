@@ -46,9 +46,12 @@ export default class Sequence extends Component {
 
 Sequence.propTypes = {
   sequence: instanceOf(Immutable.List).isRequired,
+  visualizerMargin: object.isRequired,
   nucleotidesPerRow: number.isRequired,
-  rowHeight: number.isRequired,
+  nucleotidesRowHeight: number.isRequired,
   nucleotideWidth: number.isRequired,
+  trackHeight: number.isRequired,
+  rowHeight: number.isRequired,
   // TODO: add other attrs, cf. https://github.com/TailorDev/franklin/issues/3
 };
 

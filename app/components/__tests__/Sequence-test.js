@@ -32,9 +32,12 @@ describe('<Sequence />', () => {
     const wrapper = mount(
       <Sequence
         sequence={sequence}
+        visualizerMargin={{x: 10, y: 10}}
         nucleotidesPerRow={5}
-        rowHeight={50}
+        nucleotidesRowHeight={50}
         nucleotideWidth={12}
+        trackHeight={6}
+        rowHeight={50}
       />,
       { context }
     );
@@ -46,9 +49,12 @@ describe('<Sequence />', () => {
     const wrapper = mount(
       <Sequence
         sequence={sequence}
+        visualizerMargin={{x: 10, y: 10}}
         nucleotidesPerRow={80}
-        rowHeight={50}
+        nucleotidesRowHeight={50}
         nucleotideWidth={12}
+        trackHeight={6}
+        rowHeight={50}
       />,
       { context }
     );
@@ -64,9 +70,12 @@ describe('<Sequence />', () => {
     const wrapper = mount(
       <Sequence
         sequence={sequence}
+        visualizerMargin={{x: 10, y: 10}}
         nucleotidesPerRow={80}
-        rowHeight={50}
+        nucleotidesRowHeight={50}
         nucleotideWidth={12}
+        trackHeight={6}
+        rowHeight={50}
       />,
       { context }
     );

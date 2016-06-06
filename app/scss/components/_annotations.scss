@@ -3,7 +3,11 @@
  */
 
 .annotation {
-  stroke-width: 3;
-  stroke-opacity: 0.6;
+  stroke-width: 6;
+  stroke-opacity: 0.4;
   stroke-linecap: round;
+
+  &:hover {
+    stroke-opacity: 1;
+  }
 }
