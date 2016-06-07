@@ -6,8 +6,8 @@ import Immutable from 'immutable';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-import { defaultLabels } from '../../Store';
 import Visualizer from '../Visualizer';
+import { defaultLabels } from '../../defaults';
 
 describe('<Visualizer />', () => {
 
@@ -29,6 +29,7 @@ describe('<Visualizer />', () => {
       <Visualizer
         sequence={sequence}
         labels={defaultLabels}
+        positionFrom={0}
       />,
       { context, childContextTypes }
     );

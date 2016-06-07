@@ -1,14 +1,15 @@
 import React, { PropTypes, Component } from 'react';
 import Immutable from 'immutable';
-import { Events } from '../Store';
+import { Events } from '../Store';
 
 const { instanceOf, object } = PropTypes;
 
 const emptyState = {
-  positionFrom: undefined,
-  positionTo: undefined,
-  comment: '',
-  label: null,
+  annotationPositionFrom: undefined,
+  annotationPositionTo: undefined,
+  annotationComment: '',
+  labelId: '',
+  annotationId: null,
 };
 
 class AnnotationForm extends Component {
@@ -26,44 +27,56 @@ class AnnotationForm extends Component {
 
   componentDidMount() {
     this.context.controller.on(Events.CHANGE_CURRENT_ANNOTATION, (state) => {
-      this.setState(state.currentAnnotation);
+      this.setState({
+        annotationPositionFrom: state.annotation.positionFrom,
+        annotationPositionTo: state.annotation.positionTo,
+        annotationComment: state.annotation.comment,
+        labelId: state.labelId,
+        annotationId: state.annotationId,
+      });
     });
   }
 
   onSubmit(event) {
     event.preventDefault();
 
-    this.context.controller.dispatch('action:new-annotation', {
-      label: this.state.label,
+    this.context.controller.dispatch('action:save-annotation', {
+      labelId: this.state.labelId,
       annotation: {
-        positionFrom: parseInt(this.state.positionFrom, 10),
-        positionTo: parseInt(this.state.positionTo, 10),
-        comment: this.state.comment,
+        positionFrom: this.state.annotationPositionFrom,
+        positionTo: this.state.annotationPositionTo,
+        comment: this.state.annotationComment,
       },
+      annotationId: this.state.annotationId,
     });
 
     this.setState(emptyState);
+
     this.context.controller.dispatch('action:clear-selection');
   }
 
   onPositionFromChange(event) {
     const positionFrom = event.target.value;
-    this.setState({ positionFrom });
+
+    this.setState({ annotationPositionFrom: positionFrom });
+
     this.context.controller.dispatch('action:update-selection-from', { positionFrom });
   }
 
   onPositionToChange(event) {
     const positionTo = event.target.value;
-    this.setState({ positionTo });
+
+    this.setState({ annotationPositionTo: positionTo });
+
     this.context.controller.dispatch('action:update-selection-to', { positionTo });
   }
 
   onLabelChange(event) {
-    this.setState({ label: this.props.labels.get(event.target.value) });
+    this.setState({ labelId: event.target.value });
   }
 
   onCommentChange(event) {
-    this.setState({ comment: event.target.value });
+    this.setState({ annotationComment: event.target.value });
   }
 
   render() {
@@ -72,19 +85,19 @@ class AnnotationForm extends Component {
         <form onSubmit={this.onSubmit}>
           <input
             type="number"
-            value={this.state.positionFrom}
+            value={this.state.annotationPositionFrom}
             placeholder="From"
             onChange={this.onPositionFromChange}
           />
           <input
             type="number"
-            value={this.state.positionTo}
+            value={this.state.annotationPositionTo}
             placeholder="To"
             onChange={this.onPositionToChange}
           />
           <select
             onChange={this.onLabelChange}
-            value={this.props.labels.indexOf(this.state.label)}
+            value={this.state.labelId}
           >
             <option>Select a label</option>
             {
@@ -100,12 +113,12 @@ class AnnotationForm extends Component {
           </select>
           <textarea
             placeholder="Type a comment here"
-            value={this.state.comment}
+            value={this.state.annotationComment}
             onChange={this.onCommentChange}
           />
           <input
             type="submit"
-            value="Add"
+            value={null !== this.state.annotationId ? 'Save' : 'Add'}
           />
         </form>
       </div>
@@ -114,7 +127,6 @@ class AnnotationForm extends Component {
 }
 
 AnnotationForm.propTypes = {
-  annotation: object,
   sequence: instanceOf(Immutable.List).isRequired,
   labels: instanceOf(Immutable.List).isRequired,
 };

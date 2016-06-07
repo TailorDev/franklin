@@ -1,4 +1,5 @@
 import Immutable from 'immutable';
+import { defaultSequence, defaultLabels, defaultSelection, defaultAnnotation } from './defaults';
 
 
 export const Events = {
@@ -8,69 +9,6 @@ export const Events = {
   LOADING_END: 'store:loading-end',
   CHANGE_CURRENT_ANNOTATION: 'store:change-current-annotation',
 };
-
-const defaultSequence = new Immutable.List(
-  [
-    'ATGGTCACTCTAATCGCAGTCTGCAATTTACGTGTTTCCAACTTAACGCCCCCAAGTTAATAGCCGTAAT',
-    'CATTTGAAAAGAAAGGCACGCACGCACAACGCCATGCGGATCGAACCTGGGGACTCCTTTTGGACGAAAA',
-    'AGGCGATGTTTTCCAACGCAGAAAGGCAGTACTTTGAGACGGTCCGTCCGCGGAAGACCAGTGTGAGTAA',
-    'AAGTTGACCGTCGATGGCGATTTCACAAGTGACGTTTAAGTGGCGGGAACTTCTACTCACAAATCCCTGA',
-    'GCCCTGTGATATGATTTATTTTATGGAGCCGTGATCCGGACGAAAAATGCACACACATTTCTACAAAAAT',
-    'ATGTACATCGCGGTGCGATTGTGTCGCTTAAAGCACACGTACACCCACTGTCACACTCACACTCACATGC',
-  ].join('').split('')
-);
-
-export const defaultLabels = new Immutable.List([
-  {
-    name: 'Exon',
-    color: '#334854',
-    isActive: true,
-    annotations: new Immutable.List([
-      {
-        positionFrom: 5,
-        positionTo: 25,
-        comment: 'Lorem Ipsum',
-      },
-      {
-        positionFrom: 301,
-        positionTo: 341,
-        comment: 'Lorem Ipsum',
-      },
-    ]),
-  },
-  {
-    name: 'Primer',
-    color: '#f9c535',
-    isActive: true,
-    annotations: new Immutable.List([
-      {
-        positionFrom: 45,
-        positionTo: 216,
-        comment: 'Lorem Ipsum',
-      },
-      {
-        positionFrom: 19,
-        positionTo: 181,
-        comment: 'Lorem Ipsum',
-      },
-    ]),
-  },
-  {
-    name: 'SNP',
-    color: '#e04462',
-    isActive: true,
-    annotations: new Immutable.List(
-      [
-        {
-          positionFrom: 201,
-          positionTo: 257,
-          comment: 'Lorem Ipsum',
-        },
-      ]
-    ),
-  },
-]);
-
 
 export default class Store {
 
@@ -82,13 +20,8 @@ export default class Store {
       positionFrom: 0,
       positionTo: 0,
       labels: labels || new Immutable.List(),
-      selection: { from: null, to: null },
-      currentAnnotation: {
-        positionFrom: undefined,
-        positionTo: undefined,
-        comment: '',
-        label: null,
-      },
+      selection: defaultSelection,
+      currentAnnotation: defaultAnnotation,
     };
 
     // file reader
@@ -138,8 +71,7 @@ export default class Store {
       this.state.sequence = new Immutable.List(
         this.file.chunks.join('').split('')
       );
-      // TODO
-      // Allow user input for from/to positions (at least from)
+      // TODO: allow user input for from/to positions (at least from)
       this.state.positionFrom = 1;
       this.state.positionTo = this.state.sequence.size;
 
@@ -191,30 +123,38 @@ export default class Store {
   }
 
   clearSelection() {
-    this.state.selection = { from: null, to: null };
+    this.state.selection = defaultSelection;
+
     this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
   }
 
   updateSelection(selected) {
-    if (
+    if (selected === this.state.selection.from || selected === this.state.selection.to) {
+      this.state.selection = defaultSelection;
+    } else if (
       (this.state.selection.from === null) ||
       (this.state.selection.from && this.state.selection.to)
     ) {
-      this.state.selection.from = selected;
-      this.state.selection.to = null;
+      this.state.selection = {
+        from: selected,
+        to: null,
+      };
     } else if (this.state.selection.to === null) {
       this.state.selection = this.calculateSelection(selected, this.state.selection.from);
     }
-    this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
-  }
 
-  updateSelectionTo(positionTo) {
-    this.state.selection.to = positionTo - 1;
     this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
   }
 
   updateSelectionFrom(positionFrom) {
     this.state.selection.from = positionFrom - 1;
+
+    this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
+  }
+
+  updateSelectionTo(positionTo) {
+    this.state.selection.to = positionTo - 1;
+
     this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
   }
 
@@ -233,38 +173,61 @@ export default class Store {
   }
 
   loadDataFromDemo() {
-    this.state.sequence = defaultSequence;
-    this.state.labels = defaultLabels;
-    this.state.positionFrom = 1;
-    this.state.positionTo = this.state.sequence.size;
+    this.state = {
+      sequence: defaultSequence,
+      positionFrom: 1,
+      positionTo: defaultSequence.size,
+      labels: defaultLabels,
+      selection: defaultSelection,
+      currentAnnotation: defaultAnnotation,
+    };
 
     this.events.emit(Events.CHANGE, this.state);
   }
 
-  addNewAnnotation(label, annotation) {
-    if (! label) {
+  addNewAnnotation(labelId, annotation) {
+    if (null === labelId) {
       return;
     }
 
-    const k = this.state.labels.findKey((v) => v.name === label.name);
-
-    this.state.labels = this.state.labels.update(k, (v) => {
-      return {
+    this.state.labels = this.state.labels.update(labelId, (v) => (
+      {
         name: v.name,
         color: v.color,
         isActive: v.isActive,
         annotations: v.annotations.push(annotation),
-      };
-    });
+      }
+    ));
 
     this.events.emit(Events.CHANGE, this.state);
   }
 
-  selectCurrentAnnotation(label, annotation) {
-    const k = this.state.labels.findKey((v) => v.name === label.name);
+  selectAnnotation(labelId, annotation) {
+    const annotationId = this.state.labels.get(labelId).annotations.findKey((v) => (
+      v.positionFrom === annotation.positionFrom && v.positionTo === annotation.positionTo
+    ));
 
-    this.state.currentAnnotation = this.state.labels.get(k).annotations.first();
+    this.events.emit(Events.CHANGE_CURRENT_ANNOTATION, {
+      labelId,
+      annotation,
+      annotationId,
+    });
+  }
 
-    this.events.emit(Events.CHANGE_CURRENT_ANNOTATION, this.state);
+  updateAnnotationAt(labelId, annotationId, annotation) {
+    if (null === labelId || null === annotationId) {
+      return;
+    }
+
+    this.state.labels = this.state.labels.update(labelId, (v) => (
+      {
+        name: v.name,
+        color: v.color,
+        isActive: v.isActive,
+        annotations: v.annotations.update(annotationId, () => annotation),
+      }
+    ));
+
+    this.events.emit(Events.CHANGE, this.state);
   }
 }

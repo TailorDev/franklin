@@ -5,17 +5,20 @@ export default class Controller {
     this.events = events;
 
     this.events.on('action:drop-file', this.onDropFile.bind(this));
+
     this.events.on('action:new-label', this.onNewLabel.bind(this));
     this.events.on('action:edit-label', this.onEditLabel.bind(this));
     this.events.on('action:remove-label', this.onRemoveLabel.bind(this));
     this.events.on('action:toggle-label', this.onToggleLabel.bind(this));
-    this.events.on('action:new-annotation', this.onNewAnnotation.bind(this));
-    this.events.on('action:edit-annotation', this.onEditAnnotation.bind(this));
+
+    this.events.on('action:save-annotation', this.onSaveAnnotation.bind(this));
     this.events.on('action:select-annotation', this.onSelectAnnotation.bind(this));
+
     this.events.on('action:clear-selection', this.onClearSelection.bind(this));
     this.events.on('action:update-selection', this.onUpdateSelection.bind(this));
     this.events.on('action:update-selection-from', this.onUpdateSelectionFrom.bind(this));
     this.events.on('action:update-selection-to', this.onUpdateSelectionTo.bind(this));
+
     this.events.on('action:start-demo', this.onStartDemo.bind(this));
   }
 
@@ -37,6 +40,8 @@ export default class Controller {
     this.store.loadDataFromFile(file);
   }
 
+  // Label
+
   onNewLabel({ label }) {
     this.store.addNewLabel(label);
   }
@@ -53,18 +58,25 @@ export default class Controller {
     this.store.toggleLabelAt(index);
   }
 
-  onNewAnnotation({ label, annotation }) {
-    this.store.addNewAnnotation(label, annotation);
+  // Annotation
+
+  onSaveAnnotation({ labelId, annotation, annotationId }) {
+    if (null !== annotationId) {
+      this.store.updateAnnotationAt(labelId, annotationId, annotation);
+    } else {
+      this.store.addNewAnnotation(labelId, annotation);
+    }
   }
 
-
-  onSelectAnnotation({ label, annotation }) {
-    this.store.selectCurrentAnnotation(label, annotation);
+  onSelectAnnotation({ labelId, annotation }) {
+    this.store.selectAnnotation(labelId, annotation);
   }
 
   onEditAnnotation({ label, annotation }) {
     this.store.updateAnnotation(label, annotation);
   }
+
+  // Selection
 
   onClearSelection() {
     this.store.clearSelection();
@@ -81,6 +93,8 @@ export default class Controller {
   onUpdateSelectionTo({ positionTo }) {
     this.store.updateSelectionTo(positionTo);
   }
+
+  // Demo
 
   onStartDemo() {
     this.store.loadDataFromDemo();

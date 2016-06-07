@@ -14,6 +14,7 @@ const Annotations = (props) =>
           <Annotation
             key={annotationIndex}
             label={label}
+            labelId={labelIndex}
             track={labelIndex}
             annotation={annotation}
             {...props}

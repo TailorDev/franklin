@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import { getAnnotationSegmentCoordinates } from '../utils/positionning';
 
-const { number, object, string } = PropTypes;
+const { number, object } = PropTypes;
 
 
 class Annotation extends Component {
@@ -56,7 +56,7 @@ class Annotation extends Component {
 
   handleClick() {
     this.context.controller.dispatch('action:select-annotation', {
-      label: this.props.label,
+      labelId: this.props.labelId,
       annotation: this.props.annotation,
     });
   }
@@ -84,6 +84,7 @@ class Annotation extends Component {
 Annotation.propTypes = {
   annotation: object.isRequired,
   label: object.isRequired,
+  labelId: number.isRequired,
   track: number.isRequired,
   visualizerMargin: object.isRequired,
   nucleotidesPerRow: number.isRequired,

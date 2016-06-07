@@ -38,6 +38,7 @@ describe('<Sequence />', () => {
         nucleotideWidth={12}
         trackHeight={6}
         rowHeight={50}
+        positionFrom={0}
       />,
       { context }
     );
@@ -55,6 +56,7 @@ describe('<Sequence />', () => {
         nucleotideWidth={12}
         trackHeight={6}
         rowHeight={50}
+        positionFrom={0}
       />,
       { context }
     );
@@ -76,6 +78,7 @@ describe('<Sequence />', () => {
         nucleotideWidth={12}
         trackHeight={6}
         rowHeight={50}
+        positionFrom={0}
       />,
       { context }
     );

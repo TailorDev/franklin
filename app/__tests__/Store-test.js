@@ -1,4 +1,5 @@
-import Store, { Events, defaultLabels } from '../Store';
+import Store, { Events } from '../Store';
+import { defaultLabels } from '../defaults';
 import sinon from 'sinon';
 import { expect } from 'chai';
 import Immutable from 'immutable';
@@ -89,32 +90,36 @@ describe('Store', () => {
 
         expect(eventEmitterSpy.calledOnce).to.be.true;
         expect(eventEmitterSpy.calledWith(Events.CHANGE_SELECTION)).to.be.true;
-        expect(store.getState().selection.size).to.equal(1);
+        expect(store.getState().selection.from).to.equal(2);
+        expect(store.getState().selection.to).to.equal(null);
       });
 
       it('restricts the selection boundaries', () => {
-        expect(store.getState().selection.size).to.equal(0);
+        expect(store.getState().selection.from).to.equal(null);
+        expect(store.getState().selection.to).to.equal(null);
 
         store.updateSelection(2);
-        expect(store.getState().selection.size).to.equal(1);
+        expect(store.getState().selection.from).to.equal(2);
 
         store.updateSelection(3);
-        expect(store.getState().selection.size).to.equal(2);
+        expect(store.getState().selection.to).to.equal(3);
 
         store.updateSelection(10);
-        expect(store.getState().selection.size).to.equal(2);
+        expect(store.getState().selection.from).to.equal(10);
 
         store.updateSelection(1);
-        expect(store.getState().selection.size).to.equal(2);
+        expect(store.getState().selection.from).to.equal(1);
       });
 
       it('allows "unselection" by selecting on of the boundaries', () => {
         store.updateSelection(1);
         store.updateSelection(10);
-        expect(store.getState().selection.size).to.equal(2);
+        expect(store.getState().selection.from).to.equal(1);
+        expect(store.getState().selection.to).to.equal(10);
 
         store.updateSelection(10);
-        expect(store.getState().selection.size).to.equal(0);
+        expect(store.getState().selection.from).to.equal(null);
+        expect(store.getState().selection.to).to.equal(null);
       });
     });
   });
