@@ -184,7 +184,8 @@ export default class Store {
   }
 
   clearSelection() {
-    this.state.selection = this.state.selection.clear();
+    this.state.selection = { from: null, to: null };
+    this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
   }
 
   updateSelection(selected) {
@@ -229,6 +230,25 @@ export default class Store {
     this.state.labels = defaultLabels;
     this.state.positionFrom = 1;
     this.state.positionTo = this.state.sequence.size;
+
+    this.events.emit(Events.CHANGE, this.state);
+  }
+
+  addNewAnnotation(label, annotation) {
+    if (! label) {
+      return;
+    }
+
+    const k = this.state.labels.findKey((v) => v.name === label.name);
+
+    this.state.labels = this.state.labels.update(k, (v) => {
+      return {
+        name: v.name,
+        color: v.color,
+        isActive: v.isActive,
+        annotations: v.annotations.push(annotation),
+      };
+    });
 
     this.events.emit(Events.CHANGE, this.state);
   }

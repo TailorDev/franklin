@@ -3,17 +3,18 @@ import Immutable from 'immutable';
 
 const { instanceOf, object } = PropTypes;
 
+const emptyState = {
+  positionFrom: undefined,
+  positionTo: undefined,
+  comment: '',
+  label: null,
+};
 
 class AnnotationForm extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      positionFrom: undefined,
-      positionTo: undefined,
-      comment: '',
-      label: null,
-    };
+    this.state = emptyState;
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onPositionFromChange = this.onPositionFromChange.bind(this);
@@ -25,7 +26,17 @@ class AnnotationForm extends Component {
   onSubmit(event) {
     event.preventDefault();
 
-    console.log(this.state);
+    this.context.controller.dispatch('action:new-annotation', {
+      label: this.state.label,
+      annotation: {
+        positionFrom: parseInt(this.state.positionFrom, 10),
+        positionTo: parseInt(this.state.positionTo, 10),
+        comment: this.state.comment,
+      },
+    });
+
+    this.setState(emptyState);
+    this.context.controller.dispatch('action:clear-selection');
   }
 
   onPositionFromChange(event) {
