@@ -3,12 +3,15 @@
  */
 
 .annotation {
-  stroke-width: 6;
+  stroke-width: 4;
   stroke-opacity: 0.4;
   stroke-linecap: round;
 
   &:hover {
+    stroke-width: 6;
     stroke-opacity: 1;
     cursor: pointer;
   }
+
+  .annotation-segment {}
 }

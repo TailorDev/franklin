@@ -54,7 +54,7 @@ class Annotation extends Component {
 
   render() {
     return (
-      <g>
+      <g className="annotation">
         {this.state.lines.map((line, index) =>
           <line
             key={index}
@@ -62,7 +62,7 @@ class Annotation extends Component {
             x2={line.x2}
             y1={line.y1}
             y2={line.y2}
-            className="annotation"
+            className="annotation-segment"
             stroke={this.props.label.color}
           />
         )}
