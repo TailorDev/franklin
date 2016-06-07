@@ -10,6 +10,8 @@ export default class Controller {
     this.events.on('action:remove-label', this.onRemoveLabel.bind(this));
     this.events.on('action:toggle-label', this.onToggleLabel.bind(this));
     this.events.on('action:new-annotation', this.onNewAnnotation.bind(this));
+    this.events.on('action:edit-annotation', this.onEditAnnotation.bind(this));
+    this.events.on('action:select-annotation', this.onSelectAnnotation.bind(this));
     this.events.on('action:clear-selection', this.onClearSelection.bind(this));
     this.events.on('action:update-selection', this.onUpdateSelection.bind(this));
     this.events.on('action:update-selection-from', this.onUpdateSelectionFrom.bind(this));
@@ -53,6 +55,15 @@ export default class Controller {
 
   onNewAnnotation({ label, annotation }) {
     this.store.addNewAnnotation(label, annotation);
+  }
+
+
+  onSelectAnnotation({ label, annotation }) {
+    this.store.selectCurrentAnnotation(label, annotation);
+  }
+
+  onEditAnnotation({ label, annotation }) {
+    this.store.updateAnnotation(label, annotation);
   }
 
   onClearSelection() {

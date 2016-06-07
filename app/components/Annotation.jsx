@@ -12,6 +12,8 @@ class Annotation extends Component {
     this.state = {
       lines: [], // [[x1, x2, y1, y2], [x1, x2, y1, y2], ...]
     };
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentWillMount() {
@@ -24,10 +26,10 @@ class Annotation extends Component {
   }
 
   updateCoordinates(props) {
-    const { positionFrom, positionTo, nucleotidesPerRow } = props;
+    const { nucleotidesPerRow } = props;
 
-    const indexFrom = positionFrom - 1;
-    const indexTo = positionTo - 1;
+    const indexFrom = props.annotation.positionFrom - 1;
+    const indexTo = props.annotation.positionTo - 1;
 
     // Prepare segments
     const segments = [];
@@ -52,9 +54,16 @@ class Annotation extends Component {
     this.setState({ lines });
   }
 
+  handleClick() {
+    this.context.controller.dispatch('action:select-annotation', {
+      label: this.props.label,
+      annotation: this.props.annotation,
+    });
+  }
+
   render() {
     return (
-      <g className="annotation">
+      <g className="annotation" onClick={this.handleClick}>
         {this.state.lines.map((line, index) =>
           <line
             key={index}
@@ -73,11 +82,9 @@ class Annotation extends Component {
 
 
 Annotation.propTypes = {
-  positionFrom: number.isRequired,
-  positionTo: number.isRequired,
+  annotation: object.isRequired,
   label: object.isRequired,
   track: number.isRequired,
-  comment: string,
   visualizerMargin: object.isRequired,
   nucleotidesPerRow: number.isRequired,
   nucleotidesRowHeight: number.isRequired,
@@ -86,5 +93,8 @@ Annotation.propTypes = {
   rowHeight: number.isRequired,
 };
 
+Annotation.contextTypes = {
+  controller: object.isRequired,
+};
 
 export default Annotation;

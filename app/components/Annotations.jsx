@@ -15,7 +15,7 @@ const Annotations = (props) =>
             key={annotationIndex}
             label={label}
             track={labelIndex}
-            {...annotation}
+            annotation={annotation}
             {...props}
           />
         )

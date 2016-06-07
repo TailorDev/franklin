@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import Immutable from 'immutable';
+import { Events } from '../Store';
 
 const { instanceOf, object } = PropTypes;
 
@@ -21,6 +22,12 @@ class AnnotationForm extends Component {
     this.onPositionToChange = this.onPositionToChange.bind(this);
     this.onLabelChange = this.onLabelChange.bind(this);
     this.onCommentChange = this.onCommentChange.bind(this);
+  }
+
+  componentDidMount() {
+    this.context.controller.on(Events.CHANGE_CURRENT_ANNOTATION, (state) => {
+      this.setState(state.currentAnnotation);
+    });
   }
 
   onSubmit(event) {

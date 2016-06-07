@@ -6,6 +6,7 @@ export const Events = {
   CHANGE_SELECTION: 'store:change-selection',
   LOADING_START: 'store:loading-start',
   LOADING_END: 'store:loading-end',
+  CHANGE_CURRENT_ANNOTATION: 'store:change-current-annotation',
 };
 
 const defaultSequence = new Immutable.List(
@@ -82,6 +83,12 @@ export default class Store {
       positionTo: 0,
       labels: labels || new Immutable.List(),
       selection: { from: null, to: null },
+      currentAnnotation: {
+        positionFrom: undefined,
+        positionTo: undefined,
+        comment: '',
+        label: null,
+      },
     };
 
     // file reader
@@ -251,5 +258,13 @@ export default class Store {
     });
 
     this.events.emit(Events.CHANGE, this.state);
+  }
+
+  selectCurrentAnnotation(label, annotation) {
+    const k = this.state.labels.findKey((v) => v.name === label.name);
+
+    this.state.currentAnnotation = this.state.labels.get(k).annotations.first();
+
+    this.events.emit(Events.CHANGE_CURRENT_ANNOTATION, this.state);
   }
 }
