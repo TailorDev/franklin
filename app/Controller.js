@@ -11,6 +11,8 @@ export default class Controller {
     this.events.on('action:toggle-label', this.onToggleLabel.bind(this));
     this.events.on('action:clear-selection', this.onClearSelection.bind(this));
     this.events.on('action:update-selection', this.onUpdateSelection.bind(this));
+    this.events.on('action:update-selection-from', this.onUpdateSelectionFrom.bind(this));
+    this.events.on('action:update-selection-to', this.onUpdateSelectionTo.bind(this));
     this.events.on('action:start-demo', this.onStartDemo.bind(this));
   }
 
@@ -54,6 +56,14 @@ export default class Controller {
 
   onUpdateSelection({ selected }) {
     this.store.updateSelection(selected);
+  }
+
+  onUpdateSelectionFrom({ positionFrom }) {
+    this.store.updateSelectionFrom(positionFrom);
+  }
+
+  onUpdateSelectionTo({ positionTo }) {
+    this.store.updateSelectionTo(positionTo);
   }
 
   onStartDemo() {

@@ -24,9 +24,11 @@ export default class Nucleotide extends Component {
 
   componentDidMount() {
     this.context.controller.on(Events.CHANGE_SELECTION, (selection) => {
-      const isSelected = selection.includes(this.props.index);
-      const isInSelectionRange = this.props.index <= selection.max() &&
-        this.props.index >= selection.min();
+      const isSelected = selection.from === this.props.index || selection.to === this.props.index;
+      const isInSelectionRange = (
+        selection.from <= this.props.index &&
+        selection.to >= this.props.index
+      );
 
       if (
         this.state.isSelected !== isSelected ||

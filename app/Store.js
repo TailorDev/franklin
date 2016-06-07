@@ -89,7 +89,7 @@ export default class Store {
     this.state = {
       sequence: new Immutable.List(),
       labels: labels || new Immutable.List(),
-      selection: new Immutable.OrderedSet(),
+      selection: { from: null, to: null },
     };
 
     // file reader
@@ -192,16 +192,40 @@ export default class Store {
   }
 
   updateSelection(selected) {
-    let previousSelection = this.state.selection;
+    if (
+      (! this.state.selection.from) ||
+      (this.state.selection.from && this.state.selection.to)
+    ) {
+      this.state.selection.from = selected;
+      this.state.selection.to = null;
+    } else if (! this.state.selection.to) {
+      this.state.selection = this.calculateSelection(selected, this.state.selection.from);
+    }
+    this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
+  }
 
-    if (2 <= previousSelection.size) {
-      previousSelection = previousSelection.slice(1);
+  updateSelectionTo(positionTo) {
+    this.state.selection.to = positionTo;
+    this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
+  }
+
+  updateSelectionFrom(positionFrom) {
+    this.state.selection.from = positionFrom;
+    this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
+  }
+
+  calculateSelection(from, to) {
+    if (from < to) {
+      return {
+        from,
+        to,
+      };
     }
 
-    this.state.selection = previousSelection.has(selected) ?
-      previousSelection.delete(selected) : previousSelection.add(selected);
-
-    this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
+    return {
+      from: to,
+      to: from,
+    };
   }
 
   loadDataFromDemo() {

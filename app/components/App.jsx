@@ -109,7 +109,10 @@ export default class App extends Component {
               labels={this.state.labels}
             />
           </Dropzone>
-          <Toolbar labels={this.state.labels} />
+          <Toolbar
+            sequence={this.state.sequence}
+            labels={this.state.labels}
+          />
         </div>
 
         <Footer version={this.props.version} />
