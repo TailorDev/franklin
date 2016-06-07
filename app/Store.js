@@ -26,15 +26,11 @@ export const defaultLabels = new Immutable.List([
     isActive: true,
     annotations: new Immutable.List([
       {
-        indexFrom: 4,
-        indexTo: 24,
         positionFrom: 5,
         positionTo: 25,
         comment: 'Lorem Ipsum',
       },
       {
-        indexFrom: 300,
-        indexTo: 340,
         positionFrom: 301,
         positionTo: 341,
         comment: 'Lorem Ipsum',
@@ -47,15 +43,11 @@ export const defaultLabels = new Immutable.List([
     isActive: true,
     annotations: new Immutable.List([
       {
-        indexFrom: 44,
-        indexTo: 215,
         positionFrom: 45,
         positionTo: 216,
         comment: 'Lorem Ipsum',
       },
       {
-        indexFrom: 18,
-        indexTo: 180,
         positionFrom: 19,
         positionTo: 181,
         comment: 'Lorem Ipsum',
@@ -69,8 +61,6 @@ export const defaultLabels = new Immutable.List([
     annotations: new Immutable.List(
       [
         {
-          indexFrom: 200,
-          indexTo: 256,
           positionFrom: 201,
           positionTo: 257,
           comment: 'Lorem Ipsum',
@@ -88,6 +78,8 @@ export default class Store {
 
     this.state = {
       sequence: new Immutable.List(),
+      positionFrom: 0,
+      positionTo: 0,
       labels: labels || new Immutable.List(),
       selection: { from: null, to: null },
     };
@@ -139,6 +131,10 @@ export default class Store {
       this.state.sequence = new Immutable.List(
         this.file.chunks.join('').split('')
       );
+      // TODO
+      // Allow user input for from/to positions (at least from)
+      this.state.positionFrom = 1;
+      this.state.positionTo = this.state.sequence.size;
 
       this.events.emit(Events.LOADING_END);
       this.events.emit(Events.CHANGE, this.state);
@@ -193,24 +189,24 @@ export default class Store {
 
   updateSelection(selected) {
     if (
-      (! this.state.selection.from) ||
+      (this.state.selection.from === null) ||
       (this.state.selection.from && this.state.selection.to)
     ) {
       this.state.selection.from = selected;
       this.state.selection.to = null;
-    } else if (! this.state.selection.to) {
+    } else if (this.state.selection.to === null) {
       this.state.selection = this.calculateSelection(selected, this.state.selection.from);
     }
     this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
   }
 
   updateSelectionTo(positionTo) {
-    this.state.selection.to = positionTo;
+    this.state.selection.to = positionTo - 1;
     this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
   }
 
   updateSelectionFrom(positionFrom) {
-    this.state.selection.from = positionFrom;
+    this.state.selection.from = positionFrom - 1;
     this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
   }
 
@@ -231,6 +227,8 @@ export default class Store {
   loadDataFromDemo() {
     this.state.sequence = defaultSequence;
     this.state.labels = defaultLabels;
+    this.state.positionFrom = 1;
+    this.state.positionTo = this.state.sequence.size;
 
     this.events.emit(Events.CHANGE, this.state);
   }

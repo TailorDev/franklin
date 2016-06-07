@@ -30,7 +30,7 @@ export default class Sequence extends Component {
             return (
               <Nucleotide
                 type={nucleotide}
-                position={index + 1}
+                position={this.props.positionFrom + index}
                 key={index}
                 index={index}
                 onClick={boundClick}
@@ -46,6 +46,7 @@ export default class Sequence extends Component {
 
 Sequence.propTypes = {
   sequence: instanceOf(Immutable.List).isRequired,
+  positionFrom: number.isRequired,
   visualizerMargin: object.isRequired,
   nucleotidesPerRow: number.isRequired,
   nucleotidesRowHeight: number.isRequired,

@@ -34,11 +34,7 @@ export default class App extends Component {
 
   componentDidMount() {
     this.props.controller.on(Events.CHANGE, (state) => {
-      this.setState({
-        labels: state.labels,
-        sequence: state.sequence,
-        displayModal: false,
-      });
+      this.setState(Object.assign({ displayModal: false }, state));
     });
   }
 
@@ -106,6 +102,7 @@ export default class App extends Component {
           >
             <Visualizer
               sequence={this.state.sequence}
+              positionFrom={this.state.positionFrom}
               labels={this.state.labels}
             />
           </Dropzone>

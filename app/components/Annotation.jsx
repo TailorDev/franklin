@@ -24,12 +24,15 @@ class Annotation extends Component {
   }
 
   updateCoordinates(props) {
-    const { indexFrom, indexTo, nucleotidesPerRow } = props;
+    const { positionFrom, positionTo, nucleotidesPerRow } = props;
+
+    const indexFrom = positionFrom - 1;
+    const indexTo = positionTo - 1;
 
     // Prepare segments
     const segments = [];
     let start = indexFrom;
-    for (let i = start; i < indexTo; i++) {
+    for (let i = start + 1; i < indexTo; i++) {
       if (! (i % nucleotidesPerRow)) {
         segments.push([start, i - 1]);
         start = i;
@@ -70,8 +73,6 @@ class Annotation extends Component {
 
 
 Annotation.propTypes = {
-  indexFrom: number.isRequired,
-  indexTo: number.isRequired,
   positionFrom: number.isRequired,
   positionTo: number.isRequired,
   label: object.isRequired,
