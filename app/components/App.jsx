@@ -66,7 +66,7 @@ export default class App extends Component {
           <p>
             <a href="https://franklin.lelab.tailordev.fr">Franklin</a> is a
             proof of concept. It is not suitable for production. You can&nbsp;
-            <a href="https://tailordev.fr/blog/2016/06/03/le-lab-3-franklin-dna-sequence-annotation-tool">read more about the story behind it</a>,&nbsp;
+            <a href="https://tailordev.fr/blog/2016/06/09/le-lab-3-franklin-dna-sequence-annotation-tool">read more about the story behind it</a>,&nbsp;
             <a href="https://github.com/TailorDev/franklin">checkout the sources</a> and&nbsp;
             <a href="https://github.com/TailorDev/franklin/issues">give us feedback</a>!
           </p>
