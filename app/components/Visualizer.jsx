@@ -31,28 +31,28 @@ export default class Visualizer extends Component {
   componentDidMount() {
     window.addEventListener(
       'resize',
-      debounce(() => { this.handleResize(this.props.sequence); }, 500),
+      debounce(() => { this.handleResize(this.props.sequence, this.props.labels); }, 500),
       false
     );
   }
 
   componentWillReceiveProps(nextProps) {
-    this.updateVisualizerDimensions(nextProps.sequence);
+    this.updateVisualizerDimensions(nextProps.sequence, nextProps.labels);
   }
 
   componentWillUnmount() {
     window.removeEventListener(
       'resize',
-      () => { this.handleResize(this.props.sequence); },
+      () => { this.handleResize(this.props.sequence, this.props.labels); },
       false
     );
   }
 
-  handleResize(sequence) {
-    this.updateVisualizerDimensions(sequence);
+  handleResize(sequence, labels) {
+    this.updateVisualizerDimensions(sequence, labels);
   }
 
-  updateVisualizerDimensions(sequence) {
+  updateVisualizerDimensions(sequence, labels) {
     const { visualizerMargin, nucleotideWidth, nucleotidesRowHeight, trackHeight } = this.state;
 
     // Width must fit the wrapper maximal dimension, i.e. 100%
@@ -60,10 +60,18 @@ export default class Visualizer extends Component {
     const nucleotidesPerRow = Math.trunc((width - (visualizerMargin.x * 2)) / nucleotideWidth);
 
     // Height should contain each nucleotides + annotations tracks rows
-    const tracksPerRow = this.props.labels.size;
+    const tracksPerRow = labels.size;
     const rowHeight = nucleotidesRowHeight + (tracksPerRow * trackHeight);
     const nRows = Math.trunc(sequence.size / nucleotidesPerRow) + 1;
     const height = visualizerMargin.y + (nRows * rowHeight);
+
+    console.log(
+      nucleotidesPerRow,
+      tracksPerRow,
+      rowHeight,
+      width,
+      height
+    );
 
     this.setState({
       nucleotidesPerRow,
@@ -78,7 +86,7 @@ export default class Visualizer extends Component {
     return (
       <div className="visualizer" ref="wrapper">
 
-        {this.props.sequence.size ?
+        {0 < this.props.sequence.size ?
           <svg
             version="1.1"
             baseProfile="full"
