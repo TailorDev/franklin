@@ -68,12 +68,17 @@ export default class Store {
     }
 
     if (this.file.offset >= this.file.source.size) {
-      this.state.sequence = new Immutable.List(
-        this.file.chunks.join('').split('')
-      );
-      // TODO: allow user input for from/to positions (at least from)
-      this.state.positionFrom = 1;
-      this.state.positionTo = this.state.sequence.size;
+      const sequence = new Immutable.List(this.file.chunks.join('').split(''));
+
+      this.state = {
+        sequence,
+        // TODO: allow user input for from/to positions (at least from)
+        positionFrom: 1,
+        positionTo: sequence.size,
+        labels: this.state.label,
+        selection: this.state.selection,
+        currentAnnotation: this.state.currentAnnotation,
+      };
 
       this.events.emit(Events.LOADING_END);
       this.events.emit(Events.CHANGE, this.state);
@@ -147,13 +152,19 @@ export default class Store {
   }
 
   updateSelectionFrom(positionFrom) {
-    this.state.selection.from = positionFrom - 1;
+    this.state.selection = {
+      from: positionFrom - 1,
+      to: this.state.selection.to,
+    };
 
     this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
   }
 
   updateSelectionTo(positionTo) {
-    this.state.selection.to = positionTo - 1;
+    this.state.selection = {
+      from: this.state.selection.from,
+      to: positionTo - 1,
+    };
 
     this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
   }
