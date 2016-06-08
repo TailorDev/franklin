@@ -2,8 +2,9 @@ import React, { PropTypes } from 'react';
 import Immutable from 'immutable';
 
 import Annotation from './Annotation';
+import { getAnnotationSegmentCoordinates } from '../utils/positionning';
 
-const { instanceOf, number } = PropTypes;
+const { object, instanceOf, number } = PropTypes;
 
 
 const Annotations = (props) =>
@@ -15,9 +16,19 @@ const Annotations = (props) =>
             key={annotationIndex}
             label={label}
             labelId={labelIndex}
-            track={labelIndex}
             annotation={annotation}
-            {...props}
+            getAnnotationSegmentCoordinates={(indexFrom, indexTo) => getAnnotationSegmentCoordinates(
+              indexFrom,
+              indexTo,
+              labelIndex, // current track
+              props.visualizerMargin,
+              props.nucleotidesPerRow,
+              props.nucleotideWidth,
+              props.rowHeight,
+              props.nucleotidesRowHeight,
+              props.trackHeight
+            )}
+            nucleotidesPerRow={props.nucleotidesPerRow}
           />
         )
       )
@@ -27,9 +38,12 @@ const Annotations = (props) =>
 
 Annotations.propTypes = {
   labels: instanceOf(Immutable.List).isRequired,
+  visualizerMargin: object.isRequired,
   nucleotidesPerRow: number.isRequired,
-  rowHeight: number.isRequired,
+  nucleotidesRowHeight: number.isRequired,
   nucleotideWidth: number.isRequired,
+  trackHeight: number.isRequired,
+  rowHeight: number.isRequired,
 };
 
 export default Annotations;

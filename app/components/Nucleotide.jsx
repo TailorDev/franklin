@@ -73,9 +73,13 @@ export default class Nucleotide extends Component {
   }
 
   updateCoordinates(props) {
-    this.setState(
-      getNucleotideCoordinates(props.index, props)
-    );
+    this.setState(getNucleotideCoordinates(
+      props.index,
+      props.visualizerMargin,
+      props.nucleotidesPerRow,
+      props.nucleotideWidth,
+      props.rowHeight
+    ));
   }
 
   render() {

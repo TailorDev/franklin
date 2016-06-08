@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import { getAnnotationSegmentCoordinates } from '../utils/positionning';
-
-const { number, object } = PropTypes;
+const { func, number, object } = PropTypes;
 
 
 class Annotation extends Component {
@@ -26,8 +24,6 @@ class Annotation extends Component {
   }
 
   updateCoordinates(props) {
-    const { nucleotidesPerRow } = props;
-
     const indexFrom = props.annotation.positionFrom - 1;
     const indexTo = props.annotation.positionTo - 1;
 
@@ -35,7 +31,7 @@ class Annotation extends Component {
     const segments = [];
     let start = indexFrom;
     for (let i = start + 1; i < indexTo; i++) {
-      if (! (i % nucleotidesPerRow)) {
+      if (! (i % props.nucleotidesPerRow)) {
         segments.push([start, i - 1]);
         start = i;
       }
@@ -43,11 +39,9 @@ class Annotation extends Component {
     segments.push([start, indexTo]);
 
     const lines = segments.map((segment) =>
-      getAnnotationSegmentCoordinates(
+      props.getAnnotationSegmentCoordinates(
         segment[0],
-        segment[1],
-        props.track,
-        props
+        segment[1]
       )
     );
 
@@ -85,13 +79,8 @@ Annotation.propTypes = {
   annotation: object.isRequired,
   label: object.isRequired,
   labelId: number.isRequired,
-  track: number.isRequired,
-  visualizerMargin: object.isRequired,
+  getAnnotationSegmentCoordinates: func.isRequired,
   nucleotidesPerRow: number.isRequired,
-  nucleotidesRowHeight: number.isRequired,
-  nucleotideWidth: number.isRequired,
-  trackHeight: number.isRequired,
-  rowHeight: number.isRequired,
 };
 
 Annotation.contextTypes = {
