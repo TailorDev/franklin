@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import { defaultSequence, defaultLabels, defaultSelection, defaultAnnotation } from './defaults';
+import { defaultSequence, defaultLabels, emptySelection, emptyAnnotation } from './defaults';
 
 
 export const Events = {
@@ -20,18 +20,9 @@ export default class Store {
       positionFrom: 0,
       positionTo: 0,
       labels: labels || new Immutable.List(),
-      selection: defaultSelection,
-      currentAnnotation: defaultAnnotation,
+      selection: emptySelection,
+      currentAnnotation: emptyAnnotation,
     };
-
-    // file reader
-    this.file = {
-      reader: new FileReader(),
-      offset: 0,
-      source: null,
-      chunks: [],
-    };
-    this.file.reader.onload = this.onFileLoad.bind(this);
   }
 
   getState() {
@@ -41,9 +32,15 @@ export default class Store {
   loadDataFromFile(file) {
     this.events.emit(Events.LOADING_START);
 
-    this.file.offset = 0;
-    this.file.source = file;
-    this.file.chunks = [];
+    // file reader
+    this.file = {
+      reader: new FileReader(),
+      offset: 0,
+      chunks: [],
+      source: file,
+    };
+
+    this.file.reader.onload = this.onFileLoad.bind(this);
 
     this.readFileChunk();
   }
@@ -75,9 +72,9 @@ export default class Store {
         // TODO: allow user input for from/to positions (at least from)
         positionFrom: 1,
         positionTo: sequence.size,
-        labels: this.state.label,
-        selection: this.state.selection,
-        currentAnnotation: this.state.currentAnnotation,
+        labels: new Immutable.List(),
+        selection: emptySelection,
+        currentAnnotation: emptyAnnotation,
       };
 
       this.events.emit(Events.LOADING_END);
@@ -128,23 +125,23 @@ export default class Store {
   }
 
   clearSelection() {
-    this.state.selection = defaultSelection;
+    this.state.selection = emptySelection;
 
     this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
   }
 
   updateSelection(selected) {
     if (selected === this.state.selection.from || selected === this.state.selection.to) {
-      this.state.selection = defaultSelection;
+      this.state.selection = emptySelection;
     } else if (
-      (this.state.selection.from === null) ||
+      (undefined === this.state.selection.from) ||
       (this.state.selection.from && this.state.selection.to)
     ) {
       this.state.selection = {
         from: selected,
-        to: null,
+        to: undefined,
       };
-    } else if (this.state.selection.to === null) {
+    } else if (undefined === this.state.selection.to) {
       this.state.selection = this.calculateSelection(selected, this.state.selection.from);
     }
 
@@ -189,8 +186,8 @@ export default class Store {
       positionFrom: 1,
       positionTo: defaultSequence.size,
       labels: defaultLabels,
-      selection: defaultSelection,
-      currentAnnotation: defaultAnnotation,
+      selection: emptySelection,
+      currentAnnotation: emptyAnnotation,
     };
 
     this.events.emit(Events.CHANGE, this.state);

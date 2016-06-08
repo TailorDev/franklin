@@ -34,7 +34,9 @@ export default class App extends Component {
 
   componentDidMount() {
     this.props.controller.on(Events.CHANGE, (state) => {
-      this.setState(Object.assign({ displayModal: false }, state));
+      this.setState(Object.assign({
+        displayModal: false,
+      }, state));
     });
   }
 

@@ -7,15 +7,6 @@ const { object, instanceOf, number } = PropTypes;
 
 export default class Sequence extends Component {
 
-  shouldComponentUpdate(nextProps) {
-    return (this.props.sequence !== nextProps.sequence) ||
-      (this.props.nucleotidesPerRow !== nextProps.nucleotidesPerRow);
-  }
-
-  clearSelection() {
-    this.context.controller.dispatch('action:clear-selection');
-  }
-
   handleNucleotideClick(newIndex) {
     this.context.controller.dispatch('action:update-selection', { selected: newIndex });
   }

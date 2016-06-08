@@ -91,12 +91,12 @@ describe('Store', () => {
         expect(eventEmitterSpy.calledOnce).to.be.true;
         expect(eventEmitterSpy.calledWith(Events.CHANGE_SELECTION)).to.be.true;
         expect(store.getState().selection.from).to.equal(2);
-        expect(store.getState().selection.to).to.equal(null);
+        expect(store.getState().selection.to).to.equal(undefined);
       });
 
       it('restricts the selection boundaries', () => {
-        expect(store.getState().selection.from).to.equal(null);
-        expect(store.getState().selection.to).to.equal(null);
+        expect(store.getState().selection.from).to.equal(undefined);
+        expect(store.getState().selection.to).to.equal(undefined);
 
         store.updateSelection(2);
         expect(store.getState().selection.from).to.equal(2);
@@ -118,8 +118,8 @@ describe('Store', () => {
         expect(store.getState().selection.to).to.equal(10);
 
         store.updateSelection(10);
-        expect(store.getState().selection.from).to.equal(null);
-        expect(store.getState().selection.to).to.equal(null);
+        expect(store.getState().selection.from).to.equal(undefined);
+        expect(store.getState().selection.to).to.equal(undefined);
       });
     });
   });

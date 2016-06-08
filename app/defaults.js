@@ -1,9 +1,9 @@
 import Immutable from 'immutable';
 
 
-export const defaultSelection = { from: null, to: null };
+export const emptySelection = { from: undefined, to: undefined };
 
-export const defaultAnnotation = {
+export const emptyAnnotation = {
   positionFrom: undefined,
   positionTo: undefined,
   comment: '',
