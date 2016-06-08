@@ -2,6 +2,12 @@
  * Annotations
  */
 
+.annotation-form {
+  input[type="submit"] {
+    @include button;
+  }
+}
+
 .annotation {
   stroke-width: 4;
   stroke-opacity: 0.4;
