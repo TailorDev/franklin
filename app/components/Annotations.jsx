@@ -17,17 +17,19 @@ const Annotations = (props) =>
             label={label}
             labelId={labelIndex}
             annotation={annotation}
-            getAnnotationSegmentCoordinates={(indexFrom, indexTo) => getAnnotationSegmentCoordinates(
-              indexFrom,
-              indexTo,
-              labelIndex, // current track
-              props.visualizerMargin,
-              props.nucleotidesPerRow,
-              props.nucleotideWidth,
-              props.rowHeight,
-              props.nucleotidesRowHeight,
-              props.trackHeight
-            )}
+            getAnnotationSegmentCoordinates={
+              (indexFrom, indexTo) => getAnnotationSegmentCoordinates(
+                indexFrom,
+                indexTo,
+                labelIndex, // current track
+                props.visualizerMargin,
+                props.nucleotidesPerRow,
+                props.nucleotideWidth,
+                props.rowHeight,
+                props.nucleotidesRowHeight,
+                props.trackHeight
+              )
+            }
             nucleotidesPerRow={props.nucleotidesPerRow}
           />
         )

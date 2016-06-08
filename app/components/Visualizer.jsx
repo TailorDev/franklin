@@ -65,14 +65,6 @@ export default class Visualizer extends Component {
     const nRows = Math.trunc(sequence.size / nucleotidesPerRow) + 1;
     const height = visualizerMargin.y + (nRows * rowHeight);
 
-    console.log(
-      nucleotidesPerRow,
-      tracksPerRow,
-      rowHeight,
-      width,
-      height
-    );
-
     this.setState({
       nucleotidesPerRow,
       tracksPerRow,
