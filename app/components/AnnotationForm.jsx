@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import Immutable from 'immutable';
+import { HotKeys } from 'react-hotkeys';
 import { Events } from '../Store';
 
 const { instanceOf, object } = PropTypes;
@@ -23,6 +24,7 @@ class AnnotationForm extends Component {
     this.onPositionToChange = this.onPositionToChange.bind(this);
     this.onLabelChange = this.onLabelChange.bind(this);
     this.onCommentChange = this.onCommentChange.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   componentDidMount() {
@@ -50,7 +52,7 @@ class AnnotationForm extends Component {
       annotationId: this.state.annotationId,
     });
 
-    this.setState(emptyState);
+    this.reset();
 
     this.context.controller.dispatch('action:clear-selection');
   }
@@ -79,49 +81,59 @@ class AnnotationForm extends Component {
     this.setState({ annotationComment: event.target.value });
   }
 
+  reset() {
+    this.setState(emptyState);
+  }
+
   render() {
+    const keyHandlers = {
+      clearSelection: this.reset,
+    };
+
     return (
-      <div className="annotation-form">
-        <form onSubmit={this.onSubmit}>
-          <input
-            type="number"
-            value={this.state.annotationPositionFrom}
-            placeholder="From"
-            onChange={this.onPositionFromChange}
-          />
-          <input
-            type="number"
-            value={this.state.annotationPositionTo}
-            placeholder="To"
-            onChange={this.onPositionToChange}
-          />
-          <select
-            onChange={this.onLabelChange}
-            value={this.state.labelId}
-          >
-            <option>Select a label</option>
-            {
-              this.props.labels.map((label, index) =>
-                <option
-                  key={index}
-                  value={index}
-                >
-                  {label.name}
-                </option>
-              )
-            }
-          </select>
-          <textarea
-            placeholder="Type a comment here"
-            value={this.state.annotationComment}
-            onChange={this.onCommentChange}
-          />
-          <input
-            type="submit"
-            value={null !== this.state.annotationId ? 'Save' : 'Add'}
-          />
-        </form>
-      </div>
+      <HotKeys handlers={keyHandlers}>
+        <div className="annotation-form">
+          <form onSubmit={this.onSubmit}>
+            <input
+              type="number"
+              value={this.state.annotationPositionFrom}
+              placeholder="From"
+              onChange={this.onPositionFromChange}
+            />
+            <input
+              type="number"
+              value={this.state.annotationPositionTo}
+              placeholder="To"
+              onChange={this.onPositionToChange}
+            />
+            <select
+              onChange={this.onLabelChange}
+              value={this.state.labelId}
+            >
+              <option>Select a label</option>
+              {
+                this.props.labels.map((label, index) =>
+                  <option
+                    key={index}
+                    value={index}
+                  >
+                    {label.name}
+                  </option>
+                )
+              }
+            </select>
+            <textarea
+              placeholder="Type a comment here"
+              value={this.state.annotationComment}
+              onChange={this.onCommentChange}
+            />
+            <input
+              type="submit"
+              value={null !== this.state.annotationId ? 'Save' : 'Add'}
+            />
+          </form>
+        </div>
+      </HotKeys>
     );
   }
 }
