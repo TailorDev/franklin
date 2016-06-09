@@ -184,7 +184,7 @@ describe('Store', () => {
   });
 
   describe('annotation', () => {
-    describe('addNewAnnotation()', () => {
+    describe('addAnnotation()', () => {
       it('adds an annotation to an existing label', () => {
         const labelId = 0; // Exon
         const newAnnotation = {
@@ -193,7 +193,7 @@ describe('Store', () => {
           comment: 'Foo bar',
         };
 
-        store.addNewAnnotation(labelId, newAnnotation);
+        store.addAnnotation(labelId, newAnnotation);
 
         expect(eventEmitterSpy.calledOnce).to.be.true;
         expect(eventEmitterSpy.calledWith(Events.CHANGE)).to.be.true;
@@ -214,7 +214,7 @@ describe('Store', () => {
           comment: 'Foo bar',
         };
 
-        store.addNewAnnotation(labelId, newAnnotation);
+        store.addAnnotation(labelId, newAnnotation);
 
         expect(eventEmitterSpy.called).to.be.false;
       });
@@ -258,13 +258,13 @@ describe('Store', () => {
       });
     });
 
-    describe('updateAnnotationAt()', () => {
+    describe('updateAnnotation()', () => {
       it('does not do anything if label does not exist', () => {
         const labelId = 1234; // non-existent
         const annotationId = 5678; // non-existent
         const annotation = {};
 
-        store.updateAnnotationAt(labelId, annotationId, annotation);
+        store.updateAnnotation(labelId, annotationId, annotation);
 
         expect(eventEmitterSpy.called).to.be.false;
       });
@@ -274,7 +274,7 @@ describe('Store', () => {
         const annotationId = 5678; // non-existent
         const annotation = {};
 
-        store.updateAnnotationAt(labelId, annotationId, annotation);
+        store.updateAnnotation(labelId, annotationId, annotation);
 
         expect(eventEmitterSpy.called).to.be.false;
       });
@@ -284,7 +284,7 @@ describe('Store', () => {
         const annotationId = 0;
         const existingAnnotation = defaultLabels.get(labelId).annotations.get(annotationId);
 
-        store.updateAnnotationAt(labelId, annotationId, Object.assign(
+        store.updateAnnotation(labelId, annotationId, Object.assign(
           {}, existingAnnotation, { comment: 'bar' }
         ));
 

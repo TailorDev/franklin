@@ -206,7 +206,7 @@ export default class Store {
     this.events.emit(Events.CHANGE, this.state);
   }
 
-  addNewAnnotation(labelId, annotation) {
+  addAnnotation(labelId, annotation) {
     if (null === labelId || ! this.state.labels.has(labelId)) {
       return;
     }
@@ -244,7 +244,7 @@ export default class Store {
     });
   }
 
-  updateAnnotationAt(labelId, annotationId, annotation) {
+  updateAnnotation(labelId, annotationId, annotation) {
     if (null === labelId || ! this.state.labels.has(labelId)) {
       return;
     }

@@ -62,9 +62,9 @@ export default class Controller {
 
   onSaveAnnotation({ labelId, annotation, annotationId }) {
     if (null !== annotationId) {
-      this.store.updateAnnotationAt(labelId, annotationId, annotation);
+      this.store.updateAnnotation(labelId, annotationId, annotation);
     } else {
-      this.store.addNewAnnotation(labelId, annotation);
+      this.store.addAnnotation(labelId, annotation);
     }
   }
 
