@@ -27,6 +27,10 @@ class Annotation extends Component {
         isSelected: this.props.annotation === state.annotation,
       });
     });
+
+    this.context.controller.on(Events.CHANGE_SELECTION, (state) => {
+      this.setState({ isSelected: false });
+    });
   }
 
   componentWillReceiveProps(nextProps) {

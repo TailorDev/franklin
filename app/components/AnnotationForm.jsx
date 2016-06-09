@@ -37,6 +37,10 @@ class AnnotationForm extends Component {
         annotationId: state.annotationId,
       });
     });
+
+    this.context.controller.on(Events.CHANGE_SELECTION, (state) => {
+      this.reset();
+    });
   }
 
   onSubmit(event) {
