@@ -19,5 +19,9 @@
     cursor: pointer;
   }
 
+  &.inactive {
+    stroke-opacity: 0;
+  }
+
   .annotation-segment {}
 }

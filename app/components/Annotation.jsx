@@ -57,7 +57,7 @@ class Annotation extends Component {
 
   render() {
     return (
-      <g className="annotation" onClick={this.handleClick}>
+      <g className={`annotation ${this.props.label.isActive ? null : 'inactive'}`} onClick={this.handleClick}>
         {this.state.lines.map((line, index) =>
           <line
             key={index}
