@@ -12,6 +12,11 @@ of our "Le lab" sessions:
 ![](doc/franklin-snapshot.jpg)
 
 
+## Usage
+
+Either install the project or use our public instance:
+https://franklin.lelab.tailordev.fr/.
+
 ## Installation
 
 ### Production
