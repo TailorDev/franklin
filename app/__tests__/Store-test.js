@@ -285,7 +285,7 @@ describe('Store', () => {
         const existingAnnotation = defaultLabels.get(labelId).annotations.get(annotationId);
 
         store.updateAnnotationAt(labelId, annotationId, Object.assign(
-          existingAnnotation, { comment: 'bar' }
+          {}, existingAnnotation, { comment: 'bar' }
         ));
 
         expect(eventEmitterSpy.calledOnce).to.be.true;
@@ -294,8 +294,7 @@ describe('Store', () => {
         const updatedAnnotation = store.getState().labels.get(labelId).annotations.get(annotationId);
 
         expect(updatedAnnotation.comment).to.equal('bar');
-        // is it what we want?
-        expect(existingAnnotation.comment).to.equal('bar');
+        expect(existingAnnotation.comment).to.equal('ENSE000036121231');
       });
     });
   });
