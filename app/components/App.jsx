@@ -21,7 +21,7 @@ export default class App extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = Object.assign({
+    this.state = Object.assign({}, {
       displayModal: true,
     }, props.controller.getState());
 
@@ -40,7 +40,7 @@ export default class App extends Component {
 
   componentDidMount() {
     this.props.controller.on(Events.CHANGE, (state) => {
-      this.setState(Object.assign({
+      this.setState(Object.assign({}, {
         displayModal: false,
       }, state));
     });

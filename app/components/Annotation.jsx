@@ -18,14 +18,12 @@ class Annotation extends Component {
 
   componentWillMount() {
     // First rendering
-    this.updateCoordinates(this.props);
+    this.updateSegments(this.props);
   }
 
   componentDidMount() {
     this.context.controller.on(Events.CHANGE_CURRENT_ANNOTATION, (state) => {
-      this.setState({
-        isSelected: this.props.annotation === state.annotation,
-      });
+      this.setState({ isSelected: this.props.annotation === state.annotation });
     });
 
     this.context.controller.on(Events.CHANGE_SELECTION, () => {
@@ -34,10 +32,10 @@ class Annotation extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.updateCoordinates(nextProps);
+    this.updateSegments(nextProps);
   }
 
-  updateCoordinates(props) {
+  updateSegments(props) {
     this.setState({
       segments: props.getAnnotationSegments(
         props.annotation.positionFrom - 1,
@@ -76,7 +74,6 @@ class Annotation extends Component {
     );
   }
 }
-
 
 Annotation.propTypes = {
   annotation: object.isRequired,
