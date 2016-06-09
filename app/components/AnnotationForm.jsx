@@ -38,7 +38,7 @@ class AnnotationForm extends Component {
       });
     });
 
-    this.context.controller.on(Events.CHANGE_SELECTION, (state) => {
+    this.context.controller.on(Events.CHANGE_SELECTION, () => {
       this.reset();
     });
   }

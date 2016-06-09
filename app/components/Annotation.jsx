@@ -28,7 +28,7 @@ class Annotation extends Component {
       });
     });
 
-    this.context.controller.on(Events.CHANGE_SELECTION, (state) => {
+    this.context.controller.on(Events.CHANGE_SELECTION, () => {
       this.setState({ isSelected: false });
     });
   }
