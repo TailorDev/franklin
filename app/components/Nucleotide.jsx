@@ -45,7 +45,10 @@ export default class Nucleotide extends Component {
   componentWillReceiveProps(nextProps) {
     // On resize, the number of nucleotides per row changes
     // this is the only case where we need to update coordinates
-    if (this.props.nucleotidesPerRow !== nextProps.nucleotidesPerRow) {
+    if (
+      (this.props.nucleotidesPerRow !== nextProps.nucleotidesPerRow) ||
+      (this.props.rowHeight !== nextProps.rowHeight)
+    ) {
       this.updateCoordinates(nextProps);
     }
   }
@@ -53,7 +56,8 @@ export default class Nucleotide extends Component {
   shouldComponentUpdate(nextProps, newState) {
     return (this.state.isSelected !== newState.isSelected) ||
       (this.state.isInSelectionRange !== newState.isInSelectionRange) ||
-      (this.props.nucleotidesPerRow !== nextProps.nucleotidesPerRow);
+      (this.props.nucleotidesPerRow !== nextProps.nucleotidesPerRow) ||
+      (this.props.rowHeight !== nextProps.rowHeight);
   }
 
   getPositionLength() {
