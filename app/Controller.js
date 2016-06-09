@@ -72,10 +72,6 @@ export default class Controller {
     this.store.selectAnnotation(labelId, annotation);
   }
 
-  onEditAnnotation({ label, annotation }) {
-    this.store.updateAnnotation(label, annotation);
-  }
-
   // Selection
 
   onClearSelection() {
