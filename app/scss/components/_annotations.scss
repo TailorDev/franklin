@@ -13,6 +13,7 @@
   stroke-opacity: 0.4;
   stroke-linecap: round;
 
+  &.selected,
   &:hover {
     stroke-width: 6;
     stroke-opacity: 1;
