@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Events } from '../Store';
 
 const { func, number, object } = PropTypes;
 
@@ -9,6 +10,7 @@ class Annotation extends Component {
 
     this.state = {
       lines: [], // [[x1, x2, y1, y2], [x1, x2, y1, y2], ...]
+      isSelected: false,
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -17,6 +19,14 @@ class Annotation extends Component {
   componentWillMount() {
     // First rendering
     this.updateCoordinates(this.props);
+  }
+
+  componentDidMount() {
+    this.context.controller.on(Events.CHANGE_CURRENT_ANNOTATION, (state) => {
+      this.setState({
+        isSelected: this.props.annotation === state.annotation,
+      });
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -60,7 +70,7 @@ class Annotation extends Component {
       <g
         className={`annotation
           ${this.props.label.isActive ? null : 'inactive'}
-          ${this.props.annotation.isSelected ? 'selected' : null}`}
+          ${this.state.isSelected ? 'selected' : null}`}
         onClick={this.handleClick}
       >
         {this.state.lines.map((line, index) =>
