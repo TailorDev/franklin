@@ -96,6 +96,7 @@ const common = {
       template: 'index.ejs',
       title: pkg.name,
       version: VERSION.substring(0, 7),
+      favicon: 'app/favicon.ico',
       appMountId: 'root'
     })
   ]
