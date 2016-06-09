@@ -28,13 +28,13 @@ export const defaultLabels = new Immutable.List([
     annotations: new Immutable.List([
       {
         positionFrom: 5,
-        positionTo: 25,
-        comment: 'Lorem Ipsum',
+        positionTo: 125,
+        comment: 'ENSE000036121231',
       },
       {
-        positionFrom: 301,
-        positionTo: 341,
-        comment: 'Lorem Ipsum',
+        positionFrom: 295,
+        positionTo: 415,
+        comment: 'ENSE000036121232',
       },
     ]),
   },
@@ -44,14 +44,24 @@ export const defaultLabels = new Immutable.List([
     isActive: true,
     annotations: new Immutable.List([
       {
-        positionFrom: 45,
-        positionTo: 216,
-        comment: 'Lorem Ipsum',
+        positionFrom: 1,
+        positionTo: 20,
+        comment: 'ENSE000036121231-FWD',
       },
       {
-        positionFrom: 19,
-        positionTo: 181,
-        comment: 'Lorem Ipsum',
+        positionFrom: 120,
+        positionTo: 140,
+        comment: 'ENSE000036121231-RV',
+      },
+      {
+        positionFrom: 290,
+        positionTo: 310,
+        comment: 'ENSE000036121232-FWD',
+      },
+      {
+        positionFrom: 400,
+        positionTo: 420,
+        comment: 'ENSE000036121232-RV',
       },
     ]),
   },
@@ -62,9 +72,29 @@ export const defaultLabels = new Immutable.List([
     annotations: new Immutable.List(
       [
         {
+          positionFrom: 104,
+          positionTo: 104,
+          comment: 'rs115543123',
+        },
+        {
           positionFrom: 201,
-          positionTo: 257,
-          comment: 'Lorem Ipsum',
+          positionTo: 202,
+          comment: 'rs115543124',
+        },
+        {
+          positionFrom: 340,
+          positionTo: 340,
+          comment: 'rs115543125',
+        },
+        {
+          positionFrom: 355,
+          positionTo: 355,
+          comment: 'rs115543126',
+        },
+        {
+          positionFrom: 374,
+          positionTo: 375,
+          comment: 'rs115543127',
         },
       ]
     ),
