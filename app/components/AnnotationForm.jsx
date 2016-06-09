@@ -56,8 +56,6 @@ class AnnotationForm extends Component {
       annotationId: this.state.annotationId,
     });
 
-    this.reset();
-
     this.context.controller.dispatch('action:clear-selection');
   }
 
