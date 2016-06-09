@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import Immutable from 'immutable';
 import { HotKeys } from 'react-hotkeys';
 import { Events } from '../Store';
+import { emptySelection } from '../defaults';
 
 const { instanceOf, object } = PropTypes;
 
@@ -38,8 +39,10 @@ class AnnotationForm extends Component {
       });
     });
 
-    this.context.controller.on(Events.CHANGE_SELECTION, () => {
-      this.reset();
+    this.context.controller.on(Events.CHANGE_SELECTION, (selection) => {
+      if (selection === emptySelection) {
+        this.reset();
+      }
     });
   }
 
