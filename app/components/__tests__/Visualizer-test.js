@@ -7,6 +7,7 @@ import Immutable from 'immutable';
 const { describe, it } = global;
 
 import Visualizer from '../Visualizer';
+import { defaultLabels } from '../../defaults';
 
 describe('<Visualizer />', () => {
 
@@ -27,6 +28,8 @@ describe('<Visualizer />', () => {
     const wrapper = mount(
       <Visualizer
         sequence={sequence}
+        labels={defaultLabels}
+        positionFrom={0}
       />,
       { context, childContextTypes }
     );
@@ -34,7 +37,7 @@ describe('<Visualizer />', () => {
     expect(wrapper.find(Visualizer)).to.have.length(1);
     expect(wrapper.ref('wrapper')).to.have.length(1);
     expect(wrapper.find('svg')).to.have.length(1);
-    expect(wrapper.instance().state.visualizerWidth).to.equal('100%');
-    expect(wrapper.instance().state.visualizerHeight).to.equal('100%');
+    expect(wrapper.instance().state.width).to.equal('100%');
+    expect(wrapper.instance().state.height).to.equal('100%');
   });
 });

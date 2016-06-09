@@ -1,4 +1,5 @@
 import Immutable from 'immutable';
+import { defaultSequence, defaultLabels, emptySelection, emptyAnnotation } from './defaults';
 
 
 export const Events = {
@@ -6,56 +7,22 @@ export const Events = {
   CHANGE_SELECTION: 'store:change-selection',
   LOADING_START: 'store:loading-start',
   LOADING_END: 'store:loading-end',
+  CHANGE_CURRENT_ANNOTATION: 'store:change-current-annotation',
 };
-
-const defaultSequence = new Immutable.List(
-  [
-    'ATGGTCACTCTAATCGCAGTCTGCAATTTACGTGTTTCCAACTTAACGCCCCCAAGTTAATAGCCGTAAT',
-    'CATTTGAAAAGAAAGGCACGCACGCACAACGCCATGCGGATCGAACCTGGGGACTCCTTTTGGACGAAAA',
-    'AGGCGATGTTTTCCAACGCAGAAAGGCAGTACTTTGAGACGGTCCGTCCGCGGAAGACCAGTGTGAGTAA',
-    'AAGTTGACCGTCGATGGCGATTTCACAAGTGACGTTTAAGTGGCGGGAACTTCTACTCACAAATCCCTGA',
-    'GCCCTGTGATATGATTTATTTTATGGAGCCGTGATCCGGACGAAAAATGCACACACATTTCTACAAAAAT',
-    'ATGTACATCGCGGTGCGATTGTGTCGCTTAAAGCACACGTACACCCACTGTCACACTCACACTCACATGC',
-  ].join('').split('')
-);
-
-const defaultLabels = new Immutable.List([
-  {
-    name: 'Exon',
-    color: '#334854',
-    isActive: true,
-  },
-  {
-    name: 'Primer',
-    color: '#f9c535',
-    isActive: true,
-  },
-  {
-    name: 'SNP',
-    color: '#e04462',
-    isActive: true,
-  },
-]);
 
 export default class Store {
 
-  constructor(events) {
+  constructor(events, labels) {
     this.events = events;
 
     this.state = {
       sequence: new Immutable.List(),
-      labels: defaultLabels,
-      selection: new Immutable.OrderedSet(),
+      positionFrom: 0,
+      positionTo: 0,
+      labels: labels || new Immutable.List(),
+      selection: emptySelection,
+      currentAnnotation: emptyAnnotation,
     };
-
-    // file reader
-    this.file = {
-      reader: new FileReader(),
-      offset: 0,
-      source: null,
-      chunks: [],
-    };
-    this.file.reader.onload = this.onFileLoad.bind(this);
   }
 
   getState() {
@@ -65,9 +32,15 @@ export default class Store {
   loadDataFromFile(file) {
     this.events.emit(Events.LOADING_START);
 
-    this.file.offset = 0;
-    this.file.source = file;
-    this.file.chunks = [];
+    // file reader
+    this.file = {
+      reader: new FileReader(),
+      offset: 0,
+      chunks: [],
+      source: file,
+    };
+
+    this.file.reader.onload = this.onFileLoad.bind(this);
 
     this.readFileChunk();
   }
@@ -92,9 +65,17 @@ export default class Store {
     }
 
     if (this.file.offset >= this.file.source.size) {
-      this.state.sequence = new Immutable.List(
-        this.file.chunks.join('').split('')
-      );
+      const sequence = new Immutable.List(this.file.chunks.join('').split(''));
+
+      this.state = {
+        sequence,
+        // TODO: allow user input for from/to positions (at least from)
+        positionFrom: 1,
+        positionTo: sequence.size,
+        labels: new Immutable.List(),
+        selection: emptySelection,
+        currentAnnotation: emptyAnnotation,
+      };
 
       this.events.emit(Events.LOADING_END);
       this.events.emit(Events.CHANGE, this.state);
@@ -117,6 +98,7 @@ export default class Store {
         name: label.name,
         color: label.color,
         isActive: true,
+        annotations: label.annotations,
       }
     ));
 
@@ -135,6 +117,7 @@ export default class Store {
         name: label.name,
         color: label.color,
         isActive: !label.isActive,
+        annotations: label.annotations,
       }
     ));
 
@@ -142,24 +125,116 @@ export default class Store {
   }
 
   clearSelection() {
-    this.state.selection = this.state.selection.clear();
-  }
-
-  updateSelection(selected) {
-    let previousSelection = this.state.selection;
-
-    if (2 <= previousSelection.size) {
-      previousSelection = previousSelection.slice(1);
-    }
-
-    this.state.selection = previousSelection.has(selected) ?
-      previousSelection.delete(selected) : previousSelection.add(selected);
+    this.state.selection = emptySelection;
 
     this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
   }
 
+  updateSelection(selected) {
+    if (selected === this.state.selection.from || selected === this.state.selection.to) {
+      this.state.selection = emptySelection;
+    } else if (
+      (undefined === this.state.selection.from) ||
+      (this.state.selection.from && this.state.selection.to)
+    ) {
+      this.state.selection = {
+        from: selected,
+        to: undefined,
+      };
+    } else if (undefined === this.state.selection.to) {
+      this.state.selection = this.calculateSelection(selected, this.state.selection.from);
+    }
+
+    this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
+  }
+
+  updateSelectionFrom(positionFrom) {
+    this.state.selection = {
+      from: positionFrom - 1,
+      to: this.state.selection.to,
+    };
+
+    this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
+  }
+
+  updateSelectionTo(positionTo) {
+    this.state.selection = {
+      from: this.state.selection.from,
+      to: positionTo - 1,
+    };
+
+    this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
+  }
+
+  calculateSelection(from, to) {
+    if (from < to) {
+      return {
+        from,
+        to,
+      };
+    }
+
+    return {
+      from: to,
+      to: from,
+    };
+  }
+
   loadDataFromDemo() {
-    this.state.sequence = defaultSequence;
+    this.state = {
+      sequence: defaultSequence,
+      positionFrom: 1,
+      positionTo: defaultSequence.size,
+      labels: defaultLabels,
+      selection: emptySelection,
+      currentAnnotation: emptyAnnotation,
+    };
+
+    this.events.emit(Events.CHANGE, this.state);
+  }
+
+  addNewAnnotation(labelId, annotation) {
+    if (null === labelId) {
+      return;
+    }
+
+    this.state.labels = this.state.labels.update(labelId, (v) => (
+      {
+        name: v.name,
+        color: v.color,
+        isActive: v.isActive,
+        annotations: v.annotations.push(annotation),
+      }
+    ));
+
+    this.events.emit(Events.CHANGE, this.state);
+  }
+
+  selectAnnotation(labelId, annotation) {
+    const annotationId = this.state.labels.get(labelId).annotations.findKey((v) => (
+      v.positionFrom === annotation.positionFrom && v.positionTo === annotation.positionTo
+    ));
+
+    this.events.emit(Events.CHANGE_CURRENT_ANNOTATION, {
+      labelId,
+      annotation,
+      annotationId,
+    });
+  }
+
+  updateAnnotationAt(labelId, annotationId, annotation) {
+    if (null === labelId || null === annotationId) {
+      return;
+    }
+
+    this.state.labels = this.state.labels.update(labelId, (v) => (
+      {
+        name: v.name,
+        color: v.color,
+        isActive: v.isActive,
+        annotations: v.annotations.update(annotationId, () => annotation),
+      }
+    ));
 
     this.events.emit(Events.CHANGE, this.state);
   }

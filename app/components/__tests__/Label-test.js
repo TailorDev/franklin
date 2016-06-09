@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
+import Immutable from 'immutable';
 
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
@@ -21,6 +22,7 @@ describe('<Label />', () => {
         name={'foo'}
         color={'#b0b'}
         isActive={true}
+        annotations={Immutable.List()}
         onToggleLabel={() => {}}
         onEditLabel={() => {}}
         onRemoveLabel={() => {}}
@@ -35,6 +37,7 @@ describe('<Label />', () => {
         name={'foo'}
         color={'#b0b'}
         isActive={true}
+        annotations={Immutable.List()}
         onToggleLabel={() => {}}
         onEditLabel={() => {}}
         onRemoveLabel={() => {}}
@@ -50,6 +53,7 @@ describe('<Label />', () => {
         name={'foo'}
         color={'#b0b'}
         isActive={true}
+        annotations={Immutable.List()}
         onToggleLabel={spy}
         onEditLabel={() => {}}
         onRemoveLabel={() => {}}
@@ -67,6 +71,7 @@ describe('<Label />', () => {
         name={'foo'}
         color={'#b0b'}
         isActive={true}
+        annotations={Immutable.List()}
         onToggleLabel={() => {}}
         onEditLabel={() => {}}
         onRemoveLabel={() => {}}
@@ -90,6 +95,7 @@ describe('<Label />', () => {
         name={'foo'}
         color={'#b0b'}
         isActive={true}
+        annotations={Immutable.List()}
         onToggleLabel={() => {}}
         onEditLabel={() => {}}
         onRemoveLabel={() => {}}
@@ -108,6 +114,7 @@ describe('<Label />', () => {
         name={'foo'}
         color={'#b0b'}
         isActive={true}
+        annotations={Immutable.List()}
         onToggleLabel={() => {}}
         onEditLabel={() => {}}
         onRemoveLabel={() => {}}
@@ -130,6 +137,7 @@ describe('<Label />', () => {
         name={'foo'}
         color={'#b0b'}
         isActive={true}
+        annotations={Immutable.List()}
         onToggleLabel={() => {}}
         onEditLabel={() => {}}
         onRemoveLabel={() => {}}

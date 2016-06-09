@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Dropzone from 'react-dropzone';
 import { Events } from '../Store';
 import Modal from 'react-modal';
+import { HotKeys } from 'react-hotkeys';
 
 import Header from './Header';
 import Visualizer from './Visualizer';
@@ -11,6 +12,10 @@ import Loader from './Loader';
 
 const { object, string } = PropTypes;
 
+
+const keyMap = {
+  clearSelection: 'esc',
+};
 
 export default class App extends Component {
   constructor(props, context) {
@@ -23,6 +28,7 @@ export default class App extends Component {
     this.onDropAccepted = this.onDropAccepted.bind(this);
     this.startDemo = this.startDemo.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.clearSelection = this.clearSelection.bind(this);
   }
 
   getChildContext() {
@@ -34,11 +40,9 @@ export default class App extends Component {
 
   componentDidMount() {
     this.props.controller.on(Events.CHANGE, (state) => {
-      this.setState({
-        labels: state.labels,
-        sequence: state.sequence,
+      this.setState(Object.assign({
         displayModal: false,
-      });
+      }, state));
     });
   }
 
@@ -56,7 +60,15 @@ export default class App extends Component {
     this.setState({ displayModal: false });
   }
 
+  clearSelection() {
+    this.props.controller.dispatch('action:clear-selection');
+  }
+
   render() {
+    const keyHandlers = {
+      clearSelection: this.clearSelection,
+    };
+
     return (
       <div className="layout">
         <Modal
@@ -70,7 +82,7 @@ export default class App extends Component {
           <p>
             <a href="https://franklin.lelab.tailordev.fr">Franklin</a> is a
             proof of concept. It is not suitable for production. You can&nbsp;
-            <a href="https://tailordev.fr/blog/2016/06/03/le-lab-3-franklin-dna-sequence-annotation-tool">read more about the story behind it</a>,&nbsp;
+            <a href="https://tailordev.fr/blog/2016/06/09/le-lab-3-franklin-dna-sequence-annotation-tool">read more about the story behind it</a>,&nbsp;
             <a href="https://github.com/TailorDev/franklin">checkout the sources</a> and&nbsp;
             <a href="https://github.com/TailorDev/franklin/issues">give us feedback</a>!
           </p>
@@ -94,22 +106,29 @@ export default class App extends Component {
 
         <Header />
 
-        <div className="content">
-          <Loader />
-          <Dropzone
-            className="dropzone"
-            activeClassName="drag-enter"
-            onDropAccepted={this.onDropAccepted}
-            disableClick
-            disablePreview
-            multiple={false}
-          >
-            <Visualizer
+        <HotKeys keyMap={keyMap} handlers={keyHandlers}>
+          <div className="content">
+            <Loader />
+            <Dropzone
+              className="dropzone"
+              activeClassName="drag-enter"
+              onDropAccepted={this.onDropAccepted}
+              disableClick
+              disablePreview
+              multiple={false}
+            >
+              <Visualizer
+                sequence={this.state.sequence}
+                positionFrom={this.state.positionFrom}
+                labels={this.state.labels}
+              />
+            </Dropzone>
+            <Toolbar
               sequence={this.state.sequence}
+              labels={this.state.labels}
             />
-          </Dropzone>
-          <Toolbar labels={this.state.labels} />
-        </div>
+          </div>
+        </HotKeys>
 
         <Footer version={this.props.version} />
       </div>

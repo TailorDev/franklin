@@ -1,0 +1,28 @@
+/*
+ * Annotations
+ */
+
+.annotation-form {
+  input[type="submit"] {
+    @include button;
+  }
+}
+
+.annotation {
+  stroke-width: 4;
+  stroke-opacity: 0.4;
+  stroke-linecap: round;
+
+  &.selected,
+  &:hover {
+    stroke-width: 6;
+    stroke-opacity: 1;
+    cursor: pointer;
+  }
+
+  &.inactive {
+    stroke-opacity: 0;
+  }
+
+  .annotation-segment {}
+}

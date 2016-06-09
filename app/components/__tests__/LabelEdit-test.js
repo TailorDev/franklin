@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
+import Immutable from 'immutable';
 
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
@@ -15,7 +16,8 @@ describe('<LabelEdit />', () => {
   const dummyLabel = {
     name: 'foo',
     color: '#000',
-    isActive: true
+    isActive: true,
+    annotations: Immutable.List(),
   };
 
   it('renders a label form', () => {
@@ -63,6 +65,11 @@ describe('<LabelEdit />', () => {
     wrapper.find('.button.submit').simulate('click');
 
     expect(spy.calledOnce).to.be.true;
-    expect(spy.calledWith({ name: 'bar', color: '#000', isActive: true })).to.be.true;
+    expect(spy.calledWith({
+      name: 'bar',
+      color: '#000',
+      isActive: true,
+      annotations: Immutable.List() })
+    ).to.be.true;
   });
 });

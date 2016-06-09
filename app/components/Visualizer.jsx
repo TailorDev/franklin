@@ -3,8 +3,9 @@ import debounce from 'lodash.debounce';
 import Immutable from 'immutable';
 
 import Sequence from './Sequence';
+import Annotations from './Annotations';
 
-const { instanceOf } = PropTypes;
+const { instanceOf, number } = PropTypes;
 
 export default class Visualizer extends Component {
 
@@ -12,50 +13,64 @@ export default class Visualizer extends Component {
     super(props, context);
 
     this.state = {
+      visualizerMargin: {
+        x: 10,
+        y: 10,
+      },
       nucleotidesPerRow: 80,
-      rowHeight: 50,
+      nucleotidesRowHeight: 50,
       nucleotideWidth: 12,
-      visualizerWidth: '100%',
-      visualizerHeight: '100%',
+      tracksPerRow: props.labels.size,
+      trackHeight: 6,
+      rowHeight: 0,
+      width: '100%',
+      height: '100%',
     };
   }
 
   componentDidMount() {
     window.addEventListener(
       'resize',
-      debounce(() => { this.handleResize(this.props.sequence); }, 500),
+      debounce(() => { this.handleResize(this.props.sequence, this.props.labels); }, 500),
       false
     );
   }
 
   componentWillReceiveProps(nextProps) {
-    this.updateVisualizerDimensions(nextProps.sequence);
+    this.updateVisualizerDimensions(nextProps.sequence, nextProps.labels);
   }
 
   componentWillUnmount() {
     window.removeEventListener(
       'resize',
-      () => { this.handleResize(this.props.sequence); },
+      () => { this.handleResize(this.props.sequence, this.props.labels); },
       false
     );
   }
 
-  handleResize(sequence) {
-    this.updateVisualizerDimensions(sequence);
+  handleResize(sequence, labels) {
+    this.updateVisualizerDimensions(sequence, labels);
   }
 
-  updateVisualizerDimensions(sequence) {
-    const { nucleotideWidth, rowHeight } = this.state;
+  updateVisualizerDimensions(sequence, labels) {
+    const { visualizerMargin, nucleotideWidth, nucleotidesRowHeight, trackHeight } = this.state;
+
     // Width must fit the wrapper maximal dimension, i.e. 100%
     const width = this.refs.wrapper.clientWidth;
-    const nt = Math.trunc((width - 20) / nucleotideWidth);
-    // Should contain each row
-    const height = 10 + (Math.trunc(sequence.size / nt) + 1) * rowHeight;
+    const nucleotidesPerRow = Math.trunc((width - (visualizerMargin.x * 2)) / nucleotideWidth);
+
+    // Height should contain each nucleotides + annotations tracks rows
+    const tracksPerRow = labels.size;
+    const rowHeight = nucleotidesRowHeight + (tracksPerRow * trackHeight);
+    const nRows = Math.trunc(sequence.size / nucleotidesPerRow) + 1;
+    const height = visualizerMargin.y + (nRows * rowHeight);
 
     this.setState({
-      nucleotidesPerRow: nt,
-      visualizerWidth: width,
-      visualizerHeight: height,
+      nucleotidesPerRow,
+      tracksPerRow,
+      rowHeight,
+      width,
+      height,
     });
   }
 
@@ -63,18 +78,24 @@ export default class Visualizer extends Component {
     return (
       <div className="visualizer" ref="wrapper">
 
-        {this.props.sequence.size ?
+        {0 < this.props.sequence.size ?
           <svg
             version="1.1"
             baseProfile="full"
-            width={this.state.visualizerWidth}
-            height={this.state.visualizerHeight}
+            width={this.state.width}
+            height={this.state.height}
             xmlns="http://www.w3.org/2000/svg"
           >
             <rect width="100%" height="100%" />
 
+            <Annotations
+              labels={this.props.labels}
+              {...this.state}
+            />
+
             <Sequence
               sequence={this.props.sequence}
+              positionFrom={this.props.positionFrom}
               {...this.state}
             />
           </svg>
@@ -114,4 +135,6 @@ export default class Visualizer extends Component {
 
 Visualizer.propTypes = {
   sequence: instanceOf(Immutable.List).isRequired,
+  positionFrom: number.isRequired,
+  labels: instanceOf(Immutable.List).isRequired,
 };

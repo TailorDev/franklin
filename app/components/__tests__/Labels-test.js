@@ -14,8 +14,8 @@ import Label from '../Label';
 describe('<Labels />', () => {
 
   const dummyLabels = Immutable.List([
-    { name: 'label 1', color: '#000', isActive: true },
-    { name: 'label 2', color: '#fff', isActive: true },
+    { name: 'label 1', color: '#000', isActive: true, annotations: Immutable.List(), },
+    { name: 'label 2', color: '#fff', isActive: true, annotations: Immutable.List(), },
   ]);
 
   let context, spyOn, spyDispatch;
@@ -66,6 +66,7 @@ describe('<Labels />', () => {
         name: 'foo',
         color: '#f6f6f6',
         isActive: true,
+        annotations: Immutable.List(),
       }
     })).to.be.true;
   });

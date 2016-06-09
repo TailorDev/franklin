@@ -7,15 +7,6 @@ const { object, instanceOf, number } = PropTypes;
 
 export default class Sequence extends Component {
 
-  shouldComponentUpdate(nextProps) {
-    return (this.props.sequence !== nextProps.sequence) ||
-      (this.props.nucleotidesPerRow !== nextProps.nucleotidesPerRow);
-  }
-
-  clearSelection() {
-    this.context.controller.dispatch('action:clear-selection');
-  }
-
   handleNucleotideClick(newIndex) {
     this.context.controller.dispatch('action:update-selection', { selected: newIndex });
   }
@@ -25,20 +16,16 @@ export default class Sequence extends Component {
       <g>
         {
           this.props.sequence.map((nucleotide, index) => {
-            const { rowHeight, nucleotidesPerRow, nucleotideWidth } = this.props;
             const boundClick = this.handleNucleotideClick.bind(this, index);
-            const x = 10 + (nucleotideWidth * (index % nucleotidesPerRow));
-            const y = 10 + (rowHeight * Math.trunc(index / nucleotidesPerRow));
 
             return (
               <Nucleotide
-                x={x}
-                y={y}
                 type={nucleotide}
-                position={index + 1}
+                position={this.props.positionFrom + index}
                 key={index}
                 index={index}
                 onClick={boundClick}
+                {...this.props}
               />
             );
           })
@@ -50,9 +37,13 @@ export default class Sequence extends Component {
 
 Sequence.propTypes = {
   sequence: instanceOf(Immutable.List).isRequired,
+  positionFrom: number.isRequired,
+  visualizerMargin: object.isRequired,
   nucleotidesPerRow: number.isRequired,
-  rowHeight: number.isRequired,
+  nucleotidesRowHeight: number.isRequired,
   nucleotideWidth: number.isRequired,
+  trackHeight: number.isRequired,
+  rowHeight: number.isRequired,
   // TODO: add other attrs, cf. https://github.com/TailorDev/franklin/issues/3
 };
 

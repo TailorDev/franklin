@@ -20,6 +20,7 @@ describe('<App />', () => {
       return {
         sequence: new Immutable.List(),
         labels: new Immutable.List(),
+        positionFrom: 0,
       };
     },
   };
