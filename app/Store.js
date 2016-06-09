@@ -130,6 +130,9 @@ export default class Store {
     this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
   }
 
+  /**
+   * Here, `selected` is an index related to the sequence, starting from 0
+   */
   updateSelection(selected) {
     if (selected === this.state.selection.from || selected === this.state.selection.to) {
       this.state.selection = emptySelection;
@@ -148,6 +151,11 @@ export default class Store {
     this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
   }
 
+  /**
+   * Here, we pass a position in the sequence, which is NOT the index. By now,
+   * the offset between is a position and its corresponding index is `-1`,
+   * hence the code below.
+   */
   updateSelectionFrom(positionFrom) {
     this.state.selection = {
       from: positionFrom - 1,
@@ -157,6 +165,11 @@ export default class Store {
     this.events.emit(Events.CHANGE_SELECTION, this.state.selection);
   }
 
+  /**
+   * Here, we pass a position in the sequence, which is NOT the index. By now,
+   * the offset between is a position and its corresponding index is `-1`,
+   * hence the code below.
+   */
   updateSelectionTo(positionTo) {
     this.state.selection = {
       from: this.state.selection.from,
@@ -194,7 +207,7 @@ export default class Store {
   }
 
   addNewAnnotation(labelId, annotation) {
-    if (null === labelId) {
+    if (null === labelId || ! this.state.labels.has(labelId)) {
       return;
     }
 
@@ -211,9 +224,18 @@ export default class Store {
   }
 
   selectAnnotation(labelId, annotation) {
+    if (! this.state.labels.has(labelId)) {
+      return;
+    }
+
     const annotationId = this.state.labels.get(labelId).annotations.findKey((v) => (
-      v.positionFrom === annotation.positionFrom && v.positionTo === annotation.positionTo
+      v.positionFrom === annotation.positionFrom &&
+        v.positionTo === annotation.positionTo
     ));
+
+    if (undefined === annotationId) {
+      return;
+    }
 
     this.events.emit(Events.CHANGE_CURRENT_ANNOTATION, {
       labelId,
@@ -223,7 +245,14 @@ export default class Store {
   }
 
   updateAnnotationAt(labelId, annotationId, annotation) {
-    if (null === labelId || null === annotationId) {
+    if (null === labelId || ! this.state.labels.has(labelId)) {
+      return;
+    }
+
+    if (
+      null === annotationId ||
+      ! this.state.labels.get(labelId).annotations.has(annotationId)
+    ) {
       return;
     }
 
