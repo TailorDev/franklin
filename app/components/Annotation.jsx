@@ -9,7 +9,7 @@ class Annotation extends Component {
     super(props, context);
 
     this.state = {
-      lines: [], // [[x1, x2, y1, y2], [x1, x2, y1, y2], ...]
+      segments: [], // [[x1, x2, y1, y2], [x1, x2, y1, y2], ...]
       isSelected: false,
     };
 
@@ -38,28 +38,12 @@ class Annotation extends Component {
   }
 
   updateCoordinates(props) {
-    const indexFrom = props.annotation.positionFrom - 1;
-    const indexTo = props.annotation.positionTo - 1;
-
-    // Prepare segments
-    const segments = [];
-    let start = indexFrom;
-    for (let i = start + 1; i < indexTo; i++) {
-      if (! (i % props.nucleotidesPerRow)) {
-        segments.push([start, i - 1]);
-        start = i;
-      }
-    }
-    segments.push([start, indexTo]);
-
-    const lines = segments.map((segment) =>
-      props.getAnnotationSegmentCoordinates(
-        segment[0],
-        segment[1]
-      )
-    );
-
-    this.setState({ lines });
+    this.setState({
+      segments: props.getAnnotationSegments(
+        props.annotation.positionFrom - 1,
+        props.annotation.positionTo - 1
+      ),
+    });
   }
 
   handleClick() {
@@ -77,7 +61,7 @@ class Annotation extends Component {
           ${this.state.isSelected ? 'selected' : null}`}
         onClick={this.handleClick}
       >
-        {this.state.lines.map((line, index) =>
+        {this.state.segments.map((line, index) =>
           <line
             key={index}
             x1={line.x1}
@@ -98,8 +82,7 @@ Annotation.propTypes = {
   annotation: object.isRequired,
   label: object.isRequired,
   labelId: number.isRequired,
-  getAnnotationSegmentCoordinates: func.isRequired,
-  nucleotidesPerRow: number.isRequired,
+  getAnnotationSegments: func.isRequired,
 };
 
 Annotation.contextTypes = {

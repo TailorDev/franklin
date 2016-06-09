@@ -65,3 +65,35 @@ export const getAnnotationSegmentCoordinates = (
 
   return { x1, x2, y1, y2 };
 };
+
+/**
+ */
+export const getAnnotationSegments = (
+  indexFrom, indexTo, currentTrack, visualizerMargin, nucleotidesPerRow,
+  nucleotideWidth, rowHeight, nucleotidesRowHeight, trackHeight
+) => {
+  const segments = [];
+
+  let start = indexFrom;
+  for (let i = start + 1; i < indexTo; i++) {
+    if (! (i % nucleotidesPerRow)) {
+      segments.push([start, i - 1]);
+      start = i;
+    }
+  }
+  segments.push([start, indexTo]);
+
+  return segments.map((segment) =>
+    getAnnotationSegmentCoordinates(
+      segment[0],
+      segment[1],
+      currentTrack,
+      visualizerMargin,
+      nucleotidesPerRow,
+      nucleotideWidth,
+      rowHeight,
+      nucleotidesRowHeight,
+      trackHeight
+    )
+  );
+};
