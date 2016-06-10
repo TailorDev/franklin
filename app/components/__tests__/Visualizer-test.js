@@ -71,6 +71,28 @@ describe('<Visualizer />', () => {
     expect(window.addEventListener.calledWith('resize')).to.be.true;
   });
 
+  it('removes the resize listener to window', () => {
+    window.addEventListener = sinon.spy();
+    window.removeEventListener = sinon.spy();
+
+    const wrapper = mount(
+      <Visualizer
+        sequence={sequence}
+        labels={defaultLabels}
+        positionFrom={0}
+      />,
+      { context, childContextTypes }
+    );
+
+    wrapper.unmount();
+
+    expect(window.addEventListener.calledWith('resize')).to.be.true;
+
+    const listener = window.addEventListener.args[0][1];
+
+    expect(window.removeEventListener.calledWith('resize', listener)).to.be.true;
+  });
+
   it('updates dimensions when receiving new props', () => {
     const wrapper = mount(
       <Visualizer

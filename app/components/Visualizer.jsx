@@ -29,9 +29,13 @@ export default class Visualizer extends Component {
   }
 
   componentDidMount() {
+    this.resizeListener = debounce(() => {
+      this.handleResize(this.props.sequence, this.props.labels);
+    }, 500);
+
     window.addEventListener(
       'resize',
-      debounce(() => { this.handleResize(this.props.sequence, this.props.labels); }, 500),
+      this.resizeListener,
       false
     );
   }
@@ -43,7 +47,7 @@ export default class Visualizer extends Component {
   componentWillUnmount() {
     window.removeEventListener(
       'resize',
-      () => { this.handleResize(this.props.sequence, this.props.labels); },
+      this.resizeListener,
       false
     );
   }
