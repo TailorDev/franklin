@@ -14,22 +14,16 @@ export default class Sequence extends Component {
   render() {
     return (
       <g>
-        {
-          this.props.sequence.map((nucleotide, index) => {
-            const boundClick = this.handleNucleotideClick.bind(this, index);
-
-            return (
-              <Nucleotide
-                type={nucleotide}
-                position={this.props.positionFrom + index}
-                key={index}
-                index={index}
-                onClick={boundClick}
-                {...this.props}
-              />
-            );
-          })
-        }
+        {this.props.sequence.map((nucleotide, index) =>
+          <Nucleotide
+            type={nucleotide}
+            position={this.props.positionFrom + index}
+            key={index}
+            index={index}
+            onClick={() => { this.handleNucleotideClick(index); }}
+            {...this.props}
+          />
+        )}
       </g>
     );
   }
