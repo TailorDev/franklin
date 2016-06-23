@@ -69,6 +69,7 @@ export default class Controller {
   }
 
   onSelectAnnotation({ labelId, annotation }) {
+    this.store.clearSelection();
     this.store.selectAnnotation(labelId, annotation);
   }
 

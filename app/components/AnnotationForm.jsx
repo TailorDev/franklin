@@ -7,8 +7,8 @@ import { emptySelection } from '../defaults';
 const { instanceOf, object } = PropTypes;
 
 const emptyState = {
-  annotationPositionFrom: undefined,
-  annotationPositionTo: undefined,
+  annotationPositionFrom: '',
+  annotationPositionTo: '',
   annotationComment: '',
   labelId: '',
   annotationId: null,
@@ -21,6 +21,7 @@ class AnnotationForm extends Component {
     this.state = emptyState;
 
     this.onSubmit = this.onSubmit.bind(this);
+    this.onSelectionChange = this.onSelectionChange.bind(this);
     this.onPositionFromChange = this.onPositionFromChange.bind(this);
     this.onPositionToChange = this.onPositionToChange.bind(this);
     this.onLabelChange = this.onLabelChange.bind(this);
@@ -40,9 +41,7 @@ class AnnotationForm extends Component {
     });
 
     this.context.controller.on(Events.CHANGE_SELECTION, (selection) => {
-      if (selection === emptySelection) {
-        this.reset();
-      }
+      this.onSelectionChange(selection);
     });
   }
 
@@ -60,6 +59,17 @@ class AnnotationForm extends Component {
     });
 
     this.context.controller.dispatch('action:clear-selection');
+  }
+
+  onSelectionChange(selection) {
+    if (selection === emptySelection || null !== this.state.annotationId) {
+      this.reset();
+    }
+
+    this.setState({
+      annotationPositionFrom: selection.from !== undefined ? selection.from + 1 : '',
+      annotationPositionTo: selection.to !== undefined ? selection.to + 1 : '',
+    });
   }
 
   onPositionFromChange(event) {
