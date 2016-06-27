@@ -88,7 +88,7 @@ function doUpdateAnnotation(state, action) {
   };
 }
 
-function doSelectionAnnotation(state, action) {
+function doSelectAnnotation(state, action) {
   const labelId = action.labelId;
   const annotation = action.annotation;
 
@@ -172,7 +172,7 @@ export default function reducer(state = initialState, action = {}) {
       return doUpdateAnnotation(state, action);
 
     case SELECT_ANNOTATION:
-      return doSelectionAnnotation(state, action);
+      return doSelectAnnotation(state, action);
 
     default: return state;
   }
