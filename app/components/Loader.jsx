@@ -1,34 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 
 
-export default class Loader extends Component {
+export const Loader = (props) => (
+  <div className="loader" style={{ display: props.display ? 'block' : 'none' }}>
+    <p className="message">
+      Rendering your sequence...<br /><br />
+      <i className="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+    </p>
+  </div>
+);
 
-  constructor(props, context) {
-    super(props, context);
+Loader.propTypes = React.PropTypes.bool.isRequired;
 
-    this.state = { display: 'none' };
-  }
+function mapStateToProps(state) {
+  const sequence = state.sequence;
 
-  componentDidMount() {
-    /*
-    this.context.controller.on(Events.LOADING_START, () => {
-      this.setState({ display: 'block' });
-    });
-
-    this.context.controller.on(Events.LOADING_END, () => {
-      this.setState({ display: 'none' });
-    });
-    */
-  }
-
-  render() {
-    return (
-      <div className="loader" style={{ display: this.state.display }}>
-        <p className="message">
-          Rendering your sequence...<br /><br />
-          <i className="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
-        </p>
-      </div>
-    );
-  }
+  return {
+    display: sequence.loading,
+  };
 }
+
+export default connect(mapStateToProps)(Loader);

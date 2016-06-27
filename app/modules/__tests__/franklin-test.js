@@ -16,10 +16,11 @@ describe('modules/franklin', () => {
   it('calls the default load actions', () => {
     const expectedActions = [
       { type: 'franklin/sequence/LOAD_DEFAULT' },
-      { type: 'franklin/franklin/LOAD_DEFAULT' },
+      { type: 'franklin/label/LOAD_DEFAULT' },
     ];
     const store = mockStore({});
 
-    return store.dispatch(actions.loadDefault());
+    store.dispatch(actions.loadDefault());
+    expect(store.getActions()).to.deep.equal(expectedActions);
   });
 });

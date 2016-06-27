@@ -3,6 +3,7 @@ import { defaultSequence } from '../defaults';
 
 // Actions
 const LOAD_DEFAULT = 'franklin/sequence/LOAD_DEFAULT';
+const LOAD_FILE = 'franklin/sequence/LOAD_FILE';
 const SEQUENCE_LOADED = 'franklin/sequence/SEQUENCE_LOADED';
 
 // Action Creators
@@ -16,6 +17,8 @@ export function setSequence(sequence) {
 
 export function loadFile(file) {
   return dispatch => {
+    dispatch({ type: LOAD_FILE });
+
     const reader = new FileReader();
     reader.onload = (event) => {
       let chunks = event.target.result.split('\n');
@@ -37,15 +40,27 @@ export function loadFile(file) {
 const initialState = {
   sequence: new Immutable.List(),
   positionFrom: 0,
+  loading: false,
 };
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
+    case LOAD_FILE:
+      return Object.assign({}, state, { loading: true });
+
     case LOAD_DEFAULT:
-      return { sequence: defaultSequence, positionFrom: state.positionFrom };
+      return {
+        sequence: defaultSequence,
+        positionFrom: state.positionFrom,
+        loading: false,
+      };
 
     case SEQUENCE_LOADED:
-      return { sequence: action.sequence, positionFrom: state.positionFrom };
+      return {
+        sequence: action.sequence,
+        positionFrom: state.positionFrom,
+        loading: false,
+      };
 
     default: return state;
   }
