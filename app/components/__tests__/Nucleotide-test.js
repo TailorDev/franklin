@@ -46,6 +46,8 @@ describe('<Nucleotide />', () => {
         type="A"
         position={6}
         onClick={() => {}}
+        isSelected={false}
+        isInSelectionRange={false}
       />
     );
 
@@ -64,6 +66,8 @@ describe('<Nucleotide />', () => {
         type="A"
         position={230}
         index={229}
+        isSelected={false}
+        isInSelectionRange={false}
         onClick={() => {}}
       />
     );
@@ -79,6 +83,8 @@ describe('<Nucleotide />', () => {
         type="A"
         position={230123}
         index={230122}
+        isSelected={false}
+        isInSelectionRange={false}
         onClick={() => {}}
       />
     );
@@ -97,6 +103,8 @@ describe('<Nucleotide />', () => {
         position={230}
         index={229}
         onClick={() => {}}
+        isSelected={false}
+        isInSelectionRange={false}
       />
     );
     let instance = wrapper.instance();
@@ -112,6 +120,8 @@ describe('<Nucleotide />', () => {
         position={230123}
         index={230122}
         onClick={() => {}}
+        isSelected={false}
+        isInSelectionRange={false}
       />
     );
     instance = wrapper.instance();
@@ -129,6 +139,8 @@ describe('<Nucleotide />', () => {
         position={230}
         index={229}
         onClick={() => {}}
+        isSelected={false}
+        isInSelectionRange={false}
       />
     );
     let instance = wrapper.instance();
@@ -144,6 +156,8 @@ describe('<Nucleotide />', () => {
         position={230123}
         index={230122}
         onClick={() => {}}
+        isSelected={false}
+        isInSelectionRange={false}
       />
     );
     instance = wrapper.instance();
@@ -161,6 +175,8 @@ describe('<Nucleotide />', () => {
         position={230}
         index={229}
         onClick={() => {}}
+        isSelected={false}
+        isInSelectionRange={false}
       />
     );
     let instance = wrapper.instance();
@@ -176,6 +192,8 @@ describe('<Nucleotide />', () => {
         position={230123}
         index={230122}
         onClick={() => {}}
+        isSelected={false}
+        isInSelectionRange={false}
       />
     );
     instance = wrapper.instance();

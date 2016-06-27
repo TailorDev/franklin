@@ -15,7 +15,7 @@ describe('<App />', () => {
 
   it('renders Header component', () => {
     const wrapper = shallow(
-      <App version={version} />
+      <App version={version} dispatch={() => {}} />
     );
     expect(wrapper.find(Header)).to.have.length(1);
   });

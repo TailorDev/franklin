@@ -24,6 +24,8 @@ describe('<Annotation />', () => {
         label={label}
         labelId={labelId}
         getAnnotationSegments={() => { return segments; }}
+        isSelected={false}
+        onClick={() => {}}
       />
     );
 
@@ -45,6 +47,8 @@ describe('<Annotation />', () => {
         label={label}
         labelId={labelId}
         getAnnotationSegments={() => { return segments; }}
+        isSelected={false}
+        onClick={() => {}}
       />
     );
 
@@ -65,6 +69,8 @@ describe('<Annotation />', () => {
         label={label}
         labelId={labelId}
         getAnnotationSegments={() => { return segments; }}
+        isSelected={false}
+        onClick={() => {}}
       />
     );
 
@@ -86,6 +92,8 @@ describe('<Annotation />', () => {
         label={label}
         labelId={labelId}
         getAnnotationSegments={() => { return []; }}
+        isSelected={false}
+        onClick={() => {}}
       />
     );
 
@@ -112,6 +120,8 @@ describe('<Annotation />', () => {
         label={label}
         labelId={labelId}
         getAnnotationSegments={() => { return segments; }}
+        isSelected={false}
+        onClick={() => {}}
       />
     );
 

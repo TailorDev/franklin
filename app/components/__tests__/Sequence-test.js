@@ -38,6 +38,7 @@ describe('<Sequence />', () => {
           trackHeight={6}
           rowHeight={50}
           positionFrom={0}
+          onNucleotideClick={() => {}}
         />
       </Provider>
     );

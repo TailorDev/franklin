@@ -22,6 +22,10 @@ describe('<Labels />', () => {
     const wrapper = shallow(
       <Labels
         labels={dummyLabels}
+        onCreateNewLabel={() => {}}
+        onToggleLabel={() => {}}
+        onEditLabel={() => {}}
+        onRemoveLabel={() => {}}
       />
     );
 
@@ -34,6 +38,9 @@ describe('<Labels />', () => {
       <Labels
         labels={dummyLabels}
         onCreateNewLabel={spy}
+        onToggleLabel={() => {}}
+        onEditLabel={() => {}}
+        onRemoveLabel={() => {}}
       />
     );
 
