@@ -7,8 +7,8 @@ import Immutable from 'immutable';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-import LabelEdit from '../LabelEdit';
-import LabelForm from '../LabelForm';
+import LabelEdit from '../Labels/LabelEdit';
+import LabelForm from '../Labels/LabelForm';
 
 
 describe('<LabelEdit />', () => {

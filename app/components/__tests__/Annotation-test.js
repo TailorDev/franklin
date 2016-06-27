@@ -8,14 +8,9 @@ import sinon from 'sinon';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-import Annotation from '../Annotation';
+import Annotation from '../Annotation/presenter';
 
 describe('<Annotation />', () => {
-
-  const controller = {
-    on: () => {},
-    dispatch: sinon.spy(),
-  };
 
   it('renders itself', () => {
     const labelId = 0;
@@ -29,8 +24,7 @@ describe('<Annotation />', () => {
         label={label}
         labelId={labelId}
         getAnnotationSegments={() => { return segments; }}
-      />,
-      { context: { controller } }
+      />
     );
 
     expect(wrapper.find('g')).to.have.length(1);
@@ -51,8 +45,7 @@ describe('<Annotation />', () => {
         label={label}
         labelId={labelId}
         getAnnotationSegments={() => { return segments; }}
-      />,
-      { context: { controller } }
+      />
     );
 
     expect(wrapper.find('g').hasClass('inactive')).to.be.true;
@@ -72,8 +65,7 @@ describe('<Annotation />', () => {
         label={label}
         labelId={labelId}
         getAnnotationSegments={() => { return segments; }}
-      />,
-      { context: { controller } }
+      />
     );
 
     expect(wrapper.find('g')).to.have.length(1);
@@ -94,8 +86,7 @@ describe('<Annotation />', () => {
         label={label}
         labelId={labelId}
         getAnnotationSegments={() => { return []; }}
-      />,
-      { context: { controller } }
+      />
     );
 
     expect(wrapper.find('g')).to.have.length(1);
@@ -121,11 +112,9 @@ describe('<Annotation />', () => {
         label={label}
         labelId={labelId}
         getAnnotationSegments={() => { return segments; }}
-      />,
-      { context: { controller } }
+      />
     );
 
     wrapper.find('g').simulate('click');
-    expect(controller.dispatch.calledOnce).to.be.true;
   });
 });

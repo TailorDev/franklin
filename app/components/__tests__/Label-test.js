@@ -2,27 +2,28 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
-import Immutable from 'immutable';
 
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-import Label from '../Label';
-import LabelEdit from '../LabelEdit';
-import LabelForm from '../LabelForm';
-import LabelRemove from '../LabelRemove';
-import LabelTools from '../LabelTools';
+import Label from '../Labels/Label';
+import LabelEdit from '../Labels/LabelEdit';
+import LabelForm from '../Labels/LabelForm';
+import LabelRemove from '../Labels/LabelRemove';
+import LabelTools from '../Labels/LabelTools';
 
 
 describe('<Label />', () => {
 
   it('renders a list item', () => {
+    const label = {
+      name: 'foo',
+      color: '#b0b',
+      isAction: true,
+    };
     const wrapper = shallow(
       <Label
-        name={'foo'}
-        color={'#b0b'}
-        isActive={true}
-        annotations={Immutable.List()}
+        label={label}
         onToggleLabel={() => {}}
         onEditLabel={() => {}}
         onRemoveLabel={() => {}}
@@ -32,12 +33,14 @@ describe('<Label />', () => {
   });
 
   it('renders a <LabelTools />', () => {
-    const wrapper = mount(
+    const label = {
+      name: 'foo',
+      color: '#b0b',
+      isAction: true,
+    };
+    const wrapper = shallow(
       <Label
-        name={'foo'}
-        color={'#b0b'}
-        isActive={true}
-        annotations={Immutable.List()}
+        label={label}
         onToggleLabel={() => {}}
         onEditLabel={() => {}}
         onRemoveLabel={() => {}}
@@ -48,12 +51,14 @@ describe('<Label />', () => {
 
   it('can be inactivated', () => {
     const spy = sinon.spy();
+    const label = {
+      name: 'foo',
+      color: '#b0b',
+      isAction: true,
+    };
     const wrapper = mount(
       <Label
-        name={'foo'}
-        color={'#b0b'}
-        isActive={true}
-        annotations={Immutable.List()}
+        label={label}
         onToggleLabel={spy}
         onEditLabel={() => {}}
         onRemoveLabel={() => {}}
@@ -66,12 +71,14 @@ describe('<Label />', () => {
   });
 
   it('can display the edition form', () => {
+    const label = {
+      name: 'foo',
+      color: '#b0b',
+      isAction: true,
+    };
     const wrapper = mount(
       <Label
-        name={'foo'}
-        color={'#b0b'}
-        isActive={true}
-        annotations={Immutable.List()}
+        label={label}
         onToggleLabel={() => {}}
         onEditLabel={() => {}}
         onRemoveLabel={() => {}}
@@ -90,12 +97,14 @@ describe('<Label />', () => {
   });
 
   it('can cancel edition', () => {
+    const label = {
+      name: 'foo',
+      color: '#b0b',
+      isAction: true,
+    };
     const wrapper = mount(
       <Label
-        name={'foo'}
-        color={'#b0b'}
-        isActive={true}
-        annotations={Immutable.List()}
+        label={label}
         onToggleLabel={() => {}}
         onEditLabel={() => {}}
         onRemoveLabel={() => {}}
@@ -109,12 +118,14 @@ describe('<Label />', () => {
   });
 
   it('can display the deletion form', () => {
+    const label = {
+      name: 'foo',
+      color: '#b0b',
+      isAction: true,
+    };
     const wrapper = mount(
       <Label
-        name={'foo'}
-        color={'#b0b'}
-        isActive={true}
-        annotations={Immutable.List()}
+        label={label}
         onToggleLabel={() => {}}
         onEditLabel={() => {}}
         onRemoveLabel={() => {}}
@@ -132,12 +143,14 @@ describe('<Label />', () => {
   });
 
   it('can cancel deletion', () => {
+    const label = {
+      name: 'foo',
+      color: '#b0b',
+      isAction: true,
+    };
     const wrapper = mount(
       <Label
-        name={'foo'}
-        color={'#b0b'}
-        isActive={true}
-        annotations={Immutable.List()}
+        label={label}
         onToggleLabel={() => {}}
         onEditLabel={() => {}}
         onRemoveLabel={() => {}}
