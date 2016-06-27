@@ -1,10 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import Immutable from 'immutable';
 import { HotKeys } from 'react-hotkeys';
-import { Events } from '../Store';
-import { emptySelection } from '../defaults';
+import { emptySelection } from '../../defaults';
 
-const { instanceOf, object } = PropTypes;
+const { func, instanceOf } = PropTypes;
+
 
 const emptyState = {
   annotationPositionFrom: '',
@@ -30,6 +30,8 @@ class AnnotationForm extends Component {
   }
 
   componentDidMount() {
+    // TODO: fixme
+    /*
     this.context.controller.on(Events.CHANGE_CURRENT_ANNOTATION, (state) => {
       this.setState({
         annotationPositionFrom: state.annotation.positionFrom,
@@ -43,22 +45,21 @@ class AnnotationForm extends Component {
     this.context.controller.on(Events.CHANGE_SELECTION, (selection) => {
       this.onSelectionChange(selection);
     });
+    */
   }
 
   onSubmit(event) {
     event.preventDefault();
 
-    this.context.controller.dispatch('action:save-annotation', {
-      labelId: this.state.labelId,
-      annotation: {
+    this.props.onSubmit(
+      this.state.labelId,
+      {
         positionFrom: this.state.annotationPositionFrom,
         positionTo: this.state.annotationPositionTo,
         comment: this.state.annotationComment,
       },
-      annotationId: this.state.annotationId,
-    });
-
-    this.context.controller.dispatch('action:clear-selection');
+      this.state.annotationId
+    );
   }
 
   onSelectionChange(selection) {
@@ -76,16 +77,14 @@ class AnnotationForm extends Component {
     const positionFrom = event.target.value;
 
     this.setState({ annotationPositionFrom: positionFrom });
-
-    this.context.controller.dispatch('action:update-selection-from', { positionFrom });
+    this.props.updateSelectionFrom(positionFrom);
   }
 
   onPositionToChange(event) {
     const positionTo = event.target.value;
 
     this.setState({ annotationPositionTo: positionTo });
-
-    this.context.controller.dispatch('action:update-selection-to', { positionTo });
+    this.props.updateSelectionTo(positionTo);
   }
 
   onLabelChange(event) {
@@ -156,10 +155,9 @@ class AnnotationForm extends Component {
 AnnotationForm.propTypes = {
   sequence: instanceOf(Immutable.List).isRequired,
   labels: instanceOf(Immutable.List).isRequired,
-};
-
-AnnotationForm.contextTypes = {
-  controller: object.isRequired,
+  onSubmit: func.isRequired,
+  updateSelectionFrom: func.isRequired,
+  updateSelectionTo: func.isRequired,
 };
 
 export default AnnotationForm;

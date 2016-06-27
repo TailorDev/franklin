@@ -1,7 +1,7 @@
 import React from 'react';
 
-import AnnotationForm from './AnnotationForm';
-import Labels from './Labels';
+import AnnotationForm from '../AnnotationForm';
+import Labels from '../Labels';
 
 export default (props) =>
   <div className="toolbar">

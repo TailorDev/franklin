@@ -4,13 +4,14 @@ import Immutable from 'immutable';
 import { SwatchesPicker } from 'react-color';
 
 const { func, object } = PropTypes;
+
+
 const defaultLabel = {
   name: '',
   color: '#f6f6f6',
   isActive: true,
   annotations: new Immutable.List(),
 };
-
 
 class LabelForm extends Component {
   constructor(props, context) {

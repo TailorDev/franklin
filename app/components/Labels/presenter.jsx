@@ -4,47 +4,21 @@ import Immutable from 'immutable';
 import Label from './Label';
 import LabelForm from './LabelForm';
 
-const { object, instanceOf } = PropTypes;
+const { func, instanceOf } = PropTypes;
 
 
 export default class Labels extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      displayNewLabelForm: false,
-    };
+    this.state = { displayNewLabelForm: false };
 
-    this.toggleNewLabelForm = this.toggleNewLabelForm.bind(this);
-    this.onToggleLabel = this.onToggleLabel.bind(this);
-    this.onRemoveLabel = this.onRemoveLabel.bind(this);
     this.onCreateNewLabel = this.onCreateNewLabel.bind(this);
-  }
-
-  onToggleLabel(index) {
-    this.context.controller.dispatch('action:toggle-label', {
-      index,
-    });
-  }
-
-  onEditLabel(index, label) {
-    this.context.controller.dispatch('action:edit-label', {
-      index,
-      label,
-    });
-  }
-
-  onRemoveLabel(index) {
-    this.context.controller.dispatch('action:remove-label', {
-      index,
-    });
+    this.toggleNewLabelForm = this.toggleNewLabelForm.bind(this);
   }
 
   onCreateNewLabel(label) {
-    this.context.controller.dispatch('action:new-label', {
-      label,
-    });
-
+    this.props.onCreateNewLabel(label);
     this.toggleNewLabelForm();
   }
 
@@ -60,10 +34,10 @@ export default class Labels extends Component {
         {this.props.labels.map((label, index) =>
           <Label
             key={index}
-            {...label}
-            onToggleLabel={() => { this.onToggleLabel(index); }}
-            onEditLabel={(editedLabel) => { this.onEditLabel(index, editedLabel); }}
-            onRemoveLabel={() => { this.onRemoveLabel(index); }}
+            label={label}
+            onToggleLabel={() => { this.props.onToggleLabel(index); }}
+            onEditLabel={(editedLabel) => { this.props.onEditLabel(index, editedLabel); }}
+            onRemoveLabel={() => { this.props.onRemoveLabel(index); }}
           />
         )}
 
@@ -89,8 +63,8 @@ export default class Labels extends Component {
 
 Labels.propTypes = {
   labels: instanceOf(Immutable.List).isRequired,
-};
-
-Labels.contextTypes = {
-  controller: object.isRequired,
+  onToggleLabel: func.isRequired,
+  onEditLabel: func.isRequired,
+  onRemoveLabel: func.isRequired,
+  onCreateNewLabel: func.isRequired,
 };

@@ -1,5 +1,4 @@
-import React, { Component, PropTypes } from 'react';
-import { Events } from '../Store';
+import React, { Component } from 'react';
 
 
 export default class Loader extends Component {
@@ -11,6 +10,7 @@ export default class Loader extends Component {
   }
 
   componentDidMount() {
+    /*
     this.context.controller.on(Events.LOADING_START, () => {
       this.setState({ display: 'block' });
     });
@@ -18,6 +18,7 @@ export default class Loader extends Component {
     this.context.controller.on(Events.LOADING_END, () => {
       this.setState({ display: 'none' });
     });
+    */
   }
 
   render() {
@@ -31,7 +32,3 @@ export default class Loader extends Component {
     );
   }
 }
-
-Loader.contextTypes = {
-  controller: PropTypes.object.isRequired,
-};

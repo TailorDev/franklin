@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { Events } from '../Store';
 
-const { func, number, object } = PropTypes;
+const { bool, func, number, object } = PropTypes;
 
 
 class Annotation extends Component {
@@ -10,25 +9,12 @@ class Annotation extends Component {
 
     this.state = {
       segments: [], // [[x1, x2, y1, y2], [x1, x2, y1, y2], ...]
-      isSelected: false,
     };
-
-    this.handleClick = this.handleClick.bind(this);
   }
 
   componentWillMount() {
     // First rendering
     this.updateSegments(this.props);
-  }
-
-  componentDidMount() {
-    this.context.controller.on(Events.CHANGE_CURRENT_ANNOTATION, (state) => {
-      this.setState({ isSelected: this.props.annotation === state.annotation });
-    });
-
-    this.context.controller.on(Events.CHANGE_SELECTION, () => {
-      this.setState({ isSelected: false });
-    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,20 +30,13 @@ class Annotation extends Component {
     });
   }
 
-  handleClick() {
-    this.context.controller.dispatch('action:select-annotation', {
-      labelId: this.props.labelId,
-      annotation: this.props.annotation,
-    });
-  }
-
   render() {
     return (
       <g
         className={`annotation
           ${this.props.label.isActive ? null : 'inactive'}
-          ${this.state.isSelected ? 'selected' : null}`}
-        onClick={this.handleClick}
+          ${this.props.isSelected ? 'selected' : null}`}
+        onClick={this.onClick}
       >
         {this.state.segments.map((line, index) =>
           <line
@@ -80,10 +59,8 @@ Annotation.propTypes = {
   label: object.isRequired,
   labelId: number.isRequired,
   getAnnotationSegments: func.isRequired,
-};
-
-Annotation.contextTypes = {
-  controller: object.isRequired,
+  isSelected: bool.isRequired,
+  onClick: func.isRequired,
 };
 
 export default Annotation;
