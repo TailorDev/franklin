@@ -33,6 +33,7 @@ export class App extends Component {
 
   onDropAccepted(files) {
     this.props.dispatch(sequenceActions.loadFile(files[0]));
+    this.props.dispatch(labelActions.loadEmpty());
     this.closeModal();
   }
 

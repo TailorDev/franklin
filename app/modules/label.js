@@ -3,6 +3,7 @@ import { defaultLabels } from '../defaults';
 
 // Actions
 const LOAD_DEFAULT = 'franklin/label/LOAD_DEFAULT';
+const LOAD_EMPTY = 'franklin/label/LOAD_EMPTY';
 const CREATE = 'franklin/label/CREATE';
 const UPDATE_AT = 'franklin/label/UPDATE_AT';
 const REMOVE_AT = 'franklin/label/REMOVE_AT';
@@ -15,6 +16,10 @@ const CLEAR_SELECTED_ANNOTATION = 'franklin/label/CLEAR_SELECTED_ANNOTATION';
 // Action Creators
 export function loadDefaultLabels() {
   return { type: LOAD_DEFAULT };
+}
+
+export function loadEmpty() {
+  return { type: LOAD_EMPTY };
 }
 
 export function create(label) {
@@ -126,6 +131,9 @@ const initialState = {
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
+    case LOAD_EMPTY:
+      return initialState;
+
     case LOAD_DEFAULT:
       return {
         labels: defaultLabels,
