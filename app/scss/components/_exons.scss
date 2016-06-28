@@ -1,0 +1,15 @@
+/*
+ * Exons components
+ */
+
+.exons {
+
+  .exon-form-wrapper {
+    padding: 1rem;
+    border-radius: $global-radius;
+
+    &:nth-child(odd) {
+      background-color: rgba($secondary-color, 0.2);
+    }
+  }
+}

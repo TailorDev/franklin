@@ -4,6 +4,7 @@ import Immutable from 'immutable';
 import AnnotationForm from '../AnnotationForm';
 import Labels from '../Labels';
 import Search from '../Search';
+import ExonForms from '../Exons';
 
 const Toolbar = (props) => (
   <div className="toolbar">
@@ -15,6 +16,11 @@ const Toolbar = (props) => (
     <Search
       ntSequence={props.ntSequence}
     />
+
+    <div className="exon-panel">
+      <h4>Exons</h4>
+      <ExonForms {...props} />
+    </div>
 
     <div className="annotation-panel">
       <h4>Annotation</h4>
