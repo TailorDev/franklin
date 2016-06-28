@@ -1,7 +1,7 @@
 // State
 const initialState = {
-  from: undefined,
-  to: undefined,
+  // TODO: add Immutable.List()
+  selections: [], // { from: ..., to: ... }
 };
 
 // Actions
@@ -28,7 +28,7 @@ export function updateSelectionTo(positionTo) {
 }
 
 function calculateSelection(from, to) {
-  if (from < to) {
+  if (from < to || undefined === from || undefined === to) {
     return { from, to };
   }
 
@@ -37,13 +37,19 @@ function calculateSelection(from, to) {
 
 function doUpdate(state, action) {
   const selected = action.selected;
+  const from = state.selections[0] ? state.selections[0].from : undefined;
+  const to = state.selections[0] ? state.selections[0].to : undefined;
 
-  if (selected === state.from || selected === state.to) {
+  if (selected === from || selected === to) {
     return initialState;
-  } else if ((undefined === state.from) || (state.from && state.to)) {
-    return { from: selected, to: undefined };
-  } else if (undefined === state.to) {
-    return calculateSelection(selected, state.from);
+  } else if ((undefined === from) || (from && to)) {
+    return {
+      selections: [{ from: selected, to: undefined }],
+    };
+  } else if (undefined === to) {
+    return {
+      selections: [calculateSelection(selected, from)],
+    };
   }
 
   return state;
@@ -56,8 +62,11 @@ function doUpdate(state, action) {
  */
 function doUpdateSelectionFrom(state, action) {
   const positionFrom = action.positionFrom;
+  const to = state.selections[0] ? state.selections[0].to : undefined;
 
-  return { from: positionFrom - 1, to: state.to };
+  return {
+    selections: [calculateSelection(positionFrom - 1, to)],
+  };
 }
 
 /**
@@ -67,8 +76,11 @@ function doUpdateSelectionFrom(state, action) {
  */
 function doUpdateSelectionTo(state, action) {
   const positionTo = action.positionTo;
+  const from = state.selections[0] ? state.selections[0].from : undefined;
 
-  return { from: state.from, to: positionTo - 1 };
+  return {
+    selections: [calculateSelection(from, positionTo - 1)],
+  };
 }
 
 // Reducer

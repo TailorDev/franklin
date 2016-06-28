@@ -16,17 +16,17 @@ describe('modules/sequence', () => {
   it('should return the initial state', () => {
     const state = reducer(undefined, {});
 
-    expect(state.sequence).to.be.defined;
-    expect(state.positionFrom).to.be.defined;
-    expect(state.loading).to.be.defined;
+    expect(state.sequence).not.to.be.undefined;
+    expect(state.positionFrom).not.to.be.undefined;
+    expect(state.loading).not.to.be.undefined;
   });
 
   it('handles LOAD_DEFAULT', () => {
     const state = reducer(undefined, actions.loadDefaultSequence());
 
-    expect(state.sequence).to.be.defined;
-    expect(state.positionFrom).to.be.defined;
-    expect(state.loading).to.be.defined;
+    expect(state.sequence).not.to.be.undefined;
+    expect(state.positionFrom).not.to.be.undefined;
+    expect(state.loading).not.to.be.undefined;
 
     expect(state.sequence).to.equal(defaultSequence);
     expect(state.loading).to.be.false;

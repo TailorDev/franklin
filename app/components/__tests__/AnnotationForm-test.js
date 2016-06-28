@@ -30,7 +30,7 @@ describe('<AnnotationForm />', () => {
   });
 
   it('updates annotation form with selection', () => {
-    const selection = {from: 2, to: 4};
+    const selection = { selections: [{from: 2, to: 4}] };
     const wrapper = mount(
       <AnnotationForm
         sequence={sequence}
@@ -49,7 +49,7 @@ describe('<AnnotationForm />', () => {
   });
 
   it('updates annotation form with partial selection', () => {
-    const selection = {from: 2, to: undefined};
+    const selection = { selections: [{from: 2, to: undefined}] };
     const wrapper = mount(
       <AnnotationForm
         sequence={sequence}
@@ -68,7 +68,6 @@ describe('<AnnotationForm />', () => {
   });
 
   it('does not show remove button if no annotation is under edition', () => {
-    const selection = {from: undefined, to: undefined};
     const wrapper = mount(
       <AnnotationForm
         sequence={sequence}
@@ -83,8 +82,44 @@ describe('<AnnotationForm />', () => {
     expect(wrapper.find('.remove')).to.have.length(0);
   });
 
+  it('enables position fields if at most one selection', () => {
+    const selection = { selections: [{ from: 1, to: 2 }] };
+    const wrapper = mount(
+      <AnnotationForm
+        sequence={sequence}
+        labels={defaultLabels}
+        onSubmit={() => {}}
+        onRemove={() => {}}
+        updateSelectionFrom={() => {}}
+        updateSelectionTo={() => {}}
+      />
+    );
+
+    wrapper.setProps({ selection });
+
+    expect(wrapper.state('disablePositions')).to.be.false;
+  });
+
+  it('disables position fields if more than one selection', () => {
+    const selection = { selections: [{ from: 1, to: 2}, { from: 1, to: 2 }] };
+    const wrapper = mount(
+      <AnnotationForm
+        sequence={sequence}
+        labels={defaultLabels}
+        onSubmit={() => {}}
+        onRemove={() => {}}
+        updateSelectionFrom={() => {}}
+        updateSelectionTo={() => {}}
+      />
+    );
+
+    wrapper.setProps({ selection });
+
+    expect(wrapper.state('disablePositions')).to.be.true;
+  });
+
   it('shows remove button if an annotation is under edition', () => {
-    const selection = {from: 10, to: 20};
+    const selection = { selections: [{from: 10, to: 20}] };
     const current = {
       labelId: 123,
       annotationId: 456,
@@ -115,7 +150,7 @@ describe('<AnnotationForm />', () => {
   });
 
   it('displays the Remove component on "remove" button click', () => {
-    const selection = {from: 10, to: 20};
+    const selection = { selections: [{from: 10, to: 20}] };
     const current = {
       labelId: 123,
       annotationId: 456,

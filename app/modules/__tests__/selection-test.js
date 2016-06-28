@@ -10,16 +10,16 @@ describe('modules/selection', () => {
   it('should return the initial state', () => {
     const state = reducer(undefined, {});
 
-    expect(state.from).to.be.defined;
-    expect(state.to).to.be.defined;
+    expect(state.selections).not.to.be.undefined;
+    expect(state.selections).to.be.empty;
   });
 
   describe('CLEAR', () => {
     it('assigns from/to with undefined', () => {
       const state = reducer(undefined, actions.clear());
 
-      expect(state.from).to.equal(undefined);
-      expect(state.to).to.equal(undefined);
+      expect(state.selections).not.to.be.undefined;
+      expect(state.selections).to.be.empty;
     });
   });
 
@@ -30,21 +30,21 @@ describe('modules/selection', () => {
       // not a position here, it is an index
       state = reducer(undefined, actions.update(123));
 
-      expect(state.from).to.equal(123);
-      expect(state.to).to.equal(undefined);
+      expect(state.selections[0].from).to.equal(123);
+      expect(state.selections[0].to).to.equal(undefined);
 
       state = reducer(state, actions.update(5));
-      expect(state.from).to.equal(5);
-      expect(state.to).to.equal(123);
+      expect(state.selections[0].from).to.equal(5);
+      expect(state.selections[0].to).to.equal(123);
 
       // deselect here
       state = reducer(state, actions.update(1));
-      expect(state.from).to.equal(1);
-      expect(state.to).to.equal(undefined);
+      expect(state.selections[0].from).to.equal(1);
+      expect(state.selections[0].to).to.equal(undefined);
 
       state = reducer(state, actions.update(40));
-      expect(state.from).to.equal(1);
-      expect(state.to).to.equal(40);
+      expect(state.selections[0].from).to.equal(1);
+      expect(state.selections[0].to).to.equal(40);
     });
 
     it('allows "unselection" by selecting on of the boundaries', () => {
@@ -54,13 +54,12 @@ describe('modules/selection', () => {
       state = reducer(undefined, actions.update(1));
       state = reducer(state, actions.update(10));
 
-      expect(state.from).to.equal(1);
-      expect(state.to).to.equal(10);
+      expect(state.selections[0].from).to.equal(1);
+      expect(state.selections[0].to).to.equal(10);
 
       state = reducer(state, actions.update(10));
 
-      expect(state.from).to.equal(undefined);
-      expect(state.to).to.equal(undefined);
+      expect(state.selections).to.be.empty;
     });
   });
 
@@ -70,11 +69,11 @@ describe('modules/selection', () => {
 
       state = reducer(undefined, actions.updateSelectionFrom(123));
 
-      expect(state.from).to.equal(123 - 1); // offset
-      expect(state.to).to.equal(undefined);
+      expect(state.selections[0].from).to.equal(123 - 1); // offset
+      expect(state.selections[0].to).to.equal(undefined);
 
       state = reducer(undefined, actions.updateSelectionFrom(5));
-      expect(state.from).to.equal(5 - 1); // offset
+      expect(state.selections[0].from).to.equal(5 - 1); // offset
     });
   });
 
@@ -84,11 +83,11 @@ describe('modules/selection', () => {
 
       state = reducer(undefined, actions.updateSelectionTo(123));
 
-      expect(state.from).to.equal(undefined);
-      expect(state.to).to.equal(123 - 1); // offset
+      expect(state.selections[0].from).to.equal(undefined);
+      expect(state.selections[0].to).to.equal(123 - 1); // offset
 
       state = reducer(undefined, actions.updateSelectionTo(5));
-      expect(state.to).to.equal(5 - 1); // offset
+      expect(state.selections[0].to).to.equal(5 - 1); // offset
     });
   });
 });

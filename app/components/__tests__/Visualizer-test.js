@@ -19,7 +19,7 @@ describe('<Visualizer />', () => {
   const mockStore = configureStore();
   const initialState = {
     label: { annotation: '' },
-    selection: { from: undefined, to: undefined },
+    selection: { selections: [] },
   };
 
   it('renders a SVG element with appropriate dimensions', () => {

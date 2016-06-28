@@ -15,6 +15,7 @@ const emptyState = {
   annotationId: null,
   // UI state
   displayRemoveForm: false,
+  disablePositions: false,
 };
 
 class AnnotationForm extends Component {
@@ -42,20 +43,28 @@ class AnnotationForm extends Component {
       });
     }
 
-    const selection = nextProps.selection;
+    const selections = nextProps.selection.selections;
 
-    if (undefined === selection.from && undefined === selection.to) {
+    if (0 === selections.length) {
       this.reset();
+    } else if (1 === selections.length) {
+      const selection = selections[0];
 
-      return;
-    }
+      if (undefined !== selection.from) {
+        this.setState({
+          disablePositions: false,
+          positionFrom: selection.from + 1,
+        });
+      }
 
-    if (undefined !== selection.from) {
-      this.setState({ positionFrom: selection.from + 1 });
-    }
-
-    if (undefined !== selection.to) {
-      this.setState({ positionTo: selection.to + 1 });
+      if (undefined !== selection.to) {
+        this.setState({
+          disablePositions: false,
+          positionTo: selection.to + 1,
+        });
+      }
+    } else {
+      this.setState({ disablePositions: true });
     }
   }
 
@@ -126,12 +135,14 @@ class AnnotationForm extends Component {
               value={this.state.positionFrom}
               placeholder="From"
               onChange={this.onPositionFromChange}
+              disabled={this.state.disablePositions}
             />
             <input
               type="number"
               value={this.state.positionTo}
               placeholder="To"
               onChange={this.onPositionToChange}
+              disabled={this.state.disablePositions}
             />
             <select
               onChange={this.onLabelChange}

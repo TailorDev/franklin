@@ -11,16 +11,16 @@ describe('modules/label', () => {
   it('should return the initial state', () => {
     const state = reducer(undefined, {});
 
-    expect(state.labels).to.be.defined;
-    expect(state.selectedAnnotation).to.be.defined;
+    expect(state.labels).not.to.be.undefined;
+    expect(state.selectedAnnotation).not.to.be.undefined;
     expect(state.labels.size).to.be.empty;
   });
 
   it('should handle LOAD_DEFAULT', () => {
     const state = reducer(undefined, actions.loadDefaultLabels());
 
-    expect(state.labels).to.be.defined;
-    expect(state.selectedAnnotation).to.be.defined;
+    expect(state.labels).not.to.be.undefined;
+    expect(state.selectedAnnotation).not.to.be.undefined;
     expect(state.labels.size).to.equal(3);
   });
 
@@ -32,8 +32,8 @@ describe('modules/label', () => {
       annotations: Immutable.List(),
     }));
 
-    expect(state.labels).to.be.defined;
-    expect(state.selectedAnnotation).to.be.defined;
+    expect(state.labels).not.to.be.undefined;
+    expect(state.selectedAnnotation).not.to.be.undefined;
     expect(state.labels.size).to.equal(1);
     expect(state.labels.get(0).name).to.equal('Will');
   });
@@ -52,8 +52,8 @@ describe('modules/label', () => {
       annotations: Immutable.List(),
     }));
 
-    expect(state.labels).to.be.defined;
-    expect(state.selectedAnnotation).to.be.defined;
+    expect(state.labels).not.to.be.undefined;
+    expect(state.selectedAnnotation).not.to.be.undefined;
     expect(state.labels.size).to.equal(1);
     expect(state.labels.get(0).name).to.equal('Jul');
   });
@@ -67,8 +67,8 @@ describe('modules/label', () => {
     }));
     const state = reducer(previousState, actions.removeAt(0));
 
-    expect(state.labels).to.be.defined;
-    expect(state.selectedAnnotation).to.be.defined;
+    expect(state.labels).not.to.be.undefined;
+    expect(state.selectedAnnotation).not.to.be.undefined;
     expect(state.labels.size).to.be.empty;
   });
 
@@ -83,8 +83,8 @@ describe('modules/label', () => {
     }));
     state = reducer(state, actions.toggleAt(0));
 
-    expect(state.labels).to.be.defined;
-    expect(state.selectedAnnotation).to.be.defined;
+    expect(state.labels).not.to.be.undefined;
+    expect(state.selectedAnnotation).not.to.be.undefined;
     expect(state.labels.size).to.equal(1);
     expect(state.labels.get(0).isActive).to.be.false;
 
