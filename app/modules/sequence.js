@@ -51,14 +51,15 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD_DEFAULT:
       return {
         sequence: defaultSequence,
-        positionFrom: state.positionFrom,
+        positionFrom: 1,
         loading: false,
       };
 
     case SEQUENCE_LOADED:
       return {
         sequence: action.sequence,
-        positionFrom: state.positionFrom,
+        // TODO: allow user input for from/to positions (at least from)
+        positionFrom: 1,
         loading: false,
       };
 
