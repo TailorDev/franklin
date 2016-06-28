@@ -10,6 +10,7 @@ const TOGGLE_AT = 'franklin/label/TOGGLE_AT';
 const CREATE_ANNOTATION = 'franklin/label/CREATE_ANNOTATION';
 const UPDATE_ANNOTATION = 'franklin/label/UPDATE_ANNOTATION';
 const SELECT_ANNOTATION = 'franklin/label/SELECT_ANNOTATION';
+const CLEAR_SELECTED_ANNOTATION = 'franklin/label/CLEAR_SELECTED_ANNOTATION';
 
 // Action Creators
 export function loadDefaultLabels() {
@@ -42,6 +43,10 @@ export function updateAnnotation(labelId, annotationId, annotation) {
 
 export function selectAnnotation(labelId, annotation) {
   return { type: SELECT_ANNOTATION, labelId, annotation };
+}
+
+export function clearSelectedAnnotation() {
+  return { type: CLEAR_SELECTED_ANNOTATION };
 }
 
 function doCreateAnnotation(state, action) {
@@ -173,6 +178,9 @@ export default function reducer(state = initialState, action = {}) {
 
     case SELECT_ANNOTATION:
       return doSelectAnnotation(state, action);
+
+    case CLEAR_SELECTED_ANNOTATION:
+      return Object.assign({}, state, { selectedAnnotation: null });
 
     default: return state;
   }

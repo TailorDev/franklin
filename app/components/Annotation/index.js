@@ -1,19 +1,26 @@
 import { connect } from 'react-redux';
 import * as actions from '../../modules/label';
+import { clear as clearSelection } from '../../modules/selection';
 import Annotation from './presenter';
 
 function mapStateToProps(state, ownProps) {
   const label = state.label;
 
+  let isSelected = false;
+  if (label.selectedAnnotation && ownProps.annotation) {
+    isSelected = ownProps.annotation === label.selectedAnnotation.annotation;
+  }
+
   return {
-    isSelected: ownProps.annotation === label.annotation,
+    isSelected,
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
   return {
-    onClick: (labelId, annotation) => {
-      dispatch(actions.selectAnnotation(labelId, annotation));
+    onClick: () => {
+      dispatch(clearSelection());
+      dispatch(actions.selectAnnotation(ownProps.labelId, ownProps.annotation));
     },
   };
 }

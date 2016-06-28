@@ -36,7 +36,7 @@ class Annotation extends Component {
         className={`annotation
           ${this.props.label.isActive ? null : 'inactive'}
           ${this.props.isSelected ? 'selected' : null}`}
-        onClick={this.onClick}
+        onClick={this.props.onClick}
       >
         {this.state.segments.map((line, index) =>
           <line

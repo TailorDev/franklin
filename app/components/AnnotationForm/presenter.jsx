@@ -30,20 +30,27 @@ class AnnotationForm extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.current && null !== nextProps.current) {
-      this.setState(nextProps.current);
+      this.setState({
+        labelId: nextProps.current.labelId,
+        annotationId: nextProps.current.annotationId,
+        positionFrom: nextProps.current.annotation.positionFrom,
+        positionTo: nextProps.current.annotation.positionTo,
+        comment: nextProps.current.annotation.comment,
+      });
+
+      return;
     }
 
     const selection = nextProps.selection;
 
-    if ((undefined === selection.from && undefined === selection.to)
-      || null !== this.state.annotationid) {
+    if (undefined === selection.from && undefined === selection.to) {
       this.reset();
+    } else {
+      this.setState(Object.assign({}, emptyState, {
+        positionFrom: selection.from !== undefined ? selection.from + 1 : '',
+        positionTo: selection.to !== undefined ? selection.to + 1 : '',
+      }));
     }
-
-    this.setState({
-      positionFrom: selection.from !== undefined ? selection.from + 1 : '',
-      positionTo: selection.to !== undefined ? selection.to + 1 : '',
-    });
   }
 
   onSubmit(event) {

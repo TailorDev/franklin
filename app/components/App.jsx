@@ -12,6 +12,7 @@ import Loader from './Loader';
 
 import * as sequenceActions from '../modules/sequence';
 import * as selectionActions from '../modules/selection';
+import * as labelActions from '../modules/label';
 import { loadDefault } from '../modules/franklin';
 
 
@@ -46,7 +47,10 @@ export class App extends Component {
 
   render() {
     const keyHandlers = {
-      clearSelection: () => this.props.dispatch(selectionActions.clear()),
+      clearSelection: () => {
+        this.props.dispatch(selectionActions.clear());
+        this.props.dispatch(labelActions.clearSelectedAnnotation());
+      },
     };
 
     return (
