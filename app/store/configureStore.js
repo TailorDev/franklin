@@ -1,14 +1,17 @@
+/* eslint global-require: 0 */
 import { createStore, applyMiddleware } from 'redux';
-import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 import rootReducer from '../modules/reducer';
 
-const logger = createLogger();
+const middlewares = [thunk];
 
-const createStoreWithMiddleware = applyMiddleware(
-  thunk,
-  logger
-)(createStore);
+if ('development' === process.env.NODE_ENV) {
+  const createLogger = require('redux-logger');
+  const logger = createLogger();
+  middlewares.push(logger);
+}
+
+const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
 
 export default function configureStore(initialState) {
   return createStoreWithMiddleware(rootReducer, initialState);
