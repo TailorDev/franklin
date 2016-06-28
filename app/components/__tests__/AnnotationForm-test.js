@@ -39,7 +39,7 @@ describe('<AnnotationForm />', () => {
       />
     );
 
-    wrapper.instance().onSelectionChange(selection);
+    wrapper.setProps({ selection });
 
     expect(wrapper.find('input[type="number"][value=3]')).to.have.length(1);
     expect(wrapper.find('input[type="number"][value=5]')).to.have.length(1);
@@ -57,7 +57,7 @@ describe('<AnnotationForm />', () => {
       />
     );
 
-    wrapper.instance().onSelectionChange(selection);
+    wrapper.setProps({ selection });
 
     expect(wrapper.find('input[type="number"][value=3]')).to.have.length(1);
     expect(wrapper.find({placeholder:"To", type:"number", value:''})).to.have.length(1);

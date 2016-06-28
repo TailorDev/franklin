@@ -58,7 +58,7 @@ function doCreateAnnotation(state, action) {
         annotations: v.annotations.push(action.annotation),
       }
     )),
-    current: null,
+    selectedAnnotation: null,
   };
 }
 
@@ -84,7 +84,7 @@ function doUpdateAnnotation(state, action) {
         annotations: v.annotations.update(annotationId, () => annotation),
       }
     )),
-    current: null,
+    selectedAnnotation: null,
   };
 }
 
@@ -105,7 +105,7 @@ function doSelectAnnotation(state, action) {
   }
 
   return Object.assign({}, state, {
-    current: {
+    selectedAnnotation: {
       labelId,
       annotationId,
       annotation,
@@ -116,7 +116,7 @@ function doSelectAnnotation(state, action) {
 // Reducer
 const initialState = {
   labels: new Immutable.List(),
-  current: null,
+  selectedAnnotation: null,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -124,13 +124,13 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD_DEFAULT:
       return {
         labels: defaultLabels,
-        current: null,
+        selectedAnnotation: null,
       };
 
     case CREATE:
       return {
         labels: state.labels.push(action.label),
-        current: null,
+        selectedAnnotation: null,
       };
 
     case UPDATE_AT:
@@ -143,13 +143,13 @@ export default function reducer(state = initialState, action = {}) {
             annotations: action.label.annotations,
           }
         )),
-        current: null,
+        selectedAnnotation: null,
       };
 
     case REMOVE_AT:
       return {
         labels: state.labels.splice(action.index, 1),
-        current: null,
+        selectedAnnotation: null,
       };
 
     case TOGGLE_AT:
@@ -162,7 +162,7 @@ export default function reducer(state = initialState, action = {}) {
             annotations: label.annotations,
           }
         )),
-        current: null,
+        selectedAnnotation: null,
       };
 
     case CREATE_ANNOTATION:

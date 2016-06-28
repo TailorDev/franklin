@@ -10,10 +10,13 @@ import AnnotationForm from './presenter';
 function mapStateToProps(state) {
   const sequence = state.sequence;
   const label = state.label;
+  const selection = state.selection;
 
   return {
     sequence: sequence.sequence,
     labels: label.labels,
+    current: label.selectedAnnotation,
+    selection,
   };
 }
 

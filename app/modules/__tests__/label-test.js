@@ -12,7 +12,7 @@ describe('modules/label', () => {
     const state = reducer(undefined, {});
 
     expect(state.labels).to.be.defined;
-    expect(state.current).to.be.defined;
+    expect(state.selectedAnnotation).to.be.defined;
     expect(state.labels.size).to.be.empty;
   });
 
@@ -20,7 +20,7 @@ describe('modules/label', () => {
     const state = reducer(undefined, actions.loadDefaultLabels());
 
     expect(state.labels).to.be.defined;
-    expect(state.current).to.be.defined;
+    expect(state.selectedAnnotation).to.be.defined;
     expect(state.labels.size).to.equal(3);
   });
 
@@ -33,7 +33,7 @@ describe('modules/label', () => {
     }));
 
     expect(state.labels).to.be.defined;
-    expect(state.current).to.be.defined;
+    expect(state.selectedAnnotation).to.be.defined;
     expect(state.labels.size).to.equal(1);
     expect(state.labels.get(0).name).to.equal('Will');
   });
@@ -53,7 +53,7 @@ describe('modules/label', () => {
     }));
 
     expect(state.labels).to.be.defined;
-    expect(state.current).to.be.defined;
+    expect(state.selectedAnnotation).to.be.defined;
     expect(state.labels.size).to.equal(1);
     expect(state.labels.get(0).name).to.equal('Jul');
   });
@@ -68,7 +68,7 @@ describe('modules/label', () => {
     const state = reducer(previousState, actions.removeAt(0));
 
     expect(state.labels).to.be.defined;
-    expect(state.current).to.be.defined;
+    expect(state.selectedAnnotation).to.be.defined;
     expect(state.labels.size).to.be.empty;
   });
 
@@ -84,7 +84,7 @@ describe('modules/label', () => {
     state = reducer(state, actions.toggleAt(0));
 
     expect(state.labels).to.be.defined;
-    expect(state.current).to.be.defined;
+    expect(state.selectedAnnotation).to.be.defined;
     expect(state.labels.size).to.equal(1);
     expect(state.labels.get(0).isActive).to.be.false;
 
@@ -149,7 +149,7 @@ describe('modules/label', () => {
 
       state = reducer(undefined, actions.selectAnnotation(labelId, annotation));
       expect(state.labels.size).to.be.empty;
-      expect(state.current).to.be.null;
+      expect(state.selectedAnnotation).to.be.null;
     });
 
     it('does not do anything if annotation does not exist', () => {
@@ -173,10 +173,10 @@ describe('modules/label', () => {
       const s = reducer(state, actions.selectAnnotation(labelId, annotation));
       expect(s.labels.get(0).annotations.size).to.be.empty;
       expect(s).to.equal(state); // ensure they are exactly the same
-      expect(s.current).to.be.null;
+      expect(s.selectedAnnotation).to.be.null;
     });
 
-    it('returns a current selected annotation', () => {
+    it('returns a selectedAnnotation selected annotation', () => {
       const labelId = 0;
       const annotation = defaultLabels.get(labelId).annotations.first();
 
@@ -184,8 +184,8 @@ describe('modules/label', () => {
       const state = reducer(initialState, actions.selectAnnotation(
         labelId, annotation
       ));
-      expect(state.current).not.to.be.null;
-      expect(state.current.annotation).to.be.equal(annotation);
+      expect(state.selectedAnnotation).not.to.be.null;
+      expect(state.selectedAnnotation.annotation).to.be.equal(annotation);
     });
   });
 
