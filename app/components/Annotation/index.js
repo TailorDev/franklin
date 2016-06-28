@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import * as actions from '../../modules/label';
-import { clear as clearSelection } from '../../modules/selection';
+import { updateSelectionFrom, updateSelectionTo } from '../../modules/selection';
 import Annotation from './presenter';
 
 function mapStateToProps(state, ownProps) {
@@ -19,8 +19,9 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     onClick: () => {
-      dispatch(clearSelection());
       dispatch(actions.selectAnnotation(ownProps.labelId, ownProps.annotation));
+      dispatch(updateSelectionFrom(ownProps.annotation.positionFrom));
+      dispatch(updateSelectionTo(ownProps.annotation.positionTo));
     },
   };
 }

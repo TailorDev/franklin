@@ -33,23 +33,24 @@ class AnnotationForm extends Component {
       this.setState({
         labelId: nextProps.current.labelId,
         annotationId: nextProps.current.annotationId,
-        positionFrom: nextProps.current.annotation.positionFrom,
-        positionTo: nextProps.current.annotation.positionTo,
         comment: nextProps.current.annotation.comment,
       });
-
-      return;
     }
 
     const selection = nextProps.selection;
 
     if (undefined === selection.from && undefined === selection.to) {
       this.reset();
-    } else {
-      this.setState(Object.assign({}, emptyState, {
-        positionFrom: selection.from !== undefined ? selection.from + 1 : '',
-        positionTo: selection.to !== undefined ? selection.to + 1 : '',
-      }));
+
+      return;
+    }
+
+    if (undefined !== selection.from) {
+      this.setState({ positionFrom: selection.from + 1 });
+    }
+
+    if (undefined !== selection.to) {
+      this.setState({ positionTo: selection.to + 1 });
     }
   }
 
