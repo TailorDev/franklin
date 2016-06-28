@@ -1,6 +1,7 @@
 import Immutable from 'immutable';
 import { defaultSequence } from '../defaults';
 import Fasta from '../utils/fasta';
+import { Nt } from '../utils/ntseq';
 
 // Actions
 const LOAD_DEFAULT = 'franklin/sequence/LOAD_DEFAULT';
@@ -12,8 +13,8 @@ export function loadDefaultSequence() {
   return { type: LOAD_DEFAULT };
 }
 
-export function setSequence(sequence, name) {
-  return { type: SEQUENCE_LOADED, sequence, name };
+export function setSequence(name, sequence, ntSequence) {
+  return { type: SEQUENCE_LOADED, name, sequence, ntSequence };
 }
 
 export function loadFile(file) {
@@ -22,9 +23,9 @@ export function loadFile(file) {
 
     const reader = new FileReader();
     reader.onload = (event) => {
-      const { header, sequence } = Fasta.parseString(event.target.result);
+      const { header, sequence, ntSequence } = Fasta.parseString(event.target.result);
 
-      dispatch(setSequence(sequence, header));
+      dispatch(setSequence(header, sequence, ntSequence));
     };
 
     reader.readAsText(file);
@@ -37,6 +38,7 @@ const initialState = {
   positionFrom: 0,
   loading: false,
   name: '',
+  ntSequence: null,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -50,6 +52,7 @@ export default function reducer(state = initialState, action = {}) {
         sequence: defaultSequence,
         positionFrom: 1,
         loading: false,
+        ntSequence: (new Nt.Seq()).read(defaultSequence.join('')),
       };
 
     case SEQUENCE_LOADED:
@@ -59,6 +62,7 @@ export default function reducer(state = initialState, action = {}) {
         // TODO: allow user input for from/to positions (at least from)
         positionFrom: 1,
         loading: false,
+        ntSequence: action.ntSequence,
       };
 
     default: return state;

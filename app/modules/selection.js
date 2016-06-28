@@ -9,6 +9,7 @@ const CLEAR = 'franklin/selection/CLEAR';
 const UPDATE = 'franklin/selection/UPDATE';
 const UPDATE_SELECTION_FROM = 'franklin/selection/UPDATE_SELECTION_FROM';
 const UPDATE_SELECTION_TO = 'franklin/selection/UPDATE_SELECTION_TO';
+const MULTI_SELECT = 'franklin/selection/MULTI_SELECT';
 
 // Action Creators
 export function clear() {
@@ -25,6 +26,10 @@ export function updateSelectionFrom(positionFrom) {
 
 export function updateSelectionTo(positionTo) {
   return { type: UPDATE_SELECTION_TO, positionTo };
+}
+
+export function multiSelect(selections) {
+  return { type: MULTI_SELECT, selections };
 }
 
 function calculateSelection(from, to) {
@@ -97,6 +102,11 @@ export default function reducer(state = initialState, action = {}) {
 
     case UPDATE_SELECTION_TO:
       return doUpdateSelectionTo(state, action);
+
+    case MULTI_SELECT:
+      return {
+        selections: action.selections,
+      };
 
     default: return state;
   }

@@ -3,6 +3,7 @@ import Immutable from 'immutable';
 
 import AnnotationForm from '../AnnotationForm';
 import Labels from '../Labels';
+import Search from '../Search';
 
 const Toolbar = (props) => (
   <div className="toolbar">
@@ -10,6 +11,10 @@ const Toolbar = (props) => (
       <h4>Sequence</h4>
       <p>{props.name}</p>
     </div>
+
+    <Search
+      ntSequence={props.ntSequence}
+    />
 
     <div className="annotation-panel">
       <h4>Annotation</h4>
@@ -33,6 +38,7 @@ Toolbar.propTypes = {
   name: React.PropTypes.string.isRequired,
   sequence: React.PropTypes.instanceOf(Immutable.List).isRequired,
   labels: React.PropTypes.instanceOf(Immutable.List).isRequired,
+  ntSequence: React.PropTypes.object,
 };
 
 export default Toolbar;

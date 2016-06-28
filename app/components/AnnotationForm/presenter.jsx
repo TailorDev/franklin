@@ -3,7 +3,7 @@ import Immutable from 'immutable';
 import { HotKeys } from 'react-hotkeys';
 import Remove from './Remove';
 
-const { number, string, shape, func, instanceOf } = PropTypes;
+const { array, number, string, shape, func, instanceOf } = PropTypes;
 
 
 const emptyState = {
@@ -43,7 +43,7 @@ class AnnotationForm extends Component {
       });
     }
 
-    const selections = nextProps.selection.selections;
+    const selections = nextProps.selections;
 
     if (0 === selections.length) {
       this.reset();
@@ -64,24 +64,31 @@ class AnnotationForm extends Component {
         });
       }
     } else {
-      this.setState({ disablePositions: true });
+      this.setState({
+        disablePositions: true,
+        positionFrom: '',
+        positionTo: '',
+      });
     }
   }
 
   onSubmit(event) {
     event.preventDefault();
 
-    this.props.onSubmit(
-      this.state.labelId,
-      {
-        positionFrom: this.state.positionFrom,
-        positionTo: this.state.positionTo,
-        comment: this.state.comment,
-      },
-      this.state.annotationId
-    );
+    this.props.selections.forEach((s) => {
+      this.props.onSubmit(
+        this.state.labelId,
+        {
+          positionFrom: s.from,
+          positionTo: s.to,
+          comment: this.state.comment,
+        },
+        this.state.annotationId
+      );
+    });
 
     this.reset();
+    this.props.onSubmitDone();
   }
 
   onPositionFromChange(event) {
@@ -193,6 +200,7 @@ AnnotationForm.propTypes = {
   sequence: instanceOf(Immutable.List).isRequired,
   labels: instanceOf(Immutable.List).isRequired,
   onSubmit: func.isRequired,
+  onSubmitDone: func.isRequired,
   onRemove: func.isRequired,
   updateSelectionFrom: func.isRequired,
   updateSelectionTo: func.isRequired,
@@ -205,6 +213,7 @@ AnnotationForm.propTypes = {
       comment: string.isRequired,
     }),
   }),
+  selections: array.isRequired,
 };
 
 export default AnnotationForm;

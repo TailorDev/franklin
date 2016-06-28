@@ -16,7 +16,7 @@ function mapStateToProps(state) {
     sequence: sequence.sequence,
     labels: label.labels,
     current: label.selectedAnnotation,
-    selection,
+    selections: selection.selections,
   };
 }
 
@@ -28,7 +28,8 @@ function mapDispatchToProps(dispatch) {
       } else {
         dispatch(actions.createAnnotation(labelId, annotation));
       }
-
+    },
+    onSubmitDone: () => {
       dispatch(clearSelection());
     },
     updateSelectionFrom: (positionFrom) => {
