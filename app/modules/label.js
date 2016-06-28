@@ -12,6 +12,7 @@ const CREATE_ANNOTATION = 'franklin/label/CREATE_ANNOTATION';
 const UPDATE_ANNOTATION = 'franklin/label/UPDATE_ANNOTATION';
 const SELECT_ANNOTATION = 'franklin/label/SELECT_ANNOTATION';
 const CLEAR_SELECTED_ANNOTATION = 'franklin/label/CLEAR_SELECTED_ANNOTATION';
+const REMOVE_ANNOTATION = 'franklin/label/REMOVE_ANNOTATION';
 
 // Action Creators
 export function loadDefaultLabels() {
@@ -54,6 +55,10 @@ export function clearSelectedAnnotation() {
   return { type: CLEAR_SELECTED_ANNOTATION };
 }
 
+export function removeAnnotation(labelId, annotationId) {
+  return { type: REMOVE_ANNOTATION, labelId, annotationId };
+}
+
 function doCreateAnnotation(state, action) {
   if (null === action.labelId || !state.labels.has(action.labelId)) {
     return state;
@@ -92,6 +97,31 @@ function doUpdateAnnotation(state, action) {
         color: v.color,
         isActive: v.isActive,
         annotations: v.annotations.update(annotationId, () => annotation),
+      }
+    )),
+    selectedAnnotation: null,
+  };
+}
+
+function doRemoveAnnotation(state, action) {
+  const labelId = action.labelId;
+  const annotationId = action.annotationId;
+
+  if (null === labelId || !state.labels.has(labelId)) {
+    return state;
+  }
+
+  if (null === annotationId || !state.labels.get(labelId).annotations.has(annotationId)) {
+    return state;
+  }
+
+  return {
+    labels: state.labels.update(labelId, (v) => (
+      {
+        name: v.name,
+        color: v.color,
+        isActive: v.isActive,
+        annotations: v.annotations.remove(annotationId),
       }
     )),
     selectedAnnotation: null,
@@ -189,6 +219,9 @@ export default function reducer(state = initialState, action = {}) {
 
     case CLEAR_SELECTED_ANNOTATION:
       return Object.assign({}, state, { selectedAnnotation: null });
+
+    case REMOVE_ANNOTATION:
+      return doRemoveAnnotation(state, action);
 
     default: return state;
   }

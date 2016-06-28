@@ -37,6 +37,10 @@ function mapDispatchToProps(dispatch) {
     updateSelectionTo: (positionTo) => {
       dispatch(updateSelectionTo(positionTo));
     },
+    onRemove: (labelId, annotationId) => {
+      dispatch(actions.removeAnnotation(labelId, annotationId));
+      dispatch(clearSelection());
+    },
   };
 }
 

@@ -5,6 +5,7 @@ import Immutable from 'immutable';
 import sinon from 'sinon';
 
 import AnnotationForm from '../AnnotationForm/presenter';
+import Remove from '../AnnotationForm/Remove';
 import { defaultLabels } from '../../defaults';
 
 describe('<AnnotationForm />', () => {
@@ -16,6 +17,7 @@ describe('<AnnotationForm />', () => {
         sequence={sequence}
         labels={defaultLabels}
         onSubmit={() => {}}
+        onRemove={() => {}}
         updateSelectionFrom={() => {}}
         updateSelectionTo={() => {}}
       />
@@ -34,6 +36,7 @@ describe('<AnnotationForm />', () => {
         sequence={sequence}
         labels={defaultLabels}
         onSubmit={() => {}}
+        onRemove={() => {}}
         updateSelectionFrom={() => {}}
         updateSelectionTo={() => {}}
       />
@@ -52,6 +55,7 @@ describe('<AnnotationForm />', () => {
         sequence={sequence}
         labels={defaultLabels}
         onSubmit={() => {}}
+        onRemove={() => {}}
         updateSelectionFrom={() => {}}
         updateSelectionTo={() => {}}
       />
@@ -61,5 +65,88 @@ describe('<AnnotationForm />', () => {
 
     expect(wrapper.find('input[type="number"][value=3]')).to.have.length(1);
     expect(wrapper.find({placeholder:"To", type:"number", value:''})).to.have.length(1);
+  });
+
+  it('does not show remove button if no annotation is under edition', () => {
+    const selection = {from: undefined, to: undefined};
+    const wrapper = mount(
+      <AnnotationForm
+        sequence={sequence}
+        labels={defaultLabels}
+        onSubmit={() => {}}
+        onRemove={() => {}}
+        updateSelectionFrom={() => {}}
+        updateSelectionTo={() => {}}
+      />
+    );
+
+    expect(wrapper.find('.remove')).to.have.length(0);
+  });
+
+  it('shows remove button if an annotation is under edition', () => {
+    const selection = {from: 10, to: 20};
+    const current = {
+      labelId: 123,
+      annotationId: 456,
+      annotation: {
+        positionFrom: 10,
+        positionTo: 20,
+        comment: '',
+      }
+    };
+
+    const wrapper = mount(
+      <AnnotationForm
+        sequence={sequence}
+        labels={defaultLabels}
+        onSubmit={() => {}}
+        onRemove={() => {}}
+        updateSelectionFrom={() => {}}
+        updateSelectionTo={() => {}}
+      />
+    );
+
+    wrapper.setProps({
+      current,
+      selection
+    });
+
+    expect(wrapper.find('.remove')).to.have.length(1);
+  });
+
+  it('displays the Remove component on "remove" button click', () => {
+    const selection = {from: 10, to: 20};
+    const current = {
+      labelId: 123,
+      annotationId: 456,
+      annotation: {
+        positionFrom: 10,
+        positionTo: 20,
+        comment: '',
+      }
+    };
+
+    const wrapper = mount(
+      <AnnotationForm
+        sequence={sequence}
+        labels={defaultLabels}
+        onSubmit={() => {}}
+        onRemove={() => {}}
+        updateSelectionFrom={() => {}}
+        updateSelectionTo={() => {}}
+      />
+    );
+
+    wrapper.setProps({
+      current,
+      selection
+    });
+
+    expect(wrapper.find('.remove')).to.have.length(1);
+    expect(wrapper.find(Remove)).to.have.length(0);
+
+    wrapper.find('.remove').simulate('click');
+
+    expect(wrapper.find(Remove)).to.have.length(1);
   });
 });

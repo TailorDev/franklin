@@ -6,6 +6,30 @@
   input[type="submit"] {
     @include button;
   }
+
+  .remove {
+    @include button($background: $grey, $background-hover: darken($alert-color, 10%));
+    margin-left: 0.5rem;
+    color: #0a0a0a;
+  }
+
+  .action-remove {
+    display: block;
+    border: 1px solid $alert-color;
+    border-radius: $global-radius;
+    padding: 0.2rem 0.5rem;
+
+    button {
+      &.remove {
+        @include button($background: $alert-color, $background-hover: darken($alert-color, 10%));
+        margin-right: 0.5rem;
+      }
+
+      &.cancel {
+        @include button( $background: $grey, $background-hover: darken($grey, 10%), $color: $body-font-color );
+      }
+    }
+  }
 }
 
 .annotation {
