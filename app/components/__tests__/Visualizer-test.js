@@ -20,6 +20,7 @@ describe('<Visualizer />', () => {
   const initialState = {
     label: { annotation: '' },
     selection: { selections: [] },
+    exon: { exons: new Immutable.List() },
   };
 
   it('renders a SVG element with appropriate dimensions', () => {
