@@ -123,7 +123,7 @@ if (TARGET === 'dev' || !TARGET) {
       ]
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
     ]
   });
 }
