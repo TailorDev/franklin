@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import { Nt } from './ntseq';
+
 
 export default class Fasta {
   static parseString(fasta) {
@@ -17,7 +17,6 @@ export default class Fasta {
     return {
       header: h.join('\n'),
       sequence: new Immutable.List(s),
-      ntSequence: (new Nt.Seq()).read(s.join('')),
     };
   }
 }
