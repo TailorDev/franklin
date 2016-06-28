@@ -7,11 +7,24 @@
   }
 
   .type {
-    fill: $body-font-color;
+
+    text {
+      fill: $body-font-color;
+    }
 
     &.in-selection {
       text {
         fill: $primary-color;
+      }
+    }
+
+    &.in-exon {
+      rect.type-background {
+        fill: $light-yeah;
+      }
+
+      text {
+        fill: $white;
       }
     }
   }

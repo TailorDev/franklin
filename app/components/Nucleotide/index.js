@@ -11,10 +11,12 @@ export const mapStateToProps = (state, ownProps) => {
   const isInSelectionRange = (0 < selection.selections.filter(
     s => (s.from <= ownProps.index && s.to >= ownProps.index)
   ).length);
+  const isInExon = false;
 
   return {
     isSelected,
     isInSelectionRange,
+    isInExon,
   };
 };
 

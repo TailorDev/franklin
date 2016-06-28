@@ -30,6 +30,7 @@ export default class Nucleotide extends Component {
   shouldComponentUpdate(nextProps) {
     return (this.props.isSelected !== nextProps.isSelected) ||
       (this.props.isInSelectionRange !== nextProps.isInSelectionRange) ||
+      (this.props.isInExon !== nextProps.isInExon) ||
       (this.props.nucleotidesPerRow !== nextProps.nucleotidesPerRow) ||
       (this.props.rowHeight !== nextProps.rowHeight);
   }
@@ -68,7 +69,21 @@ export default class Nucleotide extends Component {
         transform={`translate(${this.state.x}, ${this.state.y})`}
         onClick={this.props.onClick}
       >
-        <g className={`type${this.props.isInSelectionRange ? ' in-selection' : ''}`}>
+        <g
+          className={
+            `type
+             ${this.props.isInSelectionRange ? ' in-selection' : ''}
+             ${this.props.isInExon ? ' in-exon' : ''}`
+          }
+        >
+          <rect
+            className="type-background"
+            x="3"
+            y="30"
+            width="14"
+            height="16"
+          />
+
           <text x="5" y="43">{this.props.type}</text>
         </g>
 
@@ -114,6 +129,7 @@ Nucleotide.propTypes = {
   index: number.isRequired,
   isSelected: bool.isRequired,
   isInSelectionRange: bool.isRequired,
+  isInExon: bool.isRequired,
   // attributes
   type: string.isRequired,
   position: number.isRequired,
