@@ -18,6 +18,6 @@ const mapStateToProps = (state) => {
     labels: label.labels,
     ntSequence,
   };
-}
+};
 
 export default connect(mapStateToProps)(Toolbar);

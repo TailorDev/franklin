@@ -5,6 +5,7 @@ import {
   updateSelectionFrom,
   updateSelectionTo,
 } from '../../modules/selection';
+import { clear as clearAll } from '../../modules/franklin';
 import AnnotationForm from './presenter';
 
 function mapStateToProps(state) {
@@ -30,7 +31,7 @@ function mapDispatchToProps(dispatch) {
       }
     },
     onSubmitDone: () => {
-      dispatch(clearSelection());
+      dispatch(clearAll());
     },
     updateSelectionFrom: (positionFrom) => {
       dispatch(updateSelectionFrom(positionFrom));

@@ -6,6 +6,7 @@ const Search = (props) => (
     <input
       type="text"
       placeholder="ATCG..."
+      value={props.value}
       onChange={props.onChange}
       disabled={null === props.ntSequence}
     />
@@ -15,6 +16,7 @@ const Search = (props) => (
 Search.propTypes = {
   onChange: PropTypes.func.isRequired,
   ntSequence: PropTypes.object,
+  value: PropTypes.string.isRequired,
 };
 
 export default Search;

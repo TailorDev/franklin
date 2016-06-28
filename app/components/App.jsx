@@ -10,10 +10,7 @@ import Toolbar from './Toolbar';
 import Footer from './Footer';
 import Loader from './Loader';
 
-import * as sequenceActions from '../modules/sequence';
-import * as selectionActions from '../modules/selection';
-import * as labelActions from '../modules/label';
-import { loadDefault } from '../modules/franklin';
+import * as actions from '../modules/franklin';
 
 
 const keyMap = {
@@ -32,13 +29,12 @@ export class App extends Component {
   }
 
   onDropAccepted(files) {
-    this.props.dispatch(sequenceActions.loadFile(files[0]));
-    this.props.dispatch(labelActions.loadEmpty());
+    this.props.dispatch(actions.loadFile(files[0]));
     this.closeModal();
   }
 
   startDemo() {
-    this.props.dispatch(loadDefault());
+    this.props.dispatch(actions.loadDefault());
     this.closeModal();
   }
 
@@ -48,10 +44,7 @@ export class App extends Component {
 
   render() {
     const keyHandlers = {
-      clearSelection: () => {
-        this.props.dispatch(selectionActions.clear());
-        this.props.dispatch(labelActions.clearSelectedAnnotation());
-      },
+      clearSelection: () => { this.props.dispatch(actions.clear()); },
     };
 
     return (
