@@ -1,45 +1,19 @@
 import React, { Component, PropTypes } from 'react';
-import { Events } from '../Store';
-import { getNucleotideCoordinates } from '../utils/positionning';
+import { getNucleotideCoordinates } from '../../utils/positionning';
 
-const { object, func, number, string } = PropTypes;
+const { bool, object, func, number, string } = PropTypes;
 
 export default class Nucleotide extends Component {
 
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      x: 0,
-      y: 0,
-      isSelected: false,
-      isInSelectionRange: false,
-    };
+    this.state = { x: 0, y: 0 };
   }
 
   componentWillMount() {
     // First rendering
     this.updateCoordinates(this.props);
-  }
-
-  componentDidMount() {
-    this.context.controller.on(Events.CHANGE_SELECTION, (selection) => {
-      const isSelected = selection.from === this.props.index || selection.to === this.props.index;
-      const isInSelectionRange = (
-        selection.from <= this.props.index &&
-        selection.to >= this.props.index
-      );
-
-      if (
-        this.state.isSelected !== isSelected ||
-        this.state.isInSelectionRange !== isInSelectionRange
-      ) {
-        this.setState({
-          isSelected,
-          isInSelectionRange,
-        });
-      }
-    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -53,9 +27,9 @@ export default class Nucleotide extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, newState) {
-    return (this.state.isSelected !== newState.isSelected) ||
-      (this.state.isInSelectionRange !== newState.isInSelectionRange) ||
+  shouldComponentUpdate(nextProps) {
+    return (this.props.isSelected !== nextProps.isSelected) ||
+      (this.props.isInSelectionRange !== nextProps.isInSelectionRange) ||
       (this.props.nucleotidesPerRow !== nextProps.nucleotidesPerRow) ||
       (this.props.rowHeight !== nextProps.rowHeight);
   }
@@ -94,11 +68,11 @@ export default class Nucleotide extends Component {
         transform={`translate(${this.state.x}, ${this.state.y})`}
         onClick={this.props.onClick}
       >
-        <g className={`type${this.state.isInSelectionRange ? ' in-selection' : ''}`}>
+        <g className={`type${this.props.isInSelectionRange ? ' in-selection' : ''}`}>
           <text x="5" y="43">{this.props.type}</text>
         </g>
 
-        <g className={`position${this.state.isSelected ? ' selected' : ''}`}>
+        <g className={`position${this.props.isSelected ? ' selected' : ''}`}>
           <rect
             className="position-background"
             x={this.getPositionBackgroundXCoordinate()}
@@ -138,13 +112,11 @@ Nucleotide.propTypes = {
   rowHeight: number.isRequired,
   nucleotideWidth: number.isRequired,
   index: number.isRequired,
+  isSelected: bool.isRequired,
+  isInSelectionRange: bool.isRequired,
   // attributes
   type: string.isRequired,
   position: number.isRequired,
   // events
   onClick: func.isRequired,
-};
-
-Nucleotide.contextTypes = {
-  controller: object.isRequired,
 };

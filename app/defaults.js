@@ -1,8 +1,6 @@
 import Immutable from 'immutable';
 
 
-export const emptySelection = { from: undefined, to: undefined };
-
 export const emptyAnnotation = {
   positionFrom: undefined,
   positionTo: undefined,

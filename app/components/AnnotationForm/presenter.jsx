@@ -1,16 +1,16 @@
 import React, { PropTypes, Component } from 'react';
 import Immutable from 'immutable';
 import { HotKeys } from 'react-hotkeys';
-import { Events } from '../Store';
-import { emptySelection } from '../defaults';
 
-const { instanceOf, object } = PropTypes;
+const { number, string, shape, func, instanceOf } = PropTypes;
+
 
 const emptyState = {
-  annotationPositionFrom: '',
-  annotationPositionTo: '',
-  annotationComment: '',
+  // form fields
   labelId: '',
+  positionFrom: '',
+  positionTo: '',
+  comment: '',
   annotationId: null,
 };
 
@@ -21,7 +21,6 @@ class AnnotationForm extends Component {
     this.state = emptyState;
 
     this.onSubmit = this.onSubmit.bind(this);
-    this.onSelectionChange = this.onSelectionChange.bind(this);
     this.onPositionFromChange = this.onPositionFromChange.bind(this);
     this.onPositionToChange = this.onPositionToChange.bind(this);
     this.onLabelChange = this.onLabelChange.bind(this);
@@ -29,63 +28,60 @@ class AnnotationForm extends Component {
     this.reset = this.reset.bind(this);
   }
 
-  componentDidMount() {
-    this.context.controller.on(Events.CHANGE_CURRENT_ANNOTATION, (state) => {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.current && null !== nextProps.current) {
       this.setState({
-        annotationPositionFrom: state.annotation.positionFrom,
-        annotationPositionTo: state.annotation.positionTo,
-        annotationComment: state.annotation.comment,
-        labelId: state.labelId,
-        annotationId: state.annotationId,
+        labelId: nextProps.current.labelId,
+        annotationId: nextProps.current.annotationId,
+        comment: nextProps.current.annotation.comment,
       });
-    });
+    }
 
-    this.context.controller.on(Events.CHANGE_SELECTION, (selection) => {
-      this.onSelectionChange(selection);
-    });
+    const selection = nextProps.selection;
+
+    if (undefined === selection.from && undefined === selection.to) {
+      this.reset();
+
+      return;
+    }
+
+    if (undefined !== selection.from) {
+      this.setState({ positionFrom: selection.from + 1 });
+    }
+
+    if (undefined !== selection.to) {
+      this.setState({ positionTo: selection.to + 1 });
+    }
   }
 
   onSubmit(event) {
     event.preventDefault();
 
-    this.context.controller.dispatch('action:save-annotation', {
-      labelId: this.state.labelId,
-      annotation: {
-        positionFrom: this.state.annotationPositionFrom,
-        positionTo: this.state.annotationPositionTo,
-        comment: this.state.annotationComment,
+    this.props.onSubmit(
+      this.state.labelId,
+      {
+        positionFrom: this.state.positionFrom,
+        positionTo: this.state.positionTo,
+        comment: this.state.comment,
       },
-      annotationId: this.state.annotationId,
-    });
+      this.state.annotationId
+    );
 
-    this.context.controller.dispatch('action:clear-selection');
-  }
-
-  onSelectionChange(selection) {
-    if (selection === emptySelection || null !== this.state.annotationId) {
-      this.reset();
-    }
-
-    this.setState({
-      annotationPositionFrom: selection.from !== undefined ? selection.from + 1 : '',
-      annotationPositionTo: selection.to !== undefined ? selection.to + 1 : '',
-    });
+    this.reset();
   }
 
   onPositionFromChange(event) {
     const positionFrom = event.target.value;
 
-    this.setState({ annotationPositionFrom: positionFrom });
-
-    this.context.controller.dispatch('action:update-selection-from', { positionFrom });
+    this.setState({ positionFrom });
+    this.props.updateSelectionFrom(positionFrom);
   }
 
   onPositionToChange(event) {
     const positionTo = event.target.value;
 
-    this.setState({ annotationPositionTo: positionTo });
-
-    this.context.controller.dispatch('action:update-selection-to', { positionTo });
+    this.setState({ positionTo });
+    this.props.updateSelectionTo(positionTo);
   }
 
   onLabelChange(event) {
@@ -93,7 +89,7 @@ class AnnotationForm extends Component {
   }
 
   onCommentChange(event) {
-    this.setState({ annotationComment: event.target.value });
+    this.setState({ comment: event.target.value });
   }
 
   reset() {
@@ -111,13 +107,13 @@ class AnnotationForm extends Component {
           <form onSubmit={this.onSubmit}>
             <input
               type="number"
-              value={this.state.annotationPositionFrom}
+              value={this.state.positionFrom}
               placeholder="From"
               onChange={this.onPositionFromChange}
             />
             <input
               type="number"
-              value={this.state.annotationPositionTo}
+              value={this.state.positionTo}
               placeholder="To"
               onChange={this.onPositionToChange}
             />
@@ -139,7 +135,7 @@ class AnnotationForm extends Component {
             </select>
             <textarea
               placeholder="Type a comment here"
-              value={this.state.annotationComment}
+              value={this.state.comment}
               onChange={this.onCommentChange}
             />
             <input
@@ -156,10 +152,18 @@ class AnnotationForm extends Component {
 AnnotationForm.propTypes = {
   sequence: instanceOf(Immutable.List).isRequired,
   labels: instanceOf(Immutable.List).isRequired,
-};
-
-AnnotationForm.contextTypes = {
-  controller: object.isRequired,
+  onSubmit: func.isRequired,
+  updateSelectionFrom: func.isRequired,
+  updateSelectionTo: func.isRequired,
+  current: shape({
+    labelId: number.isRequired,
+    annotationId: number.isRequired,
+    annotation: shape({
+      positionFrom: number.isRequired,
+      positionTo: number.isRequired,
+      comment: string.isRequired,
+    }),
+  }),
 };
 
 export default AnnotationForm;

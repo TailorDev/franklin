@@ -6,7 +6,7 @@ import sinon from 'sinon';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-import LabelTools from '../LabelTools';
+import LabelTools from '../Labels/LabelTools';
 
 
 describe('<LabelTools />', () => {

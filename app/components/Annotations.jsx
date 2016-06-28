@@ -17,6 +17,7 @@ const Annotations = (props) =>
             label={label}
             labelId={labelIndex}
             annotation={annotation}
+            isSelected={false}
             getAnnotationSegments={(indexFrom, indexTo) => getAnnotationSegments(
               indexFrom,
               indexTo,

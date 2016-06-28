@@ -5,19 +5,9 @@ import { expect } from 'chai';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-import Nucleotide from '../Nucleotide';
+import Nucleotide from '../Nucleotide/presenter';
 
 describe('<Nucleotide />', () => {
-
-  let context;
-
-  before(() => {
-    context = {
-      controller: {
-        on: () => {}
-      }
-    };
-  });
 
   it('renders a Nucleotide as needed', () => {
     const wrapper = mount(
@@ -30,8 +20,9 @@ describe('<Nucleotide />', () => {
         type="A"
         position={1}
         onClick={() => {}}
-      />,
-      { context }
+        isSelected={false}
+        isInSelectionRange={false}
+      />
     );
 
     const instance = wrapper.instance();
@@ -40,8 +31,8 @@ describe('<Nucleotide />', () => {
     expect(instance.state.y).to.equal(10);
     expect(instance.props.type).to.equal("A");
     expect(instance.props.position).to.equal(1);
-    expect(instance.state.isSelected).to.be.false;
-    expect(instance.state.isInSelectionRange).to.be.false;
+    expect(instance.props.isSelected).to.be.false;
+    expect(instance.props.isInSelectionRange).to.be.false;
   });
 
   it('renders multiple rows when needed', () => {
@@ -55,8 +46,9 @@ describe('<Nucleotide />', () => {
         type="A"
         position={6}
         onClick={() => {}}
-      />,
-      { context }
+        isSelected={false}
+        isInSelectionRange={false}
+      />
     );
 
     const instance = wrapper.instance();
@@ -74,9 +66,10 @@ describe('<Nucleotide />', () => {
         type="A"
         position={230}
         index={229}
+        isSelected={false}
+        isInSelectionRange={false}
         onClick={() => {}}
-      />,
-      { context }
+      />
     );
     let instance = wrapper.instance();
     expect(instance.getPositionLength()).to.equal(3);
@@ -90,9 +83,10 @@ describe('<Nucleotide />', () => {
         type="A"
         position={230123}
         index={230122}
+        isSelected={false}
+        isInSelectionRange={false}
         onClick={() => {}}
-      />,
-      { context }
+      />
     );
     instance = wrapper.instance();
     expect(instance.getPositionLength()).to.equal(6);
@@ -109,8 +103,9 @@ describe('<Nucleotide />', () => {
         position={230}
         index={229}
         onClick={() => {}}
-      />,
-      { context }
+        isSelected={false}
+        isInSelectionRange={false}
+      />
     );
     let instance = wrapper.instance();
     expect(instance.getPositionBackgroundXCoordinate()).to.equal(-10);
@@ -125,8 +120,9 @@ describe('<Nucleotide />', () => {
         position={230123}
         index={230122}
         onClick={() => {}}
-      />,
-      { context }
+        isSelected={false}
+        isInSelectionRange={false}
+      />
     );
     instance = wrapper.instance();
     expect(instance.getPositionBackgroundXCoordinate()).to.equal(-25);
@@ -143,8 +139,9 @@ describe('<Nucleotide />', () => {
         position={230}
         index={229}
         onClick={() => {}}
-      />,
-      { context }
+        isSelected={false}
+        isInSelectionRange={false}
+      />
     );
     let instance = wrapper.instance();
     expect(instance.getPositionBackgroundWidth()).to.equal(40);
@@ -159,8 +156,9 @@ describe('<Nucleotide />', () => {
         position={230123}
         index={230122}
         onClick={() => {}}
-      />,
-      { context }
+        isSelected={false}
+        isInSelectionRange={false}
+      />
     );
     instance = wrapper.instance();
     expect(instance.getPositionBackgroundWidth()).to.equal(70);
@@ -177,8 +175,9 @@ describe('<Nucleotide />', () => {
         position={230}
         index={229}
         onClick={() => {}}
-      />,
-      { context }
+        isSelected={false}
+        isInSelectionRange={false}
+      />
     );
     let instance = wrapper.instance();
     expect(instance.getPositionTextXCoordinate()).to.equal(-5);
@@ -193,8 +192,9 @@ describe('<Nucleotide />', () => {
         position={230123}
         index={230122}
         onClick={() => {}}
-      />,
-      { context }
+        isSelected={false}
+        isInSelectionRange={false}
+      />
     );
     instance = wrapper.instance();
     expect(instance.getPositionTextXCoordinate()).to.equal(-20);

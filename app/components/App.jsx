@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import Dropzone from 'react-dropzone';
-import { Events } from '../Store';
 import Modal from 'react-modal';
 import { HotKeys } from 'react-hotkeys';
+import { connect } from 'react-redux';
 
 import Header from './Header';
 import Visualizer from './Visualizer';
@@ -10,63 +10,48 @@ import Toolbar from './Toolbar';
 import Footer from './Footer';
 import Loader from './Loader';
 
-const { object, string } = PropTypes;
+import * as sequenceActions from '../modules/sequence';
+import * as selectionActions from '../modules/selection';
+import * as labelActions from '../modules/label';
+import { loadDefault } from '../modules/franklin';
 
 
 const keyMap = {
   clearSelection: 'esc',
 };
 
-export default class App extends Component {
+export class App extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = Object.assign({}, {
-      displayModal: true,
-    }, props.controller.getState());
+    this.state = { displayModal: true };
 
     this.onDropAccepted = this.onDropAccepted.bind(this);
     this.startDemo = this.startDemo.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.clearSelection = this.clearSelection.bind(this);
-  }
-
-  getChildContext() {
-    // Pass the controller to child components.
-    return {
-      controller: this.props.controller,
-    };
-  }
-
-  componentDidMount() {
-    this.props.controller.on(Events.CHANGE, (state) => {
-      this.setState(Object.assign({}, {
-        displayModal: false,
-      }, state));
-    });
   }
 
   onDropAccepted(files) {
-    this.props.controller.dispatch('action:drop-file', {
-      file: files[0],
-    });
+    this.props.dispatch(sequenceActions.loadFile(files[0]));
+    this.props.dispatch(labelActions.loadEmpty());
+    this.closeModal();
   }
 
   startDemo() {
-    this.props.controller.dispatch('action:start-demo');
+    this.props.dispatch(loadDefault());
+    this.closeModal();
   }
 
   closeModal() {
     this.setState({ displayModal: false });
   }
 
-  clearSelection() {
-    this.props.controller.dispatch('action:clear-selection');
-  }
-
   render() {
     const keyHandlers = {
-      clearSelection: this.clearSelection,
+      clearSelection: () => {
+        this.props.dispatch(selectionActions.clear());
+        this.props.dispatch(labelActions.clearSelectedAnnotation());
+      },
     };
 
     return (
@@ -117,16 +102,9 @@ export default class App extends Component {
               disablePreview
               multiple={false}
             >
-              <Visualizer
-                sequence={this.state.sequence}
-                positionFrom={this.state.positionFrom}
-                labels={this.state.labels}
-              />
+              <Visualizer />
             </Dropzone>
-            <Toolbar
-              sequence={this.state.sequence}
-              labels={this.state.labels}
-            />
+            <Toolbar />
           </div>
         </HotKeys>
 
@@ -137,10 +115,8 @@ export default class App extends Component {
 }
 
 App.propTypes = {
-  version: string.isRequired,
-  controller: object.isRequired,
+  version: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-App.childContextTypes = {
-  controller: object,
-};
+export default connect()(App);

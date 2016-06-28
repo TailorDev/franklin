@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react';
-import Immutable from 'immutable';
 
-const { bool, func, instanceOf, string } = PropTypes;
+const { object, func } = PropTypes;
 
 import LabelEdit from './LabelEdit';
 import LabelRemove from './LabelRemove';
@@ -19,7 +18,6 @@ class Label extends Component {
 
     this.toggleActionRemove = this.toggleActionRemove.bind(this);
     this.toggleActionEdit = this.toggleActionEdit.bind(this);
-    this.handleToggleLabel = this.handleToggleLabel.bind(this);
     this.handleLabelEdit = this.handleLabelEdit.bind(this);
     this.handleLabelRemove = this.handleLabelRemove.bind(this);
   }
@@ -34,10 +32,6 @@ class Label extends Component {
     this.setState({
       displayEditForm: !this.state.displayEditForm,
     });
-  }
-
-  handleToggleLabel() {
-    this.props.onToggleLabel();
   }
 
   handleLabelEdit(label) {
@@ -57,19 +51,23 @@ class Label extends Component {
           `label
             ${this.state.displayRemoveForm ? 'in-action remove' : ''}
             ${this.state.displayEditForm ? 'in-action edit' : ''}
-            ${this.props.isActive ? null : 'inactive'}`
+            ${this.props.label.isActive ? null : 'inactive'}`
         }
       >
         <span
           className="label-name"
-          onClick={this.handleToggleLabel}
+          onClick={this.props.onToggleLabel}
         >
-          <i className="fa fa-tag" aria-hidden="true" style={{ color: this.props.color }}></i>
-          {this.props.name}
+          <i
+            className="fa fa-tag"
+            aria-hidden="true"
+            style={{ color: this.props.label.color }}
+          ></i>
+          {this.props.label.name}
         </span>
 
         <LabelTools
-          onActionToggleClick={this.handleToggleLabel}
+          onActionToggleClick={this.props.onToggleLabel}
           onActionEditClick={this.toggleActionEdit}
           onActionRemoveClick={this.toggleActionRemove}
         />
@@ -85,7 +83,7 @@ class Label extends Component {
           <LabelEdit
             onActionEditCancelClick={this.toggleActionEdit}
             onLabelEdit={this.handleLabelEdit}
-            label={this.props}
+            label={this.props.label}
           /> : null
         }
       </li>
@@ -94,10 +92,7 @@ class Label extends Component {
 }
 
 Label.propTypes = {
-  name: string.isRequired,
-  color: string.isRequired,
-  isActive: bool.isRequired,
-  annotations: instanceOf(Immutable.List).isRequired,
+  label: object.isRequired,
   onToggleLabel: func.isRequired,
   onEditLabel: func.isRequired,
   onRemoveLabel: func.isRequired,
