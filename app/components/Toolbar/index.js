@@ -6,6 +6,7 @@ function mapStateToProps(state) {
   const label = state.label;
 
   return {
+    name: sequence.name,
     sequence: sequence.sequence,
     labels: label.labels,
   };
