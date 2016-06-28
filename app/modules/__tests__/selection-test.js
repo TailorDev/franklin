@@ -90,4 +90,21 @@ describe('modules/selection', () => {
       expect(state.selections[0].to).to.equal(5 - 1); // offset
     });
   });
+
+  describe('MULTI_SELECT', () => {
+    it('sets a batch of selections', () => {
+      const selections = [
+        { from: 123, to: 124 },
+        { from: 1, to: 2 },
+      ];
+
+      const state = reducer(undefined, actions.multiSelect(selections));
+
+      expect(state.selections).to.have.length(2);
+      expect(state.selections[0].from).to.equal(123);
+      expect(state.selections[0].to).to.equal(124);
+      expect(state.selections[1].from).to.equal(1);
+      expect(state.selections[1].to).to.equal(2);
+    });
+  });
 });

@@ -19,6 +19,8 @@ describe('<AnnotationForm />', () => {
         onSubmit={() => {}}
         onRemove={() => {}}
         updateSelectionFrom={() => {}}
+        onSubmitDone={() => {}}
+        selections={[]}
         updateSelectionTo={() => {}}
       />
     );
@@ -38,6 +40,8 @@ describe('<AnnotationForm />', () => {
         onSubmit={() => {}}
         onRemove={() => {}}
         updateSelectionFrom={() => {}}
+        onSubmitDone={() => {}}
+        selections={[]}
         updateSelectionTo={() => {}}
       />
     );
@@ -58,6 +62,8 @@ describe('<AnnotationForm />', () => {
         onRemove={() => {}}
         updateSelectionFrom={() => {}}
         updateSelectionTo={() => {}}
+        onSubmitDone={() => {}}
+        selections={[]}
       />
     );
 
@@ -76,6 +82,8 @@ describe('<AnnotationForm />', () => {
         onRemove={() => {}}
         updateSelectionFrom={() => {}}
         updateSelectionTo={() => {}}
+        onSubmitDone={() => {}}
+        selections={[]}
       />
     );
 
@@ -92,6 +100,8 @@ describe('<AnnotationForm />', () => {
         onRemove={() => {}}
         updateSelectionFrom={() => {}}
         updateSelectionTo={() => {}}
+        onSubmitDone={() => {}}
+        selections={[]}
       />
     );
 
@@ -110,6 +120,8 @@ describe('<AnnotationForm />', () => {
         onRemove={() => {}}
         updateSelectionFrom={() => {}}
         updateSelectionTo={() => {}}
+        onSubmitDone={() => {}}
+        selections={[]}
       />
     );
 
@@ -138,6 +150,8 @@ describe('<AnnotationForm />', () => {
         onRemove={() => {}}
         updateSelectionFrom={() => {}}
         updateSelectionTo={() => {}}
+        onSubmitDone={() => {}}
+        selections={[]}
       />
     );
 
@@ -169,6 +183,8 @@ describe('<AnnotationForm />', () => {
         onRemove={() => {}}
         updateSelectionFrom={() => {}}
         updateSelectionTo={() => {}}
+        onSubmitDone={() => {}}
+        selections={[]}
       />
     );
 
@@ -183,5 +199,39 @@ describe('<AnnotationForm />', () => {
     wrapper.find('.remove').simulate('click');
 
     expect(wrapper.find(Remove)).to.have.length(1);
+  });
+
+  it('should call onSubmit N times, but onSubmitDone once', () => {
+    const selections = [
+      {from: 1, to: 2},
+      {from: 10, to: 20},
+    ];
+    const spyOnSubmit = sinon.spy();
+    const spyOnSubmitDone = sinon.spy();
+
+    const wrapper = shallow(
+      <AnnotationForm
+        sequence={sequence}
+        labels={defaultLabels}
+        onSubmit={spyOnSubmit}
+        onSubmitDone={spyOnSubmitDone}
+        selections={[]}
+        onRemove={() => {}}
+        updateSelectionFrom={() => {}}
+        updateSelectionTo={() => {}}
+      />
+    );
+
+    wrapper.setProps({
+      current: null,
+      selections
+    });
+
+    const e = { preventDefault: () => {} };
+
+    wrapper.instance().onSubmit(e);
+
+    expect(spyOnSubmit.calledTwice).to.be.true;
+    expect(spyOnSubmitDone.calledOnce).to.be.true;
   });
 });

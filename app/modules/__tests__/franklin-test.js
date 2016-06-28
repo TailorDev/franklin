@@ -23,4 +23,27 @@ describe('modules/franklin', () => {
     store.dispatch(actions.loadDefault());
     expect(store.getActions()).to.deep.equal(expectedActions);
   });
+
+  it('calls all actions needed to load a file', () => {
+    const expectedActions = [
+      { type: 'franklin/sequence/LOAD_FILE' },
+      { type: 'franklin/label/LOAD_EMPTY' },
+    ];
+    const store = mockStore({});
+
+    store.dispatch(actions.loadFile('file'));
+    expect(store.getActions()).to.deep.equal(expectedActions);
+  });
+
+  it('calls all actions needed to clear', () => {
+    const expectedActions = [
+      { type: 'franklin/selection/CLEAR' },
+      { type: 'franklin/label/CLEAR_SELECTED_ANNOTATION' },
+      { type: 'franklin/search/CLEAR' },
+    ];
+    const store = mockStore({});
+
+    store.dispatch(actions.clear());
+    expect(store.getActions()).to.deep.equal(expectedActions);
+  });
 });

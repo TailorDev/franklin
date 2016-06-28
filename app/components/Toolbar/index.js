@@ -3,7 +3,7 @@ import { Nt } from '../../utils/ntseq';
 import Toolbar from './presenter';
 
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   const sequence = state.sequence;
   const label = state.label;
 
