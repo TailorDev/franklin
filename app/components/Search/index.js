@@ -10,6 +10,7 @@ const mapStateToProps = (state) => {
 
   return {
     value: search.value,
+    matches: search.matches,
   };
 };
 
@@ -22,7 +23,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       result => 0 < result.matches && len <= result.matches
     );
 
-    dispatch(actions.search(event.target.value));
+    dispatch(actions.search(event.target.value, matches.length));
     dispatch(multiSelect(matches.map((m) => ({
       from: m.pos,
       to: m.pos + len - 1,

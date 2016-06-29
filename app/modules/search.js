@@ -2,8 +2,8 @@
 const SEARCH = 'franklin/search/SEARCH';
 const CLEAR = 'franklin/search/CLEAR';
 
-export function search(value) {
-  return { type: SEARCH, value };
+export function search(value, matches) {
+  return { type: SEARCH, value, matches };
 }
 
 export function clear() {
@@ -13,6 +13,7 @@ export function clear() {
 // Reducer
 const initialState = {
   value: '',
+  matches: 0,
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -20,6 +21,7 @@ export default function reducer(state = initialState, action = {}) {
     case SEARCH:
       return {
         value: action.value,
+        matches: action.matches,
       };
 
     case CLEAR:
