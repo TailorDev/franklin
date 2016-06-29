@@ -15,7 +15,7 @@ export const mapStateToProps = (state, ownProps) => {
   ).length);
 
   const isInExon = (0 < exon.exons.filter(
-    e => e.positionFrom <= ownProps.index && e.positionTo >= ownProps.index
+    e => e.positionFrom <= ownProps.position && e.positionTo >= ownProps.position
   ).size);
 
   return {
