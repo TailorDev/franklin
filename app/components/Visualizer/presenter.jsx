@@ -5,7 +5,7 @@ import Immutable from 'immutable';
 import Sequence from '../Sequence';
 import Annotations from '../Annotations';
 
-const { instanceOf, func, number } = PropTypes;
+const { instanceOf, func } = PropTypes;
 
 export default class Visualizer extends Component {
 
@@ -99,7 +99,6 @@ export default class Visualizer extends Component {
 
             <Sequence
               sequence={this.props.sequence}
-              positionFrom={this.props.positionFrom}
               {...this.state}
             />
           </svg>
@@ -151,6 +150,5 @@ export default class Visualizer extends Component {
 Visualizer.propTypes = {
   sequence: instanceOf(Immutable.List).isRequired,
   labels: instanceOf(Immutable.List).isRequired,
-  positionFrom: number.isRequired,
   onFileSelectClick: func.isRequired,
 };

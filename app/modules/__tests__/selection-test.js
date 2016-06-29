@@ -34,8 +34,8 @@ describe('modules/selection', () => {
       expect(state.selections[0].to).to.equal(undefined);
 
       state = reducer(state, actions.update(5));
-      expect(state.selections[0].from).to.equal(5);
-      expect(state.selections[0].to).to.equal(123);
+      expect(state.selections[0].from).to.equal(123);
+      expect(state.selections[0].to).to.equal(5);
 
       // deselect here
       state = reducer(state, actions.update(1));
@@ -69,11 +69,11 @@ describe('modules/selection', () => {
 
       state = reducer(undefined, actions.updateSelectionFrom(123));
 
-      expect(state.selections[0].from).to.equal(123 - 1); // offset
+      expect(state.selections[0].from).to.equal(123);
       expect(state.selections[0].to).to.equal(undefined);
 
       state = reducer(undefined, actions.updateSelectionFrom(5));
-      expect(state.selections[0].from).to.equal(5 - 1); // offset
+      expect(state.selections[0].from).to.equal(5);
     });
   });
 
@@ -84,10 +84,10 @@ describe('modules/selection', () => {
       state = reducer(undefined, actions.updateSelectionTo(123));
 
       expect(state.selections[0].from).to.equal(undefined);
-      expect(state.selections[0].to).to.equal(123 - 1); // offset
+      expect(state.selections[0].to).to.equal(123);
 
       state = reducer(undefined, actions.updateSelectionTo(5));
-      expect(state.selections[0].to).to.equal(5 - 1); // offset
+      expect(state.selections[0].to).to.equal(5);
     });
   });
 

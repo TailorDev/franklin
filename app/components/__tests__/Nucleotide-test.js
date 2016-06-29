@@ -240,7 +240,7 @@ describe('<Nucleotide />', () => {
       expect(props.isInSelectionRange).to.be.true;
     });
 
-    it('returns isInSelectionRange but isSelected', () => {
+    it('returns isInSelectionRange and isSelected', () => {
       const state = {
         selection: {
           selections: [{ from: 1, to: 2}],
@@ -254,7 +254,7 @@ describe('<Nucleotide />', () => {
       expect(props.isInSelectionRange).to.be.true;
     });
 
-    it('returns isInSelectionRange but isSelected', () => {
+    it('returns isInSelectionRange and isSelected with multiple selections', () => {
       const state = {
         selection: {
           selections: [{ from: 10, to: 20}],
@@ -266,6 +266,20 @@ describe('<Nucleotide />', () => {
       const props = mapStateToProps(state, ownProps);
 
       expect(props.isSelected).to.be.true;
+      expect(props.isInSelectionRange).to.be.true;
+    });
+
+    it('returns isInSelectionRange and isSelected with inverted selections', () => {
+      const state = {
+        selection: {
+          selections: [{ from: 10, to: 2}],
+        },
+        exon: { exons: new Immutable.List() },
+      };
+      const ownProps = { index: 8 };
+      const props = mapStateToProps(state, ownProps);
+
+      expect(props.isSelected).to.be.false;
       expect(props.isInSelectionRange).to.be.true;
     });
   });

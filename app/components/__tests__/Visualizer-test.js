@@ -21,6 +21,7 @@ describe('<Visualizer />', () => {
     label: { annotation: '' },
     selection: { selections: [] },
     exon: { exons: new Immutable.List() },
+    sequence: { positionFrom: 123 },
   };
 
   it('renders a SVG element with appropriate dimensions', () => {
@@ -28,7 +29,7 @@ describe('<Visualizer />', () => {
       <Visualizer
         sequence={sequence}
         labels={defaultLabels}
-        positionFrom={0}
+        onFileSelectClick={() => {}}
       />
     );
 
@@ -42,7 +43,7 @@ describe('<Visualizer />', () => {
       <Visualizer
         sequence={new Immutable.List()}
         labels={defaultLabels}
-        positionFrom={0}
+        onFileSelectClick={() => {}}
       />
     );
 
@@ -58,7 +59,7 @@ describe('<Visualizer />', () => {
         <Visualizer
           sequence={sequence}
           labels={defaultLabels}
-          positionFrom={0}
+          onFileSelectClick={() => {}}
         />
       </Provider>
     );
@@ -75,7 +76,7 @@ describe('<Visualizer />', () => {
         <Visualizer
           sequence={sequence}
           labels={defaultLabels}
-          positionFrom={0}
+          onFileSelectClick={() => {}}
         />
       </Provider>
     );
@@ -89,6 +90,7 @@ describe('<Visualizer />', () => {
     expect(window.removeEventListener.calledWith('resize', listener)).to.be.true;
   });
 
+  // SKIPPED
   it.skip('updates dimensions when receiving new props', () => {
 
     // Does not work because of:
@@ -99,7 +101,7 @@ describe('<Visualizer />', () => {
       <Visualizer
         sequence={sequence}
         labels={defaultLabels}
-        positionFrom={0}
+        onFileSelectClick={() => {}}
       />
     );
 

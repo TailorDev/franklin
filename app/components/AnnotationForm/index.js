@@ -18,6 +18,7 @@ function mapStateToProps(state) {
     labels: label.labels,
     current: label.selectedAnnotation,
     selections: selection.selections,
+    positionFrom: sequence.positionFrom,
   };
 }
 

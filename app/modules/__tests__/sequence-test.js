@@ -16,6 +16,12 @@ describe('modules/sequence', () => {
   it('should return the initial state', () => {
     const state = reducer(undefined, {});
 
+    expect(state).to.have.all.keys([
+      'sequence',
+      'positionFrom',
+      'loading',
+      'name',
+    ]);
     expect(state.sequence).not.to.be.undefined;
     expect(state.positionFrom).not.to.be.undefined;
     expect(state.loading).not.to.be.undefined;
@@ -23,6 +29,13 @@ describe('modules/sequence', () => {
 
   it('handles LOAD_DEFAULT', () => {
     const state = reducer(undefined, actions.loadDefaultSequence());
+
+    expect(state).to.have.all.keys([
+      'sequence',
+      'positionFrom',
+      'loading',
+      'name',
+    ]);
 
     expect(state.sequence).not.to.be.undefined;
     expect(state.positionFrom).not.to.be.undefined;
@@ -38,5 +51,18 @@ describe('modules/sequence', () => {
     store.dispatch(actions.loadFile('file'));
     expect(store.getActions()[0].type).to.equal('franklin/sequence/LOAD_FILE');
     // TODO: we should expect SEQUENCE_LOADED at some point...
+  });
+
+  it('handles CHANGE_POSITION_FROM', () => {
+    const state = reducer(undefined, actions.changePositionFrom(1234));
+
+    expect(state).to.have.all.keys([
+      'sequence',
+      'positionFrom',
+      'loading',
+      'name',
+    ]);
+
+    expect(state.positionFrom).to.equal(1234);
   });
 });

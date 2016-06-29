@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import Immutable from 'immutable';
 
-import Annotation from './Annotation';
-import { getAnnotationSegments } from '../utils/positionning';
+import Annotation from '../Annotation';
+import { getAnnotationSegments } from '../../utils/positionning';
 
 const { object, instanceOf, number } = PropTypes;
 
@@ -19,8 +19,8 @@ const Annotations = (props) =>
             annotation={annotation}
             isSelected={false}
             getAnnotationSegments={(indexFrom, indexTo) => getAnnotationSegments(
-              indexFrom,
-              indexTo,
+              indexFrom - props.positionFrom + 1,
+              indexTo - props.positionFrom + 1,
               labelIndex, // current track
               props.visualizerMargin,
               props.nucleotidesPerRow,
@@ -29,6 +29,7 @@ const Annotations = (props) =>
               props.nucleotidesRowHeight,
               props.trackHeight
             )}
+            positionFrom={props.positionFrom}
           />
         )
       )
@@ -44,6 +45,7 @@ Annotations.propTypes = {
   nucleotideWidth: number.isRequired,
   trackHeight: number.isRequired,
   rowHeight: number.isRequired,
+  positionFrom: number.isRequired,
 };
 
 export default Annotations;

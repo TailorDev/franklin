@@ -6,6 +6,7 @@ import Fasta from '../utils/fasta';
 const LOAD_DEFAULT = 'franklin/sequence/LOAD_DEFAULT';
 const LOAD_FILE = 'franklin/sequence/LOAD_FILE';
 const SEQUENCE_LOADED = 'franklin/sequence/SEQUENCE_LOADED';
+const CHANGE_POSITION_FROM = 'franklin/sequence/CHANGE_POSITION_FROM';
 
 // Action Creators
 export function loadDefaultSequence() {
@@ -34,10 +35,14 @@ export function loadFile(file) {
   };
 }
 
+export function changePositionFrom(positionFrom) {
+  return { type: CHANGE_POSITION_FROM, positionFrom };
+}
+
 // Reducer
 const initialState = {
   sequence: new Immutable.List(),
-  positionFrom: 0,
+  positionFrom: 1,
   loading: false,
   name: '',
 };
@@ -51,7 +56,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         name: 'Demo sequence',
         sequence: defaultSequence,
-        positionFrom: 1,
+        positionFrom: 5,
         loading: false,
       };
 
@@ -63,6 +68,11 @@ export default function reducer(state = initialState, action = {}) {
         positionFrom: 1,
         loading: false,
       };
+
+    case CHANGE_POSITION_FROM:
+      return Object.assign({}, state, {
+        positionFrom: action.positionFrom,
+      });
 
     default: return state;
   }

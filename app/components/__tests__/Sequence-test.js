@@ -21,6 +21,7 @@ describe('<Sequence />', () => {
     label: { annotation: '' },
     selection: { selections: [] },
     exon: { exons: new Immutable.List() },
+    sequence: { positionFrom: 1 },
   };
 
   it('renders as many Nucleotide as needed', () => {
