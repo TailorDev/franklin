@@ -6,8 +6,8 @@ import Immutable from 'immutable';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-import Toolbar from '../Toolbar/presenter';
-import { mapStateToProps } from '../Toolbar';
+import Toolbar from '../presenter';
+import { mapStateToProps } from '../index';
 
 
 describe('<Toolbar />', () => {

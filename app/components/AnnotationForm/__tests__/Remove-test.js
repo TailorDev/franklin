@@ -6,16 +6,16 @@ import sinon from 'sinon';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-import LabelRemove from '../Labels/LabelRemove';
+import Remove from '../Remove';
 
 
-describe('<LabelRemove />', () => {
+describe('<Remove />', () => {
 
   it('renders a remove dialog box', () => {
     const wrapper = shallow(
-      <LabelRemove
+      <Remove
         onActionRemoveCancelClick={() => {}}
-        onLabelRemove={() => {}}
+        onRemove={() => {}}
       />
     );
 
@@ -27,9 +27,9 @@ describe('<LabelRemove />', () => {
   it('fires label deletion canceling', () => {
     const spy = sinon.spy();
     const wrapper = shallow(
-      <LabelRemove
+      <Remove
         onActionRemoveCancelClick={spy}
-        onLabelRemove={() => {}}
+        onRemove={() => {}}
       />
     );
 
@@ -40,9 +40,9 @@ describe('<LabelRemove />', () => {
   it('fires label deletion', () => {
     const spy = sinon.spy();
     const wrapper = shallow(
-      <LabelRemove
+      <Remove
         onActionRemoveCancelClick={() => {}}
-        onLabelRemove={spy}
+        onRemove={spy}
       />
     );
 

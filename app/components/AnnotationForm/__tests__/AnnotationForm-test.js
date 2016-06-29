@@ -4,10 +4,10 @@ import { expect } from 'chai';
 import Immutable from 'immutable';
 import sinon from 'sinon';
 
-import AnnotationForm from '../AnnotationForm/presenter';
-import Remove from '../AnnotationForm/Remove';
-import InputNumber from '../AnnotationForm/InputNumber';
-import { defaultLabels } from '../../defaults';
+import AnnotationForm from '../presenter';
+import Remove from '../Remove';
+import InputNumber from '../InputNumber';
+import { defaultLabels } from '../../../defaults';
 
 describe('<AnnotationForm />', () => {
   const sequence = new Immutable.List('ATTTGCGTCG'.split(''));

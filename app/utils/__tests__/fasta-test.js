@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 import { expect } from 'chai';
-import Fasta from '../utils/fasta';
+import Fasta from '../fasta';
 
 // see: https://github.com/mochajs/mocha/issues/1847
 const { Promise, beforeEach, afterEach, describe, it } = global;
