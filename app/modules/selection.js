@@ -32,14 +32,6 @@ export function multiSelect(selections) {
   return { type: MULTI_SELECT, selections };
 }
 
-function calculateSelection(from, to) {
-  if (from < to || undefined === from || undefined === to) {
-    return { from, to };
-  }
-
-  return { from: to, to: from };
-}
-
 function doUpdate(state, action) {
   const selected = action.selected;
   const from = state.selections[0] ? state.selections[0].from : undefined;
@@ -53,38 +45,28 @@ function doUpdate(state, action) {
     };
   } else if (undefined === to) {
     return {
-      selections: [calculateSelection(selected, from)],
+      selections: [{ from, to: selected }],
     };
   }
 
   return state;
 }
 
-/**
- * Here, we pass a position in the sequence, which is NOT the index. By now,
- * the offset between is a position and its corresponding index is `-1`,
- * hence the code below.
- */
 function doUpdateSelectionFrom(state, action) {
   const positionFrom = action.positionFrom;
   const to = state.selections[0] ? state.selections[0].to : undefined;
 
   return {
-    selections: [calculateSelection(positionFrom - 1, to)],
+    selections: [{ from: positionFrom, to }],
   };
 }
 
-/**
- * Here, we pass a position in the sequence, which is NOT the index. By now,
- * the offset between is a position and its corresponding index is `-1`,
- * hence the code below.
- */
 function doUpdateSelectionTo(state, action) {
   const positionTo = action.positionTo;
   const from = state.selections[0] ? state.selections[0].from : undefined;
 
   return {
-    selections: [calculateSelection(from, positionTo - 1)],
+    selections: [{ from, to: positionTo }],
   };
 }
 
