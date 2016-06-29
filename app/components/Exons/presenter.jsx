@@ -51,7 +51,7 @@ class Exons extends Component {
             />
             :
             <button
-              className="button new-label"
+              className="button new-exon"
               onClick={this.toggleNewExonForm}
             >
               New Exon

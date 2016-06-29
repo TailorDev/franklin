@@ -35,7 +35,9 @@ class ExonForm extends Component {
   }
 
   onSubmit(event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
 
     // Prevent empty fields
     if (
