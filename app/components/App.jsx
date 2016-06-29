@@ -26,11 +26,16 @@ export class App extends Component {
     this.onDropAccepted = this.onDropAccepted.bind(this);
     this.startDemo = this.startDemo.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.onFileSelectClick = this.onFileSelectClick.bind(this);
   }
 
   onDropAccepted(files) {
     this.props.dispatch(actions.loadFile(files[0]));
     this.closeModal();
+  }
+
+  onFileSelectClick() {
+    this.refs.dropzone.open();
   }
 
   startDemo() {
@@ -88,6 +93,7 @@ export class App extends Component {
           <div className="content">
             <Loader />
             <Dropzone
+              ref="dropzone"
               className="dropzone"
               activeClassName="drag-enter"
               onDropAccepted={this.onDropAccepted}
@@ -95,7 +101,9 @@ export class App extends Component {
               disablePreview
               multiple={false}
             >
-              <Visualizer />
+              <Visualizer
+                onFileSelectClick={this.onFileSelectClick}
+              />
             </Dropzone>
             <Toolbar />
           </div>
