@@ -6,11 +6,11 @@ import sinon from 'sinon';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-import Label from '../Labels/Label';
-import LabelEdit from '../Labels/LabelEdit';
-import LabelForm from '../Labels/LabelForm';
-import LabelRemove from '../Labels/LabelRemove';
-import LabelTools from '../Labels/LabelTools';
+import Label from '../Label';
+import LabelEdit from '../LabelEdit';
+import LabelForm from '../LabelForm';
+import LabelRemove from '../LabelRemove';
+import LabelTools from '../LabelTools';
 
 
 describe('<Label />', () => {

@@ -7,8 +7,8 @@ import sinon from 'sinon';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-import Labels from '../Labels/presenter';
-import Label from '../Labels/Label';
+import Labels from '../presenter';
+import Label from '../Label';
 
 
 describe('<Labels />', () => {

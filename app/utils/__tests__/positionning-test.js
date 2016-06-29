@@ -1,4 +1,7 @@
-import { getNucleotideCoordinates, getAnnotationSegmentCoordinates } from '../utils/positionning';
+import {
+  getNucleotideCoordinates,
+  getAnnotationSegmentCoordinates,
+} from '../positionning';
 import sinon from 'sinon';
 import { expect } from 'chai';
 

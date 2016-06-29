@@ -9,8 +9,8 @@ import configureStore from 'redux-mock-store';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-import Visualizer from '../Visualizer/presenter';
-import { defaultLabels } from '../../defaults';
+import Visualizer from '../presenter';
+import { defaultLabels } from '../../../defaults';
 
 describe('<Visualizer />', () => {
 

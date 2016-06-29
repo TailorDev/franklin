@@ -6,8 +6,9 @@ import Immutable from 'immutable';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-import Nucleotide from '../Nucleotide/presenter';
-import { mapStateToProps } from '../Nucleotide';
+import Nucleotide from '../presenter';
+import { mapStateToProps } from '../index';
+
 
 describe('<Nucleotide />', () => {
   it('renders a Nucleotide as needed', () => {
