@@ -5,7 +5,7 @@ import Immutable from 'immutable';
 import Sequence from '../Sequence';
 import Annotations from '../Annotations';
 
-const { instanceOf, number } = PropTypes;
+const { instanceOf, func, number } = PropTypes;
 
 export default class Visualizer extends Component {
 
@@ -116,6 +116,17 @@ export default class Visualizer extends Component {
             <i className="fa fa-arrow-right big" aria-hidden="true"></i>
             <i className="fa fa-square-o big" aria-hidden="true"></i>
 
+            <div>
+              <h4>Or click below to select your file</h4>
+
+              <button
+                className="button"
+                onClick={this.props.onFileSelectClick}
+              >
+                Select file
+              </button>
+            </div>
+
             <p>
               Your FASTA file content must look like the following:
             </p>
@@ -141,4 +152,5 @@ Visualizer.propTypes = {
   sequence: instanceOf(Immutable.List).isRequired,
   labels: instanceOf(Immutable.List).isRequired,
   positionFrom: number.isRequired,
+  onFileSelectClick: func.isRequired,
 };
