@@ -24,6 +24,9 @@ export function loadFile(file) {
     reader.onload = (event) => {
       const { header, sequence } = Fasta.parseString(event.target.result);
 
+      // Customize page title with the current sequence header
+      document.title = header;
+
       dispatch(setSequence(header, sequence));
     };
 
