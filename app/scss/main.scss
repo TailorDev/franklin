@@ -10,6 +10,7 @@
 @include foundation-forms;
 @include foundation-button;
 @include foundation-button-group;
+@include foundation-badge;
 
 /* -- FontAwesome -- */
 $fa-font-path: '~font-awesome/fonts';
@@ -34,3 +35,4 @@ $fa-font-path: '~font-awesome/fonts';
 @import 'components/loader';
 @import 'components/annotations';
 @import 'components/exons';
+@import 'components/search';

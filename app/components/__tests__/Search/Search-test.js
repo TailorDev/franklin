@@ -16,11 +16,13 @@ describe('<Search />', () => {
         onChange={() => {}}
         ntSequence={{}}
         value={''}
+        matches={0}
       />
     );
 
-    expect(wrapper.find('.search-panel')).to.have.length(1);
+    expect(wrapper.find('.search')).to.have.length(1);
     expect(wrapper.find('input')).to.have.length(1);
+    expect(wrapper.find('.matches')).to.have.length(0);
   });
 
   it('should be enabled when ntSequence is NOT null', () => {
@@ -29,6 +31,7 @@ describe('<Search />', () => {
         onChange={() => {}}
         ntSequence={{}}
         value={''}
+        matches={0}
       />
     );
 
@@ -41,9 +44,63 @@ describe('<Search />', () => {
         onChange={() => {}}
         ntSequence={null}
         value={''}
+        matches={0}
       />
     );
 
     expect(wrapper.find('input').prop('disabled')).to.be.true;
+  });
+
+  it('hides the matches counter when search is empty', () => {
+    const wrapper = shallow(
+      <Search
+        onChange={() => {}}
+        ntSequence={null}
+        value={''}
+        matches={1}
+      />
+    );
+
+    expect(wrapper.find('.matches')).to.have.length(0);
+  });
+
+  it('displays the matches counter when search is not empty', () => {
+    const wrapper = shallow(
+      <Search
+        onChange={() => {}}
+        ntSequence={null}
+        value={'AT'}
+        matches={1}
+      />
+    );
+
+    expect(wrapper.find('.matches')).to.have.length(1);
+    expect(wrapper.find('.matches').text()).to.equal('1 match');
+  });
+
+  it('adds a dedicated style to the matches counter when nothing matches', () => {
+    const wrapper = shallow(
+      <Search
+        onChange={() => {}}
+        ntSequence={null}
+        value={'AT'}
+        matches={0}
+      />
+    );
+
+    expect(wrapper.find('.matches').text()).to.equal('0 match');
+    expect(wrapper.find('.matches.none')).to.have.length(1);
+  });
+
+  it('pluralizes the matches counter', () => {
+    const wrapper = shallow(
+      <Search
+        onChange={() => {}}
+        ntSequence={null}
+        value={'AT'}
+        matches={2}
+      />
+    );
+    expect(wrapper.find('.matches').text()).to.equal('2 matches');
   });
 });

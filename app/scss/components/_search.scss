@@ -1,0 +1,28 @@
+/*
+ * Search component
+ */
+
+.search {
+  input[type="text"] {
+    margin-bottom: 0.2rem;
+  }
+
+  .matches {
+    font-style: italic;
+    color: $dark-gray;
+
+    span {
+      @include badge;
+      background-color: $dark-gray;
+      color: $white;
+    }
+
+    &.none {
+      color: $alert-color;
+
+      span {
+        background-color: $alert-color;
+      }
+    }
+  }
+}

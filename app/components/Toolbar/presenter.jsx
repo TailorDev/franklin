@@ -13,9 +13,12 @@ const Toolbar = (props) => (
       <p>{props.name}</p>
     </div>
 
-    <Search
-      ntSequence={props.ntSequence}
-    />
+    <div className="search-panel">
+      <h4>Search</h4>
+      <Search
+        ntSequence={props.ntSequence}
+      />
+    </div>
 
     <div className="exon-panel">
       <h4>Exons</h4>
