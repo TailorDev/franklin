@@ -6,9 +6,9 @@ import { expect } from 'chai';
 const { describe, it } = global;
 
 import Nucleotide from '../Nucleotide/presenter';
+import { mapStateToProps } from '../Nucleotide';
 
 describe('<Nucleotide />', () => {
-
   it('renders a Nucleotide as needed', () => {
     const wrapper = mount(
       <Nucleotide
@@ -198,5 +198,60 @@ describe('<Nucleotide />', () => {
     );
     instance = wrapper.instance();
     expect(instance.getPositionTextXCoordinate()).to.equal(-20);
+  });
+
+  describe('mapStateToProps', () => {
+    it('returns false if no selection', () => {
+      const state = {
+        selection: {
+          selections: [],
+        }
+      };
+      const ownProps = { index: 1 };
+      const props = mapStateToProps(state, ownProps);
+
+      expect(props.isSelected).to.be.false;
+      expect(props.isInSelectionRange).to.be.false;
+    });
+
+    it('returns isInSelectionRange but !isSelected', () => {
+      const state = {
+        selection: {
+          selections: [{ from: 0, to: 2}],
+        }
+      };
+      const ownProps = { index: 1 };
+      const props = mapStateToProps(state, ownProps);
+
+      expect(props.isSelected).to.be.false;
+      expect(props.isInSelectionRange).to.be.true;
+    });
+
+    it('returns isInSelectionRange but isSelected', () => {
+      const state = {
+        selection: {
+          selections: [{ from: 1, to: 2}],
+        }
+      };
+      const ownProps = { index: 1 };
+      const props = mapStateToProps(state, ownProps);
+
+      expect(props.isSelected).to.be.true;
+      expect(props.isInSelectionRange).to.be.true;
+    });
+
+    it('returns isInSelectionRange but isSelected', () => {
+      const state = {
+        selection: {
+          selections: [{ from: 10, to: 20}],
+          selections: [{ from: 1, to: 2}],
+        }
+      };
+      const ownProps = { index: 2 };
+      const props = mapStateToProps(state, ownProps);
+
+      expect(props.isSelected).to.be.true;
+      expect(props.isInSelectionRange).to.be.true;
+    });
   });
 });

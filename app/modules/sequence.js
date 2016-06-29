@@ -12,8 +12,8 @@ export function loadDefaultSequence() {
   return { type: LOAD_DEFAULT };
 }
 
-export function setSequence(sequence, name) {
-  return { type: SEQUENCE_LOADED, sequence, name };
+export function setSequence(name, sequence) {
+  return { type: SEQUENCE_LOADED, name, sequence };
 }
 
 export function loadFile(file) {
@@ -24,7 +24,7 @@ export function loadFile(file) {
     reader.onload = (event) => {
       const { header, sequence } = Fasta.parseString(event.target.result);
 
-      dispatch(setSequence(sequence, header));
+      dispatch(setSequence(header, sequence));
     };
 
     reader.readAsText(file);

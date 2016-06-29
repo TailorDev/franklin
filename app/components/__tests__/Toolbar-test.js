@@ -7,6 +7,7 @@ import Immutable from 'immutable';
 const { describe, it } = global;
 
 import Toolbar from '../Toolbar/presenter';
+import { mapStateToProps } from '../Toolbar';
 
 
 describe('<Toolbar />', () => {
@@ -36,5 +37,38 @@ describe('<Toolbar />', () => {
 
     expect(wrapper.find('.sequence-panel')).to.have.length(1);
     expect(wrapper.find('.sequence-panel').text()).to.contain('NC_004350.2');
+  });
+
+  describe('mapStateToProps', () => {
+    it('should return a null ntSequence when sequence is empty', () => {
+      const state = {
+        sequence: {
+          name: 'empty list',
+          sequence: new Immutable.List(),
+        },
+        label: { labels: [] },
+      };
+
+      const props = mapStateToProps(state);
+
+      expect(props.name).to.equal('empty list');
+      expect(props.ntSequence).to.be.null;
+    });
+
+    it('should a valid ntSequence when sequence is NOT empty', () => {
+      const state = {
+        sequence: {
+          name: 'empty list',
+          sequence: new Immutable.List(['A', 'T']),
+        },
+        label: { labels: [] },
+      };
+
+      const props = mapStateToProps(state);
+
+      expect(props.name).to.equal('empty list');
+      expect(props.ntSequence).not.to.be.null;
+      expect(props.ntSequence.sequence()).equal('AT');
+    });
   });
 });

@@ -19,7 +19,7 @@ describe('<Sequence />', () => {
   const mockStore = configureStore();
   const initialState = {
     label: { annotation: '' },
-    selection: { from: undefined, to: undefined },
+    selection: { selections: [] },
   };
 
   it('renders as many Nucleotide as needed', () => {

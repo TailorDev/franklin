@@ -79,7 +79,8 @@
     "exclude": [
       "app/**/*-test.js",
       "app/components/**/index.js",
-      "lib"
+      "lib",
+      "app/utils/ntseq.js"
     ]
   }
 }

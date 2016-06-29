@@ -3,7 +3,7 @@ import Immutable from 'immutable';
 import { HotKeys } from 'react-hotkeys';
 import Remove from './Remove';
 
-const { number, string, shape, func, instanceOf } = PropTypes;
+const { array, number, string, shape, func, instanceOf } = PropTypes;
 
 
 const emptyState = {
@@ -15,6 +15,7 @@ const emptyState = {
   annotationId: null,
   // UI state
   displayRemoveForm: false,
+  disablePositions: false,
 };
 
 class AnnotationForm extends Component {
@@ -42,37 +43,52 @@ class AnnotationForm extends Component {
       });
     }
 
-    const selection = nextProps.selection;
+    const selections = nextProps.selections;
 
-    if (undefined === selection.from && undefined === selection.to) {
+    if (0 === selections.length) {
       this.reset();
+    } else if (1 === selections.length) {
+      const selection = selections[0];
 
-      return;
-    }
+      if (undefined !== selection.from) {
+        this.setState({
+          disablePositions: false,
+          positionFrom: selection.from + 1,
+        });
+      }
 
-    if (undefined !== selection.from) {
-      this.setState({ positionFrom: selection.from + 1 });
-    }
-
-    if (undefined !== selection.to) {
-      this.setState({ positionTo: selection.to + 1 });
+      if (undefined !== selection.to) {
+        this.setState({
+          disablePositions: false,
+          positionTo: selection.to + 1,
+        });
+      }
+    } else {
+      this.setState({
+        disablePositions: true,
+        positionFrom: '',
+        positionTo: '',
+      });
     }
   }
 
   onSubmit(event) {
     event.preventDefault();
 
-    this.props.onSubmit(
-      this.state.labelId,
-      {
-        positionFrom: this.state.positionFrom,
-        positionTo: this.state.positionTo,
-        comment: this.state.comment,
-      },
-      this.state.annotationId
-    );
+    this.props.selections.forEach((s) => {
+      this.props.onSubmit(
+        this.state.labelId,
+        {
+          positionFrom: s.from,
+          positionTo: s.to,
+          comment: this.state.comment,
+        },
+        this.state.annotationId
+      );
+    });
 
     this.reset();
+    this.props.onSubmitDone();
   }
 
   onPositionFromChange(event) {
@@ -126,12 +142,14 @@ class AnnotationForm extends Component {
               value={this.state.positionFrom}
               placeholder="From"
               onChange={this.onPositionFromChange}
+              disabled={this.state.disablePositions}
             />
             <input
               type="number"
               value={this.state.positionTo}
               placeholder="To"
               onChange={this.onPositionToChange}
+              disabled={this.state.disablePositions}
             />
             <select
               onChange={this.onLabelChange}
@@ -182,6 +200,7 @@ AnnotationForm.propTypes = {
   sequence: instanceOf(Immutable.List).isRequired,
   labels: instanceOf(Immutable.List).isRequired,
   onSubmit: func.isRequired,
+  onSubmitDone: func.isRequired,
   onRemove: func.isRequired,
   updateSelectionFrom: func.isRequired,
   updateSelectionTo: func.isRequired,
@@ -194,6 +213,7 @@ AnnotationForm.propTypes = {
       comment: string.isRequired,
     }),
   }),
+  selections: array.isRequired,
 };
 
 export default AnnotationForm;

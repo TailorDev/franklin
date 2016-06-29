@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 
+
 export default class Fasta {
   static parseString(fasta) {
     const s = [];
