@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import Immutable from 'immutable';
 import { HotKeys } from 'react-hotkeys';
+import Remove from './Remove';
 
 const { number, string, shape, func, instanceOf } = PropTypes;
 
@@ -12,6 +13,8 @@ const emptyState = {
   positionTo: '',
   comment: '',
   annotationId: null,
+  // UI state
+  displayRemoveForm: false,
 };
 
 class AnnotationForm extends Component {
@@ -26,6 +29,8 @@ class AnnotationForm extends Component {
     this.onLabelChange = this.onLabelChange.bind(this);
     this.onCommentChange = this.onCommentChange.bind(this);
     this.reset = this.reset.bind(this);
+    this.toggleActionRemove = this.toggleActionRemove.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -92,6 +97,17 @@ class AnnotationForm extends Component {
     this.setState({ comment: event.target.value });
   }
 
+  toggleActionRemove() {
+    this.setState({
+      displayRemoveForm: !this.state.displayRemoveForm,
+    });
+  }
+
+  handleRemove() {
+    this.props.onRemove(this.state.labelId, this.state.annotationId);
+    this.reset();
+  }
+
   reset() {
     this.setState(emptyState);
   }
@@ -142,7 +158,20 @@ class AnnotationForm extends Component {
               type="submit"
               value={null !== this.state.annotationId ? 'Save' : 'Add'}
             />
+            {null !== this.state.annotationId ?
+              <i
+                className="fa fa-trash remove"
+                onClick={this.toggleActionRemove}
+              ></i> : null
+            }
           </form>
+
+          {this.state.displayRemoveForm ?
+            <Remove
+              onRemove={this.handleRemove}
+              onActionRemoveCancelClick={this.toggleActionRemove}
+            /> : null
+          }
         </div>
       </HotKeys>
     );
@@ -153,6 +182,7 @@ AnnotationForm.propTypes = {
   sequence: instanceOf(Immutable.List).isRequired,
   labels: instanceOf(Immutable.List).isRequired,
   onSubmit: func.isRequired,
+  onRemove: func.isRequired,
   updateSelectionFrom: func.isRequired,
   updateSelectionTo: func.isRequired,
   current: shape({
