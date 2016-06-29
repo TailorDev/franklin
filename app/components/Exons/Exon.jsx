@@ -9,20 +9,12 @@ class Exon extends Component {
     super(props, context);
 
     this.state = {
-      displayRemoveForm: false,
       displayEditForm: false,
     };
 
-    this.toggleActionRemove = this.toggleActionRemove.bind(this);
     this.toggleActionEdit = this.toggleActionEdit.bind(this);
     this.handleEditExon = this.handleEditExon.bind(this);
     this.handleRemoveExon = this.handleRemoveExon.bind(this);
-  }
-
-  toggleActionRemove() {
-    this.setState({
-      displayRemoveForm: !this.state.displayRemoveForm,
-    });
   }
 
   toggleActionEdit() {
@@ -38,7 +30,7 @@ class Exon extends Component {
 
   handleRemoveExon() {
     this.props.onRemoveExon();
-    this.toggleActionRemove();
+    this.toggleActionEdit();
   }
 
   render() {
@@ -46,7 +38,6 @@ class Exon extends Component {
       <div
         className={
           `exon
-            ${this.state.displayRemoveForm ? 'in-action remove' : ''}
             ${this.state.displayEditForm ? 'in-action edit' : ''}`
         }
       >
@@ -64,6 +55,7 @@ class Exon extends Component {
           <ExonEdit
             onActionEditCancelClick={this.toggleActionEdit}
             onEditExon={this.handleEditExon}
+            onRemoveExon={this.handleRemoveExon}
             exon={this.props.exon}
           /> : null
         }

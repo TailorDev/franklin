@@ -1,5 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 
+import ExonRemove from './ExonRemove';
+
 const { func, object } = PropTypes;
 
 const defaultExon = {
@@ -21,10 +23,12 @@ class ExonForm extends Component {
 
     this.state = {
       exon,
+      displayRemoveForm: false,
     };
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onCancel = this.onCancel.bind(this);
+    this.toggleActionRemove = this.toggleActionRemove.bind(this);
     this.onPositionFromChange = this.onPositionFromChange.bind(this);
     this.onPositionToChange = this.onPositionToChange.bind(this);
     this.onNameChange = this.onNameChange.bind(this);
@@ -59,6 +63,7 @@ class ExonForm extends Component {
         positionFrom: event.target.value,
         positionTo: this.state.exon.positionTo,
       },
+      displayRemoveForm: this.state.displayRemoveForm,
     });
   }
 
@@ -69,6 +74,7 @@ class ExonForm extends Component {
         positionFrom: this.state.exon.positionFrom,
         positionTo: event.target.value,
       },
+      displayRemoveForm: this.state.displayRemoveForm,
     });
   }
 
@@ -79,11 +85,17 @@ class ExonForm extends Component {
         positionFrom: this.state.exon.positionFrom,
         positionTo: this.state.exon.positionTo,
       },
+      displayRemoveForm: this.state.displayRemoveForm,
     });
   }
 
   onCancel() {
     this.props.onCancel();
+  }
+
+  toggleActionRemove(event) {
+    event.preventDefault();
+    this.setState({ displayRemoveForm: !this.state.displayRemoveForm });
   }
 
   render() {
@@ -115,6 +127,16 @@ class ExonForm extends Component {
               className="button submit"
               onClick={this.onSubmit}
             />
+            {this.props.onRemoveExon ?
+              <button
+                className="button remove"
+                onClick={this.toggleActionRemove}
+              >
+                <i className="fa fa-trash-o" aria-hidden="true"></i>
+              </button>
+              :
+              null
+            }
             <input
               type="reset"
               value="Cancel"
@@ -123,6 +145,12 @@ class ExonForm extends Component {
             />
           </div>
         </form>
+        {this.state.displayRemoveForm ?
+          <ExonRemove
+            onRemoveExon={this.props.onRemoveExon}
+            onActionRemoveCancelClick={this.toggleActionRemove}
+          /> : null
+        }
       </div>
     );
   }
@@ -131,6 +159,7 @@ class ExonForm extends Component {
 ExonForm.propTypes = {
   onEditExon: func,
   onCancel: func.isRequired,
+  onRemoveExon: func,
   onCreateNewExon: func,
   exon: object,
 };
