@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import Immutable from 'immutable';
-import { HotKeys } from 'react-hotkeys';
 import Remove from './Remove';
 import InputNumber from './InputNumber';
 
@@ -138,69 +137,63 @@ class AnnotationForm extends Component {
   }
 
   render() {
-    const keyHandlers = {
-      clearSelection: this.reset,
-    };
-
     return (
-      <HotKeys handlers={keyHandlers}>
-        <div className="annotation-form">
-          <form onSubmit={this.onSubmit}>
-            <InputNumber
-              value={this.state.positionFrom}
-              min={this.props.positionFrom}
-              placeholder={'From'}
-              onChange={this.onPositionFromChange}
-              isDisabled={this.state.disablePositions}
-            />
-            <InputNumber
-              value={this.state.positionTo}
-              min={this.props.positionFrom}
-              placeholder={'To'}
-              onChange={this.onPositionToChange}
-              isDisabled={this.state.disablePositions}
-            />
-            <select
-              onChange={this.onLabelChange}
-              value={this.state.labelId}
-            >
-              <option>Select a label</option>
-              {
-                this.props.labels.map((label, index) =>
-                  <option
-                    key={index}
-                    value={index}
-                  >
-                    {label.name}
-                  </option>
-                )
-              }
-            </select>
-            <textarea
-              placeholder="Type a comment here"
-              value={this.state.comment}
-              onChange={this.onCommentChange}
-            />
-            <input
-              type="submit"
-              value={null !== this.state.annotationId ? 'Save' : 'Add'}
-            />
-            {null !== this.state.annotationId ?
-              <i
-                className="fa fa-trash remove"
-                onClick={this.toggleActionRemove}
-              ></i> : null
+      <div className="annotation-form">
+        <form onSubmit={this.onSubmit}>
+          <InputNumber
+            value={this.state.positionFrom}
+            min={this.props.positionFrom}
+            placeholder={'From'}
+            onChange={this.onPositionFromChange}
+            isDisabled={this.state.disablePositions}
+          />
+          <InputNumber
+            value={this.state.positionTo}
+            min={this.props.positionFrom}
+            placeholder={'To'}
+            onChange={this.onPositionToChange}
+            isDisabled={this.state.disablePositions}
+          />
+          <select
+            onChange={this.onLabelChange}
+            value={this.state.labelId}
+          >
+            <option>Select a label</option>
+            {
+              this.props.labels.map((label, index) =>
+                <option
+                  key={index}
+                  value={index}
+                >
+                  {label.name}
+                </option>
+              )
             }
-          </form>
-
-          {this.state.displayRemoveForm ?
-            <Remove
-              onRemove={this.handleRemove}
-              onActionRemoveCancelClick={this.toggleActionRemove}
-            /> : null
+          </select>
+          <textarea
+            placeholder="Type a comment here"
+            value={this.state.comment}
+            onChange={this.onCommentChange}
+          />
+          <input
+            type="submit"
+            value={null !== this.state.annotationId ? 'Save' : 'Add'}
+          />
+          {null !== this.state.annotationId ?
+            <i
+              className="fa fa-trash remove"
+              onClick={this.toggleActionRemove}
+            ></i> : null
           }
-        </div>
-      </HotKeys>
+        </form>
+
+        {this.state.displayRemoveForm ?
+          <Remove
+            onRemove={this.handleRemove}
+            onActionRemoveCancelClick={this.toggleActionRemove}
+          /> : null
+        }
+      </div>
     );
   }
 }
