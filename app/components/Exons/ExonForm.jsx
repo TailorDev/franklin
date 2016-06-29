@@ -24,6 +24,7 @@ class ExonForm extends Component {
     };
 
     this.onSubmit = this.onSubmit.bind(this);
+    this.onCancel = this.onCancel.bind(this);
     this.onPositionFromChange = this.onPositionFromChange.bind(this);
     this.onPositionToChange = this.onPositionToChange.bind(this);
     this.onNameChange = this.onNameChange.bind(this);
@@ -81,6 +82,10 @@ class ExonForm extends Component {
     });
   }
 
+  onCancel() {
+    this.props.onCancel();
+  }
+
   render() {
     return (
       <div className="exon-form-wrapper">
@@ -104,18 +109,18 @@ class ExonForm extends Component {
             onChange={this.onNameChange}
           />
           <div className="action-buttons">
-            <button
+            <input
               type="submit"
+              value={this.props.onEditExon ? 'Save' : 'Add'}
               className="button submit"
               onClick={this.onSubmit}
-            >
-              <i
-                className={
-                  `fa ${this.props.onEditExon ? 'fa-floppy-o' : 'fa-plus-circle'}`
-                }
-                aria-hidden="true"
-              />
-            </button>
+            />
+            <input
+              type="reset"
+              value="Cancel"
+              className="button cancel"
+              onClick={this.onCancel}
+            />
           </div>
         </form>
       </div>
@@ -125,7 +130,7 @@ class ExonForm extends Component {
 
 ExonForm.propTypes = {
   onEditExon: func,
-  onRemoveExon: func,
+  onCancel: func.isRequired,
   onCreateNewExon: func,
   exon: object,
 };
