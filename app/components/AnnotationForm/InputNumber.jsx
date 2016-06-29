@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const Input = (props) => {
+const InputNumber = (props) => {
   let isInvalid = false;
   if (!isNaN(parseInt(props.value, 10))) {
     isInvalid = props.value < props.min;
@@ -25,7 +25,7 @@ const Input = (props) => {
   );
 };
 
-Input.propTypes = {
+InputNumber.propTypes = {
   value: React.PropTypes.number.isRequired,
   min: React.PropTypes.number.isRequired,
   placeholder: React.PropTypes.string.isRequired,
@@ -34,4 +34,4 @@ Input.propTypes = {
   errorText: React.PropTypes.string,
 };
 
-export default Input;
+export default InputNumber;

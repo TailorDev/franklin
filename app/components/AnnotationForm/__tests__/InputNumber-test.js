@@ -5,14 +5,14 @@ import { expect } from 'chai';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-import Input from '../Input';
+import InputNumber from '../InputNumber';
 
 
-describe('<Input />', () => {
+describe('<InputNumber />', () => {
 
   it('renders itself', () => {
     const wrapper = shallow(
-      <Input
+      <InputNumber
         value={124}
         min={1}
         placeholder={'From'}
@@ -29,7 +29,7 @@ describe('<Input />', () => {
 
   it('can be disabled', () => {
     const wrapper = shallow(
-      <Input
+      <InputNumber
         value={124}
         min={1}
         placeholder={'From'}
@@ -43,7 +43,7 @@ describe('<Input />', () => {
 
   it('should know when it is invalid', () => {
     const wrapper = shallow(
-      <Input
+      <InputNumber
         value={124}
         min={200}
         placeholder={'From'}
@@ -58,7 +58,7 @@ describe('<Input />', () => {
 
   it('should NOT be invalid when no value is supplied', () => {
     const wrapper = shallow(
-      <Input
+      <InputNumber
         value={''}
         min={200}
         placeholder={'From'}
