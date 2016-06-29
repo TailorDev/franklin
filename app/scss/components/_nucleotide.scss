@@ -20,7 +20,7 @@
 
     &.in-exon {
       rect.type-background {
-        fill: $light-yeah;
+        fill: lighten($light-yeah, 10%);
       }
 
       text {

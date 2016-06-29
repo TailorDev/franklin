@@ -80,7 +80,7 @@ export default class Nucleotide extends Component {
             className="type-background"
             x="3"
             y="30"
-            width="14"
+            width="12"
             height="16"
           />
 
