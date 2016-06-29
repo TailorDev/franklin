@@ -5,12 +5,15 @@ import AnnotationForm from '../AnnotationForm';
 import Labels from '../Labels';
 import Search from '../Search';
 import Exons from '../Exons';
+import PositionFrom from '../PositionFrom';
 
 const Toolbar = (props) => (
   <div className="toolbar">
     <div className="sequence-panel">
       <h4>Sequence</h4>
       <p>{props.name}</p>
+
+      <PositionFrom />
     </div>
 
     <div className="search-panel">

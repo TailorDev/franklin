@@ -42,7 +42,7 @@ export function changePositionFrom(positionFrom) {
 // Reducer
 const initialState = {
   sequence: new Immutable.List(),
-  positionFrom: 0,
+  positionFrom: 1,
   loading: false,
   name: '',
 };
