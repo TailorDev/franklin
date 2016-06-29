@@ -29,6 +29,7 @@ describe('<Visualizer />', () => {
       <Visualizer
         sequence={sequence}
         labels={defaultLabels}
+        onFileSelectClick={() => {}}
       />
     );
 
@@ -42,6 +43,7 @@ describe('<Visualizer />', () => {
       <Visualizer
         sequence={new Immutable.List()}
         labels={defaultLabels}
+        onFileSelectClick={() => {}}
       />
     );
 
@@ -57,6 +59,7 @@ describe('<Visualizer />', () => {
         <Visualizer
           sequence={sequence}
           labels={defaultLabels}
+          onFileSelectClick={() => {}}
         />
       </Provider>
     );
@@ -73,6 +76,7 @@ describe('<Visualizer />', () => {
         <Visualizer
           sequence={sequence}
           labels={defaultLabels}
+          onFileSelectClick={() => {}}
         />
       </Provider>
     );
@@ -86,6 +90,7 @@ describe('<Visualizer />', () => {
     expect(window.removeEventListener.calledWith('resize', listener)).to.be.true;
   });
 
+  // SKIPPED
   it.skip('updates dimensions when receiving new props', () => {
 
     // Does not work because of:
@@ -96,6 +101,7 @@ describe('<Visualizer />', () => {
       <Visualizer
         sequence={sequence}
         labels={defaultLabels}
+        onFileSelectClick={() => {}}
       />
     );
 
