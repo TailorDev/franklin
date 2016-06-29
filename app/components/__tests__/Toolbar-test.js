@@ -47,6 +47,7 @@ describe('<Toolbar />', () => {
           sequence: new Immutable.List(),
         },
         label: { labels: [] },
+        exon: { exons: new Immutable.List() },
       };
 
       const props = mapStateToProps(state);
@@ -62,6 +63,7 @@ describe('<Toolbar />', () => {
           sequence: new Immutable.List(['A', 'T']),
         },
         label: { labels: [] },
+        exon: { exons: new Immutable.List() },
       };
 
       const props = mapStateToProps(state);

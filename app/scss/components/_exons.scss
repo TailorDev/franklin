@@ -1,0 +1,92 @@
+/*
+ * Exons components
+ */
+
+.exons {
+
+  .exon-form-wrapper {
+    padding: 1rem;
+
+    .action-buttons {
+      @include button-group( '.button' );
+      margin-bottom: 0;
+
+      .button {
+        margin-bottom: 0 !important;
+
+        &.submit {
+          @include button;
+          margin-right: 0.5rem;
+        }
+
+        &.remove {
+          @include button(
+            $background: $alert-color,
+            $background-hover: darken($alert-color, 5%)
+          );
+          margin-right: 0.5rem;
+        }
+
+        &.cancel {
+          @include button(
+            $background: darken($grey, 5%),
+            $background-hover: darken($grey, 10%),
+            $color: $body-font-color
+          );
+        }
+      }
+    }
+  }
+
+  .exon {
+    padding: 0.5rem 0;
+    border-radius: $global-radius;
+
+    &:hover {
+      cursor: pointer;
+      background-color: lighten($oh-baby, 5%);
+    }
+
+    &:nth-child(even) {
+      background-color: $oh-baby;
+    }
+
+    .properties {
+      @include grid-row;
+
+      &:hover {
+      }
+
+      & > * {
+        @include grid-column(4);
+
+        &:not(:first-child) {
+          text-align: right;
+        }
+      }
+    }
+
+    &.in-action {
+      padding-bottom: 0;
+      margin-bottom: 0.5rem;
+      background-color: $light-yeah;
+      color: $white;
+
+      .properties {
+        font-weight: bold;
+      }
+
+      .action-remove {
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  .new {
+    margin: 1rem 0 0;
+
+    .exon-form-wrapper {
+      background-color: $grey;
+    }
+  }
+}

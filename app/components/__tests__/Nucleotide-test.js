@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { expect } from 'chai';
+import Immutable from 'immutable';
 
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
@@ -22,6 +23,7 @@ describe('<Nucleotide />', () => {
         onClick={() => {}}
         isSelected={false}
         isInSelectionRange={false}
+        isInExon={false}
       />
     );
 
@@ -48,6 +50,7 @@ describe('<Nucleotide />', () => {
         onClick={() => {}}
         isSelected={false}
         isInSelectionRange={false}
+        isInExon={false}
       />
     );
 
@@ -68,6 +71,7 @@ describe('<Nucleotide />', () => {
         index={229}
         isSelected={false}
         isInSelectionRange={false}
+        isInExon={false}
         onClick={() => {}}
       />
     );
@@ -85,6 +89,7 @@ describe('<Nucleotide />', () => {
         index={230122}
         isSelected={false}
         isInSelectionRange={false}
+        isInExon={false}
         onClick={() => {}}
       />
     );
@@ -105,6 +110,7 @@ describe('<Nucleotide />', () => {
         onClick={() => {}}
         isSelected={false}
         isInSelectionRange={false}
+        isInExon={false}
       />
     );
     let instance = wrapper.instance();
@@ -122,6 +128,7 @@ describe('<Nucleotide />', () => {
         onClick={() => {}}
         isSelected={false}
         isInSelectionRange={false}
+        isInExon={false}
       />
     );
     instance = wrapper.instance();
@@ -141,6 +148,7 @@ describe('<Nucleotide />', () => {
         onClick={() => {}}
         isSelected={false}
         isInSelectionRange={false}
+        isInExon={false}
       />
     );
     let instance = wrapper.instance();
@@ -158,6 +166,7 @@ describe('<Nucleotide />', () => {
         onClick={() => {}}
         isSelected={false}
         isInSelectionRange={false}
+        isInExon={false}
       />
     );
     instance = wrapper.instance();
@@ -177,6 +186,7 @@ describe('<Nucleotide />', () => {
         onClick={() => {}}
         isSelected={false}
         isInSelectionRange={false}
+        isInExon={false}
       />
     );
     let instance = wrapper.instance();
@@ -194,6 +204,7 @@ describe('<Nucleotide />', () => {
         onClick={() => {}}
         isSelected={false}
         isInSelectionRange={false}
+        isInExon={false}
       />
     );
     instance = wrapper.instance();
@@ -205,7 +216,8 @@ describe('<Nucleotide />', () => {
       const state = {
         selection: {
           selections: [],
-        }
+        },
+        exon: { exons: new Immutable.List() },
       };
       const ownProps = { index: 1 };
       const props = mapStateToProps(state, ownProps);
@@ -218,7 +230,8 @@ describe('<Nucleotide />', () => {
       const state = {
         selection: {
           selections: [{ from: 0, to: 2}],
-        }
+        },
+        exon: { exons: new Immutable.List() },
       };
       const ownProps = { index: 1 };
       const props = mapStateToProps(state, ownProps);
@@ -231,7 +244,8 @@ describe('<Nucleotide />', () => {
       const state = {
         selection: {
           selections: [{ from: 1, to: 2}],
-        }
+        },
+        exon: { exons: new Immutable.List() },
       };
       const ownProps = { index: 1 };
       const props = mapStateToProps(state, ownProps);
@@ -245,7 +259,8 @@ describe('<Nucleotide />', () => {
         selection: {
           selections: [{ from: 10, to: 20}],
           selections: [{ from: 1, to: 2}],
-        }
+        },
+        exon: { exons: new Immutable.List() },
       };
       const ownProps = { index: 2 };
       const props = mapStateToProps(state, ownProps);

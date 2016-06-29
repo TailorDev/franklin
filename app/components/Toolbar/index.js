@@ -6,6 +6,7 @@ import Toolbar from './presenter';
 export const mapStateToProps = (state) => {
   const sequence = state.sequence;
   const label = state.label;
+  const exon = state.exon;
 
   let ntSequence = null;
   if (0 < sequence.sequence.size) {
@@ -17,6 +18,7 @@ export const mapStateToProps = (state) => {
     sequence: sequence.sequence,
     labels: label.labels,
     ntSequence,
+    exons: exon.exons,
   };
 };
 
