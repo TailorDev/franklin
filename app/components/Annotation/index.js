@@ -20,8 +20,12 @@ function mapDispatchToProps(dispatch, ownProps) {
   return {
     onClick: () => {
       dispatch(actions.selectAnnotation(ownProps.labelId, ownProps.annotation));
-      dispatch(updateSelectionFrom(ownProps.annotation.positionFrom));
-      dispatch(updateSelectionTo(ownProps.annotation.positionTo));
+      dispatch(updateSelectionFrom(
+        ownProps.annotation.positionFrom - ownProps.positionFrom
+      ));
+      dispatch(updateSelectionTo(
+        ownProps.annotation.positionTo - ownProps.positionFrom
+      ));
     },
   };
 }

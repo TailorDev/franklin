@@ -42,7 +42,7 @@ export const defaultLabels = new Immutable.List([
     isActive: true,
     annotations: new Immutable.List([
       {
-        positionFrom: 1,
+        positionFrom: 10,
         positionTo: 20,
         comment: 'ENSE000036121231-FWD',
       },

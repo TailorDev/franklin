@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import Immutable from 'immutable';
 import { HotKeys } from 'react-hotkeys';
 import Remove from './Remove';
+import InputNumber from './InputNumber';
 
 const { array, number, string, shape, func, instanceOf } = PropTypes;
 
@@ -53,14 +54,14 @@ class AnnotationForm extends Component {
       if (undefined !== selection.from) {
         this.setState({
           disablePositions: false,
-          positionFrom: selection.from + 1,
+          positionFrom: selection.from + nextProps.positionFrom,
         });
       }
 
       if (undefined !== selection.to) {
         this.setState({
           disablePositions: false,
-          positionTo: selection.to + 1,
+          positionTo: selection.to + nextProps.positionFrom,
         });
       }
     } else {
@@ -79,8 +80,8 @@ class AnnotationForm extends Component {
       this.props.onSubmit(
         this.state.labelId,
         {
-          positionFrom: s.from,
-          positionTo: s.to,
+          positionFrom: s.from + this.props.positionFrom,
+          positionTo: s.to + this.props.positionFrom,
           comment: this.state.comment,
         },
         this.state.annotationId
@@ -92,17 +93,25 @@ class AnnotationForm extends Component {
   }
 
   onPositionFromChange(event) {
-    const positionFrom = event.target.value;
+    let positionFrom = parseInt(event.target.value, 10);
+
+    if (isNaN(positionFrom)) {
+      positionFrom = this.props.positionFrom;
+    }
 
     this.setState({ positionFrom });
-    this.props.updateSelectionFrom(positionFrom);
+    this.props.updateSelectionFrom(positionFrom - this.props.positionFrom);
   }
 
   onPositionToChange(event) {
-    const positionTo = event.target.value;
+    let positionTo = parseInt(event.target.value, 10);
+
+    if (isNaN(positionTo)) {
+      positionTo = this.props.positionFrom;
+    }
 
     this.setState({ positionTo });
-    this.props.updateSelectionTo(positionTo);
+    this.props.updateSelectionTo(positionTo - this.props.positionFrom);
   }
 
   onLabelChange(event) {
@@ -137,19 +146,19 @@ class AnnotationForm extends Component {
       <HotKeys handlers={keyHandlers}>
         <div className="annotation-form">
           <form onSubmit={this.onSubmit}>
-            <input
-              type="number"
+            <InputNumber
               value={this.state.positionFrom}
-              placeholder="From"
+              min={this.props.positionFrom}
+              placeholder={'From'}
               onChange={this.onPositionFromChange}
-              disabled={this.state.disablePositions}
+              isDisabled={this.state.disablePositions}
             />
-            <input
-              type="number"
+            <InputNumber
               value={this.state.positionTo}
-              placeholder="To"
+              min={this.props.positionFrom}
+              placeholder={'To'}
               onChange={this.onPositionToChange}
-              disabled={this.state.disablePositions}
+              isDisabled={this.state.disablePositions}
             />
             <select
               onChange={this.onLabelChange}
@@ -214,6 +223,7 @@ AnnotationForm.propTypes = {
     }),
   }),
   selections: array.isRequired,
+  positionFrom: number.isRequired,
 };
 
 export default AnnotationForm;

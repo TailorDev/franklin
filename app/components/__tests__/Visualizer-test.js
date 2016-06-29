@@ -21,6 +21,7 @@ describe('<Visualizer />', () => {
     label: { annotation: '' },
     selection: { selections: [] },
     exon: { exons: new Immutable.List() },
+    sequence: { positionFrom: 123 },
   };
 
   it('renders a SVG element with appropriate dimensions', () => {
@@ -28,7 +29,6 @@ describe('<Visualizer />', () => {
       <Visualizer
         sequence={sequence}
         labels={defaultLabels}
-        positionFrom={0}
       />
     );
 
@@ -42,7 +42,6 @@ describe('<Visualizer />', () => {
       <Visualizer
         sequence={new Immutable.List()}
         labels={defaultLabels}
-        positionFrom={0}
       />
     );
 
@@ -58,7 +57,6 @@ describe('<Visualizer />', () => {
         <Visualizer
           sequence={sequence}
           labels={defaultLabels}
-          positionFrom={0}
         />
       </Provider>
     );
@@ -75,7 +73,6 @@ describe('<Visualizer />', () => {
         <Visualizer
           sequence={sequence}
           labels={defaultLabels}
-          positionFrom={0}
         />
       </Provider>
     );
@@ -99,7 +96,6 @@ describe('<Visualizer />', () => {
       <Visualizer
         sequence={sequence}
         labels={defaultLabels}
-        positionFrom={0}
       />
     );
 

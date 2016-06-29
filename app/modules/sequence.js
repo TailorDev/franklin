@@ -56,7 +56,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         name: 'Demo sequence',
         sequence: defaultSequence,
-        positionFrom: 1,
+        positionFrom: 5,
         loading: false,
       };
 

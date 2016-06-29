@@ -6,6 +6,7 @@ import sinon from 'sinon';
 
 import AnnotationForm from '../AnnotationForm/presenter';
 import Remove from '../AnnotationForm/Remove';
+import InputNumber from '../AnnotationForm/InputNumber';
 import { defaultLabels } from '../../defaults';
 
 describe('<AnnotationForm />', () => {
@@ -22,11 +23,12 @@ describe('<AnnotationForm />', () => {
         onSubmitDone={() => {}}
         selections={[]}
         updateSelectionTo={() => {}}
+        positionFrom={0}
       />
     );
 
     expect(wrapper.find('input[type="submit"]')).to.have.length(1);
-    expect(wrapper.find('input[type="number"]')).to.have.length(2);
+    expect(wrapper.find(InputNumber)).to.have.length(2);
     expect(wrapper.find('select')).to.have.length(1);
     expect(wrapper.find('textarea')).to.have.length(1);
   });
@@ -43,13 +45,14 @@ describe('<AnnotationForm />', () => {
         onSubmitDone={() => {}}
         selections={[]}
         updateSelectionTo={() => {}}
+        positionFrom={0}
       />
     );
 
     wrapper.setProps({ selections });
 
-    expect(wrapper.find('input[type="number"][value=3]')).to.have.length(1);
-    expect(wrapper.find('input[type="number"][value=5]')).to.have.length(1);
+    expect(wrapper.find(InputNumber).get(0).props.value).to.equal(2);
+    expect(wrapper.find(InputNumber).get(1).props.value).to.equal(4);
   });
 
   it('updates annotation form with partial selection', () => {
@@ -64,12 +67,13 @@ describe('<AnnotationForm />', () => {
         updateSelectionTo={() => {}}
         onSubmitDone={() => {}}
         selections={[]}
+        positionFrom={0}
       />
     );
 
     wrapper.setProps({ selections });
 
-    expect(wrapper.find('input[type="number"][value=3]')).to.have.length(1);
+    expect(wrapper.find(InputNumber).get(0).props.value).to.equal(2);
     expect(wrapper.find({placeholder:"To", type:"number", value:''})).to.have.length(1);
   });
 
@@ -84,6 +88,7 @@ describe('<AnnotationForm />', () => {
         updateSelectionTo={() => {}}
         onSubmitDone={() => {}}
         selections={[]}
+        positionFrom={0}
       />
     );
 
@@ -102,6 +107,7 @@ describe('<AnnotationForm />', () => {
         updateSelectionTo={() => {}}
         onSubmitDone={() => {}}
         selections={[]}
+        positionFrom={0}
       />
     );
 
@@ -122,6 +128,7 @@ describe('<AnnotationForm />', () => {
         updateSelectionTo={() => {}}
         onSubmitDone={() => {}}
         selections={[]}
+        positionFrom={0}
       />
     );
 
@@ -152,6 +159,7 @@ describe('<AnnotationForm />', () => {
         updateSelectionTo={() => {}}
         onSubmitDone={() => {}}
         selections={[]}
+        positionFrom={0}
       />
     );
 
@@ -185,6 +193,7 @@ describe('<AnnotationForm />', () => {
         updateSelectionTo={() => {}}
         onSubmitDone={() => {}}
         selections={[]}
+        positionFrom={0}
       />
     );
 
@@ -219,6 +228,7 @@ describe('<AnnotationForm />', () => {
         onRemove={() => {}}
         updateSelectionFrom={() => {}}
         updateSelectionTo={() => {}}
+        positionFrom={0}
       />
     );
 

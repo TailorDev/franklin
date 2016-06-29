@@ -26,12 +26,13 @@ const InputNumber = (props) => {
 };
 
 InputNumber.propTypes = {
-  value: React.PropTypes.number.isRequired,
   min: React.PropTypes.number.isRequired,
   placeholder: React.PropTypes.string.isRequired,
   onChange: React.PropTypes.func.isRequired,
   isDisabled: React.PropTypes.bool.isRequired,
+  // optional
   errorText: React.PropTypes.string,
+  value: React.PropTypes.number,
 };
 
 export default InputNumber;
