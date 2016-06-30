@@ -1,12 +1,6 @@
 import Immutable from 'immutable';
 
 
-export const emptyAnnotation = {
-  positionFrom: undefined,
-  positionTo: undefined,
-  comment: '',
-};
-
 export const defaultSequence = new Immutable.List(
   [
     'ATGGTCACTCTAATCGCAGTCTGCAATTTACGTGTTTCCAACTTAACGCCCCCAAGTTAATAGCCGTAAT',
