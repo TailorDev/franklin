@@ -8,4 +8,42 @@
   & > * {
     padding: 1rem;
   }
+
+  .react-tabs {
+
+    .ReactTabs__TabList {
+      margin-bottom: 0;
+      border-bottom: 1px solid lighten($light-yeah, 30%);
+
+      .ReactTabs__Tab {
+        width: 25%;
+        text-align: center;
+
+        h4 {
+          margin: auto 0.5rem;
+          font-size: 1.5rem;
+        }
+
+        &.ReactTabs__Tab--selected {
+          box-shadow: none;
+          background-color: $light-yeah;
+          border-color: lighten($light-yeah, 30%);
+          color: $white;
+        }
+      }
+    }
+
+    .ReactTabs__TabPanel {
+      padding: 0 1rem 0.5rem;
+      background-color: lighten($light-yeah, 60%);
+      border-bottom-right-radius: $global-radius;
+      border-bottom-left-radius: $global-radius;
+
+      h4 {
+        padding: 0.5rem 0;
+        color: $light-yeah;
+        font-size: 1.2rem;
+      }
+    }
+  }
 }
