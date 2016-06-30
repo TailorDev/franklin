@@ -1,21 +1,21 @@
 import React, { PropTypes } from 'react';
 
 
-const ExonRemove = (props) => (
+const Remove = (props) => (
   <div className="action-remove">
     <p>
-      Are you sure you want to remove this exon?
+      {props.children}
     </p>
     <div className="action-buttons">
       <button
         className="button remove"
-        onClick={props.onRemoveExon}
+        onClick={props.onRemove}
       >
         Remove
       </button>
       <button
         className="button cancel"
-        onClick={props.onActionRemoveCancelClick}
+        onClick={props.onCancel}
       >
         Cancel
       </button>
@@ -23,9 +23,10 @@ const ExonRemove = (props) => (
   </div>
 );
 
-ExonRemove.propTypes = {
-  onRemoveExon: PropTypes.func.isRequired,
-  onActionRemoveCancelClick: PropTypes.func.isRequired,
+Remove.propTypes = {
+  onRemove: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  children: PropTypes.string.isRequired,
 };
 
-export default ExonRemove;
+export default Remove;

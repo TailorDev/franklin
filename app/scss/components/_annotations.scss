@@ -16,23 +16,7 @@
   }
 
   .action-remove {
-    border-radius: $global-radius;
     padding: 1rem;
-    background-color: lighten($light-yeah, 10%);
-    color: $white;
-
-    button {
-      margin-bottom: 0 !important;
-
-      &.remove {
-        @include button($background: $alert-color, $background-hover: darken($alert-color, 10%));
-        margin-right: 0.5rem;
-      }
-
-      &.cancel {
-        @include button( $background: $grey, $background-hover: darken($grey, 10%), $color: $body-font-color );
-      }
-    }
   }
 }
 

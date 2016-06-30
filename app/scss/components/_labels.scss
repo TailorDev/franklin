@@ -5,6 +5,7 @@
 ul.labels {
   list-style: none inside;
   margin-left: 0;
+  margin-bottom: 0;
   line-height: 1.6 !important;
 
   li {
@@ -105,16 +106,19 @@ ul.labels {
 
         .action-remove {
           display: block;
+          background-color: $grey;
+          margin-bottom: 0.5rem;
 
-          button {
-            &.remove {
-              @include button($background: $alert-color, $background-hover: darken($alert-color, 10%));
-              margin-right: 0.5rem;
-            }
+          .cancel {
+            background: darken($grey, 4%);
+          }
 
-            &.cancel {
-              @include button( $background: $grey, $background-hover: darken($grey, 10%), $color: $body-font-color );
-            }
+          button.cancel {
+            @include button(
+              $background: darken($grey, 5%),
+              $background-hover: darken($grey, 10%),
+              $color: $body-font-color
+            );
           }
         }
       }

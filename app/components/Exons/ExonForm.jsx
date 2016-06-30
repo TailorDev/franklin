@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 
-import ExonRemove from './ExonRemove';
+import Remove from '../Remove';
 
 const { func, object } = PropTypes;
 
@@ -148,10 +148,12 @@ class ExonForm extends Component {
           </div>
         </form>
         {this.state.displayRemoveForm ?
-          <ExonRemove
-            onRemoveExon={this.props.onRemoveExon}
-            onActionRemoveCancelClick={this.toggleActionRemove}
-          /> : null
+          <Remove
+            onRemove={this.props.onRemoveExon}
+            onCancel={this.toggleActionRemove}
+          >
+            Are you sure you want to remove this exon?
+          </Remove> : null
         }
       </div>
     );
