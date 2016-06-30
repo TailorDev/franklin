@@ -6,7 +6,7 @@ import sinon from 'sinon';
 
 import AnnotationForm from '../presenter';
 import Remove from '../Remove';
-import InputNumber from '../InputNumber';
+import InputNumber from '../../InputNumber';
 import { defaultLabels } from '../../../defaults';
 
 describe('<AnnotationForm />', () => {

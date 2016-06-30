@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { expect } from 'chai';
 
 // see: https://github.com/mochajs/mocha/issues/1847
@@ -11,7 +11,7 @@ import PositionFrom from '../../PositionFrom/presenter';
 describe('<PositionFrom />', () => {
 
   it('renders itself', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <PositionFrom
         value={123}
         onChange={() => {}}

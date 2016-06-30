@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import Immutable from 'immutable';
 import Remove from './Remove';
-import InputNumber from './InputNumber';
+import InputNumber from '../InputNumber';
 
 const { array, number, string, shape, func, instanceOf } = PropTypes;
 

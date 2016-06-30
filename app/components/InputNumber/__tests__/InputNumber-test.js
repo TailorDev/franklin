@@ -5,7 +5,7 @@ import { expect } from 'chai';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-import InputNumber from '../InputNumber';
+import InputNumber from '../';
 
 
 describe('<InputNumber />', () => {
