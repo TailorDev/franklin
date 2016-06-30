@@ -4,13 +4,20 @@
 
 .loader {
   position: absolute;
-  height: 100%;
   width: 100%;
   background: rgba($primary-color, 0.9);
   color: $white;
   font-size: 1.8rem;
   text-align: center;
   z-index: 1;
+
+  top: header-height(small);
+  bottom: footer-height(small);
+
+  @include breakpoint(medium) {
+    top: header-height(medium);
+    bottom: footer-height(medium);
+  }
 
   .message {
     position: absolute;
