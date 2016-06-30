@@ -56,10 +56,14 @@ ul.labels {
     }
 
     .colorpicker-panel {
-      position: absolute;
-      z-index: 2;
-      right: 235px;
-      margin-top: -258px;
+
+      & > div:nth-child(2) {
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
 
     .colorpicker-overlay {
