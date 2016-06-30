@@ -5,7 +5,7 @@
 .exons {
 
   .exon-form-wrapper {
-    padding: 1rem;
+    padding: 1rem 0;
 
     .action-buttons {
       @include button-group( '.button' );
@@ -48,7 +48,7 @@
     }
 
     &:nth-child(even) {
-      background-color: $oh-baby;
+      background-color: $white;
     }
 
     .properties {
@@ -69,11 +69,15 @@
     &.in-action {
       padding-bottom: 0;
       margin-bottom: 0.5rem;
-      background-color: $light-yeah;
+      background-color: lighten($light-yeah, 10%);
       color: $white;
 
       .properties {
         font-weight: bold;
+      }
+
+      .action-edit {
+        padding: 0 1rem;
       }
 
       .action-remove {
@@ -86,7 +90,9 @@
     margin: 1rem 0 0;
 
     .exon-form-wrapper {
-      background-color: $grey;
+      border-radius: $global-radius;
+      padding: 1rem;
+      background-color: lighten($light-yeah, 10%);
     }
   }
 }
