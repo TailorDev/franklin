@@ -2,7 +2,6 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { expect } from 'chai';
 import Immutable from 'immutable';
-import { defaultLabels } from '../../../defaults';
 import sinon from 'sinon';
 
 // see: https://github.com/mochajs/mocha/issues/1847
@@ -13,10 +12,27 @@ import Line from '../Line';
 
 describe('<Annotation />', () => {
 
+  const label = {
+    name: 'Exon',
+    color: '#334854',
+    isActive: true,
+    annotations: new Immutable.List([
+      {
+        positionFrom: 5,
+        positionTo: 125,
+        comment: 'ENSE000036121231',
+      },
+      {
+        positionFrom: 295,
+        positionTo: 415,
+        comment: 'ENSE000036121232',
+      },
+    ]),
+  };
+  const annotation = label.annotations.first();
+
   it('renders itself', () => {
     const labelId = 0;
-    const label = defaultLabels.get(labelId);
-    const annotation = label.annotations.first();
     const segments = [];
 
     const wrapper = shallow(
@@ -36,8 +52,6 @@ describe('<Annotation />', () => {
 
   it('is inactive if label is inactive', () => {
     const labelId = 0;
-    const label = defaultLabels.get(labelId);
-    const annotation = label.annotations.first();
     const segments = [];
 
     label.isActive = false;
@@ -58,8 +72,6 @@ describe('<Annotation />', () => {
 
   it('renders segments on mount', () => {
     const labelId = 0;
-    const label = defaultLabels.get(labelId);
-    const annotation = label.annotations.first();
     const segments = [
       { x1: 0, y1: 0, x2: 5, y2: 0 },
     ];
@@ -81,8 +93,6 @@ describe('<Annotation />', () => {
 
   it('renders segments when new props are received', () => {
     const labelId = 0;
-    const label = defaultLabels.get(labelId);
-    const annotation = label.annotations.first();
     const segments = [
       { x1: 0, y1: 0, x2: 5, y2: 0 },
     ];
@@ -109,8 +119,6 @@ describe('<Annotation />', () => {
 
   it('dispatches an action on click', () => {
     const labelId = 0;
-    const label = defaultLabels.get(labelId);
-    const annotation = label.annotations.first();
     const segments = [
       { x1: 0, y1: 0, x2: 5, y2: 0 },
     ];
@@ -131,7 +139,6 @@ describe('<Annotation />', () => {
 
   it('should NOT render the tick if annotation is a unit (dimension == 1)', () => {
     const labelId = 0;
-    const label = defaultLabels.get(labelId);
     const segments = [
       { x1: 0, y1: 0, x2: 0, y2: 5 },
     ];
@@ -160,8 +167,6 @@ describe('<Annotation />', () => {
 
   it('should render a tick', () => {
     const labelId = 0;
-    const label = defaultLabels.get(labelId);
-    const annotation = label.annotations.first();
     const segments = [
       { x1: 0, y1: 1, x2: 0, y2: 5 },
     ];
@@ -185,8 +190,6 @@ describe('<Annotation />', () => {
 
   it('should render a tick with multiple segments', () => {
     const labelId = 0;
-    const label = defaultLabels.get(labelId);
-    const annotation = label.annotations.first();
     const segments = [
       { x1: 0, y1: 1, x2: 0, y2: 5 },
       { x1: 1, y1: 2, x2: 1, y2: 6 },
@@ -211,7 +214,6 @@ describe('<Annotation />', () => {
 
   it('should render a tick for reverse annotation', () => {
     const labelId = 0;
-    const label = defaultLabels.get(labelId);
     const segments = [
       { x1: 0, y1: 1, x2: 0, y2: 5 },
       { x1: 1, y1: 2, x2: 1, y2: 6 },

@@ -21,7 +21,7 @@ describe('modules/label', () => {
 
     expect(state.labels).not.to.be.undefined;
     expect(state.selectedAnnotation).not.to.be.undefined;
-    expect(state.labels.size).to.equal(3);
+    expect(state.labels.size).to.equal(2);
   });
 
   it('should handle CREATE', () => {

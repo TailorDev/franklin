@@ -20,23 +20,6 @@ export const defaultSequence = new Immutable.List(
 
 export const defaultLabels = new Immutable.List([
   {
-    name: 'Exon',
-    color: '#334854',
-    isActive: true,
-    annotations: new Immutable.List([
-      {
-        positionFrom: 5,
-        positionTo: 125,
-        comment: 'ENSE000036121231',
-      },
-      {
-        positionFrom: 295,
-        positionTo: 415,
-        comment: 'ENSE000036121232',
-      },
-    ]),
-  },
-  {
     name: 'Primer',
     color: '#f9c535',
     isActive: true,
