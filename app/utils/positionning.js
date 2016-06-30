@@ -37,7 +37,7 @@ export const getNucleotideCoordinates = (
  * @param {number} rowHeight
  * @param {number} nucleotidesRowHeight
  * @param {number} trackHeight
- * @return {Object} coordinates - segment coordinates {x1: 0, x2: 0, y1: 0, y3: 0}
+ * @return {Object} coordinates - segment coordinates {x1: 0, x2: 0, y1: 0, y2: 0}
  */
 export const getAnnotationSegmentCoordinates = (
   indexFrom, indexTo, currentTrack, visualizerMargin, nucleotidesPerRow,
@@ -80,7 +80,7 @@ export const getAnnotationSegments = (
     { from: indexFrom, to: indexTo } : { from: indexTo, to: indexFrom };
 
   let start = from;
-  for (let i = start + 1; i < to; i++) {
+  for (let i = start + 1; i <= to; i++) {
     if (! (i % nucleotidesPerRow)) {
       segments.push([start, i - 1]);
       start = i;

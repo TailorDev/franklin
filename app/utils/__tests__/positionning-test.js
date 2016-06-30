@@ -1,6 +1,7 @@
 import {
   getNucleotideCoordinates,
   getAnnotationSegmentCoordinates,
+  getAnnotationSegments,
 } from '../positionning';
 import sinon from 'sinon';
 import { expect } from 'chai';
@@ -109,6 +110,45 @@ describe('utils/positionning', () => {
       expect(y1).to.equal(NUCLEOTIDE_HEIGHT + 1 * 5);
       expect(x2).to.equal(NUCLEOTIDE_WIDTH + NUCLEOTIDE_WIDTH);
       expect(y2).to.equal(y1);
+    });
+
+    it('handles last nucleotide of a row', () => {
+      const { x1, x2, y1, y2 } = getAnnotationSegmentCoordinates(
+        NUCLEOTIDES_PER_ROW - 2, //indexFrom
+        NUCLEOTIDES_PER_ROW - 1, //indexTo
+        1, //currentTrack
+        { x: 0, y: 0 },
+        NUCLEOTIDES_PER_ROW,
+        NUCLEOTIDE_WIDTH,
+        ROW_HEIGHT,
+        NUCLEOTIDE_HEIGHT,
+        5 //trackHeight
+      );
+
+      expect(x1).to.equal(NUCLEOTIDE_WIDTH * (NUCLEOTIDES_PER_ROW - 2) + (NUCLEOTIDE_WIDTH / 2));
+      expect(y1).to.equal(NUCLEOTIDES_PER_ROW);
+      expect(x2).to.equal(NUCLEOTIDES_PER_ROW * NUCLEOTIDE_WIDTH);
+      expect(y2).to.equal(y1);
+    });
+  });
+
+  describe('getAnnotationSegments()', () => {
+    it('handles the last nucleotide of a first row', () => {
+      const segments = getAnnotationSegments(
+        NUCLEOTIDES_PER_ROW - 1,
+        NUCLEOTIDES_PER_ROW,
+        2,
+        { x: 0, y: 0 },
+        NUCLEOTIDES_PER_ROW,
+        NUCLEOTIDE_WIDTH,
+        ROW_HEIGHT,
+        NUCLEOTIDE_HEIGHT,
+        5 //trackHeight
+      );
+
+      expect(segments).to.have.length(2);
+      expect(segments[0]).to.deep.equal({ x1: 47.5, x2: 50, y1: 15, y2: 15 });
+      expect(segments[1]).to.deep.equal({ x1: 2.5, x2: 5, y1: 35, y2: 35 });
     });
   });
 });
