@@ -75,3 +75,11 @@ export const defaultLabels = new Immutable.List([
     ),
   },
 ]);
+
+export const defaultExons = new Immutable.List([
+  {
+    name: 'Exon 1',
+    positionFrom: 150,
+    positionTo: 159,
+  },
+]);

@@ -14,6 +14,13 @@ describe('modules/exon', () => {
     expect(state.exons.size).to.be.empty;
   });
 
+  it('should handle LOAD_DEFAULT', () => {
+    const state = reducer(undefined, actions.loadDefaultExons());
+
+    expect(state).to.have.all.keys('exons');
+    expect(state.exons.size).to.equal(1);
+  });
+
   it('should handle CREATE', () => {
     const state = reducer(undefined, actions.create({
       name: 'exon 1',

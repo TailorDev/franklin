@@ -6,6 +6,7 @@ import {
 } from './label';
 import { clear as clearSelection } from './selection';
 import { clear as clearSearch } from './search';
+import { loadDefaultExons } from './exon';
 
 
 // Actions
@@ -13,6 +14,7 @@ export function loadDefault() {
   return (dispatch) => {
     dispatch(loadDefaultSequence());
     dispatch(loadDefaultLabels());
+    dispatch(loadDefaultExons());
   };
 }
 

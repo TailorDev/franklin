@@ -1,11 +1,17 @@
 import Immutable from 'immutable';
+import { defaultExons } from '../defaults';
 
 // Actions
+const LOAD_DEFAULT = 'franklin/exon/LOAD_DEFAULT';
 const CREATE = 'franklin/exon/CREATE';
 const UPDATE_AT = 'franklin/exon/UPDATE_AT';
 const REMOVE_AT = 'franklin/exon/REMOVE_AT';
 
 // Action Creators
+export function loadDefaultExons() {
+  return { type: LOAD_DEFAULT };
+}
+
 export function create(exon) {
   return { type: CREATE, exon };
 }
@@ -25,6 +31,11 @@ const initialState = {
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
+    case LOAD_DEFAULT:
+      return {
+        exons: defaultExons,
+      };
+
     case CREATE:
       return {
         exons: state.exons.push(action.exon),
