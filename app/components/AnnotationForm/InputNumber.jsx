@@ -32,7 +32,10 @@ InputNumber.propTypes = {
   isDisabled: React.PropTypes.bool.isRequired,
   // optional
   errorText: React.PropTypes.string,
-  value: React.PropTypes.number,
+  value: React.PropTypes.oneOfType([
+    React.PropTypes.number,
+    React.PropTypes.oneOf(['']),
+  ]),
 };
 
 export default InputNumber;
