@@ -27,15 +27,6 @@ export default class Nucleotide extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps) {
-    return (this.props.isSelected !== nextProps.isSelected) ||
-      (this.props.isInSelectionRange !== nextProps.isInSelectionRange) ||
-      (this.props.isInExon !== nextProps.isInExon) ||
-      (this.props.nucleotidesPerRow !== nextProps.nucleotidesPerRow) ||
-      (this.props.rowHeight !== nextProps.rowHeight) ||
-      (this.props.position !== nextProps.position);
-  }
-
   getPositionLength() {
     return this.props.position.toString().length;
   }
