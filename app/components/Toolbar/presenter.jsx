@@ -1,5 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import AnnotationForm from '../AnnotationForm';
 import Labels from '../Labels';
@@ -23,26 +24,45 @@ const Toolbar = (props) => (
       />
     </div>
 
-    <div className="exon-panel">
-      <h4>Exons</h4>
-      <Exons {...props} />
-    </div>
+    <Tabs
+      forceRenderTabPanel
+    >
+      <TabList>
+        <Tab>
+          <h4>Labels</h4>
+        </Tab>
+        <Tab>
+          <h4>Exons</h4>
+        </Tab>
+        <Tab>
+          <h4>Annotations</h4>
+        </Tab>
+      </TabList>
 
-    <div className="annotation-panel">
-      <h4>Annotation</h4>
-      <AnnotationForm
-        sequence={props.sequence}
-        labels={props.labels}
-      />
-    </div>
+      <TabPanel>
+        <div className="label-panel">
+          <Labels
+            sequence={props.sequence}
+            labels={props.labels}
+          />
+        </div>
+      </TabPanel>
 
-    <div className="label-panel">
-      <h4>Labels</h4>
-      <Labels
-        sequence={props.sequence}
-        labels={props.labels}
-      />
-    </div>
+      <TabPanel>
+        <div className="exon-panel">
+          <Exons {...props} />
+        </div>
+      </TabPanel>
+
+      <TabPanel>
+        <div className="annotation-panel">
+          <AnnotationForm
+            sequence={props.sequence}
+            labels={props.labels}
+          />
+        </div>
+      </TabPanel>
+    </Tabs>
   </div>
 );
 
