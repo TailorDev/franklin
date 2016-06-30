@@ -8,9 +8,11 @@
   }
 
   .remove {
-    @include button($background: $grey, $background-hover: darken($alert-color, 10%));
+    @include button(
+      $background: $alert-color,
+      $background-hover: darken($alert-color, 5%)
+    );
     margin-left: 0.5rem;
-    color: #0a0a0a;
   }
 
   .action-remove {
