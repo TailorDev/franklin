@@ -65,6 +65,11 @@ Please note that this project is released with a [Contributor Code of
 Conduct](http://contributor-covenant.org/). By participating in this project you
 agree to abide by its terms. See [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) file.
 
+## Credits
+
+We use [NtSeq](https://github.com/keithwhor/NtSeq) (browser version) from Keith
+Horwood, which is versioned (and slightly modified) in `app/utils/ntseq.js`.
+
 ## License
 
 Franklin is released under the MIT License. See the bundled
