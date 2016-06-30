@@ -9,8 +9,8 @@ const { describe, it } = global;
 import Label from '../Label';
 import LabelEdit from '../LabelEdit';
 import LabelForm from '../LabelForm';
-import LabelRemove from '../LabelRemove';
 import LabelTools from '../LabelTools';
+import Remove from '../../Remove';
 
 
 describe('<Label />', () => {
@@ -133,13 +133,13 @@ describe('<Label />', () => {
     );
 
     expect(wrapper.instance().state.displayRemoveForm).to.be.false;
-    expect(wrapper.find(LabelRemove)).to.have.length(0);
+    expect(wrapper.find(Remove)).to.have.length(0);
 
     expect(wrapper.find('i.remove')).to.have.length(1);
     wrapper.find('i.remove').simulate('click');
 
     expect(wrapper.instance().state.displayRemoveForm).to.be.true;
-    expect(wrapper.find(LabelRemove)).to.have.length(1);
+    expect(wrapper.find(Remove)).to.have.length(1);
   });
 
   it('can cancel deletion', () => {

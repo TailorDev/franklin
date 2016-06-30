@@ -6,17 +6,19 @@ import sinon from 'sinon';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-import LabelRemove from '../LabelRemove';
+import Remove from '../';
 
 
-describe('<LabelRemove />', () => {
+describe('<Remove />', () => {
 
-  it('renders a remove dialog box', () => {
+  it('should render a remove dialog box', () => {
     const wrapper = shallow(
-      <LabelRemove
-        onActionRemoveCancelClick={() => {}}
-        onLabelRemove={() => {}}
-      />
+      <Remove
+        onCancel={() => {}}
+        onRemove={() => {}}
+      >
+        Foo
+      </Remove>
     );
 
     expect(wrapper.find('.action-remove')).to.have.length(1);
@@ -24,26 +26,30 @@ describe('<LabelRemove />', () => {
     expect(wrapper.find('button.cancel')).to.have.length(1);
   });
 
-  it('fires label deletion canceling', () => {
+  it('should fire cancel handler', () => {
     const spy = sinon.spy();
     const wrapper = shallow(
-      <LabelRemove
-        onActionRemoveCancelClick={spy}
-        onLabelRemove={() => {}}
-      />
+      <Remove
+        onCancel={spy}
+        onRemove={() => {}}
+      >
+        Foo
+      </Remove>
     );
 
     wrapper.find('button.cancel').simulate('click');
     expect(spy.calledOnce).to.be.true;
   });
 
-  it('fires label deletion', () => {
+  it('should fire deletion handler', () => {
     const spy = sinon.spy();
     const wrapper = shallow(
-      <LabelRemove
-        onActionRemoveCancelClick={() => {}}
-        onLabelRemove={spy}
-      />
+      <Remove
+        onCancel={() => {}}
+        onRemove={spy}
+      >
+        Foo
+      </Remove>
     );
 
     wrapper.find('button.remove').simulate('click');

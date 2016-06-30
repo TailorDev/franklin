@@ -5,7 +5,7 @@ import Immutable from 'immutable';
 import sinon from 'sinon';
 
 import AnnotationForm from '../presenter';
-import Remove from '../Remove';
+import Remove from '../../Remove';
 import InputNumber from '../../InputNumber';
 import { defaultLabels } from '../../../defaults';
 

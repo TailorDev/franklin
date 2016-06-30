@@ -3,8 +3,8 @@ import React, { PropTypes, Component } from 'react';
 const { object, func } = PropTypes;
 
 import LabelEdit from './LabelEdit';
-import LabelRemove from './LabelRemove';
 import LabelTools from './LabelTools';
+import Remove from '../Remove';
 
 
 class Label extends Component {
@@ -73,10 +73,12 @@ class Label extends Component {
         />
 
         {this.state.displayRemoveForm ?
-          <LabelRemove
-            onActionRemoveCancelClick={this.toggleActionRemove}
-            onLabelRemove={this.handleLabelRemove}
-          /> : null
+          <Remove
+            onCancel={this.toggleActionRemove}
+            onRemove={this.handleLabelRemove}
+          >
+            Are you sure you want to remove this label and its related annotations?
+          </Remove> : null
         }
 
         {this.state.displayEditForm ?
