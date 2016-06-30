@@ -10,24 +10,39 @@
   }
 
   .react-tabs {
-    h4 {
-      font-size: 1.07rem;
-    }
 
     .ReactTabs__TabList {
-      margin-bottom: 1rem;
-      border-bottom: 1px solid $medium-gray;
+      margin-bottom: 0;
+      border-bottom: 1px solid lighten($light-yeah, 30%);
+
+      .ReactTabs__Tab {
+        width: 25%;
+        text-align: center;
+
+        h4 {
+          margin: auto 0.5rem;
+          font-size: 1.5rem;
+        }
+
+        &.ReactTabs__Tab--selected {
+          box-shadow: none;
+          background-color: $light-yeah;
+          border-color: lighten($light-yeah, 30%);
+          color: $white;
+        }
+      }
     }
 
-    [role=tab] {
+    .ReactTabs__TabPanel {
+      padding: 0 1rem 0.5rem;
+      background-color: lighten($light-yeah, 60%);
+      border-bottom-right-radius: $global-radius;
+      border-bottom-left-radius: $global-radius;
 
-      &:focus {
-        box-shadow: none;
-        border-color: #aaa;
-      }
-
-      &[aria-selected=true] {
-        border-color: $medium-gray;
+      h4 {
+        padding: 0.5rem 0;
+        color: $light-yeah;
+        font-size: 1.2rem;
       }
     }
   }
