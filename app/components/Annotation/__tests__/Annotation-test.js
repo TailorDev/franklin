@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { expect } from 'chai';
 import Immutable from 'immutable';
 import { defaultLabels } from '../../../defaults';
@@ -9,6 +9,7 @@ import sinon from 'sinon';
 const { describe, it } = global;
 
 import Annotation from '../presenter';
+import Line from '../Line';
 
 describe('<Annotation />', () => {
 
@@ -74,8 +75,8 @@ describe('<Annotation />', () => {
       />
     );
 
-    expect(wrapper.find('g')).to.have.length(2);
-    expect(wrapper.find('line')).to.have.length(2);
+    expect(wrapper.find('g')).to.have.length(1);
+    expect(wrapper.find(Line)).to.have.length(1);
   });
 
   it('renders segments when new props are received', () => {
@@ -98,12 +99,12 @@ describe('<Annotation />', () => {
     );
 
     expect(wrapper.find('g')).to.have.length(1);
-    expect(wrapper.find('line')).to.have.length(0);
+    expect(wrapper.find(Line)).to.have.length(0);
 
     // test starts here
     wrapper.setProps({ getAnnotationSegments: () => { return segments; } });
 
-    expect(wrapper.find('line')).to.have.length(2);
+    expect(wrapper.find(Line)).to.have.length(1);
   });
 
   it('dispatches an action on click', () => {
@@ -141,7 +142,7 @@ describe('<Annotation />', () => {
       positionTo: 1,
     });
 
-    const wrapper = shallow(
+    const wrapper = mount(
       <Annotation
         annotation={annotation}
         label={label}
@@ -153,7 +154,7 @@ describe('<Annotation />', () => {
     );
 
     expect(wrapper.find('g')).to.have.length(2);
-    expect(wrapper.find('line')).to.have.length(1);
+    expect(wrapper.find(Line)).to.have.length(1);
     expect(wrapper.find('.annotation-tick')).to.have.length(0);
   });
 
@@ -165,7 +166,7 @@ describe('<Annotation />', () => {
       { x1: 0, y1: 1, x2: 0, y2: 5 },
     ];
 
-    const wrapper = shallow(
+    const wrapper = mount(
       <Annotation
         annotation={annotation}
         label={label}
@@ -177,7 +178,7 @@ describe('<Annotation />', () => {
     );
 
     expect(wrapper.find('g')).to.have.length(2);
-    expect(wrapper.find('line')).to.have.length(2);
+    expect(wrapper.find(Line)).to.have.length(1);
     expect(wrapper.find('.annotation-tick.forward')).to.have.length(1);
     expect(wrapper.find('.annotation-tick.reverse')).to.have.length(0);
   });
@@ -191,7 +192,7 @@ describe('<Annotation />', () => {
       { x1: 1, y1: 2, x2: 1, y2: 6 },
     ];
 
-    const wrapper = shallow(
+    const wrapper = mount(
       <Annotation
         annotation={annotation}
         label={label}
@@ -203,7 +204,7 @@ describe('<Annotation />', () => {
     );
 
     expect(wrapper.find('g')).to.have.length(3);
-    expect(wrapper.find('line')).to.have.length(3);
+    expect(wrapper.find(Line)).to.have.length(2);
     expect(wrapper.find('.annotation-tick.forward')).to.have.length(1);
     expect(wrapper.find('.annotation-tick.reverse')).to.have.length(0);
   });
@@ -221,7 +222,7 @@ describe('<Annotation />', () => {
       positionTo: 1,
     });
 
-    const wrapper = shallow(
+    const wrapper = mount(
       <Annotation
         annotation={annotation}
         label={label}
@@ -232,8 +233,7 @@ describe('<Annotation />', () => {
       />
     );
 
-    expect(wrapper.find('g')).to.have.length(3);
-    expect(wrapper.find('line')).to.have.length(3);
+    expect(wrapper.find(Line)).to.have.length(2);
     expect(wrapper.find('.annotation-tick.forward')).to.have.length(0);
     expect(wrapper.find('.annotation-tick.reverse')).to.have.length(1);
   });

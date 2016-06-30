@@ -1,12 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+import Line from './Line';
 
 const { bool, func, number, object } = PropTypes;
 
-
-const tickPosition = {
-  x: 5,
-  y: 4,
-};
 
 class Annotation extends Component {
   constructor(props, context) {
@@ -49,26 +45,16 @@ class Annotation extends Component {
         onClick={this.props.onClick}
       >
         {this.state.segments.map((line, index) =>
-          <g key={index}>
-            <line
-              x1={line.x1}
-              x2={line.x2}
-              y1={line.y1}
-              y2={line.y2}
-              className="annotation-segment"
-              stroke={this.props.label.color}
-            />
-            {!isUnit && indexForTick === index ?
-              <line
-                x1={isReverse ? line.x1 : line.x2}
-                x2={isReverse ? line.x1 + tickPosition.x : line.x2 - tickPosition.x}
-                y1={isReverse ? line.y1 : line.y2}
-                y2={isReverse ? line.y1 + tickPosition.y : line.y2 - tickPosition.y}
-                stroke={this.props.label.color}
-                className={`annotation-tick ${isReverse ? 'reverse' : 'forward'}`}
-              /> : null
-            }
-          </g>
+          <Line
+            key={index}
+            x1={line.x1}
+            x2={line.x2}
+            y1={line.y1}
+            y2={line.y2}
+            color={this.props.label.color}
+            hasTick={!isUnit && indexForTick === index}
+            isReverse={isReverse}
+          />
         )}
       </g>
     );
