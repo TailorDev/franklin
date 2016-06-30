@@ -270,7 +270,7 @@ describe('<Nucleotide />', () => {
       expect(props.isInSelectionRange).to.be.true;
     });
 
-    it('returns isInSelectionRange and isSelected with inverted selections', () => {
+    it('returns isInSelectionRange and isSelected with reverse selections', () => {
       const state = {
         selection: {
           selections: [{ from: 10, to: 2}],

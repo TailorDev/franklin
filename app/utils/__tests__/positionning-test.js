@@ -92,7 +92,7 @@ describe('utils/positionning', () => {
       expect(y2).to.equal(y1);
     });
 
-    it('handles inverted selections', () => {
+    it('handles reverse selections', () => {
       const { x1, x2, y1, y2 } = getAnnotationSegmentCoordinates(
         1, //indexFrom
         0, //indexTo

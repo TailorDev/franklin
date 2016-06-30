@@ -211,7 +211,7 @@ describe('<Annotation />', () => {
     expect(wrapper.find('circle').props().cy).to.equal(6);
   });
 
-  it('should render a tick for inverted annotation', () => {
+  it('should render a tick for reverse annotation', () => {
     const labelId = 0;
     const label = defaultLabels.get(labelId);
     const segments = [

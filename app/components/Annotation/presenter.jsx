@@ -32,9 +32,9 @@ class Annotation extends Component {
 
   render() {
     const a = this.props.annotation;
-    const isInverted = a.positionFrom > a.positionTo;
+    const isReverse = a.positionFrom > a.positionTo;
     const isUnit = a.positionFrom === a.positionTo;
-    const indexForTick = isInverted ? 0 : this.state.segments.length - 1;
+    const indexForTick = isReverse ? 0 : this.state.segments.length - 1;
 
     /* eslint prefer-template: 0 */
     const complementColor = ('000000' + (0xffffff ^ parseInt(
@@ -60,8 +60,8 @@ class Annotation extends Component {
             />
             {!isUnit && indexForTick === index ?
               <circle
-                cx={isInverted ? line.x1 : line.x2}
-                cy={isInverted ? line.y1 : line.y2}
+                cx={isReverse ? line.x1 : line.x2}
+                cy={isReverse ? line.y1 : line.y2}
                 r="2"
                 fill={`#${complementColor}`}
               /> : null
