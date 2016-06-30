@@ -3,6 +3,7 @@ import { defaultExons } from '../defaults';
 
 // Actions
 const LOAD_DEFAULT = 'franklin/exon/LOAD_DEFAULT';
+const LOAD_EMPTY = 'franklin/exon/LOAD_EMPTY';
 const CREATE = 'franklin/exon/CREATE';
 const UPDATE_AT = 'franklin/exon/UPDATE_AT';
 const REMOVE_AT = 'franklin/exon/REMOVE_AT';
@@ -10,6 +11,10 @@ const REMOVE_AT = 'franklin/exon/REMOVE_AT';
 // Action Creators
 export function loadDefaultExons() {
   return { type: LOAD_DEFAULT };
+}
+
+export function loadEmpty() {
+  return { type: LOAD_EMPTY };
 }
 
 export function create(exon) {
@@ -31,6 +36,9 @@ const initialState = {
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
+    case LOAD_EMPTY:
+      return initialState;
+
     case LOAD_DEFAULT:
       return {
         exons: defaultExons,

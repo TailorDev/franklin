@@ -1,12 +1,18 @@
-import { loadDefaultSequence, loadFile as loadFileSequence } from './sequence';
+import {
+  loadDefaultSequence,
+  loadFile as loadFileSequence,
+} from './sequence';
 import {
   loadDefaultLabels,
   loadEmpty as loadEmptyLabels,
   clearSelectedAnnotation,
 } from './label';
+import {
+  loadDefaultExons,
+  loadEmpty as loadEmptyExons,
+} from './exon';
 import { clear as clearSelection } from './selection';
 import { clear as clearSearch } from './search';
-import { loadDefaultExons } from './exon';
 
 
 // Actions
@@ -22,6 +28,7 @@ export function loadFile(file) {
   return (dispatch) => {
     dispatch(loadFileSequence(file));
     dispatch(loadEmptyLabels());
+    dispatch(loadEmptyExons());
   };
 }
 

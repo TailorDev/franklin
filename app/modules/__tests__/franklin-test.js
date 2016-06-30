@@ -29,6 +29,7 @@ describe('modules/franklin', () => {
     const expectedActions = [
       { type: 'franklin/sequence/LOAD_FILE' },
       { type: 'franklin/label/LOAD_EMPTY' },
+      { type: 'franklin/exon/LOAD_EMPTY' },
     ];
     const store = mockStore({});
 
