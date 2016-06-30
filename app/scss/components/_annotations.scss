@@ -16,12 +16,14 @@
   }
 
   .action-remove {
-    display: block;
-    border: 1px solid $alert-color;
     border-radius: $global-radius;
-    padding: 0.2rem 0.5rem;
+    padding: 1rem;
+    background-color: lighten($light-yeah, 10%);
+    color: $white;
 
     button {
+      margin-bottom: 0 !important;
+
       &.remove {
         @include button($background: $alert-color, $background-hover: darken($alert-color, 10%));
         margin-right: 0.5rem;
