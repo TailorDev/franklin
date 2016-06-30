@@ -36,16 +36,19 @@
   stroke-width: 4;
   stroke-opacity: 0.4;
   stroke-linecap: round;
+  fill-opacity: 0.4;
 
   &.selected,
   &:hover {
     stroke-width: 6;
     stroke-opacity: 1;
+    fill-opacity: 1;
     cursor: pointer;
   }
 
   &.inactive {
     stroke-opacity: 0;
+    fill-opacity: 0;
   }
 
   .annotation-segment {}
