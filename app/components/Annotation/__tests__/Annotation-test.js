@@ -75,8 +75,7 @@ describe('<Annotation />', () => {
     );
 
     expect(wrapper.find('g')).to.have.length(2);
-    expect(wrapper.find('line')).to.have.length(1);
-    expect(wrapper.find('circle')).to.have.length(1);
+    expect(wrapper.find('line')).to.have.length(2);
   });
 
   it('renders segments when new props are received', () => {
@@ -104,7 +103,7 @@ describe('<Annotation />', () => {
     // test starts here
     wrapper.setProps({ getAnnotationSegments: () => { return segments; } });
 
-    expect(wrapper.find('line')).to.have.length(1);
+    expect(wrapper.find('line')).to.have.length(2);
   });
 
   it('dispatches an action on click', () => {
@@ -155,7 +154,7 @@ describe('<Annotation />', () => {
 
     expect(wrapper.find('g')).to.have.length(2);
     expect(wrapper.find('line')).to.have.length(1);
-    expect(wrapper.find('circle')).to.have.length(0);
+    expect(wrapper.find('.annotation-tick')).to.have.length(0);
   });
 
   it('should render a tick', () => {
@@ -178,10 +177,9 @@ describe('<Annotation />', () => {
     );
 
     expect(wrapper.find('g')).to.have.length(2);
-    expect(wrapper.find('line')).to.have.length(1);
-    expect(wrapper.find('circle')).to.have.length(1);
-    expect(wrapper.find('circle').props().cx).to.equal(0);
-    expect(wrapper.find('circle').props().cy).to.equal(5);
+    expect(wrapper.find('line')).to.have.length(2);
+    expect(wrapper.find('.annotation-tick.forward')).to.have.length(1);
+    expect(wrapper.find('.annotation-tick.reverse')).to.have.length(0);
   });
 
   it('should render a tick with multiple segments', () => {
@@ -205,10 +203,9 @@ describe('<Annotation />', () => {
     );
 
     expect(wrapper.find('g')).to.have.length(3);
-    expect(wrapper.find('line')).to.have.length(2);
-    expect(wrapper.find('circle')).to.have.length(1);
-    expect(wrapper.find('circle').props().cx).to.equal(1);
-    expect(wrapper.find('circle').props().cy).to.equal(6);
+    expect(wrapper.find('line')).to.have.length(3);
+    expect(wrapper.find('.annotation-tick.forward')).to.have.length(1);
+    expect(wrapper.find('.annotation-tick.reverse')).to.have.length(0);
   });
 
   it('should render a tick for reverse annotation', () => {
@@ -236,9 +233,8 @@ describe('<Annotation />', () => {
     );
 
     expect(wrapper.find('g')).to.have.length(3);
-    expect(wrapper.find('line')).to.have.length(2);
-    expect(wrapper.find('circle')).to.have.length(1);
-    expect(wrapper.find('circle').props().cx).to.equal(0);
-    expect(wrapper.find('circle').props().cy).to.equal(1);
+    expect(wrapper.find('line')).to.have.length(3);
+    expect(wrapper.find('.annotation-tick.forward')).to.have.length(0);
+    expect(wrapper.find('.annotation-tick.reverse')).to.have.length(1);
   });
 });

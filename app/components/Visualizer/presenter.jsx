@@ -21,7 +21,7 @@ export default class Visualizer extends Component {
       nucleotidesRowHeight: 50,
       nucleotideWidth: 12,
       tracksPerRow: props.labels.size,
-      trackHeight: 6,
+      trackHeight: 12,
       rowHeight: 0,
       width: '100%',
       height: '100%',

@@ -3,6 +3,11 @@ import React, { Component, PropTypes } from 'react';
 const { bool, func, number, object } = PropTypes;
 
 
+const tickPosition = {
+  x: 5,
+  y: 4,
+};
+
 class Annotation extends Component {
   constructor(props, context) {
     super(props, context);
@@ -36,11 +41,6 @@ class Annotation extends Component {
     const isUnit = a.positionFrom === a.positionTo;
     const indexForTick = isReverse ? 0 : this.state.segments.length - 1;
 
-    /* eslint prefer-template: 0 */
-    const complementColor = ('000000' + (0xffffff ^ parseInt(
-      this.props.label.color.substr(1), 16
-    ))).slice(-6);
-
     return (
       <g
         className={`annotation
@@ -59,11 +59,13 @@ class Annotation extends Component {
               stroke={this.props.label.color}
             />
             {!isUnit && indexForTick === index ?
-              <circle
-                cx={isReverse ? line.x1 : line.x2}
-                cy={isReverse ? line.y1 : line.y2}
-                r="2"
-                fill={`#${complementColor}`}
+              <line
+                x1={isReverse ? line.x1 : line.x2}
+                x2={isReverse ? line.x1 + tickPosition.x : line.x2 - tickPosition.x}
+                y1={isReverse ? line.y1 : line.y2}
+                y2={isReverse ? line.y1 + tickPosition.y : line.y2 - tickPosition.y}
+                stroke={this.props.label.color}
+                className={`annotation-tick ${isReverse ? 'reverse' : 'forward'}`}
               /> : null
             }
           </g>
