@@ -2,13 +2,21 @@ import React, { PropTypes } from 'react';
 
 const Search = (props) => (
   <div className="search">
-    <input
-      type="text"
-      placeholder="ATCG..."
-      value={props.value}
-      onChange={props.onChange}
-      disabled={null === props.ntSequence}
-    />
+    <label>
+      <input
+        type="text"
+        placeholder="ATCG..."
+        value={props.value}
+        onChange={props.onChange}
+        disabled={null === props.ntSequence}
+        aria-describedby="search-help"
+      />
+    </label>
+    <p className="help-text" id="search-help">
+      <a href="https://en.wikipedia.org/wiki/Nucleic_acid_notation#IUPAC_notation">
+        IUPAC notation
+      </a> is supported.
+    </p>
     {props.value.length ?
       <div className={`matches${0 === props.matches ? ' none' : ''}`}>
         <span>{props.matches}</span> match{1 < props.matches ? 'es' : null}
