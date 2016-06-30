@@ -2,11 +2,14 @@ import React from 'react';
 
 
 const PositionFrom = (props) => (
-  <input
-    type="number"
-    value={props.value}
-    onChange={props.onChange}
-  />
+  <label>
+    Starting position
+    <input
+      type="number"
+      value={props.value}
+      onChange={props.onChange}
+    />
+  </label>
 );
 
 PositionFrom.propTypes = {

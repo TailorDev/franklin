@@ -12,7 +12,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onChange: (event) => {
-    const position = parseInt(event.target.value, 10);
+    let position = parseInt(event.target.value, 10);
+
+    if (isNaN(position)) {
+      position = 1;
+    }
 
     dispatch(changePositionFrom(position));
   },
