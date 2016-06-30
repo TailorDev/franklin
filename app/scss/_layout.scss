@@ -2,6 +2,10 @@
 * Franklin Layout
 */
 
+*:focus {
+  outline: none;
+}
+
 .layout {
   header.main {
     height: header-height(small);
