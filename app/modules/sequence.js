@@ -64,7 +64,6 @@ export default function reducer(state = initialState, action = {}) {
       return {
         name: action.name,
         sequence: action.sequence,
-        // TODO: allow user input for from/to positions (at least from)
         positionFrom: 1,
         loading: false,
       };
