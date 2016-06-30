@@ -43,15 +43,18 @@ export const getAnnotationSegmentCoordinates = (
   indexFrom, indexTo, currentTrack, visualizerMargin, nucleotidesPerRow,
   nucleotideWidth, rowHeight, nucleotidesRowHeight, trackHeight
 ) => {
+  const { from, to } = indexFrom < indexTo ?
+    { from: indexFrom, to: indexTo } : { from: indexTo, to: indexFrom };
+
   const nucleotideFromCoordinates = getNucleotideCoordinates(
-    indexFrom,
+    from,
     visualizerMargin,
     nucleotidesPerRow,
     nucleotideWidth,
     rowHeight
   );
   const nucleotideToCoordinates = getNucleotideCoordinates(
-    indexTo,
+    to,
     visualizerMargin,
     nucleotidesPerRow,
     nucleotideWidth,
@@ -73,15 +76,17 @@ export const getAnnotationSegments = (
   nucleotideWidth, rowHeight, nucleotidesRowHeight, trackHeight
 ) => {
   const segments = [];
+  const { from, to } = indexFrom < indexTo ?
+    { from: indexFrom, to: indexTo } : { from: indexTo, to: indexFrom };
 
-  let start = indexFrom;
-  for (let i = start + 1; i < indexTo; i++) {
+  let start = from;
+  for (let i = start + 1; i < to; i++) {
     if (! (i % nucleotidesPerRow)) {
       segments.push([start, i - 1]);
       start = i;
     }
   }
-  segments.push([start, indexTo]);
+  segments.push([start, to]);
 
   return segments.map((segment) =>
     getAnnotationSegmentCoordinates(

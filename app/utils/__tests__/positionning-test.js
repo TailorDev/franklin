@@ -91,5 +91,24 @@ describe('utils/positionning', () => {
       expect(x2).to.equal(NUCLEOTIDE_WIDTH + NUCLEOTIDE_WIDTH);
       expect(y2).to.equal(y1);
     });
+
+    it('handles reverse selections', () => {
+      const { x1, x2, y1, y2 } = getAnnotationSegmentCoordinates(
+        1, //indexFrom
+        0, //indexTo
+        1, //currentTrack
+        { x: 0, y: 0 },
+        NUCLEOTIDES_PER_ROW,
+        NUCLEOTIDE_WIDTH,
+        ROW_HEIGHT,
+        NUCLEOTIDE_HEIGHT,
+        5 //trackHeight
+      );
+
+      expect(x1).to.equal(NUCLEOTIDE_WIDTH / 2);
+      expect(y1).to.equal(NUCLEOTIDE_HEIGHT + 1 * 5);
+      expect(x2).to.equal(NUCLEOTIDE_WIDTH + NUCLEOTIDE_WIDTH);
+      expect(y2).to.equal(y1);
+    });
   });
 });
