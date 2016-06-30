@@ -196,7 +196,7 @@ export default function reducer(state = initialState, action = {}) {
       };
 
     case TOGGLE_AT:
-      return {
+      return Object.assign({}, state, {
         labels: state.labels.update(action.index, (label) => (
           {
             name: label.name,
@@ -205,8 +205,7 @@ export default function reducer(state = initialState, action = {}) {
             annotations: label.annotations,
           }
         )),
-        selectedAnnotation: null,
-      };
+      });
 
     case CREATE_ANNOTATION:
       return doCreateAnnotation(state, action);

@@ -95,6 +95,26 @@ describe('modules/label', () => {
     expect(state.labels.get(0).isActive).to.be.false;
   });
 
+  it('should handle TOGGLE_AT without affecting the selected annotation', () => {
+    const labelId = 0;
+    const annotation = defaultLabels.get(labelId).annotations.first();
+
+    let state = reducer(undefined, actions.loadDefaultLabels());
+
+    expect(state.selectedAnnotation).to.be.null;
+
+    // 1. select
+    state = reducer(state, actions.selectAnnotation(
+      labelId, annotation
+    ));
+    expect(state.selectedAnnotation).not.to.be.null;
+    expect(state.selectedAnnotation.annotation).to.be.equal(annotation);
+
+    // 2. toggle
+    state = reducer(state, actions.toggleAt(0));
+    expect(state.selectedAnnotation).not.to.be.null;
+  });
+
   describe('CREATE_ANNOTATION', () => {
     it('should handle CREATE_ANNOTATION', () => {
       let state;
@@ -153,7 +173,7 @@ describe('modules/label', () => {
     });
 
     it('does not do anything if annotation does not exist', () => {
-      const labelId = 0; // Exon
+      const labelId = 0;
       const annotation = {
         positionFrom: 0,
         positionTo: 10,
@@ -176,7 +196,7 @@ describe('modules/label', () => {
       expect(s.selectedAnnotation).to.be.null;
     });
 
-    it('returns a selectedAnnotation selected annotation', () => {
+    it('returns a selected annotation', () => {
       const labelId = 0;
       const annotation = defaultLabels.get(labelId).annotations.first();
 
@@ -203,7 +223,7 @@ describe('modules/label', () => {
     });
 
     it('does not do anything if annotation does not exist', () => {
-      const labelId = 0; // Exon
+      const labelId = 0;
       const annotationId = 5678; // non-existent
       const annotation = {};
 
@@ -215,7 +235,7 @@ describe('modules/label', () => {
     });
 
     it('updates an existing annotation', () => {
-      const labelId = 0; // Exon
+      const labelId = 0;
       const annotationId = 0;
       const annotation = {
         positionFrom: 12,
