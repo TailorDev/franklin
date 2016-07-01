@@ -7,6 +7,7 @@ const PositionFrom = (props) => (
     value={props.value}
     onChange={props.onChange}
     labelText={'Starting position'}
+    min={1}
   />
 );
 

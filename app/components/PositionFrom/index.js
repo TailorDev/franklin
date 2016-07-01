@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) => ({
   onChange: (event) => {
     let position = parseInt(event.target.value, 10);
 
-    if (isNaN(position)) {
+    if (isNaN(position) || position < 1) {
       position = 1;
     }
 
