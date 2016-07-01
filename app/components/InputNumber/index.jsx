@@ -1,5 +1,7 @@
 import React from 'react';
 
+import RawInputNumber from './RawInputNumber';
+
 
 const InputNumber = (props) => {
   let isInvalid = false;
@@ -8,16 +10,11 @@ const InputNumber = (props) => {
   }
 
   return (
-    <label className={isInvalid ? 'is-invalid-label' : null}>
+    <label className={isInvalid ? 'is-invalid-label' : ''}>
       {props.labelText || null}
-      <input
-        type="number"
-        value={props.value}
-        placeholder={props.placeholder || null}
-        onChange={props.onChange}
-        disabled={props.isDisabled || false}
-        min={props.min || null}
-        className={isInvalid ? 'is-invalid-input' : null}
+      <RawInputNumber
+        {...props}
+        isInvalid={isInvalid}
       />
       <small className={`form-error${isInvalid ? ' is-visible' : ''}`}>
         {props.errorText || 'Invalid value'}
@@ -38,6 +35,7 @@ InputNumber.propTypes = {
     React.PropTypes.oneOf(['']),
   ]),
   labelText: React.PropTypes.string,
+  className: React.PropTypes.string,
 };
 
 export default InputNumber;

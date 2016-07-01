@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import Immutable from 'immutable';
 import Remove from '../Remove';
 import InputNumber from '../InputNumber';
+import InputNumberWithInlineButton from '../InputNumber/InlineButton';
 
 const { array, number, string, shape, func, instanceOf } = PropTypes;
 
@@ -32,6 +33,7 @@ class AnnotationForm extends Component {
     this.reset = this.reset.bind(this);
     this.toggleActionRemove = this.toggleActionRemove.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.onSwitchPositions = this.onSwitchPositions.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -98,7 +100,6 @@ class AnnotationForm extends Component {
       positionFrom = this.props.positionFrom;
     }
 
-    this.setState({ positionFrom });
     this.props.updateSelectionFrom(positionFrom - this.props.positionFrom);
   }
 
@@ -109,8 +110,18 @@ class AnnotationForm extends Component {
       positionTo = this.props.positionFrom;
     }
 
-    this.setState({ positionTo });
     this.props.updateSelectionTo(positionTo - this.props.positionFrom);
+  }
+
+  onSwitchPositions(event) {
+    event.preventDefault();
+
+    this.props.updateSelectionFrom(
+      this.state.positionTo - this.props.positionFrom
+    );
+    this.props.updateSelectionTo(
+      this.state.positionFrom - this.props.positionFrom
+    );
   }
 
   onLabelChange(event) {
@@ -140,13 +151,19 @@ class AnnotationForm extends Component {
     return (
       <div className="annotation-form">
         <form onSubmit={this.onSubmit}>
-          <InputNumber
+          <InputNumberWithInlineButton
             value={this.state.positionFrom}
             min={this.props.positionFrom}
             placeholder={'From'}
             onChange={this.onPositionFromChange}
             isDisabled={this.state.disablePositions}
-          />
+            className="input-group-field"
+            onClick={this.onSwitchPositions}
+            titleText="Invert positions"
+          >
+            <i className="fa fa-arrows-v" aria-hidden="true"></i>
+          </InputNumberWithInlineButton>
+
           <InputNumber
             value={this.state.positionTo}
             min={this.props.positionFrom}

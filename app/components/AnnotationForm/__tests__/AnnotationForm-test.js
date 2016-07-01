@@ -7,6 +7,7 @@ import sinon from 'sinon';
 import AnnotationForm from '../presenter';
 import Remove from '../../Remove';
 import InputNumber from '../../InputNumber';
+import InputNumberWithInlineButton from '../../InputNumber/InlineButton';
 import { defaultLabels } from '../../../defaults';
 
 describe('<AnnotationForm />', () => {
@@ -28,7 +29,8 @@ describe('<AnnotationForm />', () => {
     );
 
     expect(wrapper.find('input[type="submit"]')).to.have.length(1);
-    expect(wrapper.find(InputNumber)).to.have.length(2);
+    expect(wrapper.find(InputNumber)).to.have.length(1);
+    expect(wrapper.find(InputNumberWithInlineButton)).to.have.length(1);
     expect(wrapper.find('select')).to.have.length(1);
     expect(wrapper.find('textarea')).to.have.length(1);
   });
@@ -51,8 +53,8 @@ describe('<AnnotationForm />', () => {
 
     wrapper.setProps({ selections });
 
-    expect(wrapper.find(InputNumber).get(0).props.value).to.equal(2);
-    expect(wrapper.find(InputNumber).get(1).props.value).to.equal(4);
+    expect(wrapper.find(InputNumberWithInlineButton).get(0).props.value).to.equal(2);
+    expect(wrapper.find(InputNumber).get(0).props.value).to.equal(4);
   });
 
   it('updates annotation form with partial selection', () => {
@@ -73,7 +75,7 @@ describe('<AnnotationForm />', () => {
 
     wrapper.setProps({ selections });
 
-    expect(wrapper.find(InputNumber).get(0).props.value).to.equal(2);
+    expect(wrapper.find(InputNumberWithInlineButton).get(0).props.value).to.equal(2);
     expect(wrapper.find({placeholder:"To", type:"number", value:''})).to.have.length(1);
   });
 
