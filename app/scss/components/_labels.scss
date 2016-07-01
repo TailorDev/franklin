@@ -24,7 +24,6 @@ ul.labels {
     }
 
     .label-form {
-      padding: 0.5rem;
       background-color: $grey;
       border-radius: $global-radius;
 
@@ -85,6 +84,7 @@ ul.labels {
         display: block;
         background-color: $primary-color;
         color: $white !important;
+        padding-left: 0.5rem;
       }
 
       .label-tools {
