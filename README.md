@@ -4,10 +4,11 @@ Franklin
 [![CircleCI](https://circleci.com/gh/TailorDev/franklin.svg?style=svg)](https://circleci.com/gh/TailorDev/franklin)
 
 Franklin is a DNA sequence annotation tool we built at TailorDev in order to
-play with SVGs and [React](https://facebook.github.io/react/) (again), as part
-of our "Le lab" sessions:
+play with SVGs, [React](https://facebook.github.io/react/), and
+[Redux](http://redux.js.org/), as part of our "Le lab" sessions:
 
 * https://tailordev.fr/blog/2016/06/09/le-lab-3-franklin-dna-sequence-annotation-tool/
+* https://tailordev.fr/blog/2016/07/01/le-lab-4-franklin-dna-ninja/
 
 ![](doc/franklin-snapshot.jpg)
 
