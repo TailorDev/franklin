@@ -14,14 +14,14 @@ export const mapStateToProps = (state, ownProps) => {
     (s.from >= ownProps.index && s.to <= ownProps.index)
   ).length);
 
-  const isInExon = (0 < exon.exons.filter(
+  const nbExons = exon.exons.filter(
     e => e.positionFrom <= ownProps.position && e.positionTo >= ownProps.position
-  ).size);
+  ).size;
 
   return {
     isSelected,
     isInSelectionRange,
-    isInExon,
+    nbExons,
   };
 };
 

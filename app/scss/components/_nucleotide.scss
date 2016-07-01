@@ -18,13 +18,20 @@
       }
     }
 
-    &.in-exon {
+    &.in-exon,
+    &.in-multiple-exons {
       rect.type-background {
         fill: lighten($light-yeah, 10%);
       }
 
       text {
         fill: $white;
+      }
+    }
+
+    &.in-multiple-exons {
+      rect.type-background {
+        fill: $light-yeah;
       }
     }
   }

@@ -54,6 +54,13 @@ export default class Nucleotide extends Component {
   }
 
   render() {
+    let exonClassName = '';
+    if (1 === this.props.nbExons) {
+      exonClassName = ' in-exon';
+    } else if (1 < this.props.nbExons) {
+      exonClassName = ' in-multiple-exons';
+    }
+
     return (
       <g
         className="nucleotide"
@@ -65,7 +72,7 @@ export default class Nucleotide extends Component {
           className={
             `type
              ${this.props.isInSelectionRange ? ' in-selection' : ''}
-             ${this.props.isInExon ? ' in-exon' : ''}`
+             ${exonClassName}`
           }
         >
           <rect
@@ -121,7 +128,7 @@ Nucleotide.propTypes = {
   index: number.isRequired,
   isSelected: bool.isRequired,
   isInSelectionRange: bool.isRequired,
-  isInExon: bool.isRequired,
+  nbExons: number.isRequired,
   // attributes
   type: string.isRequired,
   position: number.isRequired,
