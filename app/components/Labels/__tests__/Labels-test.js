@@ -56,7 +56,7 @@ describe('<Labels />', () => {
     expect(spy.calledOnce).to.be.true;
     expect(spy.calledWith({
       name: 'foo',
-      color: '#f6f6f6',
+      color: '#0F157B',
       isActive: true,
       annotations: Immutable.List(),
     })).to.be.true;

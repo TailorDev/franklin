@@ -8,7 +8,7 @@ const { func, object } = PropTypes;
 
 const defaultLabel = {
   name: '',
-  color: '#f6f6f6',
+  color: '#0F157B',
   isActive: true,
   annotations: new Immutable.List(),
 };
