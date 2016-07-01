@@ -21,6 +21,7 @@ const InlineButton = (props) => {
             onClick={props.onClick}
             className="button"
             title={props.titleText || null}
+            disabled={props.hasButtonDisabled || false}
           >
             {props.children}
           </button>
@@ -51,6 +52,7 @@ InlineButton.propTypes = {
   ]),
   className: React.PropTypes.string,
   titleText: React.PropTypes.string,
+  hasButtonDisabled: React.PropTypes.bool,
 };
 
 export default InlineButton;

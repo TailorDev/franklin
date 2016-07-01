@@ -23,4 +23,19 @@ describe('<InlineButton />', () => {
     expect(wrapper.find('button')).to.have.length(1);
     expect(wrapper.find('button').text()).to.equal('Button text');
   });
+
+  it('has a button that can be disabled', () => {
+    const wrapper = shallow(
+      <InlineButton
+        onChange={() => {}}
+        onClick={() => {}}
+        hasButtonDisabled
+      >
+        Button text
+      </InlineButton>
+    );
+
+    expect(wrapper.find('button')).to.have.length(1);
+    expect(wrapper.find('button').props().disabled).to.be.true;
+  });
 });

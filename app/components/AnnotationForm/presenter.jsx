@@ -160,6 +160,7 @@ class AnnotationForm extends Component {
             className="input-group-field"
             onClick={this.onSwitchPositions}
             titleText="Invert positions"
+            hasButtonDisabled={this.state.positionFrom === this.state.positionTo}
           >
             <i className="fa fa-arrows-v" aria-hidden="true"></i>
           </InputNumberWithInlineButton>
