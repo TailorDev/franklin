@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { expect } from 'chai';
 
 // see: https://github.com/mochajs/mocha/issues/1847
@@ -11,7 +11,7 @@ import InputNumber from '../';
 describe('<InputNumber />', () => {
 
   it('renders itself', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <InputNumber
         value={124}
         min={1}
@@ -28,7 +28,7 @@ describe('<InputNumber />', () => {
   });
 
   it('can be disabled', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <InputNumber
         value={124}
         min={1}

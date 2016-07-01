@@ -1,0 +1,24 @@
+/*
+ * InputNumber
+ */
+
+.input-number {
+  .input-group-field {
+    border-top-left-radius: $global-radius;
+    border-bottom-left-radius: $global-radius;
+  }
+
+  &.inline-button {
+    .button {
+      background: darken($grey, 5%);
+      color: $body-font-color;
+      border: 1px solid $medium-gray;
+      border-left: 0;
+
+      &:hover,
+      &:focus {
+        background: darken($grey, 10%);
+      }
+    }
+  }
+}
