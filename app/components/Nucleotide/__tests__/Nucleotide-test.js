@@ -24,18 +24,66 @@ describe('<Nucleotide />', () => {
         onClick={() => {}}
         isSelected={false}
         isInSelectionRange={false}
-        isInExon={false}
+        nbExons={0}
       />
     );
 
-    const instance = wrapper.instance();
     expect(wrapper.find(Nucleotide)).to.have.length(1);
+    expect(wrapper.find('.in-multiple-exons')).to.have.length(0);
+    expect(wrapper.find('.in-exon')).to.have.length(0);
+
+    const instance = wrapper.instance();
+
     expect(instance.state.x).to.equal(10);
     expect(instance.state.y).to.equal(10);
     expect(instance.props.type).to.equal("A");
     expect(instance.props.position).to.equal(1);
     expect(instance.props.isSelected).to.be.false;
     expect(instance.props.isInSelectionRange).to.be.false;
+  });
+
+  it('handles 1 exon', () => {
+    const wrapper = mount(
+      <Nucleotide
+        visualizerMargin={{x: 10, y: 10}}
+        nucleotidesPerRow={5}
+        rowHeight={50}
+        nucleotideWidth={12}
+        index={0}
+        type="A"
+        position={1}
+        onClick={() => {}}
+        isSelected={false}
+        isInSelectionRange={false}
+        nbExons={1}
+      />
+    );
+
+    expect(wrapper.find(Nucleotide)).to.have.length(1);
+    expect(wrapper.find('.in-multiple-exons')).to.have.length(0);
+    expect(wrapper.find('.in-exon')).to.have.length(1);
+  });
+
+  it('handles multiple exons', () => {
+    const wrapper = mount(
+      <Nucleotide
+        visualizerMargin={{x: 10, y: 10}}
+        nucleotidesPerRow={5}
+        rowHeight={50}
+        nucleotideWidth={12}
+        index={0}
+        type="A"
+        position={1}
+        onClick={() => {}}
+        isSelected={false}
+        isInSelectionRange={false}
+        nbExons={2}
+      />
+    );
+
+    expect(wrapper.find(Nucleotide)).to.have.length(1);
+    expect(wrapper.find('.in-multiple-exons')).to.have.length(1);
+    expect(wrapper.find('.in-exon')).to.have.length(0);
   });
 
   it('renders multiple rows when needed', () => {
@@ -51,7 +99,7 @@ describe('<Nucleotide />', () => {
         onClick={() => {}}
         isSelected={false}
         isInSelectionRange={false}
-        isInExon={false}
+        nbExons={0}
       />
     );
 
@@ -72,7 +120,7 @@ describe('<Nucleotide />', () => {
         index={229}
         isSelected={false}
         isInSelectionRange={false}
-        isInExon={false}
+        nbExons={0}
         onClick={() => {}}
       />
     );
@@ -90,7 +138,7 @@ describe('<Nucleotide />', () => {
         index={230122}
         isSelected={false}
         isInSelectionRange={false}
-        isInExon={false}
+        nbExons={0}
         onClick={() => {}}
       />
     );
@@ -111,7 +159,7 @@ describe('<Nucleotide />', () => {
         onClick={() => {}}
         isSelected={false}
         isInSelectionRange={false}
-        isInExon={false}
+        nbExons={0}
       />
     );
     let instance = wrapper.instance();
@@ -129,7 +177,7 @@ describe('<Nucleotide />', () => {
         onClick={() => {}}
         isSelected={false}
         isInSelectionRange={false}
-        isInExon={false}
+        nbExons={0}
       />
     );
     instance = wrapper.instance();
@@ -149,7 +197,7 @@ describe('<Nucleotide />', () => {
         onClick={() => {}}
         isSelected={false}
         isInSelectionRange={false}
-        isInExon={false}
+        nbExons={0}
       />
     );
     let instance = wrapper.instance();
@@ -167,7 +215,7 @@ describe('<Nucleotide />', () => {
         onClick={() => {}}
         isSelected={false}
         isInSelectionRange={false}
-        isInExon={false}
+        nbExons={0}
       />
     );
     instance = wrapper.instance();
@@ -187,7 +235,7 @@ describe('<Nucleotide />', () => {
         onClick={() => {}}
         isSelected={false}
         isInSelectionRange={false}
-        isInExon={false}
+        nbExons={0}
       />
     );
     let instance = wrapper.instance();
@@ -205,7 +253,7 @@ describe('<Nucleotide />', () => {
         onClick={() => {}}
         isSelected={false}
         isInSelectionRange={false}
-        isInExon={false}
+        nbExons={0}
       />
     );
     instance = wrapper.instance();
@@ -213,6 +261,20 @@ describe('<Nucleotide />', () => {
   });
 
   describe('mapStateToProps', () => {
+    it('returns 3 props', () => {
+      const state = {
+        selection: {
+          selections: [],
+        },
+        exon: { exons: new Immutable.List() },
+      };
+      const ownProps = { index: 1 };
+
+      const props = mapStateToProps(state, ownProps);
+
+      expect(props).to.have.all.keys('isSelected', 'isInSelectionRange', 'nbExons');
+    });
+
     it('returns false if no selection', () => {
       const state = {
         selection: {
@@ -222,6 +284,8 @@ describe('<Nucleotide />', () => {
       };
       const ownProps = { index: 1 };
       const props = mapStateToProps(state, ownProps);
+
+      expect(props).to.have.all.keys('isSelected', 'isInSelectionRange', 'nbExons');
 
       expect(props.isSelected).to.be.false;
       expect(props.isInSelectionRange).to.be.false;
@@ -282,6 +346,26 @@ describe('<Nucleotide />', () => {
 
       expect(props.isSelected).to.be.false;
       expect(props.isInSelectionRange).to.be.true;
+      expect(props.nbExons).to.equal(0);
+    });
+
+    it('returns the number of exons', () => {
+      const state = {
+        selection: {
+          selections: [],
+        },
+        exon: {
+          exons: new Immutable.List([
+            { positionFrom: 2, positionTo: 10 },
+            { positionFrom: 4, positionTo: 70 },
+          ])
+        },
+      };
+      const ownProps = { index: 1, position: 5 };
+
+      const props = mapStateToProps(state, ownProps);
+
+      expect(props.nbExons).to.equal(2);
     });
   });
 });
