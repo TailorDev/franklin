@@ -17,11 +17,11 @@ import { clear as clearSearch } from './search';
 
 // Actions
 export function loadDefault() {
-  return (dispatch) => {
-    dispatch(loadDefaultSequence());
-    dispatch(loadDefaultLabels());
-    dispatch(loadDefaultExons());
-  };
+  return (dispatch) => Promise.all([
+    dispatch(loadDefaultSequence()),
+    dispatch(loadDefaultLabels()),
+    dispatch(loadDefaultExons()),
+  ]);
 }
 
 export function loadFile(file) {

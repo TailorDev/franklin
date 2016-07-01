@@ -22,16 +22,18 @@ export function loadFile(file) {
     dispatch({ type: LOAD_FILE });
 
     const reader = new FileReader();
-    reader.onload = (event) => {
-      const { header, sequence } = Fasta.parseString(event.target.result);
+    return new Promise((resolve) => {
+      reader.onload = (event) => {
+        const { header, sequence } = Fasta.parseString(event.target.result);
 
-      // Customize page title with the current sequence header
-      document.title = header;
+        // Customize page title with the current sequence header
+        document.title = header;
 
-      dispatch(setSequence(header, sequence));
-    };
+        resolve(dispatch(setSequence(header, sequence)));
+      };
 
-    reader.readAsText(file);
+      reader.readAsText(file);
+    });
   };
 }
 
