@@ -6,7 +6,7 @@ const LabelTools = (props) => (
     <i
       className="fa fa-adjust toggle"
       aria-hidden="true"
-      title="Toggle active"
+      title="Hide/Show"
       onClick={props.onActionToggleClick}
     />
     <i
