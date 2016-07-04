@@ -88,7 +88,6 @@ export default class Visualizer extends Component {
             baseProfile="full"
             width={this.state.width}
             height={this.state.height}
-            xmlns="http://www.w3.org/2000/svg"
           >
             <rect width="100%" height="100%" />
 
