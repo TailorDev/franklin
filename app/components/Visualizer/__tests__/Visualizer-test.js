@@ -33,6 +33,7 @@ describe('<Visualizer />', () => {
         onFileSelectClick={() => {}}
         positionFrom={1}
         onNucleotideClick={() => {}}
+        onAnnotationClick={() => {}}
       />
     );
 
@@ -49,6 +50,7 @@ describe('<Visualizer />', () => {
         onFileSelectClick={() => {}}
         positionFrom={1}
         onNucleotideClick={() => {}}
+        onAnnotationClick={() => {}}
       />
     );
 
@@ -68,6 +70,7 @@ describe('<Visualizer />', () => {
           onFileSelectClick={() => {}}
           positionFrom={1}
           onNucleotideClick={() => {}}
+          onAnnotationClick={() => {}}
         />
       </Provider>
     );
@@ -87,6 +90,7 @@ describe('<Visualizer />', () => {
           onFileSelectClick={() => {}}
           positionFrom={1}
           onNucleotideClick={() => {}}
+          onAnnotationClick={() => {}}
         />
       </Provider>
     );
@@ -114,6 +118,7 @@ describe('<Visualizer />', () => {
         onFileSelectClick={() => {}}
         positionFrom={1}
         onNucleotideClick={() => {}}
+        onAnnotationClick={() => {}}
       />
     );
 

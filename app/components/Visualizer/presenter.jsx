@@ -6,7 +6,7 @@ import Sequence from '../Sequence';
 import Annotations from '../Annotations';
 import Help from './Help';
 
-const { number, instanceOf, func } = PropTypes;
+const { number, object, instanceOf, func } = PropTypes;
 
 
 export default class Visualizer extends Component {
@@ -96,6 +96,8 @@ export default class Visualizer extends Component {
             <Annotations
               labels={this.props.labels}
               positionFrom={this.props.positionFrom}
+              onAnnotationClick={this.props.onAnnotationClick}
+              selectedAnnotation={this.props.selectedAnnotation}
               {...this.state}
             />
 
@@ -123,4 +125,6 @@ Visualizer.propTypes = {
   positionFrom: number.isRequired,
   onFileSelectClick: func.isRequired,
   onNucleotideClick: func.isRequired,
+  onAnnotationClick: func.isRequired,
+  selectedAnnotation: object,
 };

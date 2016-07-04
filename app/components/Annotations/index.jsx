@@ -4,7 +4,7 @@ import Immutable from 'immutable';
 import Annotation from '../Annotation';
 import { getAnnotationSegments } from '../../utils/positionning';
 
-const { object, instanceOf, number } = PropTypes;
+const { func, object, instanceOf, number } = PropTypes;
 
 
 const Annotations = (props) =>
@@ -17,7 +17,10 @@ const Annotations = (props) =>
             label={label}
             labelId={labelIndex}
             annotation={annotation}
-            isSelected={false}
+            isSelected={
+              (props.selectedAnnotation &&
+                props.selectedAnnotation.annotation === annotation) || false
+            }
             getAnnotationSegments={(indexFrom, indexTo) => getAnnotationSegments(
               indexFrom - props.positionFrom + 1,
               indexTo - props.positionFrom + 1,
@@ -30,6 +33,7 @@ const Annotations = (props) =>
               props.trackHeight
             )}
             positionFrom={props.positionFrom}
+            onClick={props.onAnnotationClick}
           />
         )
       )
@@ -46,6 +50,8 @@ Annotations.propTypes = {
   trackHeight: number.isRequired,
   rowHeight: number.isRequired,
   positionFrom: number.isRequired,
+  onAnnotationClick: func.isRequired,
+  selectedAnnotation: object,
 };
 
 export default Annotations;
