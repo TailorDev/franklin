@@ -1,7 +1,10 @@
 import { connect } from 'react-redux';
 import Visualizer from './presenter';
+import { update as updateSelection } from '../../modules/selection';
+import { clearSelectedAnnotation } from '../../modules/label';
 
-function mapStateToProps(state) {
+
+const mapStateToProps = (state) => {
   const sequence = state.sequence;
   const label = state.label;
 
@@ -10,6 +13,13 @@ function mapStateToProps(state) {
     labels: label.labels,
     positionFrom: sequence.positionFrom,
   };
-}
+};
 
-export default connect(mapStateToProps)(Visualizer);
+const mapDispatchToProps = (dispatch) => ({
+  onNucleotideClick: (newIndex) => {
+    dispatch(clearSelectedAnnotation());
+    dispatch(updateSelection(newIndex));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Visualizer);

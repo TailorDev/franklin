@@ -9,6 +9,8 @@ export default class Nucleotide extends Component {
     super(props, context);
 
     this.state = { x: 0, y: 0 };
+
+    this.onClick = this.onClick.bind(this);
   }
 
   componentWillMount() {
@@ -25,6 +27,10 @@ export default class Nucleotide extends Component {
     ) {
       this.updateCoordinates(nextProps);
     }
+  }
+
+  onClick() {
+    this.props.onClick(this.props.index);
   }
 
   getPositionLength() {
@@ -66,7 +72,7 @@ export default class Nucleotide extends Component {
         className="nucleotide"
         title="click to start selection"
         transform={`translate(${this.state.x}, ${this.state.y})`}
-        onClick={this.props.onClick}
+        onClick={this.onClick}
       >
         <g
           className={

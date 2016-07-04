@@ -13,7 +13,7 @@ const Sequence = (props) => (
         position={props.positionFrom + index}
         key={index}
         index={index}
-        onClick={() => props.onNucleotideClick(index)}
+        onClick={props.onNucleotideClick}
         {...props}
       />
     )}

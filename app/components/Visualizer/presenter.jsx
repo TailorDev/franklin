@@ -101,6 +101,8 @@ export default class Visualizer extends Component {
 
             <Sequence
               sequence={this.props.sequence}
+              positionFrom={this.props.positionFrom}
+              onNucleotideClick={this.props.onNucleotideClick}
               {...this.state}
             />
           </svg>
@@ -120,4 +122,5 @@ Visualizer.propTypes = {
   labels: instanceOf(Immutable.List).isRequired,
   positionFrom: number.isRequired,
   onFileSelectClick: func.isRequired,
+  onNucleotideClick: func.isRequired,
 };
