@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { Nt } from '../../utils/ntseq';
 import Toolbar from './presenter';
+import { changePositionFrom } from '../../modules/sequence';
 
 
 export const mapStateToProps = (state) => {
@@ -19,7 +20,20 @@ export const mapStateToProps = (state) => {
     labels: label.labels,
     ntSequence,
     exons: exon.exons,
+    positionFrom: sequence.positionFrom,
   };
 };
 
-export default connect(mapStateToProps)(Toolbar);
+const mapDispatchToProps = (dispatch) => ({
+  onPositionFromChange: (event) => {
+    let position = parseInt(event.target.value, 10);
+
+    if (isNaN(position) || 1 > position) {
+      position = 1;
+    }
+
+    dispatch(changePositionFrom(position));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);

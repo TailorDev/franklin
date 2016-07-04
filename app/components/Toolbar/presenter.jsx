@@ -50,7 +50,10 @@ const Toolbar = (props) => (
 
           <p>{props.name}</p>
 
-          <PositionFrom />
+          <PositionFrom
+            value={props.positionFrom}
+            onChange={props.onPositionFromChange}
+          />
         </div>
       </TabPanel>
 
@@ -91,7 +94,9 @@ Toolbar.propTypes = {
   name: React.PropTypes.string.isRequired,
   sequence: React.PropTypes.instanceOf(Immutable.List).isRequired,
   labels: React.PropTypes.instanceOf(Immutable.List).isRequired,
+  positionFrom: React.PropTypes.number.isRequired,
   ntSequence: React.PropTypes.object,
+  onPositionFromChange: React.PropTypes.func.isRequired,
 };
 
 export default Toolbar;
