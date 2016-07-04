@@ -8,6 +8,7 @@ function mapStateToProps(state) {
   return {
     sequence: sequence.sequence,
     labels: label.labels,
+    positionFrom: sequence.positionFrom,
   };
 }
 

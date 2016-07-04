@@ -30,6 +30,7 @@ describe('<Visualizer />', () => {
         sequence={sequence}
         labels={defaultLabels}
         onFileSelectClick={() => {}}
+        positionFrom={1}
       />
     );
 
@@ -44,6 +45,7 @@ describe('<Visualizer />', () => {
         sequence={new Immutable.List()}
         labels={defaultLabels}
         onFileSelectClick={() => {}}
+        positionFrom={1}
       />
     );
 
@@ -60,6 +62,7 @@ describe('<Visualizer />', () => {
           sequence={sequence}
           labels={defaultLabels}
           onFileSelectClick={() => {}}
+          positionFrom={1}
         />
       </Provider>
     );
@@ -77,6 +80,7 @@ describe('<Visualizer />', () => {
           sequence={sequence}
           labels={defaultLabels}
           onFileSelectClick={() => {}}
+          positionFrom={1}
         />
       </Provider>
     );
@@ -102,6 +106,7 @@ describe('<Visualizer />', () => {
         sequence={sequence}
         labels={defaultLabels}
         onFileSelectClick={() => {}}
+        positionFrom={1}
       />
     );
 
