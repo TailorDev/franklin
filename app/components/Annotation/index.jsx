@@ -35,6 +35,7 @@ class Annotation extends Component {
   updateSegments(props) {
     this.setState({
       segments: props.getAnnotationSegments(
+        props.labelId,
         props.annotation.positionFrom - 1,
         props.annotation.positionTo - 1
       ),
