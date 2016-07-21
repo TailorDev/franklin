@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 
 import ExonEdit from './ExonEdit';
 
-const { func, object } = PropTypes;
+const { number, func, object } = PropTypes;
 
 class Exon extends Component {
   constructor(props, context) {
@@ -24,12 +24,12 @@ class Exon extends Component {
   }
 
   handleEditExon(exon) {
-    this.props.onEditExon(exon);
+    this.props.onEditExon(this.props.index, exon);
     this.toggleActionEdit();
   }
 
   handleRemoveExon() {
-    this.props.onRemoveExon();
+    this.props.onRemoveExon(this.props.index);
     this.toggleActionEdit();
   }
 
@@ -66,6 +66,7 @@ class Exon extends Component {
 
 Exon.propTypes = {
   exon: object.isRequired,
+  index: number.isRequired,
   onEditExon: func.isRequired,
   onRemoveExon: func.isRequired,
 };
