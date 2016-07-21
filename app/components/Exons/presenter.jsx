@@ -18,8 +18,9 @@ class Exons extends Component {
     this.toggleNewExonForm = this.toggleNewExonForm.bind(this);
   }
 
-  shouldComponentUpdate(nextProps) {
-    return this.props.exons !== nextProps.exons;
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.exons !== nextProps.exons ||
+      this.state.displayNewExonForm !== nextState.displayNewExonForm;
   }
 
   onCreateNewExon(exon) {

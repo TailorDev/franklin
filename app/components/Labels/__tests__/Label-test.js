@@ -91,6 +91,8 @@ describe('<Label />', () => {
     expect(wrapper.find('i.edit')).to.have.length(1);
     wrapper.find('i.edit').simulate('click');
 
+    console.log(wrapper.html());
+
     expect(wrapper.instance().state.displayEditForm).to.be.true;
     expect(wrapper.find(LabelEdit)).to.have.length(1);
     expect(wrapper.find(LabelForm)).to.have.length(1);
