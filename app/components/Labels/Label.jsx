@@ -22,6 +22,12 @@ class Label extends Component {
     this.handleLabelRemove = this.handleLabelRemove.bind(this);
   }
 
+  shouldComponentUpdate(nextProps) {
+    return this.props.label.isActive !== nextProps.label.isActive ||
+      this.props.label.color !== nextProps.label.color ||
+      this.props.label.name !== nextProps.label.name;
+  }
+
   toggleActionRemove() {
     this.setState({
       displayRemoveForm: !this.state.displayRemoveForm,
