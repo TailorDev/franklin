@@ -11,6 +11,8 @@ class Annotation extends Component {
     this.state = {
       segments: [], // [[x1, x2, y1, y2], [x1, x2, y1, y2], ...]
     };
+
+    this.onClick = this.onClick.bind(this);
   }
 
   componentWillMount() {
@@ -22,9 +24,18 @@ class Annotation extends Component {
     this.updateSegments(nextProps);
   }
 
+  onClick() {
+    this.props.onClick(
+      this.props.labelId,
+      this.props.annotation,
+      this.props.positionFrom
+    );
+  }
+
   updateSegments(props) {
     this.setState({
       segments: props.getAnnotationSegments(
+        props.labelId,
         props.annotation.positionFrom - 1,
         props.annotation.positionTo - 1
       ),
@@ -41,8 +52,9 @@ class Annotation extends Component {
       <g
         className={`annotation
           ${this.props.label.isActive ? '' : 'inactive'}
-          ${this.props.isSelected ? 'selected' : ''}`}
-        onClick={this.props.onClick}
+          ${this.props.isSelected ? 'selected' : ''}`
+        }
+        onClick={this.onClick}
       >
         {this.state.segments.map((line, index) =>
           <Line
@@ -68,6 +80,7 @@ Annotation.propTypes = {
   getAnnotationSegments: func.isRequired,
   isSelected: bool.isRequired,
   onClick: func.isRequired,
+  positionFrom: number.isRequired,
 };
 
 export default Annotation;

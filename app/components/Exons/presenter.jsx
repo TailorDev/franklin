@@ -18,6 +18,11 @@ class Exons extends Component {
     this.toggleNewExonForm = this.toggleNewExonForm.bind(this);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.exons !== nextProps.exons ||
+      this.state.displayNewExonForm !== nextState.displayNewExonForm;
+  }
+
   onCreateNewExon(exon) {
     this.props.onCreateNewExon(exon);
     this.toggleNewExonForm();
@@ -36,9 +41,10 @@ class Exons extends Component {
         {this.props.exons.map((exon, index) =>
           <Exon
             key={index}
+            index={index}
             exon={exon}
-            onEditExon={(editedExon) => { this.props.onEditExon(index, editedExon); }}
-            onRemoveExon={() => { this.props.onRemoveExon(index); }}
+            onEditExon={this.props.onEditExon}
+            onRemoveExon={this.props.onRemoveExon}
           />
         )}
         {/* New exon */}
@@ -47,7 +53,7 @@ class Exons extends Component {
             <ExonForm
               key="new"
               onCancel={this.toggleNewExonForm}
-              onCreateNewExon={(newExon) => { this.onCreateNewExon(newExon); }}
+              onCreateNewExon={this.props.onCreateNewExon}
             />
             :
             <button

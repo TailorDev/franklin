@@ -4,8 +4,10 @@ import Immutable from 'immutable';
 
 import Sequence from '../Sequence';
 import Annotations from '../Annotations';
+import Help from './Help';
 
-const { instanceOf, func } = PropTypes;
+const { number, object, instanceOf, func } = PropTypes;
+
 
 export default class Visualizer extends Component {
 
@@ -88,58 +90,28 @@ export default class Visualizer extends Component {
             baseProfile="full"
             width={this.state.width}
             height={this.state.height}
-            xmlns="http://www.w3.org/2000/svg"
           >
             <rect width="100%" height="100%" />
 
             <Annotations
               labels={this.props.labels}
+              positionFrom={this.props.positionFrom}
+              onAnnotationClick={this.props.onAnnotationClick}
+              selectedAnnotation={this.props.selectedAnnotation}
               {...this.state}
             />
 
             <Sequence
               sequence={this.props.sequence}
+              positionFrom={this.props.positionFrom}
+              onNucleotideClick={this.props.onNucleotideClick}
               {...this.state}
             />
           </svg>
           :
-          <div className="help">
-            <h4>Drag &amp; drop your sequence file here</h4>
-
-            <p className="message">
-              Your file will be loaded locally (in your web browser), nothing
-              will be uploaded to our servers.
-            </p>
-
-            <i className="fa fa-file big" aria-hidden="true"></i>
-            <i className="fa fa-arrow-right big" aria-hidden="true"></i>
-            <i className="fa fa-square-o big" aria-hidden="true"></i>
-
-            <div>
-              <h4>Or click below to select your file</h4>
-
-              <button
-                className="button"
-                onClick={this.props.onFileSelectClick}
-              >
-                Select file
-              </button>
-            </div>
-
-            <p>
-              Your FASTA file content must look like the following:
-            </p>
-
-            <pre>
-                >gi|671162122:c7086083-7083225 Drosophila melanogaster chromosome 3R{'\n'}
-                ATGGTCACTCTAATCGCAGTCTGCAATTTACGTGTTTCCAACTTAACGCCCCCAAGTTAATAGCCGTAAT{'\n'}
-                CATTTGAAAAGAAAGGCACGCACGCACAACGCCATGCGGATCGAACCTGGGGACTCCTTTTGGACGAAAA{'\n'}
-                AGGCGATGTTTTCCAACGCAGAAAGGCAGTACTTTGAGACGGTCCGTCCGCGGAAGACCAGTGTGAGTAA{'\n'}
-                AAGTTGACCGTCGATGGCGATTTCACAAGTGACGTTTAAGTGGCGGGAACTTCTACTCACAAATCCCTGA{'\n'}
-                GCCCTGTGATATGATTTATTTTATGGAGCCGTGATCCGGACGAAAAATGCACACACATTTCTACAAAAAT{'\n'}
-                ATGTACATCGCGGTGCGATTGTGTCGCTTAAAGCACACGTACACCCACTGTCACACTCACACTCACATGC{'\n'}
-            </pre>
-          </div>
+          <Help
+            onFileSelectClick={this.props.onFileSelectClick}
+          />
         }
 
       </div>
@@ -150,5 +122,9 @@ export default class Visualizer extends Component {
 Visualizer.propTypes = {
   sequence: instanceOf(Immutable.List).isRequired,
   labels: instanceOf(Immutable.List).isRequired,
+  positionFrom: number.isRequired,
   onFileSelectClick: func.isRequired,
+  onNucleotideClick: func.isRequired,
+  onAnnotationClick: func.isRequired,
+  selectedAnnotation: object,
 };

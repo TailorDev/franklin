@@ -7,7 +7,7 @@ import sinon from 'sinon';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-import Annotation from '../presenter';
+import Annotation from '../';
 import Line from '../Line';
 
 describe('<Annotation />', () => {
@@ -43,6 +43,7 @@ describe('<Annotation />', () => {
         getAnnotationSegments={() => { return segments; }}
         isSelected={false}
         onClick={() => {}}
+        positionFrom={0}
       />
     );
 
@@ -64,6 +65,7 @@ describe('<Annotation />', () => {
         getAnnotationSegments={() => { return segments; }}
         isSelected={false}
         onClick={() => {}}
+        positionFrom={0}
       />
     );
 
@@ -84,6 +86,7 @@ describe('<Annotation />', () => {
         getAnnotationSegments={() => { return segments; }}
         isSelected={false}
         onClick={() => {}}
+        positionFrom={0}
       />
     );
 
@@ -105,6 +108,7 @@ describe('<Annotation />', () => {
         getAnnotationSegments={() => { return []; }}
         isSelected={false}
         onClick={() => {}}
+        positionFrom={0}
       />
     );
 
@@ -131,6 +135,7 @@ describe('<Annotation />', () => {
         getAnnotationSegments={() => { return segments; }}
         isSelected={false}
         onClick={() => {}}
+        positionFrom={0}
       />
     );
 
@@ -157,6 +162,7 @@ describe('<Annotation />', () => {
         getAnnotationSegments={() => { return segments; }}
         isSelected={false}
         onClick={() => {}}
+        positionFrom={0}
       />
     );
 
@@ -179,6 +185,7 @@ describe('<Annotation />', () => {
         getAnnotationSegments={() => { return segments; }}
         isSelected={false}
         onClick={() => {}}
+        positionFrom={0}
       />
     );
 
@@ -203,6 +210,7 @@ describe('<Annotation />', () => {
         getAnnotationSegments={() => { return segments; }}
         isSelected={false}
         onClick={() => {}}
+        positionFrom={0}
       />
     );
 
@@ -232,6 +240,7 @@ describe('<Annotation />', () => {
         getAnnotationSegments={() => { return segments; }}
         isSelected={false}
         onClick={() => {}}
+        positionFrom={0}
       />
     );
 

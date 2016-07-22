@@ -10,6 +10,7 @@ import configureStore from 'redux-mock-store';
 const { describe, it } = global;
 
 import Visualizer from '../presenter';
+import Help from '../Help';
 import { defaultLabels } from '../../../defaults';
 
 describe('<Visualizer />', () => {
@@ -30,6 +31,9 @@ describe('<Visualizer />', () => {
         sequence={sequence}
         labels={defaultLabels}
         onFileSelectClick={() => {}}
+        positionFrom={1}
+        onNucleotideClick={() => {}}
+        onAnnotationClick={() => {}}
       />
     );
 
@@ -39,14 +43,18 @@ describe('<Visualizer />', () => {
   });
 
   it('renders help panel if sequence is empty', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <Visualizer
         sequence={new Immutable.List()}
         labels={defaultLabels}
         onFileSelectClick={() => {}}
+        positionFrom={1}
+        onNucleotideClick={() => {}}
+        onAnnotationClick={() => {}}
       />
     );
 
+    expect(wrapper.find(Help)).to.have.length(1);
     expect(wrapper.find('.help')).to.have.length(1);
     expect(wrapper.find('svg')).to.have.length(0);
   });
@@ -60,6 +68,9 @@ describe('<Visualizer />', () => {
           sequence={sequence}
           labels={defaultLabels}
           onFileSelectClick={() => {}}
+          positionFrom={1}
+          onNucleotideClick={() => {}}
+          onAnnotationClick={() => {}}
         />
       </Provider>
     );
@@ -77,6 +88,9 @@ describe('<Visualizer />', () => {
           sequence={sequence}
           labels={defaultLabels}
           onFileSelectClick={() => {}}
+          positionFrom={1}
+          onNucleotideClick={() => {}}
+          onAnnotationClick={() => {}}
         />
       </Provider>
     );
@@ -102,6 +116,9 @@ describe('<Visualizer />', () => {
         sequence={sequence}
         labels={defaultLabels}
         onFileSelectClick={() => {}}
+        positionFrom={1}
+        onNucleotideClick={() => {}}
+        onAnnotationClick={() => {}}
       />
     );
 

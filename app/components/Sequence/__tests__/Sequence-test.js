@@ -9,8 +9,8 @@ import configureStore from 'redux-mock-store';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-import Sequence from '../presenter';
-import Nucleotide from '../../Nucleotide/presenter';
+import Sequence from '../';
+import Nucleotide from '../../Nucleotide';
 
 describe('<Sequence />', () => {
 

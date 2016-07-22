@@ -11,6 +11,11 @@ import configureStore from './store/configureStore';
 const appElement = document.getElementById('root');
 const appVersion = appElement.getAttribute('data-app-version');
 
+if ('production' !== process.env.NODE_ENV) {
+  const Perf = require('react-addons-perf');
+  window.Perf = Perf;
+}
+
 const store = configureStore();
 
 ReactDOM.render(

@@ -20,6 +20,8 @@ describe('<Toolbar />', () => {
         name={''}
         sequence={list}
         labels={list}
+        positionFrom={1}
+        onPositionFromChange={() => {}}
       />
     );
 
@@ -32,6 +34,8 @@ describe('<Toolbar />', () => {
         name={'NC_004350.2'}
         sequence={list}
         labels={list}
+        positionFrom={1}
+        onPositionFromChange={() => {}}
       />
     );
 
