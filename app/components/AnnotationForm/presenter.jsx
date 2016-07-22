@@ -4,7 +4,7 @@ import Remove from '../Remove';
 import InputNumber from '../InputNumber';
 import InputNumberWithInlineButton from '../InputNumber/InlineButton';
 
-const { array, number, string, shape, func, instanceOf } = PropTypes;
+const { array, bool, number, string, shape, func, instanceOf } = PropTypes;
 
 
 const emptyState = {
@@ -13,6 +13,7 @@ const emptyState = {
   positionFrom: '',
   positionTo: '',
   comment: '',
+  displayTick: true,
   annotationId: null,
   // UI state
   displayRemoveForm: false,
@@ -30,6 +31,7 @@ class AnnotationForm extends Component {
     this.onPositionToChange = this.onPositionToChange.bind(this);
     this.onLabelChange = this.onLabelChange.bind(this);
     this.onCommentChange = this.onCommentChange.bind(this);
+    this.onDisplayTickChange = this.onDisplayTickChange.bind(this);
     this.reset = this.reset.bind(this);
     this.toggleActionRemove = this.toggleActionRemove.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
@@ -42,6 +44,7 @@ class AnnotationForm extends Component {
         labelId: nextProps.current.labelId,
         annotationId: nextProps.current.annotationId,
         comment: nextProps.current.annotation.comment,
+        displayTick: nextProps.current.annotation.displayTick,
       });
     }
 
@@ -84,6 +87,7 @@ class AnnotationForm extends Component {
           positionFrom: s.from + this.props.positionFrom,
           positionTo: s.to + this.props.positionFrom,
           comment: this.state.comment,
+          displayTick: this.state.displayTick,
         },
         this.state.annotationId
       );
@@ -130,6 +134,10 @@ class AnnotationForm extends Component {
 
   onCommentChange(event) {
     this.setState({ comment: event.target.value });
+  }
+
+  onDisplayTickChange() {
+    this.setState({ displayTick: !this.state.displayTick });
   }
 
   toggleActionRemove() {
@@ -193,6 +201,17 @@ class AnnotationForm extends Component {
             value={this.state.comment}
             onChange={this.onCommentChange}
           />
+
+          <label htmlFor="display-tick">
+            Display orientation tick?&nbsp;
+            <input
+              type="checkbox"
+              id="display-tick"
+              checked={this.state.displayTick}
+              onChange={this.onDisplayTickChange}
+            />
+          </label>
+
           <input
             type="submit"
             value={null !== this.state.annotationId ? 'Save' : 'Add'}
@@ -233,6 +252,7 @@ AnnotationForm.propTypes = {
       positionFrom: number.isRequired,
       positionTo: number.isRequired,
       comment: string.isRequired,
+      displayTick: bool.isRequired,
     }),
   }),
   selections: array.isRequired,

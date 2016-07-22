@@ -33,6 +33,7 @@ describe('<AnnotationForm />', () => {
     expect(wrapper.find(InputNumberWithInlineButton)).to.have.length(1);
     expect(wrapper.find('select')).to.have.length(1);
     expect(wrapper.find('textarea')).to.have.length(1);
+    expect(wrapper.find('input[type="checkbox"]')).to.have.length(1);
   });
 
   it('updates annotation form with selection', () => {
@@ -148,6 +149,7 @@ describe('<AnnotationForm />', () => {
         positionFrom: 10,
         positionTo: 20,
         comment: '',
+        displayTick: true,
       }
     };
 
@@ -182,6 +184,7 @@ describe('<AnnotationForm />', () => {
         positionFrom: 10,
         positionTo: 20,
         comment: '',
+        displayTick: true,
       }
     };
 
