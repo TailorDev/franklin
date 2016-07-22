@@ -44,6 +44,7 @@ class Annotation extends Component {
 
   render() {
     const a = this.props.annotation;
+    const displayTick = a.displayTick;
     const isReverse = a.positionFrom > a.positionTo;
     const isUnit = a.positionFrom === a.positionTo;
     const indexForTick = isReverse ? 0 : this.state.segments.length - 1;
@@ -64,7 +65,7 @@ class Annotation extends Component {
             y1={line.y1}
             y2={line.y2}
             color={this.props.label.color}
-            hasTick={!isUnit && indexForTick === index}
+            hasTick={displayTick && !isUnit && indexForTick === index}
             isReverse={isReverse}
           />
         )}

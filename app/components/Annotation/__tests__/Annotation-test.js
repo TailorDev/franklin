@@ -21,11 +21,13 @@ describe('<Annotation />', () => {
         positionFrom: 5,
         positionTo: 125,
         comment: 'ENSE000036121231',
+        displayTick: true,
       },
       {
         positionFrom: 295,
         positionTo: 415,
         comment: 'ENSE000036121232',
+        displayTick: true,
       },
     ]),
   };
@@ -247,5 +249,32 @@ describe('<Annotation />', () => {
     expect(wrapper.find(Line)).to.have.length(2);
     expect(wrapper.find('.annotation-tick.forward')).to.have.length(0);
     expect(wrapper.find('.annotation-tick.reverse')).to.have.length(1);
+  });
+
+  it('should be possible to hide the orientation tick', () => {
+    const labelId = 0;
+    const segments = [
+      { x1: 0, y1: 1, x2: 0, y2: 5 },
+      { x1: 1, y1: 2, x2: 1, y2: 6 },
+    ];
+
+    const annotation = Object.assign({}, label.annotations.first(), {
+      displayTick: false,
+    });
+
+    const wrapper = mount(
+      <Annotation
+        annotation={annotation}
+        label={label}
+        labelId={labelId}
+        getAnnotationSegments={() => { return segments; }}
+        isSelected={false}
+        onClick={() => {}}
+        positionFrom={0}
+      />
+    );
+
+    expect(wrapper.find(Line)).to.have.length(2);
+    expect(wrapper.find('.annotation-tick')).to.have.length(0);
   });
 });
