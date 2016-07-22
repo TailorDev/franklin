@@ -40,7 +40,7 @@ directory).
 
 ## Requirements
 
-We use `node` 5.8+ and `npm` 3.7+.
+We use `node` 6.2+ and `npm` 3.8+.
 
 
 ## Contributing

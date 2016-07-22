@@ -47,11 +47,11 @@
     "mocha-circleci-reporter": "0.0.1",
     "node-sass": "^3.4.2",
     "nyc": "^6.0.0",
-    "react": "^15.0.2",
-    "react-addons-perf": "^15.2.0",
-    "react-addons-test-utils": "^15.0.2",
+    "react": "^15.2.1",
+    "react-addons-perf": "^15.2.1",
+    "react-addons-test-utils": "^15.2.1",
     "react-color": "^2.1.0",
-    "react-dom": "^15.0.2",
+    "react-dom": "^15.2.0",
     "react-dropzone": "^3.5.3",
     "react-hot-loader": "^3.0.0-beta.1",
     "react-hotkeys": "^0.9.0",
@@ -75,7 +75,7 @@
     "express": "^4.13.4"
   },
   "engines": {
-    "node": "^5.7"
+    "node": "^6.2"
   },
   "nyc": {
     "exclude": [
