@@ -24,6 +24,7 @@ describe('<Exon />', () => {
         exon={exon}
         onEditExon={() => {}}
         onRemoveExon={() => {}}
+        index={1}
       />
     );
     expect(wrapper.find('.exon')).to.have.length(1);
@@ -39,6 +40,7 @@ describe('<Exon />', () => {
         exon={exon}
         onEditExon={() => {}}
         onRemoveExon={() => {}}
+        index={1}
       />
     );
 
@@ -55,6 +57,7 @@ describe('<Exon />', () => {
         exon={exon}
         onEditExon={() => {}}
         onRemoveExon={() => {}}
+        index={1}
       />
     );
 
@@ -72,6 +75,7 @@ describe('<Exon />', () => {
         exon={exon}
         onEditExon={spy}
         onRemoveExon={() => {}}
+        index={1}
       />
     );
 
@@ -87,6 +91,7 @@ describe('<Exon />', () => {
         exon={exon}
         onEditExon={() => {}}
         onRemoveExon={() => {}}
+        index={1}
       />
     );
 
@@ -103,6 +108,7 @@ describe('<Exon />', () => {
         exon={exon}
         onEditExon={() => {}}
         onRemoveExon={() => {}}
+        index={1}
       />
     );
 
@@ -119,6 +125,7 @@ describe('<Exon />', () => {
         exon={exon}
         onEditExon={() => {}}
         onRemoveExon={spy}
+        index={1}
       />
     );
 
