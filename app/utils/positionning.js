@@ -81,7 +81,7 @@ export const getAnnotationSegments = (
 
   let start = from;
   for (let i = start + 1; i <= to; i++) {
-    if (! (i % nucleotidesPerRow)) {
+    if (!(i % nucleotidesPerRow)) {
       segments.push([start, i - 1]);
       start = i;
     }

@@ -1,4 +1,3 @@
-// Actions
 const SEARCH = 'franklin/search/SEARCH';
 const CLEAR = 'franklin/search/CLEAR';
 

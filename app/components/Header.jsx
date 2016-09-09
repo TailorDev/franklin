@@ -1,3 +1,4 @@
+/* eslint react/jsx-no-comment-textnodes: 0 */
 import React from 'react';
 
 

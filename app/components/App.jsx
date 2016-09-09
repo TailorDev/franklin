@@ -27,6 +27,7 @@ export class App extends Component {
     this.startDemo = this.startDemo.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.onFileSelectClick = this.onFileSelectClick.bind(this);
+    this.setDropzoneEl = this.setDropzoneEl.bind(this);
   }
 
   onDropAccepted(files) {
@@ -35,7 +36,11 @@ export class App extends Component {
   }
 
   onFileSelectClick() {
-    this.refs.dropzone.open();
+    this.$dropzone.open();
+  }
+
+  setDropzoneEl(node) {
+    this.$dropzone = node;
   }
 
   startDemo() {
@@ -66,7 +71,7 @@ export class App extends Component {
           <div className="content">
             <Loader />
             <Dropzone
-              ref="dropzone"
+              ref={this.setDropzoneEl}
               className="dropzone"
               activeClassName="drag-enter"
               onDropAccepted={this.onDropAccepted}

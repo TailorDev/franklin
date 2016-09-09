@@ -24,22 +24,22 @@ const Toolbar = (props) => (
       <TabList>
         <Tab>
           <h4 title="Sequence">
-            <i className="fa fa-info-circle" aria-hidden="true"></i>
+            <i className="fa fa-info-circle" aria-hidden="true" />
           </h4>
         </Tab>
         <Tab>
           <h4 title="Labels">
-            <i className="fa fa-tag" aria-hidden="true"></i>
+            <i className="fa fa-tag" aria-hidden="true" />
           </h4>
         </Tab>
         <Tab>
           <h4 title="Exons">
-            <i className="fa fa-sliders" aria-hidden="true"></i>
+            <i className="fa fa-sliders" aria-hidden="true" />
           </h4>
         </Tab>
         <Tab>
           <h4 title="Annotations">
-            <i className="fa fa-bars" aria-hidden="true"></i>
+            <i className="fa fa-bars" aria-hidden="true" />
           </h4>
         </Tab>
       </TabList>

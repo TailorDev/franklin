@@ -134,7 +134,7 @@ class ExonForm extends Component {
                 className="button remove"
                 onClick={this.toggleActionRemove}
               >
-                <i className="fa fa-trash-o" aria-hidden="true"></i>
+                <i className="fa fa-trash-o" aria-hidden="true" />
               </button>
               :
               null

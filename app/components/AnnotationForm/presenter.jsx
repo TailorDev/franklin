@@ -170,7 +170,7 @@ class AnnotationForm extends Component {
             titleText="Invert positions"
             hasButtonDisabled={this.state.positionFrom === this.state.positionTo}
           >
-            <i className="fa fa-arrows-v" aria-hidden="true"></i>
+            <i className="fa fa-arrows-v" aria-hidden="true" />
           </InputNumberWithInlineButton>
 
           <InputNumber
@@ -220,7 +220,7 @@ class AnnotationForm extends Component {
             <i
               className="fa fa-trash remove"
               onClick={this.toggleActionRemove}
-            ></i> : null
+            /> : null
           }
         </form>
 

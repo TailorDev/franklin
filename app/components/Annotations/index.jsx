@@ -16,8 +16,8 @@ class Annotations extends Component {
 
   getAnnotationSegments(labelIndex, indexFrom, indexTo) {
     return getAnnotationSegments(
-      indexFrom - this.props.positionFrom + 1,
-      indexTo - this.props.positionFrom + 1,
+      (indexFrom - this.props.positionFrom) + 1,
+      (indexTo - this.props.positionFrom) + 1,
       labelIndex, // current track
       this.props.visualizerMargin,
       this.props.nucleotidesPerRow,

@@ -28,6 +28,8 @@ export default class Visualizer extends Component {
       width: '100%',
       height: '100%',
     };
+
+    this.setWrapperEl = this.setWrapperEl.bind(this);
   }
 
   componentDidMount() {
@@ -54,6 +56,10 @@ export default class Visualizer extends Component {
     );
   }
 
+  setWrapperEl(node) {
+    this.$wrapper = node;
+  }
+
   handleResize(sequence, labels) {
     this.updateVisualizerDimensions(sequence, labels);
   }
@@ -62,7 +68,7 @@ export default class Visualizer extends Component {
     const { visualizerMargin, nucleotideWidth, nucleotidesRowHeight, trackHeight } = this.state;
 
     // Width must fit the wrapper maximal dimension, i.e. 100%
-    const width = this.refs.wrapper.clientWidth;
+    const width = this.$wrapper.clientWidth;
     const nucleotidesPerRow = Math.trunc((width - (visualizerMargin.x * 2)) / nucleotideWidth);
 
     // Height should contain each nucleotides + annotations tracks rows
@@ -82,7 +88,7 @@ export default class Visualizer extends Component {
 
   render() {
     return (
-      <div className="visualizer" ref="wrapper">
+      <div className="visualizer" ref={this.setWrapperEl}>
 
         {0 < this.props.sequence.size ?
           <svg

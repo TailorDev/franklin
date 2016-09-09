@@ -5,6 +5,15 @@
     "node": true
   },
   "rules": {
-    "yoda": [1, "always"]
+    "yoda": [1, "always"],
+    "new-cap": 1,
+    "import/no-extraneous-dependencies": [2, {
+      'optionalDependencies': false,
+    }],
+  },
+  "parserOptions":{
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
   }
 }

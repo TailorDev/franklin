@@ -38,15 +38,15 @@ export default class Nucleotide extends Component {
   }
 
   getPositionBackgroundXCoordinate() {
-    return -(this.getPositionLength() - 1) * 10 / 2;
+    return -1 * (((this.getPositionLength() - 1) * 10) / 2);
   }
 
   getPositionBackgroundWidth() {
-    return this.getPositionLength() * 10 + 10;
+    return (this.getPositionLength() * 10) + 10;
   }
 
   getPositionTextXCoordinate() {
-    return 5 - ((this.getPositionLength() - 1) * 10 / 2);
+    return 5 - (((this.getPositionLength() - 1) * 10) / 2);
   }
 
   updateCoordinates(props) {

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 const Search = (props) => (
   <div className="search">
-    <label>
+    <label htmlFor="search-help-input">
       <input
         type="text"
         placeholder="ATCG..."
@@ -10,6 +10,7 @@ const Search = (props) => (
         onChange={props.onChange}
         disabled={null === props.ntSequence}
         aria-describedby="search-help"
+        name="search-help-input"
       />
     </label>
     <p className="help-text" id="search-help">

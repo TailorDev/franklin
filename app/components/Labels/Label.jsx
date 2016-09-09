@@ -1,10 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 
-const { object, func } = PropTypes;
-
 import LabelEdit from './LabelEdit';
 import LabelTools from './LabelTools';
 import Remove from '../Remove';
+
+const { object, func } = PropTypes;
 
 
 class Label extends Component {
@@ -70,7 +70,7 @@ class Label extends Component {
             className="fa fa-tag"
             aria-hidden="true"
             style={{ color: this.props.label.color }}
-          ></i>
+          />
           {this.props.label.name}
         </span>
 
