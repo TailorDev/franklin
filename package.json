@@ -80,9 +80,9 @@
   },
   "nyc": {
     "exclude": [
-      "app/**/*-test.js",
-      "app/components/**/index.js",
-      "lib",
+      "node_modules",
+      "**/*-test.js",
+      "**/__tests__/*.js",
       "app/utils/ntseq.js"
     ]
   }
