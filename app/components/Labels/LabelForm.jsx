@@ -106,7 +106,7 @@ class LabelForm extends Component {
               onClick={this.handleColorpickerClick}
               style={{ background: this.state.label.color }}
             >
-              <i className="fa fa-eyedropper" aria-hidden="true"></i>
+              <i className="fa fa-eyedropper" aria-hidden="true" />
             </span>
 
             <input

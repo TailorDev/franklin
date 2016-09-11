@@ -1,3 +1,5 @@
+const PORT = process.env.PORT || 3000;
+
 if ('production' === process.env.NODE_ENV) {
   const express = require('express');
   const compression = require('compression');
@@ -8,7 +10,7 @@ if ('production' === process.env.NODE_ENV) {
   // config
   const staticPath = path.join(__dirname, '/build');
 
-  app.set('port', process.env.PORT || 3000);
+  app.set('port', PORT);
 
   // middlewares
   app.use(compression());
@@ -37,11 +39,11 @@ if ('production' === process.env.NODE_ENV) {
     hot: true,
     historyApiFallback: true,
     publicPath: '/'
-  }).listen(3000, 'localhost', function (err) {
+  }).listen(PORT, 'localhost', function (err) {
     if (err) {
       return console.log(err);
     }
 
-    console.log('Development server running at http://localhost:3000/');
+    console.log(`Development server running at http://localhost:${PORT}`);
   });
 }

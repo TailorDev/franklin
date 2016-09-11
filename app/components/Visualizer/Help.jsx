@@ -10,9 +10,9 @@ const Help = ({ onFileSelectClick }) =>
       will be uploaded to our servers.
     </p>
 
-    <i className="fa fa-file big" aria-hidden="true"></i>
-    <i className="fa fa-arrow-right big" aria-hidden="true"></i>
-    <i className="fa fa-square-o big" aria-hidden="true"></i>
+    <i className="fa fa-file big" aria-hidden="true" />
+    <i className="fa fa-arrow-right big" aria-hidden="true" />
+    <i className="fa fa-square-o big" aria-hidden="true" />
 
     <div>
       <h4>Or click below to select your file</h4>

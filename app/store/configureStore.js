@@ -1,13 +1,15 @@
 /* eslint global-require: 0 */
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from '../modules/reducer';
 import Immutable from 'immutable';
+import rootReducer from '../modules/reducer';
+
 
 const middlewares = [thunk];
 
 if ('production' !== process.env.NODE_ENV) {
   const createLogger = require('redux-logger');
+
   const logger = createLogger({
     stateTransformer: (state) => {
       const newState = {};

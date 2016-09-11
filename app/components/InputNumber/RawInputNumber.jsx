@@ -4,6 +4,7 @@ import React from 'react';
 const RawInputNumber = (props) =>
   <input
     type="number"
+    name={`input-number-${props.className}`}
     value={props.value}
     placeholder={props.placeholder || null}
     onChange={props.onChange}

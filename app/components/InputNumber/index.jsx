@@ -10,7 +10,10 @@ const InputNumber = (props) => {
   }
 
   return (
-    <label className={isInvalid ? 'is-invalid-label' : ''}>
+    <label
+      htmlFor={`input-number-${props.className}`}
+      className={isInvalid ? 'is-invalid-label' : ''}
+    >
       {props.labelText || null}
       <RawInputNumber
         {...props}

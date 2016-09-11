@@ -5,6 +5,14 @@
     "node": true
   },
   "rules": {
-    "yoda": [1, "always"]
+    "yoda": [1, "always"],
+    "import/no-extraneous-dependencies": [2, {
+      'optionalDependencies': false,
+    }],
+  },
+  "parserOptions":{
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
   }
 }
