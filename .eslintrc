@@ -6,7 +6,6 @@
   },
   "rules": {
     "yoda": [1, "always"],
-    "new-cap": 1,
     "import/no-extraneous-dependencies": [2, {
       'optionalDependencies': false,
     }],
