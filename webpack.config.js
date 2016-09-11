@@ -31,6 +31,8 @@ const VERSION = (() => {
   return v;
 })();
 
+const PORT = process.env.PORT || 3000;
+
 // Used to configure Babel (see: `.babelrc` file)
 process.env.BABEL_ENV = TARGET;
 
@@ -108,7 +110,7 @@ if (TARGET === 'dev' || !TARGET) {
     devtool: 'eval-source-map',
     entry: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:3000',
+      'webpack-dev-server/client?http://localhost:' + PORT,
       'webpack/hot/only-dev-server',
       PATHS.app
     ],
