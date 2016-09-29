@@ -5,7 +5,7 @@ Franklin
 
 Franklin is a DNA sequence annotation tool we built at TailorDev in order to
 play with SVGs, [React](https://facebook.github.io/react/), and
-[Redux](http://redux.js.org/), as part of our "Le lab" sessions:
+[Redux](http://redux.js.org/) as part of our "Le lab" sessions:
 
 * https://tailordev.fr/blog/2016/06/09/le-lab-3-franklin-dna-sequence-annotation-tool/
 * https://tailordev.fr/blog/2016/07/01/le-lab-4-franklin-dna-ninja/
@@ -28,7 +28,7 @@ https://franklin.lelab.tailordev.fr/.
 
 We use this
 [Dockerfile](https://github.com/TailorDev/dockerfiles/blob/master/node/Dockerfile)
-to run franklin in production (which runs `npm run start` from franklin root
+to run franklin in production (which runs `npm run start` from the franklin root
 directory).
 
 ### Development
@@ -45,7 +45,7 @@ We use `node` 6.2+ and `npm` 3.8+.
 
 ## Contributing
 
-Please, see [CONTRIBUTING](CONTRIBUTING.md) file.
+Please see the [CONTRIBUTING](CONTRIBUTING.md) file.
 
 ## Running the Tests
 
@@ -64,7 +64,7 @@ Code coverage is available by running:
 
 Please note that this project is released with a [Contributor Code of
 Conduct](http://contributor-covenant.org/). By participating in this project you
-agree to abide by its terms. See [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) file.
+agree to abide by its terms. See the [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) file.
 
 ## Credits
 
