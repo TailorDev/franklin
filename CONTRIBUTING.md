@@ -3,7 +3,8 @@ Contributing Guidelines
 
 First of all, **thank you** for contributing, **you are awesome**!
 
-Before starting to contribute, you should read the following:
+Before starting to contribute, you should read, agree, and follow these three
+points:
 
 * [How to contribute?](#how-to-contribute)
 * [Pull Request Guidelines](#pull-request-guidelines)
@@ -13,55 +14,68 @@ Before starting to contribute, you should read the following:
 
 ## How to contribute?
 
+> You might be interested in [how we communicate with GitHub
+> labels](https://tailordev.fr/blog/2016/09/27/communication-with-github-issues-1/).
+
 ### Report Bugs
 
-Report bugs at https://github.com/TailorDev/franklin/issues/new.
+Report bugs at: https://github.com/TailorDev/franklin/issues/new.
 
 When reporting a bug, please include:
 
-- Any details about your local setup that might be helpful in
-  troubleshooting;
-- Detailed steps to reproduce the bug. When possible, please
-  write a test case.
+* Any details about your local setup that might be helpful in troubleshooting;
+* Detailed steps to reproduce the bug. When possible, please write a test case.
+
+If you are not able to do that, that is fine! Open an issue anyway and let us
+know as many information as you can. We will get back to you to determine the
+problems, and (hopefully) fix it.
 
 ### Fix Bugs
 
-Check out the [open bugs](https://github.com/TailorDev/franklin/issues) -
-anything tagged with the **[easy pick]** label could be a good choice
-for newcomers (and we are willing to help you).
+Check out the [open bugs](https://github.com/TailorDev/franklin/issues) - anything
+tagged with the **[easy pick]** label could be a good choice for newcomers (and
+we are willing to help you).
+
+We have two kind of bugs: **[critical]** and **[bug]**. We tend to fix critical
+bugs as soon as possible. Feel free to come up with a patch before us though!
 
 ### Implement Features
 
 Look through the GitHub issues for features. Anything tagged with
-**[enhancement]** is open to whoever wants to implement it.
+**[improvement]** or **[feature]** is open to whoever wants to implement it.
+
+The issue is unclear or you are not sure what is expected: ask for more
+information by commenting to the issue.
 
 ### Submit Feedback
 
-Any issue with the **[question]** label is open for feedback, so feel
-free to share your thoughts with us!
+Any issue with the **[question]** label is open for feedback, so feel free to
+share your thoughts with us!
 
 The best way to send feedback is to [fill a new
 issue](https://github.com/TailorDev/franklin/issues/new) on GitHub.
 
 If you are proposing a feature:
 
-- Explain how you envision it working. Try to be as detailed as you
-  can;
-- Try to keep the scope as narrow as possible. This will help make it
-  easier to implement;
-- Feel free to include any code you might already have, even if it's
-  just a rough idea. This is a volunteer-driven project, and
-  contributions are welcome :)
+* Explain how you envision it working. Try to be as detailed as you can;
+* Try to keep the scope as narrow as possible. This will help make it easier to
+  implement;
+* Feel free to include any code you might already have, even if it is
+  just a rough idea. This is a volunteer-driven project, and contributions are
+  welcome :)
 
+Your issue will be flagged as **[feature request]** first, and if we agree on
+it, we will label it as **[feature]**, meaning it has been accepted and the
+feature will eventually be added to the project.
 
 ## Pull Request Guidelines
 
-Here are a few rules to follow in order to ease code reviews, and discussions before
-maintainers accept and merge your work:
+Here are a few rules to follow in order to ease code reviews, and discussions
+before maintainers accept and merge your work:
 
-- you MUST run the test suite;
-- you MUST write (or update) unit tests;
-- you SHOULD write documentation.
+* you MUST run the test suite;
+* you MUST write (or update) unit tests;
+* you SHOULD write documentation.
 
 Please, write [commit messages that make
 sense](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html),
@@ -75,5 +89,8 @@ commits such as `fix tests`, `fix 2`, `fix 3`, etc.).
 
 Also, while creating your Pull Request on GitHub, you MUST write a description
 which gives the context and/or explains why you are creating it.
+
+For further information about creating a Pull Request, please read [this blog
+post](http://williamdurand.fr/2013/11/20/on-creating-pull-requests/).
 
 Thank you!
