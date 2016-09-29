@@ -27,7 +27,7 @@ When reporting a bug, please include:
 * Detailed steps to reproduce the bug. When possible, please write a test case.
 
 If you are not able to do that, that is fine! Open an issue anyway and let us
-know as many information as you can. We will get back to you to determine the
+know as much information as you can. We will get back to you to determine the
 problems, and (hopefully) fix it.
 
 ### Fix Bugs
@@ -42,9 +42,9 @@ bugs as soon as possible. Feel free to come up with a patch before us though!
 ### Implement Features
 
 Look through the GitHub issues for features. Anything tagged with
-**[improvement]** or **[feature]** is open to whoever wants to implement it.
+**[improvement]** or **[feature]** is open to anyone that wants to implement it.
 
-The issue is unclear or you are not sure what is expected: ask for more
+If the issue is unclear or you are not sure what is expected, ask for more
 information by commenting to the issue.
 
 ### Submit Feedback
@@ -82,8 +82,8 @@ sense](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html),
 and [rebase your branch](http://git-scm.com/book/en/Git-Branching-Rebasing)
 before submitting your Pull Request.
 
-One may ask you to [squash your
-commits](http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html)
+You may be asked to [squash your
+commits](http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html), 
 too. This is used to "clean" your Pull Request before merging it (we don't want
 commits such as `fix tests`, `fix 2`, `fix 3`, etc.).
 
