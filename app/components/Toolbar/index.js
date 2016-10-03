@@ -2,12 +2,14 @@ import { connect } from 'react-redux';
 import { Nt } from '../../utils/ntseq';
 import Toolbar from './presenter';
 import { changePositionFrom } from '../../modules/sequence';
+import * as actions from '../../modules/franklin';
 
 
 export const mapStateToProps = (state) => {
   const sequence = state.sequence;
   const label = state.label;
   const exon = state.exon;
+  const selection = state.selection;
 
   let ntSequence = null;
   if (0 < sequence.sequence.size) {
@@ -21,6 +23,7 @@ export const mapStateToProps = (state) => {
     ntSequence,
     exons: exon.exons,
     positionFrom: sequence.positionFrom,
+    selections: selection.selections,
   };
 };
 
@@ -33,6 +36,9 @@ const mapDispatchToProps = (dispatch) => ({
     }
 
     dispatch(changePositionFrom(position));
+  },
+  onClearSelection: () => {
+    dispatch(actions.clear());
   },
 });
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import Immutable from 'immutable';
+import sinon from 'sinon';
 
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
@@ -22,6 +23,7 @@ describe('<Toolbar />', () => {
         labels={list}
         positionFrom={1}
         onPositionFromChange={() => {}}
+        selections={[]}
       />
     );
 
@@ -36,12 +38,62 @@ describe('<Toolbar />', () => {
         labels={list}
         positionFrom={1}
         onPositionFromChange={() => {}}
+        selections={[]}
       />
     );
 
     expect(wrapper.find('.sequence-panel')).to.have.length(1);
     expect(wrapper.find('.sequence-panel').text()).to.contain('NC_004350.2');
   });
+
+  it('doesnt display the clear selection button', () => {
+    const wrapper = shallow(
+      <Toolbar
+        name={'NC_004350.2'}
+        sequence={list}
+        labels={list}
+        positionFrom={1}
+        onPositionFromChange={() => {}}
+        selections={[]}
+      />
+    );
+
+    expect(wrapper.find('.clear-selection')).to.have.length(0);
+  })
+
+  it('display the clear selection button', () => {
+    const wrapper = shallow(
+      <Toolbar
+        name={'NC_004350.2'}
+        sequence={list}
+        labels={list}
+        positionFrom={1}
+        onPositionFromChange={() => {}}
+        selections={[{from:4, to:1}, {from:43, to: 49}]}
+      />
+    );
+
+    expect(wrapper.find('.clear-selection')).to.have.length(1);
+  })
+
+  it('clear the current selection', () => {
+    const spy = sinon.spy();
+    const wrapper = shallow(
+      <Toolbar
+        name={'NC_004350.2'}
+        sequence={list}
+        labels={list}
+        positionFrom={1}
+        onPositionFromChange={() => {}}
+        onClearSelection={spy}
+        selections={[{from:4, to:1}, {from:43, to: 49}]}
+      />
+    );
+
+    expect(wrapper.find('.clear-selection')).to.have.length(1);
+    wrapper.find('.clear-selection a').simulate('click');
+    expect(spy.calledOnce).to.be.true;
+  })
 
   describe('mapStateToProps', () => {
     it('should return a null ntSequence when sequence is empty', () => {
@@ -52,6 +104,7 @@ describe('<Toolbar />', () => {
         },
         label: { labels: [] },
         exon: { exons: new Immutable.List() },
+        selection: [],
       };
 
       const props = mapStateToProps(state);
@@ -68,6 +121,7 @@ describe('<Toolbar />', () => {
         },
         label: { labels: [] },
         exon: { exons: new Immutable.List() },
+        selection: [],
       };
 
       const props = mapStateToProps(state);

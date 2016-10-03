@@ -18,6 +18,16 @@ const Toolbar = (props) => (
       />
     </div>
 
+    {0 !== props.selections.length ?
+      <div className="clear-selection">
+        <a
+          onClick={props.onClearSelection}
+        >
+          <i className="fa fa-times-circle-o" aria-hidden="true" /> Clear current selection
+        </a>
+      </div> : null
+    }
+
     <Tabs
       forceRenderTabPanel
     >
@@ -97,6 +107,8 @@ Toolbar.propTypes = {
   positionFrom: React.PropTypes.number.isRequired,
   ntSequence: React.PropTypes.object,
   onPositionFromChange: React.PropTypes.func.isRequired,
+  onClearSelection: React.PropTypes.func.isRequired,
+  selections: React.PropTypes.array,
 };
 
 export default Toolbar;
