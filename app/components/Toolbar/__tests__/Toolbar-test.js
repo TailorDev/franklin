@@ -23,7 +23,6 @@ describe('<Toolbar />', () => {
         labels={list}
         positionFrom={1}
         onPositionFromChange={() => {}}
-        selections={[]}
       />
     );
 
@@ -38,7 +37,6 @@ describe('<Toolbar />', () => {
         labels={list}
         positionFrom={1}
         onPositionFromChange={() => {}}
-        selections={[]}
       />
     );
 
@@ -46,7 +44,7 @@ describe('<Toolbar />', () => {
     expect(wrapper.find('.sequence-panel').text()).to.contain('NC_004350.2');
   });
 
-  it('doesnt display the clear selection button', () => {
+  it('should hide the clear selection button', () => {
     const wrapper = shallow(
       <Toolbar
         name={'NC_004350.2'}
@@ -54,14 +52,14 @@ describe('<Toolbar />', () => {
         labels={list}
         positionFrom={1}
         onPositionFromChange={() => {}}
-        selections={[]}
+        hasSelection={false}
       />
     );
 
-    expect(wrapper.find('.clear-selection')).to.have.length(0);
+    expect(wrapper.find('.clear-selection').hasClass('hidden')).to.equal(true);
   })
 
-  it('display the clear selection button', () => {
+  it('should show the clear selection button', () => {
     const wrapper = shallow(
       <Toolbar
         name={'NC_004350.2'}
@@ -69,11 +67,11 @@ describe('<Toolbar />', () => {
         labels={list}
         positionFrom={1}
         onPositionFromChange={() => {}}
-        selections={[{from:4, to:1}, {from:43, to: 49}]}
+        hasSelection={true}
       />
     );
 
-    expect(wrapper.find('.clear-selection')).to.have.length(1);
+    expect(wrapper.find('.clear-selection').hasClass('hidden')).to.equal(false);
   })
 
   it('clear the current selection', () => {
@@ -86,7 +84,7 @@ describe('<Toolbar />', () => {
         positionFrom={1}
         onPositionFromChange={() => {}}
         onClearSelection={spy}
-        selections={[{from:4, to:1}, {from:43, to: 49}]}
+        hasSelection={true}
       />
     );
 
@@ -104,7 +102,7 @@ describe('<Toolbar />', () => {
         },
         label: { labels: [] },
         exon: { exons: new Immutable.List() },
-        selection: [],
+        selection: { selections: [] },
       };
 
       const props = mapStateToProps(state);
@@ -121,7 +119,7 @@ describe('<Toolbar />', () => {
         },
         label: { labels: [] },
         exon: { exons: new Immutable.List() },
-        selection: [],
+        selection: { selections: [] },
       };
 
       const props = mapStateToProps(state);

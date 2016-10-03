@@ -9,12 +9,13 @@ export const mapStateToProps = (state) => {
   const sequence = state.sequence;
   const label = state.label;
   const exon = state.exon;
-  const selection = state.selection;
 
   let ntSequence = null;
   if (0 < sequence.sequence.size) {
     ntSequence = (new Nt.Seq()).read(sequence.sequence.join(''));
   }
+  const hasSelection = (undefined !== state.selection.selections &&
+                        0 !== state.selection.selections.length);
 
   return {
     name: sequence.name,
@@ -23,7 +24,7 @@ export const mapStateToProps = (state) => {
     ntSequence,
     exons: exon.exons,
     positionFrom: sequence.positionFrom,
-    selections: selection.selections,
+    hasSelection,
   };
 };
 
