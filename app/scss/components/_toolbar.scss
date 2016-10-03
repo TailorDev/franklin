@@ -9,6 +9,18 @@
     padding: 1rem;
   }
 
+  .clear-selection {
+    padding: 0 1rem;
+
+    a {
+     color: $kashmir;
+    }
+  }
+
+  .clear-selection.hidden {
+    visibility: hidden;
+  }
+
   .react-tabs {
 
     .ReactTabs__TabList {
