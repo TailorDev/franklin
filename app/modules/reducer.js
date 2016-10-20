@@ -6,6 +6,7 @@ import label from './label';
 import selection from './selection';
 import search from './search';
 import exon from './exon';
+import notification from './notification';
 
 export default combineReducers({
   sequence,
@@ -13,4 +14,5 @@ export default combineReducers({
   selection,
   search,
   exon,
+  notification,
 });

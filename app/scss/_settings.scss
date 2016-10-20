@@ -9,6 +9,9 @@ $yeah: #334854;
 $light-yeah: lighten($yeah, 10%);
 $dark-yeah: darken($yeah, 10%);
 $grey: #f6f6f6;
+$alabaster: #f9f9f9;
+$success: #3adb76;
+$warning: #ffae00;
 
 /* -- Layout -- */
 $main-header-height: 70px;
@@ -18,7 +21,13 @@ $toolbar-width: 300px;
 /* -- Foundation overridden settings -- */
 
 // Colors
-$foundation-palette: ( primary: $kitty, secondary: $dark-yeah, alert: $kashmir );
+$foundation-palette: ( 
+  primary: $kitty,
+  secondary: $dark-yeah,
+  success:$success,
+  warning:$warning,
+  alert: $kashmir
+);
 
 // Global
 $global-radius: 5px;
@@ -28,10 +37,18 @@ $global-rounded: 1000px;
 $common-font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
 $body-font-family: 'LatoLatin', $common-font-family;
 $header-font-family: 'LatoLatinBold', $common-font-family;
+$callout-font-family: 'LatoLatin';
 
 // Typography
 $list-lineheight: 2;
 $list-margin-bottom: 1.4rem;
+
+// Callout
+$callout-radius: 0;
+$callout-margin: 0;
+$callout-background-fade: 20%;
+$callout-font-color: $alabaster;
+$callout-border: 0 none none;
 
 /* -- Franklin settings -- */
 $footer-font-family: 'LatoLatinBold', $common-font-family;

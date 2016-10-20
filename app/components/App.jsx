@@ -9,6 +9,7 @@ import Toolbar from './Toolbar';
 import Footer from './Footer';
 import Loader from './Loader';
 import Disclaimer from './Disclaimer';
+import Notifications from './Notifications';
 
 import * as actions from '../modules/franklin';
 
@@ -66,6 +67,8 @@ export class App extends Component {
         />
 
         <Header />
+
+        <Notifications />
 
         <HotKeys keyMap={keyMap} handlers={keyHandlers}>
           <div className="content">

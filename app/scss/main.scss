@@ -8,7 +8,9 @@
 @include foundation-global-styles;
 @include foundation-typography;
 @include foundation-forms;
+@include foundation-callout;
 @include foundation-button;
+@include foundation-close-button;
 @include foundation-button-group;
 @include foundation-badge;
 
@@ -38,3 +40,4 @@ $fa-font-path: '~font-awesome/fonts';
 @import 'components/search';
 @import 'components/remove';
 @import 'components/input_number';
+@import 'components/message_box';
