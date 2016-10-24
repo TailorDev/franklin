@@ -59,4 +59,29 @@ describe('modules/notification', () => {
 
     expect(state.messages[0].level).to.equal('warning');
   });
+
+  it('should close notifications by category', () => {
+    let state = reducer(undefined, {});
+
+    state = reducer(state, actions.notify('Warning', 'warning', 'upload'));
+    state = reducer(state, actions.notify('hello', 'info'));
+    state = reducer(state, actions.notify('Fail', 'error', 'upload'));
+    state = reducer(state, actions.error('Fail', 'upload'));
+
+    state = reducer(state, actions.closeCategory('upload'));
+
+    expect(state.messages).to.have.length(1);
+    expect(state.messages[0].content).to.equal('hello');
+  });
+
+  it('should close all notifications', () => {
+    let state = reducer(undefined, {});
+
+    state = reducer(state, actions.notify('hello', 'info'));
+    state = reducer(state, actions.notify('Fail', 'error', 'upload'));
+
+    state = reducer(state, actions.closeAll());
+
+    expect(state.messages).to.have.length(0);
+  });
 });
