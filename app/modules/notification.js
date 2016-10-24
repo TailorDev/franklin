@@ -1,6 +1,7 @@
 // Actions
 export const NOTIFY = 'franklin/notification/NOTIFY';
 const CLOSE = 'franklin/notification/CLOSE';
+const CLOSE_ALL = 'franklin/notification/CLOSE_ALL';
 
 // Action Creators
 export function notify(message, level) {
@@ -9,6 +10,10 @@ export function notify(message, level) {
 
 export function close(index) {
   return { type: CLOSE, index };
+}
+
+export function closeAll() {
+  return { type: CLOSE_ALL };
 }
 
 export function info(message) {
@@ -70,6 +75,9 @@ export default function reducer(state = initialState, action = {}) {
 
     case CLOSE:
       return doClose(state, action);
+
+    case CLOSE_ALL:
+      return initialState;
 
     default: return state;
   }
