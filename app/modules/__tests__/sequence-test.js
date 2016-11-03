@@ -65,4 +65,57 @@ describe('modules/sequence', () => {
 
     expect(state.positionFrom).to.equal(1234);
   });
+
+  it('handles empty file', () => {
+    const store = mockStore({});
+    const content = {
+      header: '',
+      sequence: Immutable.List(),
+    }
+
+    const { header, sequence } = actions.checkUploadedFile(store.dispatch, content);
+    expect(header).to.equal('');
+    expect(store.getActions()[0].type).to.equal('franklin/notification/NOTIFY');
+    expect(store.getActions()[0].level).to.equal('error');
+  });
+
+  it('handles empty header', () => {
+    const store = mockStore({});
+    const content = {
+      header: '',
+      sequence: Immutable.List(['A','G']),
+    }
+
+    const { header, sequence } = actions.checkUploadedFile(store.dispatch, content);
+    expect(header).to.equal('Unknown');
+    expect(store.getActions()[0].type).to.equal('franklin/notification/NOTIFY');
+    expect(store.getActions()[0].level).to.equal('warning');
+    expect(store.getActions()[0].message).to.equal('Undefined title set to unknown');
+  });
+
+  it('handles empty sequence file', () => {
+    const store = mockStore({});
+    const content = {
+      header: 'name',
+      sequence: Immutable.List([]),
+    }
+
+    const { header, sequence } = actions.checkUploadedFile(store.dispatch, content);
+    expect(header).to.equal('name');
+    expect(store.getActions()[0].type).to.equal('franklin/notification/NOTIFY');
+    expect(store.getActions()[0].level).to.equal('error');
+    expect(store.getActions()[0].message).to.equal('No sequence found into the file');
+  });
+
+  it('should close "upload" notifications when uploaded file is OK', () => {
+    const store = mockStore({});
+    const content = {
+      header: 'name',
+      sequence: Immutable.List(['A','G']),
+    }
+
+    const { header, sequence } = actions.checkUploadedFile(store.dispatch, content);
+    expect(header).to.equal('name');
+    expect(store.getActions()[0].type).to.equal('franklin/notification/CLOSE_CATEGORY');
+  });
 });
