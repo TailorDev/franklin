@@ -48,12 +48,12 @@ export default class Labels extends Component {
               onCancel={this.toggleNewLabelForm}
             />
             :
-            <button
-              className="button new-label"
-              onClick={this.toggleNewLabelForm}
-            >
-              New label
-            </button>
+              <button
+                className="button new-label"
+                onClick={this.toggleNewLabelForm}
+              >
+                New label
+              </button>
           }
         </li>
       </ul>

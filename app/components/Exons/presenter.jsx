@@ -56,12 +56,12 @@ class Exons extends Component {
               onCreateNewExon={this.props.onCreateNewExon}
             />
             :
-            <button
-              className="button new-exon"
-              onClick={this.toggleNewExonForm}
-            >
-              New Exon
-            </button>
+              <button
+                className="button new-exon"
+                onClick={this.toggleNewExonForm}
+              >
+                New Exon
+              </button>
           }
         </div>
       </div>

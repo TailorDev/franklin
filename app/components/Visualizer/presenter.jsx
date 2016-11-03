@@ -115,9 +115,9 @@ export default class Visualizer extends Component {
             />
           </svg>
           :
-          <Help
-            onFileSelectClick={this.props.onFileSelectClick}
-          />
+            <Help
+              onFileSelectClick={this.props.onFileSelectClick}
+            />
         }
 
       </div>
