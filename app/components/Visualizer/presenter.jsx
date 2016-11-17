@@ -89,7 +89,6 @@ export default class Visualizer extends Component {
   render() {
     return (
       <div className="visualizer" ref={this.setWrapperEl}>
-
         {0 < this.props.sequence.size ?
           <svg
             version="1.1"
@@ -115,11 +114,10 @@ export default class Visualizer extends Component {
             />
           </svg>
           :
-            <Help
-              onFileSelectClick={this.props.onFileSelectClick}
-            />
+          <Help
+            onFileSelectClick={this.props.onFileSelectClick}
+          />
         }
-
       </div>
     );
   }
