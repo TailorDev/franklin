@@ -38,7 +38,7 @@ export default class Labels extends Component {
             onToggleLabel={() => { this.props.onToggleLabel(index); }}
             onEditLabel={(editedLabel) => { this.props.onEditLabel(index, editedLabel); }}
             onRemoveLabel={() => { this.props.onRemoveLabel(index); }}
-          />
+          />,
         )}
 
         <li className="new">
@@ -48,10 +48,10 @@ export default class Labels extends Component {
               onCancel={this.toggleNewLabelForm}
             />
             :
-              <button
-                className="button new-label"
-                onClick={this.toggleNewLabelForm}
-              >
+            <button
+              className="button new-label"
+              onClick={this.toggleNewLabelForm}
+            >
                 New label
               </button>
           }

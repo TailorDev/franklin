@@ -89,7 +89,7 @@ class AnnotationForm extends Component {
           comment: this.state.comment,
           displayTick: this.state.displayTick,
         },
-        this.state.annotationId
+        this.state.annotationId,
       );
     });
 
@@ -121,10 +121,10 @@ class AnnotationForm extends Component {
     event.preventDefault();
 
     this.props.updateSelectionFrom(
-      this.state.positionTo - this.props.positionFrom
+      this.state.positionTo - this.props.positionFrom,
     );
     this.props.updateSelectionTo(
-      this.state.positionFrom - this.props.positionFrom
+      this.state.positionFrom - this.props.positionFrom,
     );
   }
 
@@ -188,11 +188,11 @@ class AnnotationForm extends Component {
             {
               this.props.labels.map((label, index) =>
                 <option
-                  key={index}
+                  key={label.name}
                   value={index}
                 >
                   {label.name}
-                </option>
+                </option>,
               )
             }
           </select>
@@ -257,6 +257,10 @@ AnnotationForm.propTypes = {
   }),
   selections: array.isRequired,
   positionFrom: number.isRequired,
+};
+
+AnnotationForm.defaultProps = {
+  current: null,
 };
 
 export default AnnotationForm;

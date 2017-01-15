@@ -11,7 +11,7 @@ const Notifications = props => (
         key={index}
         message={message}
         onClose={props.onMessageBoxClose}
-      />
+      />,
     )}
   </div>
 );

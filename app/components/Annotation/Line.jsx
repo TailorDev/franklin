@@ -6,7 +6,7 @@ const tickPosition = {
   y: 4,
 };
 
-const Line = (props) => (
+const Line = props => (
   <g>
     <line
       x1={props.x1}

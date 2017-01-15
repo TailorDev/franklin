@@ -25,7 +25,7 @@ class Sequence extends Component {
             index={index}
             onClick={this.props.onNucleotideClick}
             {...this.props}
-          />
+          />,
         )}
       </g>
     );

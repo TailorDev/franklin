@@ -65,7 +65,7 @@ function doCreateAnnotation(state, action) {
   }
 
   return {
-    labels: state.labels.update(action.labelId, (v) => (
+    labels: state.labels.update(action.labelId, v => (
       {
         name: v.name,
         color: v.color,
@@ -91,7 +91,7 @@ function doUpdateAnnotation(state, action) {
   }
 
   return {
-    labels: state.labels.update(labelId, (v) => (
+    labels: state.labels.update(labelId, v => (
       {
         name: v.name,
         color: v.color,
@@ -116,7 +116,7 @@ function doRemoveAnnotation(state, action) {
   }
 
   return {
-    labels: state.labels.update(labelId, (v) => (
+    labels: state.labels.update(labelId, v => (
       {
         name: v.name,
         color: v.color,
@@ -136,7 +136,7 @@ function doSelectAnnotation(state, action) {
     return state;
   }
 
-  const annotationId = state.labels.get(labelId).annotations.findKey((v) => (
+  const annotationId = state.labels.get(labelId).annotations.findKey(v => (
     v.positionFrom === annotation.positionFrom && v.positionTo === annotation.positionTo
   ));
 
@@ -197,7 +197,7 @@ export default function reducer(state = initialState, action = {}) {
 
     case TOGGLE_AT:
       return Object.assign({}, state, {
-        labels: state.labels.update(action.index, (label) => (
+        labels: state.labels.update(action.index, label => (
           {
             name: label.name,
             color: label.color,

@@ -1,3 +1,4 @@
+/* eslint no-plusplus: 0 */
 /*
  * Positionning utils
  */
@@ -14,7 +15,7 @@
   * @return {Object} coordinates - nucleotide coordinates {x: 0, y: 0}
   */
 export const getNucleotideCoordinates = (
-  index, visualizerMargin, nucleotidesPerRow, nucleotideWidth, rowHeight
+  index, visualizerMargin, nucleotidesPerRow, nucleotideWidth, rowHeight,
 ) => {
   const x = visualizerMargin.x + (nucleotideWidth * (index % nucleotidesPerRow));
 
@@ -41,7 +42,7 @@ export const getNucleotideCoordinates = (
  */
 export const getAnnotationSegmentCoordinates = (
   indexFrom, indexTo, currentTrack, visualizerMargin, nucleotidesPerRow,
-  nucleotideWidth, rowHeight, nucleotidesRowHeight, trackHeight
+  nucleotideWidth, rowHeight, nucleotidesRowHeight, trackHeight,
 ) => {
   const { from, to } = indexFrom < indexTo ?
     { from: indexFrom, to: indexTo } : { from: indexTo, to: indexFrom };
@@ -51,14 +52,14 @@ export const getAnnotationSegmentCoordinates = (
     visualizerMargin,
     nucleotidesPerRow,
     nucleotideWidth,
-    rowHeight
+    rowHeight,
   );
   const nucleotideToCoordinates = getNucleotideCoordinates(
     to,
     visualizerMargin,
     nucleotidesPerRow,
     nucleotideWidth,
-    rowHeight
+    rowHeight,
   );
 
   const x1 = (nucleotideWidth / 2) + nucleotideFromCoordinates.x;
@@ -73,7 +74,7 @@ export const getAnnotationSegmentCoordinates = (
  */
 export const getAnnotationSegments = (
   indexFrom, indexTo, currentTrack, visualizerMargin, nucleotidesPerRow,
-  nucleotideWidth, rowHeight, nucleotidesRowHeight, trackHeight
+  nucleotideWidth, rowHeight, nucleotidesRowHeight, trackHeight,
 ) => {
   const segments = [];
   const { from, to } = indexFrom < indexTo ?
@@ -88,7 +89,7 @@ export const getAnnotationSegments = (
   }
   segments.push([start, to]);
 
-  return segments.map((segment) =>
+  return segments.map(segment =>
     getAnnotationSegmentCoordinates(
       segment[0],
       segment[1],
@@ -98,7 +99,7 @@ export const getAnnotationSegments = (
       nucleotideWidth,
       rowHeight,
       nucleotidesRowHeight,
-      trackHeight
-    )
+      trackHeight,
+    ),
   );
 };

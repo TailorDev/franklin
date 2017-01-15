@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 
-const Disclaimer = (props) => (
+const Disclaimer = props => (
   <Modal
     overlayClassName="modal-overlay"
     className="modal-content"

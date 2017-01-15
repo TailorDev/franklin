@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const RawInputNumber = (props) =>
+const RawInputNumber = props =>
   <input
     type="number"
     name={`input-number-${props.className}`}
@@ -29,6 +29,15 @@ RawInputNumber.propTypes = {
     React.PropTypes.oneOf(['']),
   ]),
   className: React.PropTypes.string,
+};
+
+RawInputNumber.defaultProps = {
+  isDisabled: false,
+  isInvalid: false,
+  placeholder: null,
+  min: null,
+  value: '',
+  className: null,
 };
 
 export default RawInputNumber;

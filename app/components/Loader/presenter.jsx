@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Loader = (props) => (
+const Loader = props => (
   <div className="loader" style={{ display: props.display ? 'block' : 'none' }}>
     <p className="message">
       Rendering your sequence...<br /><br />

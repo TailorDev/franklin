@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import LabelForm from './LabelForm';
 
 
-const LabelEdit = (props) => (
+const LabelEdit = props => (
   <div className="action-edit">
     <LabelForm
       label={props.label}
