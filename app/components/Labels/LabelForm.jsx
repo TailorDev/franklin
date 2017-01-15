@@ -48,7 +48,7 @@ class LabelForm extends Component {
   }
 
   handleColorChange(color) {
-    this.setState((previousState) => ({
+    this.setState(previousState => ({
       label: {
         name: previousState.label.name,
         color: color.hex,
@@ -62,7 +62,7 @@ class LabelForm extends Component {
   handleNameChange(event) {
     event.persist();
 
-    this.setState((previousState) => ({
+    this.setState(previousState => ({
       label: {
         name: event.target.value,
         color: previousState.label.color,
@@ -156,6 +156,12 @@ LabelForm.propTypes = {
   onEditLabel: func,
   onCancel: func.isRequired,
   label: object,
+};
+
+LabelForm.defaultProps = {
+  onCreateNewLabel: null,
+  onEditLabel: null,
+  label: null,
 };
 
 export default LabelForm;

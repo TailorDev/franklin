@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import ExonForm from './ExonForm';
 
 
-const ExonEdit = (props) => (
+const ExonEdit = props => (
   <div className="action-edit">
     <ExonForm
       exon={props.exon}

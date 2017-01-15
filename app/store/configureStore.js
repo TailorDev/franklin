@@ -14,13 +14,13 @@ if ('production' !== process.env.NODE_ENV) {
     stateTransformer: (state) => {
       const newState = {};
 
-      for (const i of Object.keys(state)) {
-        if (Immutable.Iterable.isIterable(state[i])) {
-          newState[i] = state[i].toJS();
-        } else {
-          newState[i] = state[i];
+        for (const i of Object.keys(state)) { // eslint-disable-line
+          if (Immutable.Iterable.isIterable(state[i])) {
+            newState[i] = state[i].toJS();
+          } else {
+            newState[i] = state[i];
+          }
         }
-      }
 
       return newState;
     },
@@ -34,7 +34,7 @@ export default function configureStore(initialState) {
   return createStoreWithMiddleware(
     rootReducer,
     initialState,
-    'production' !== process.env.NODE_ENV && typeof 'undefined' !== window &&
-    window.devToolsExtension ? window.devToolsExtension() : f => f
+    'production' !== process.env.NODE_ENV && 'undefined' !== typeof window &&
+    window.devToolsExtension ? window.devToolsExtension() : f => f,
   );
 }

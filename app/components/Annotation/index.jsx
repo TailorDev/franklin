@@ -28,7 +28,7 @@ class Annotation extends Component {
     this.props.onClick(
       this.props.labelId,
       this.props.annotation,
-      this.props.positionFrom
+      this.props.positionFrom,
     );
   }
 
@@ -37,7 +37,7 @@ class Annotation extends Component {
       segments: props.getAnnotationSegments(
         props.labelId,
         props.annotation.positionFrom - 1,
-        props.annotation.positionTo - 1
+        props.annotation.positionTo - 1,
       ),
     });
   }
@@ -67,7 +67,7 @@ class Annotation extends Component {
             color={this.props.label.color}
             hasTick={displayTick && !isUnit && indexForTick === index}
             isReverse={isReverse}
-          />
+          />,
         )}
       </g>
     );

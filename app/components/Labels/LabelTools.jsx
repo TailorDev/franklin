@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 
-const LabelTools = (props) => (
+const LabelTools = props => (
   <span className="label-tools">
     <i
       className="fa fa-adjust toggle"

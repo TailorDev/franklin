@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onNucleotideClick: (newIndex) => {
     dispatch(actions.clearSelectedAnnotation());
     dispatch(updateSelection(newIndex));
@@ -28,10 +28,10 @@ const mapDispatchToProps = (dispatch) => ({
   onAnnotationClick: (labelId, annotation, positionFrom) => {
     dispatch(actions.selectAnnotation(labelId, annotation));
     dispatch(updateSelectionFrom(
-      annotation.positionFrom - positionFrom
+      annotation.positionFrom - positionFrom,
     ));
     dispatch(updateSelectionTo(
-      annotation.positionTo - positionFrom
+      annotation.positionTo - positionFrom,
     ));
   },
 });

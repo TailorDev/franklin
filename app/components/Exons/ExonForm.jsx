@@ -168,4 +168,11 @@ ExonForm.propTypes = {
   exon: object,
 };
 
+ExonForm.defaultProps = {
+  onRemoveExon: null,
+  onCreateNewExon: null,
+  onEditExon: null,
+  exon: null,
+};
+
 export default ExonForm;

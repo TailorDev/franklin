@@ -55,7 +55,7 @@ export default class Nucleotide extends Component {
       props.visualizerMargin,
       props.nucleotidesPerRow,
       props.nucleotideWidth,
-      props.rowHeight
+      props.rowHeight,
     ));
   }
 

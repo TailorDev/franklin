@@ -9,7 +9,7 @@ export const defaultSequence = new Immutable.List(
     'AAGTTGACCGTCGATGGCGATTTCACAAGTGACGTTTAAGTGGCGGGAACTTCTACTCACAAATCCCTGA',
     'GCCCTGTGATATGATTTATTTTATGGAGCCGTGATCCGGACGAAAAATGCACACACATTTCTACAAAAAT',
     'ATGTACATCGCGGTGCGATTGTGTCGCTTAAAGCACACGTACACCCACTGTCACACTCACACTCACATGC',
-  ].join('').split('')
+  ].join('').split(''),
 );
 
 export const defaultLabels = new Immutable.List([
@@ -80,7 +80,7 @@ export const defaultLabels = new Immutable.List([
           comment: 'rs115543127',
           displayTick: true,
         },
-      ]
+      ],
     ),
   },
 ]);

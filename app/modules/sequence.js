@@ -40,7 +40,7 @@ export function checkUploadedFile(dispatch, { header, sequence }) {
 }
 
 export function loadFile(file) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({ type: LOAD_FILE });
 
     const reader = new FileReader();
@@ -48,7 +48,7 @@ export function loadFile(file) {
       reader.onload = (event) => {
         const { header, sequence } = checkUploadedFile(
           dispatch,
-          Fasta.parseString(event.target.result)
+          Fasta.parseString(event.target.result),
         );
 
         // Customize page title with the current sequence header

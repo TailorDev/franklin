@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 const { string } = PropTypes;
 
 
-const Footer = (props) =>
+const Footer = props =>
   <footer className="main">
     <div className="version">
       <span className="git-ref">

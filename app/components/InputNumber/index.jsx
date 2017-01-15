@@ -14,13 +14,13 @@ const InputNumber = (props) => {
       htmlFor={`input-number-${props.className}`}
       className={isInvalid ? 'is-invalid-label' : ''}
     >
-      {props.labelText || null}
+      {props.labelText}
       <RawInputNumber
         {...props}
         isInvalid={isInvalid}
       />
       <small className={`form-error${isInvalid ? ' is-visible' : ''}`}>
-        {props.errorText || 'Invalid value'}
+        {props.errorText}
       </small>
     </label>
   );
@@ -39,6 +39,16 @@ InputNumber.propTypes = {
   ]),
   labelText: React.PropTypes.string,
   className: React.PropTypes.string,
+};
+
+InputNumber.defaultProps = {
+  isDisabled: false,
+  value: '',
+  min: null,
+  labelText: null,
+  errorText: 'Invalid value',
+  className: null,
+  placeholder: '',
 };
 
 export default InputNumber;

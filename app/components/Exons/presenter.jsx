@@ -45,7 +45,7 @@ class Exons extends Component {
             exon={exon}
             onEditExon={this.props.onEditExon}
             onRemoveExon={this.props.onRemoveExon}
-          />
+          />,
         )}
         {/* New exon */}
         <div className="new">
@@ -56,10 +56,10 @@ class Exons extends Component {
               onCreateNewExon={this.props.onCreateNewExon}
             />
             :
-              <button
-                className="button new-exon"
-                onClick={this.toggleNewExonForm}
-              >
+            <button
+              className="button new-exon"
+              onClick={this.toggleNewExonForm}
+            >
                 New Exon
               </button>
           }

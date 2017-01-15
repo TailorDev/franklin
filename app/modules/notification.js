@@ -40,7 +40,7 @@ const initialState = {
 
 function doNotify(state, action) {
   const idx = state.messages.findIndex(
-    m => action.message === m.content && action.level === m.level && action.category === m.category
+    m => action.message === m.content && action.level === m.level && action.category === m.category,
   );
 
   if (-1 !== idx) {
@@ -76,7 +76,7 @@ function doClose(state, action) {
 
 function doCloseCategory(state, action) {
   return {
-    messages: state.messages.filter((message) => message.category !== action.category),
+    messages: state.messages.filter(message => message.category !== action.category),
   };
 }
 

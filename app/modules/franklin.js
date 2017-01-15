@@ -17,7 +17,7 @@ import { clear as clearSearch } from './search';
 
 // Actions
 export function loadDefault() {
-  return (dispatch) => Promise.all([
+  return dispatch => Promise.all([
     dispatch(loadDefaultSequence()),
     dispatch(loadDefaultLabels()),
     dispatch(loadDefaultExons()),

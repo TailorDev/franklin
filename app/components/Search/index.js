@@ -20,11 +20,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     const len = event.target.value.length;
 
     const matches = ownProps.ntSequence.mapSequence(q).results().filter(
-      result => 0 < result.matches && len <= result.matches
+      result => 0 < result.matches && len <= result.matches,
     );
 
     dispatch(actions.search(event.target.value, matches.length));
-    dispatch(multiSelect(matches.map((m) => ({
+    dispatch(multiSelect(matches.map(m => ({
       from: m.pos,
       to: (m.pos + len) - 1,
     }))));

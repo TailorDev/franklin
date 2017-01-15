@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 
-const Remove = (props) => (
+const Remove = props => (
   <div className="action-remove">
     <p>
       {props.children}

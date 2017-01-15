@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const Search = (props) => (
+const Search = props => (
   <div className="search">
     <label htmlFor="search-help-input">
       <input
@@ -33,6 +33,10 @@ Search.propTypes = {
   ntSequence: PropTypes.object,
   value: PropTypes.string.isRequired,
   matches: PropTypes.number.isRequired,
+};
+
+Search.defaultProps = {
+  ntSequence: null,
 };
 
 export default Search;

@@ -23,6 +23,8 @@ describe('<Toolbar />', () => {
         labels={list}
         positionFrom={1}
         onPositionFromChange={() => {}}
+        onClearSelection={() => {}}
+        hasSelection={false}
       />
     );
 
@@ -37,6 +39,8 @@ describe('<Toolbar />', () => {
         labels={list}
         positionFrom={1}
         onPositionFromChange={() => {}}
+        onClearSelection={() => {}}
+        hasSelection={false}
       />
     );
 
@@ -53,6 +57,7 @@ describe('<Toolbar />', () => {
         positionFrom={1}
         onPositionFromChange={() => {}}
         hasSelection={false}
+        onClearSelection={() => {}}
       />
     );
 
@@ -67,7 +72,8 @@ describe('<Toolbar />', () => {
         labels={list}
         positionFrom={1}
         onPositionFromChange={() => {}}
-        hasSelection={true}
+        hasSelection
+        onClearSelection={() => {}}
       />
     );
 
@@ -84,7 +90,7 @@ describe('<Toolbar />', () => {
         positionFrom={1}
         onPositionFromChange={() => {}}
         onClearSelection={spy}
-        hasSelection={true}
+        hasSelection
       />
     );
 

@@ -20,7 +20,7 @@ const InlineButton = (props) => {
           <button
             onClick={props.onClick}
             className="button"
-            title={props.titleText || null}
+            title={props.titleText}
             disabled={props.hasButtonDisabled || false}
           >
             {props.children}
@@ -28,7 +28,7 @@ const InlineButton = (props) => {
         </div>
       </div>
       <small className={`form-error${isInvalid ? ' is-visible' : ''}`}>
-        {props.errorText || 'Invalid value'}
+        {props.errorText}
       </small>
     </div>
   );
@@ -53,6 +53,18 @@ InlineButton.propTypes = {
   className: React.PropTypes.string,
   titleText: React.PropTypes.string,
   hasButtonDisabled: React.PropTypes.bool,
+};
+
+InlineButton.defaultProps = {
+  children: null,
+  errorText: 'Invalid value',
+  isDisabled: false,
+  placeholder: null,
+  min: null,
+  value: '',
+  className: null,
+  titleText: null,
+  hasButtonDisabled: false,
 };
 
 export default InlineButton;

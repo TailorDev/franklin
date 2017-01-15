@@ -24,7 +24,7 @@ class Annotations extends Component {
       this.props.nucleotideWidth,
       this.props.rowHeight,
       this.props.nucleotidesRowHeight,
-      this.props.trackHeight
+      this.props.trackHeight,
     );
   }
 
@@ -46,8 +46,8 @@ class Annotations extends Component {
                 getAnnotationSegments={this.getAnnotationSegments}
                 positionFrom={this.props.positionFrom}
                 onClick={this.props.onAnnotationClick}
-              />
-            )
+              />,
+            ),
           )
         }
       </g>
@@ -66,6 +66,10 @@ Annotations.propTypes = {
   positionFrom: number.isRequired,
   onAnnotationClick: func.isRequired,
   selectedAnnotation: object,
+};
+
+Annotations.defaultProps = {
+  selectedAnnotation: null,
 };
 
 export default Annotations;

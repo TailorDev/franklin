@@ -8,7 +8,7 @@ import Search from '../Search';
 import Exons from '../Exons';
 import PositionFrom from '../PositionFrom';
 
-const Toolbar = (props) => (
+const Toolbar = props => (
   <div className="toolbar">
 
     <div className="search-panel">
@@ -107,6 +107,10 @@ Toolbar.propTypes = {
   onPositionFromChange: React.PropTypes.func.isRequired,
   onClearSelection: React.PropTypes.func.isRequired,
   hasSelection: React.PropTypes.bool.isRequired,
+};
+
+Toolbar.defaultProps = {
+  ntSequence: null,
 };
 
 export default Toolbar;

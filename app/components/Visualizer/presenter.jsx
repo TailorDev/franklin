@@ -9,7 +9,7 @@ import Help from './Help';
 const { number, object, instanceOf, func } = PropTypes;
 
 
-export default class Visualizer extends Component {
+class Visualizer extends Component {
 
   constructor(props, context) {
     super(props, context);
@@ -40,7 +40,7 @@ export default class Visualizer extends Component {
     window.addEventListener(
       'resize',
       this.resizeListener,
-      false
+      false,
     );
   }
 
@@ -52,7 +52,7 @@ export default class Visualizer extends Component {
     window.removeEventListener(
       'resize',
       this.resizeListener,
-      false
+      false,
     );
   }
 
@@ -132,3 +132,9 @@ Visualizer.propTypes = {
   onAnnotationClick: func.isRequired,
   selectedAnnotation: object,
 };
+
+Visualizer.defaultProps = {
+  selectedAnnotation: null,
+};
+
+export default Visualizer;
