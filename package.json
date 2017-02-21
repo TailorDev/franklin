@@ -69,7 +69,7 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.2",
     "webpack-dev-server": "^2.3.0",
-    "webpack-merge": "^2.1.0"
+    "webpack-merge": "^3.0.0"
   },
   "dependencies": {
     "compression": "^1.6.1",
