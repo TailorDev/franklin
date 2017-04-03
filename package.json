@@ -28,7 +28,7 @@
     "babel-register": "^6.14.0",
     "chai": "^3.5.0",
     "clean-webpack-plugin": "^0.1.15",
-    "css-loader": "^0.27.1",
+    "css-loader": "^0.28.0",
     "enzyme": "^2.3.0",
     "eslint": "^3.13.1",
     "eslint-config-airbnb": "^14.0.0",
