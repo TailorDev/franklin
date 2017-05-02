@@ -1,6 +1,8 @@
 Franklin
 ========
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/TailorDev/franklin.svg)](https://greenkeeper.io/)
+
 [![CircleCI](https://circleci.com/gh/TailorDev/franklin.svg?style=svg)](https://circleci.com/gh/TailorDev/franklin)
 
 Franklin is a DNA sequence annotation tool we built at TailorDev in order to
