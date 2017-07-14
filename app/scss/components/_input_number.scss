@@ -10,6 +10,7 @@
 
   &.inline-button {
     .button {
+      height: 100%;
       background: darken($grey, 5%);
       color: $body-font-color;
       border: 1px solid $medium-gray;
