@@ -76,7 +76,7 @@
     "express": "^4.13.4"
   },
   "engines": {
-    "node": "^6.2"
+    "node": "^8.1"
   },
   "nyc": {
     "exclude": [
