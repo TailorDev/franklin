@@ -47,7 +47,7 @@ const common = {
   // - `''` is needed to allow imports without an extension
   // - note the `.` before extensions as it will fail to match without!
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx']
   },
   // Tells Webpack how to write the compiled files to disk
   // Note, that while there can be multiple entry points, only one output
@@ -58,36 +58,37 @@ const common = {
     filename: '[name].js'
   },
   module: {
-    // Loaders that run *before* others loaders
-    // Loaders that run *before* others loaders
-    preLoaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        loaders: ['eslint'],
-        include: PATHS.app
-      }
-    ],
-    // Loaders are transformations that are applied on a resource file of
-    // an application
-    loaders: [
+        enforce: 'pre',
+        use: [
+          { loader: 'eslint-loader' },
+        ],
+        include: [PATHS.app],
+      },
       {
         test: /\.jsx?$/,
-        loaders: ['babel'],
-        include: PATHS.app
+        use: [
+          { loader: 'babel-loader' },
+        ],
+        include: [PATHS.app],
       },
-      // FontAwesome, KaTeX
       {
-          test: /\.(ttf|eot|svg|woff(2)?)(\?v=.+)?$/,
-          loaders: ['file?name=fonts/[name].[ext]'],
-          include: [
-            path.join(__dirname, 'node_modules/font-awesome/fonts/'),
-          ]
+        test: /\.(ttf|eot|svg|woff(2)?)(\?v=.+)?$/,
+        use: [
+          'file-loader?name=fonts/[name].[ext]',
+        ],
+        include: [
+          path.join(__dirname, 'node_modules/font-awesome/fonts/'),
+        ]
       },
-      // Franklin fonts
       {
         test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loaders: ['file?name=[path][name].[ext]&context=./app'],
-        include: PATHS.app
+        use: [
+          'file-loader?name=[path][name].[ext]&context=./app',
+        ],
+        include: [PATHS.app],
       }
     ]
   },
@@ -115,12 +116,11 @@ if (TARGET === 'dev' || !TARGET) {
       PATHS.app
     ],
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.scss$/,
-          // Loaders are applied from right to left
-          loaders: ['style', 'css', 'sass'],
-          include: PATHS.app
+          loader: 'style-loader!css-loader!sass-loader',
+          include: [PATHS.app],
         }
       ]
     },
@@ -142,11 +142,14 @@ if (TARGET === 'build') {
       chunkFilename: '[chunkhash].js'
     },
     module: {
-      loaders: [
+      rules: [
         // Extract CSS during build
         {
           test: /\.(css|scss)$/,
-          loader: ExtractTextPlugin.extract('style', 'css!sass')
+          loader: ExtractTextPlugin.extract({
+            loader: 'css-loader!sass-loader',
+            fallbackLoader: 'style-loader',
+          }),
         }
       ]
     },
@@ -158,12 +161,14 @@ if (TARGET === 'build') {
       }),
       new CleanPlugin([ PATHS.build ]),
       // Output extracted CSS to a file
-      new ExtractTextPlugin('[name].[chunkhash].css'),
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.OccurrenceOrderPlugin(),
+      new ExtractTextPlugin({
+        filename: '[name].[chunkhash].css',
+      }),
       // Minification with Uglify
-      new webpack.optimize.UglifyJsPlugin({
+      new webpack.LoaderOptionsPlugin({
         minimize: true,
+      }),
+      new webpack.optimize.UglifyJsPlugin({
         sourceMap: false,
         compress: {
           // Ignore warning messages are they are pretty useless
