@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import RawInputNumber from './RawInputNumber';
@@ -35,24 +36,24 @@ const InlineButton = (props) => {
 };
 
 InlineButton.propTypes = {
-  onChange: React.PropTypes.func.isRequired,
-  onClick: React.PropTypes.func.isRequired,
-  children: React.PropTypes.oneOfType([
-    React.PropTypes.object.isRequired,
-    React.PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.object.isRequired,
+    PropTypes.string.isRequired,
   ]),
   // optional
-  isDisabled: React.PropTypes.bool,
-  placeholder: React.PropTypes.string,
-  min: React.PropTypes.number,
-  errorText: React.PropTypes.string,
-  value: React.PropTypes.oneOfType([
-    React.PropTypes.number,
-    React.PropTypes.oneOf(['']),
+  isDisabled: PropTypes.bool,
+  placeholder: PropTypes.string,
+  min: PropTypes.number,
+  errorText: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.oneOf(['']),
   ]),
-  className: React.PropTypes.string,
-  titleText: React.PropTypes.string,
-  hasButtonDisabled: React.PropTypes.bool,
+  className: PropTypes.string,
+  titleText: PropTypes.string,
+  hasButtonDisabled: PropTypes.bool,
 };
 
 InlineButton.defaultProps = {

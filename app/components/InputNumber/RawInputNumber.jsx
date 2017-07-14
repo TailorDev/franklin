@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 
@@ -18,17 +19,17 @@ const RawInputNumber = props =>
 ;
 
 RawInputNumber.propTypes = {
-  onChange: React.PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   // optional
-  isDisabled: React.PropTypes.bool,
-  isInvalid: React.PropTypes.bool,
-  placeholder: React.PropTypes.string,
-  min: React.PropTypes.number,
-  value: React.PropTypes.oneOfType([
-    React.PropTypes.number,
-    React.PropTypes.oneOf(['']),
+  isDisabled: PropTypes.bool,
+  isInvalid: PropTypes.bool,
+  placeholder: PropTypes.string,
+  min: PropTypes.number,
+  value: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.oneOf(['']),
   ]),
-  className: React.PropTypes.string,
+  className: PropTypes.string,
 };
 
 RawInputNumber.defaultProps = {

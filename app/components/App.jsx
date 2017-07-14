@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import { HotKeys } from 'react-hotkeys';
 import { connect } from 'react-redux';

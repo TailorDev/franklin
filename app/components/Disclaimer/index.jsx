@@ -1,8 +1,10 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Modal from 'react-modal';
 
 const Disclaimer = props => (
   <Modal
+    contentLabel="Disclaimer modal"
     overlayClassName="modal-overlay"
     className="modal-content"
     isOpen={props.isVisible}
@@ -39,9 +41,9 @@ const Disclaimer = props => (
 );
 
 Disclaimer.propTypes = {
-  isVisible: React.PropTypes.bool.isRequired,
-  onDemoClick: React.PropTypes.func.isRequired,
-  onCloseClick: React.PropTypes.func.isRequired,
+  isVisible: PropTypes.bool.isRequired,
+  onDemoClick: PropTypes.func.isRequired,
+  onCloseClick: PropTypes.func.isRequired,
 };
 
 export default Disclaimer;

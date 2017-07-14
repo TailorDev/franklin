@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 
@@ -42,7 +43,7 @@ const Help = ({ onFileSelectClick }) =>
 ;
 
 Help.propTypes = {
-  onFileSelectClick: React.PropTypes.func.isRequired,
+  onFileSelectClick: PropTypes.func.isRequired,
 };
 
 export default Help;

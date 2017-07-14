@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 
@@ -30,13 +31,13 @@ const Line = props => (
 );
 
 Line.propTypes = {
-  x1: React.PropTypes.number.isRequired,
-  x2: React.PropTypes.number.isRequired,
-  y1: React.PropTypes.number.isRequired,
-  y2: React.PropTypes.number.isRequired,
-  color: React.PropTypes.string.isRequired,
-  hasTick: React.PropTypes.bool.isRequired,
-  isReverse: React.PropTypes.bool.isRequired,
+  x1: PropTypes.number.isRequired,
+  x2: PropTypes.number.isRequired,
+  y1: PropTypes.number.isRequired,
+  y2: PropTypes.number.isRequired,
+  color: PropTypes.string.isRequired,
+  hasTick: PropTypes.bool.isRequired,
+  isReverse: PropTypes.bool.isRequired,
 };
 
 export default Line;

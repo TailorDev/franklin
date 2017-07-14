@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Immutable from 'immutable';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -99,14 +100,14 @@ const Toolbar = props => (
 );
 
 Toolbar.propTypes = {
-  name: React.PropTypes.string.isRequired,
-  sequence: React.PropTypes.instanceOf(Immutable.List).isRequired,
-  labels: React.PropTypes.instanceOf(Immutable.List).isRequired,
-  positionFrom: React.PropTypes.number.isRequired,
-  ntSequence: React.PropTypes.object,
-  onPositionFromChange: React.PropTypes.func.isRequired,
-  onClearSelection: React.PropTypes.func.isRequired,
-  hasSelection: React.PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
+  sequence: PropTypes.instanceOf(Immutable.List).isRequired,
+  labels: PropTypes.instanceOf(Immutable.List).isRequired,
+  positionFrom: PropTypes.number.isRequired,
+  ntSequence: PropTypes.object,
+  onPositionFromChange: PropTypes.func.isRequired,
+  onClearSelection: PropTypes.func.isRequired,
+  hasSelection: PropTypes.bool.isRequired,
 };
 
 Toolbar.defaultProps = {

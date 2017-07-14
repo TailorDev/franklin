@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import InputNumber from '../InputNumber';
@@ -21,8 +22,8 @@ class PositionFrom extends React.Component {
 }
 
 PositionFrom.propTypes = {
-  value: React.PropTypes.number.isRequired,
-  onChange: React.PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default PositionFrom;
