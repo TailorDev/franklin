@@ -9,12 +9,11 @@ const { describe, it } = global;
 import Nucleotide from '../presenter';
 import { mapStateToProps } from '../index';
 
-
 describe('<Nucleotide />', () => {
   it('renders a Nucleotide as needed', () => {
     const wrapper = mount(
       <Nucleotide
-        visualizerMargin={{x: 10, y: 10}}
+        visualizerMargin={{ x: 10, y: 10 }}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
@@ -36,7 +35,7 @@ describe('<Nucleotide />', () => {
 
     expect(instance.state.x).to.equal(10);
     expect(instance.state.y).to.equal(10);
-    expect(instance.props.type).to.equal("A");
+    expect(instance.props.type).to.equal('A');
     expect(instance.props.position).to.equal(1);
     expect(instance.props.isSelected).to.be.false;
     expect(instance.props.isInSelectionRange).to.be.false;
@@ -45,7 +44,7 @@ describe('<Nucleotide />', () => {
   it('handles 1 exon', () => {
     const wrapper = mount(
       <Nucleotide
-        visualizerMargin={{x: 10, y: 10}}
+        visualizerMargin={{ x: 10, y: 10 }}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
@@ -67,7 +66,7 @@ describe('<Nucleotide />', () => {
   it('handles multiple exons', () => {
     const wrapper = mount(
       <Nucleotide
-        visualizerMargin={{x: 10, y: 10}}
+        visualizerMargin={{ x: 10, y: 10 }}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
@@ -89,7 +88,7 @@ describe('<Nucleotide />', () => {
   it('renders multiple rows when needed', () => {
     const wrapper = mount(
       <Nucleotide
-        visualizerMargin={{x: 10, y: 10}}
+        visualizerMargin={{ x: 10, y: 10 }}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
@@ -111,7 +110,7 @@ describe('<Nucleotide />', () => {
   it('computes the position text length', () => {
     let wrapper = mount(
       <Nucleotide
-        visualizerMargin={{x: 10, y: 10}}
+        visualizerMargin={{ x: 10, y: 10 }}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
@@ -129,7 +128,7 @@ describe('<Nucleotide />', () => {
 
     wrapper = mount(
       <Nucleotide
-        visualizerMargin={{x: 10, y: 10}}
+        visualizerMargin={{ x: 10, y: 10 }}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
@@ -149,7 +148,7 @@ describe('<Nucleotide />', () => {
   it('computes the position background x-coordinate', () => {
     let wrapper = mount(
       <Nucleotide
-        visualizerMargin={{x: 10, y: 10}}
+        visualizerMargin={{ x: 10, y: 10 }}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
@@ -167,7 +166,7 @@ describe('<Nucleotide />', () => {
 
     wrapper = mount(
       <Nucleotide
-        visualizerMargin={{x: 10, y: 10}}
+        visualizerMargin={{ x: 10, y: 10 }}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
@@ -187,7 +186,7 @@ describe('<Nucleotide />', () => {
   it('computes the position background width', () => {
     let wrapper = mount(
       <Nucleotide
-        visualizerMargin={{x: 10, y: 10}}
+        visualizerMargin={{ x: 10, y: 10 }}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
@@ -205,7 +204,7 @@ describe('<Nucleotide />', () => {
 
     wrapper = mount(
       <Nucleotide
-        visualizerMargin={{x: 10, y: 10}}
+        visualizerMargin={{ x: 10, y: 10 }}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
@@ -225,7 +224,7 @@ describe('<Nucleotide />', () => {
   it('computes the position text x-coordinate', () => {
     let wrapper = mount(
       <Nucleotide
-        visualizerMargin={{x: 10, y: 10}}
+        visualizerMargin={{ x: 10, y: 10 }}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
@@ -243,7 +242,7 @@ describe('<Nucleotide />', () => {
 
     wrapper = mount(
       <Nucleotide
-        visualizerMargin={{x: 10, y: 10}}
+        visualizerMargin={{ x: 10, y: 10 }}
         nucleotidesPerRow={5}
         rowHeight={50}
         nucleotideWidth={12}
@@ -272,7 +271,11 @@ describe('<Nucleotide />', () => {
 
       const props = mapStateToProps(state, ownProps);
 
-      expect(props).to.have.all.keys('isSelected', 'isInSelectionRange', 'nbExons');
+      expect(props).to.have.all.keys(
+        'isSelected',
+        'isInSelectionRange',
+        'nbExons'
+      );
     });
 
     it('returns false if no selection', () => {
@@ -285,7 +288,11 @@ describe('<Nucleotide />', () => {
       const ownProps = { index: 1 };
       const props = mapStateToProps(state, ownProps);
 
-      expect(props).to.have.all.keys('isSelected', 'isInSelectionRange', 'nbExons');
+      expect(props).to.have.all.keys(
+        'isSelected',
+        'isInSelectionRange',
+        'nbExons'
+      );
 
       expect(props.isSelected).to.be.false;
       expect(props.isInSelectionRange).to.be.false;
@@ -294,7 +301,7 @@ describe('<Nucleotide />', () => {
     it('returns isInSelectionRange but !isSelected', () => {
       const state = {
         selection: {
-          selections: [{ from: 0, to: 2}],
+          selections: [{ from: 0, to: 2 }],
         },
         exon: { exons: new Immutable.List() },
       };
@@ -308,7 +315,7 @@ describe('<Nucleotide />', () => {
     it('returns isInSelectionRange and isSelected', () => {
       const state = {
         selection: {
-          selections: [{ from: 1, to: 2}],
+          selections: [{ from: 1, to: 2 }],
         },
         exon: { exons: new Immutable.List() },
       };
@@ -322,8 +329,8 @@ describe('<Nucleotide />', () => {
     it('returns isInSelectionRange and isSelected with multiple selections', () => {
       const state = {
         selection: {
-          selections: [{ from: 10, to: 20}],
-          selections: [{ from: 1, to: 2}],
+          selections: [{ from: 10, to: 20 }],
+          selections: [{ from: 1, to: 2 }],
         },
         exon: { exons: new Immutable.List() },
       };
@@ -337,7 +344,7 @@ describe('<Nucleotide />', () => {
     it('returns isInSelectionRange and isSelected with reverse selections', () => {
       const state = {
         selection: {
-          selections: [{ from: 10, to: 2}],
+          selections: [{ from: 10, to: 2 }],
         },
         exon: { exons: new Immutable.List() },
       };
@@ -358,7 +365,7 @@ describe('<Nucleotide />', () => {
           exons: new Immutable.List([
             { positionFrom: 2, positionTo: 10 },
             { positionFrom: 4, positionTo: 70 },
-          ])
+          ]),
         },
       };
       const ownProps = { index: 1, position: 5 };

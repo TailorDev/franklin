@@ -8,9 +8,7 @@ const { describe, it } = global;
 
 import LabelTools from '../LabelTools';
 
-
 describe('<LabelTools />', () => {
-
   it('renders a toolbar', () => {
     const wrapper = shallow(
       <LabelTools

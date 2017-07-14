@@ -6,7 +6,6 @@ import { defaultLabels } from '../../defaults';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-
 describe('modules/label', () => {
   it('should return the initial state', () => {
     const state = reducer(undefined, {});
@@ -25,12 +24,15 @@ describe('modules/label', () => {
   });
 
   it('should handle CREATE', () => {
-    const state = reducer(undefined, actions.create({
-      name: 'Will',
-      color: '#123456',
-      isActive: true,
-      annotations: Immutable.List(),
-    }));
+    const state = reducer(
+      undefined,
+      actions.create({
+        name: 'Will',
+        color: '#123456',
+        isActive: true,
+        annotations: Immutable.List(),
+      })
+    );
 
     expect(state.labels).not.to.be.undefined;
     expect(state.selectedAnnotation).not.to.be.undefined;
@@ -39,18 +41,24 @@ describe('modules/label', () => {
   });
 
   it('should handle UPDATE_AT', () => {
-    const previousState = reducer(undefined, actions.create({
-      name: 'Will',
-      color: '#123456',
-      isActive: true,
-      annotations: Immutable.List(),
-    }));
-    const state = reducer(previousState, actions.updateAt(0, {
-      name: 'Jul',
-      color: '#123456',
-      isActive: true,
-      annotations: Immutable.List(),
-    }));
+    const previousState = reducer(
+      undefined,
+      actions.create({
+        name: 'Will',
+        color: '#123456',
+        isActive: true,
+        annotations: Immutable.List(),
+      })
+    );
+    const state = reducer(
+      previousState,
+      actions.updateAt(0, {
+        name: 'Jul',
+        color: '#123456',
+        isActive: true,
+        annotations: Immutable.List(),
+      })
+    );
 
     expect(state.labels).not.to.be.undefined;
     expect(state.selectedAnnotation).not.to.be.undefined;
@@ -59,12 +67,15 @@ describe('modules/label', () => {
   });
 
   it('should handle REMOVE_AT', () => {
-    const previousState = reducer(undefined, actions.create({
-      name: 'Will',
-      color: '#123456',
-      isActive: true,
-      annotations: Immutable.List(),
-    }));
+    const previousState = reducer(
+      undefined,
+      actions.create({
+        name: 'Will',
+        color: '#123456',
+        isActive: true,
+        annotations: Immutable.List(),
+      })
+    );
     const state = reducer(previousState, actions.removeAt(0));
 
     expect(state.labels).not.to.be.undefined;
@@ -75,12 +86,15 @@ describe('modules/label', () => {
   it('should handle TOGGLE_AT', () => {
     let state;
 
-    state = reducer(undefined, actions.create({
-      name: 'Will',
-      color: '#123456',
-      isActive: true,
-      annotations: Immutable.List(),
-    }));
+    state = reducer(
+      undefined,
+      actions.create({
+        name: 'Will',
+        color: '#123456',
+        isActive: true,
+        annotations: Immutable.List(),
+      })
+    );
     state = reducer(state, actions.toggleAt(0));
 
     expect(state.labels).not.to.be.undefined;
@@ -104,9 +118,7 @@ describe('modules/label', () => {
     expect(state.selectedAnnotation).to.be.null;
 
     // 1. select
-    state = reducer(state, actions.selectAnnotation(
-      labelId, annotation
-    ));
+    state = reducer(state, actions.selectAnnotation(labelId, annotation));
     expect(state.selectedAnnotation).not.to.be.null;
     expect(state.selectedAnnotation.annotation).to.be.equal(annotation);
 
@@ -119,19 +131,25 @@ describe('modules/label', () => {
     it('should handle CREATE_ANNOTATION', () => {
       let state;
 
-      state = reducer(undefined, actions.create({
-        name: 'Will',
-        color: '#123456',
-        isActive: true,
-        annotations: Immutable.List(),
-      }));
+      state = reducer(
+        undefined,
+        actions.create({
+          name: 'Will',
+          color: '#123456',
+          isActive: true,
+          annotations: Immutable.List(),
+        })
+      );
       expect(state.labels.get(0).annotations.size).to.equal(0);
 
-      state = reducer(state, actions.createAnnotation(0, {
-        positionFrom: 12,
-        positionTo: 34,
-        comment: 'Hello',
-      }));
+      state = reducer(
+        state,
+        actions.createAnnotation(0, {
+          positionFrom: 12,
+          positionTo: 34,
+          comment: 'Hello',
+        })
+      );
       expect(state.labels.get(0).annotations.size).to.equal(1);
     });
 
@@ -145,12 +163,15 @@ describe('modules/label', () => {
 
       let state;
 
-      state = reducer(undefined, actions.create({
-        name: 'Will',
-        color: '#123456',
-        isActive: true,
-        annotations: Immutable.List(),
-      }));
+      state = reducer(
+        undefined,
+        actions.create({
+          name: 'Will',
+          color: '#123456',
+          isActive: true,
+          annotations: Immutable.List(),
+        })
+      );
       expect(state.labels.get(0).annotations.size).to.equal(0);
 
       state = reducer(state, actions.createAnnotation(labelId, annotation));
@@ -182,12 +203,15 @@ describe('modules/label', () => {
 
       let state;
 
-      state = reducer(undefined, actions.create({
-        name: 'Will',
-        color: '#123456',
-        isActive: true,
-        annotations: Immutable.List(),
-      }));
+      state = reducer(
+        undefined,
+        actions.create({
+          name: 'Will',
+          color: '#123456',
+          isActive: true,
+          annotations: Immutable.List(),
+        })
+      );
       expect(state.labels.get(0).annotations.size).to.equal(0);
 
       const s = reducer(state, actions.selectAnnotation(labelId, annotation));
@@ -201,9 +225,10 @@ describe('modules/label', () => {
       const annotation = defaultLabels.get(labelId).annotations.first();
 
       const initialState = reducer(undefined, actions.loadDefaultLabels());
-      const state = reducer(initialState, actions.selectAnnotation(
-        labelId, annotation
-      ));
+      const state = reducer(
+        initialState,
+        actions.selectAnnotation(labelId, annotation)
+      );
       expect(state.selectedAnnotation).not.to.be.null;
       expect(state.selectedAnnotation.annotation).to.be.equal(annotation);
     });
@@ -216,9 +241,10 @@ describe('modules/label', () => {
       const annotation = {};
 
       const initialState = reducer(undefined, actions.loadDefaultLabels());
-      const state = reducer(initialState, actions.updateAnnotation(
-        labelId, annotationId, annotation
-      ));
+      const state = reducer(
+        initialState,
+        actions.updateAnnotation(labelId, annotationId, annotation)
+      );
       expect(state).to.equal(initialState); // ensure they are exactly the same
     });
 
@@ -228,9 +254,10 @@ describe('modules/label', () => {
       const annotation = {};
 
       const initialState = reducer(undefined, actions.loadDefaultLabels());
-      const state = reducer(initialState, actions.updateAnnotation(
-        labelId, annotationId, annotation
-      ));
+      const state = reducer(
+        initialState,
+        actions.updateAnnotation(labelId, annotationId, annotation)
+      );
       expect(state).to.equal(initialState); // ensure they are exactly the same
     });
 
@@ -244,11 +271,14 @@ describe('modules/label', () => {
       };
 
       const initialState = reducer(undefined, actions.loadDefaultLabels());
-      const state = reducer(initialState, actions.updateAnnotation(
-        labelId, annotationId, annotation
-      ));
+      const state = reducer(
+        initialState,
+        actions.updateAnnotation(labelId, annotationId, annotation)
+      );
       expect(state).to.not.equal(initialState);
-      expect(state.labels.get(labelId).annotations.get(annotationId)).to.equal(annotation);
+      expect(state.labels.get(labelId).annotations.get(annotationId)).to.equal(
+        annotation
+      );
     });
   });
 });

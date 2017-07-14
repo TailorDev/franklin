@@ -1,12 +1,11 @@
 import Immutable from 'immutable';
 
-
 export default class Fasta {
   static parseString(fasta) {
     const s = [];
     const h = [];
 
-    fasta.split('\n').forEach((line) => {
+    fasta.split('\n').forEach(line => {
       if ('>' === line[0] || ';' === line[0]) {
         h.push(line.replace(/^[>;]/, '').trim());
       } else {

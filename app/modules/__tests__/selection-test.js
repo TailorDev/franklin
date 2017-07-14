@@ -5,7 +5,6 @@ import reducer, * as actions from '../selection';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-
 describe('modules/selection', () => {
   it('should return the initial state', () => {
     const state = reducer(undefined, {});
@@ -93,10 +92,7 @@ describe('modules/selection', () => {
 
   describe('MULTI_SELECT', () => {
     it('sets a batch of selections', () => {
-      const selections = [
-        { from: 123, to: 124 },
-        { from: 1, to: 2 },
-      ];
+      const selections = [{ from: 123, to: 124 }, { from: 1, to: 2 }];
 
       const state = reducer(undefined, actions.multiSelect(selections));
 

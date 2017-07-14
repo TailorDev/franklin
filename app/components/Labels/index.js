@@ -12,16 +12,16 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onToggleLabel: (index) => {
+    onToggleLabel: index => {
       dispatch(actions.toggleAt(index));
     },
     onEditLabel: (index, label) => {
       dispatch(actions.updateAt(index, label));
     },
-    onRemoveLabel: (index) => {
+    onRemoveLabel: index => {
       dispatch(actions.removeAt(index));
     },
-    onCreateNewLabel: (label) => {
+    onCreateNewLabel: label => {
       dispatch(actions.create(label));
     },
   };

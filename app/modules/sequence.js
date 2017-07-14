@@ -40,15 +40,15 @@ export function checkUploadedFile(dispatch, { header, sequence }) {
 }
 
 export function loadFile(file) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({ type: LOAD_FILE });
 
     const reader = new FileReader();
-    return new Promise((resolve) => {
-      reader.onload = (event) => {
+    return new Promise(resolve => {
+      reader.onload = event => {
         const { header, sequence } = checkUploadedFile(
           dispatch,
-          Fasta.parseString(event.target.result),
+          Fasta.parseString(event.target.result)
         );
 
         // Customize page title with the current sequence header
@@ -61,7 +61,6 @@ export function loadFile(file) {
     });
   };
 }
-
 
 export function changePositionFrom(positionFrom) {
   return { type: CHANGE_POSITION_FROM, positionFrom };
@@ -101,6 +100,7 @@ export default function reducer(state = initialState, action = {}) {
         positionFrom: action.positionFrom,
       });
 
-    default: return state;
+    default:
+      return state;
   }
 }

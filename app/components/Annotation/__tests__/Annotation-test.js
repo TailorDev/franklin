@@ -11,7 +11,6 @@ import Annotation from '../';
 import Line from '../Line';
 
 describe('<Annotation />', () => {
-
   const label = {
     name: 'Exon',
     color: '#334854',
@@ -42,7 +41,9 @@ describe('<Annotation />', () => {
         annotation={annotation}
         label={label}
         labelId={labelId}
-        getAnnotationSegments={() => { return segments; }}
+        getAnnotationSegments={() => {
+          return segments;
+        }}
         isSelected={false}
         onClick={() => {}}
         positionFrom={0}
@@ -64,7 +65,9 @@ describe('<Annotation />', () => {
         annotation={annotation}
         label={label}
         labelId={labelId}
-        getAnnotationSegments={() => { return segments; }}
+        getAnnotationSegments={() => {
+          return segments;
+        }}
         isSelected={false}
         onClick={() => {}}
         positionFrom={0}
@@ -76,16 +79,16 @@ describe('<Annotation />', () => {
 
   it('renders segments on mount', () => {
     const labelId = 0;
-    const segments = [
-      { x1: 0, y1: 0, x2: 5, y2: 0 },
-    ];
+    const segments = [{ x1: 0, y1: 0, x2: 5, y2: 0 }];
 
     const wrapper = shallow(
       <Annotation
         annotation={annotation}
         label={label}
         labelId={labelId}
-        getAnnotationSegments={() => { return segments; }}
+        getAnnotationSegments={() => {
+          return segments;
+        }}
         isSelected={false}
         onClick={() => {}}
         positionFrom={0}
@@ -98,16 +101,16 @@ describe('<Annotation />', () => {
 
   it('renders segments when new props are received', () => {
     const labelId = 0;
-    const segments = [
-      { x1: 0, y1: 0, x2: 5, y2: 0 },
-    ];
+    const segments = [{ x1: 0, y1: 0, x2: 5, y2: 0 }];
 
     const wrapper = shallow(
       <Annotation
         annotation={annotation}
         label={label}
         labelId={labelId}
-        getAnnotationSegments={() => { return []; }}
+        getAnnotationSegments={() => {
+          return [];
+        }}
         isSelected={false}
         onClick={() => {}}
         positionFrom={0}
@@ -118,23 +121,27 @@ describe('<Annotation />', () => {
     expect(wrapper.find(Line)).to.have.length(0);
 
     // test starts here
-    wrapper.setProps({ getAnnotationSegments: () => { return segments; } });
+    wrapper.setProps({
+      getAnnotationSegments: () => {
+        return segments;
+      },
+    });
 
     expect(wrapper.find(Line)).to.have.length(1);
   });
 
   it('dispatches an action on click', () => {
     const labelId = 0;
-    const segments = [
-      { x1: 0, y1: 0, x2: 5, y2: 0 },
-    ];
+    const segments = [{ x1: 0, y1: 0, x2: 5, y2: 0 }];
 
     const wrapper = shallow(
       <Annotation
         annotation={annotation}
         label={label}
         labelId={labelId}
-        getAnnotationSegments={() => { return segments; }}
+        getAnnotationSegments={() => {
+          return segments;
+        }}
         isSelected={false}
         onClick={() => {}}
         positionFrom={0}
@@ -146,9 +153,7 @@ describe('<Annotation />', () => {
 
   it('should NOT render the tick if annotation is a unit (dimension == 1)', () => {
     const labelId = 0;
-    const segments = [
-      { x1: 0, y1: 0, x2: 0, y2: 5 },
-    ];
+    const segments = [{ x1: 0, y1: 0, x2: 0, y2: 5 }];
 
     // force same positions
     const annotation = Object.assign({}, label.annotations.first(), {
@@ -161,7 +166,9 @@ describe('<Annotation />', () => {
         annotation={annotation}
         label={label}
         labelId={labelId}
-        getAnnotationSegments={() => { return segments; }}
+        getAnnotationSegments={() => {
+          return segments;
+        }}
         isSelected={false}
         onClick={() => {}}
         positionFrom={0}
@@ -175,16 +182,16 @@ describe('<Annotation />', () => {
 
   it('should render a tick', () => {
     const labelId = 0;
-    const segments = [
-      { x1: 0, y1: 1, x2: 0, y2: 5 },
-    ];
+    const segments = [{ x1: 0, y1: 1, x2: 0, y2: 5 }];
 
     const wrapper = mount(
       <Annotation
         annotation={annotation}
         label={label}
         labelId={labelId}
-        getAnnotationSegments={() => { return segments; }}
+        getAnnotationSegments={() => {
+          return segments;
+        }}
         isSelected={false}
         onClick={() => {}}
         positionFrom={0}
@@ -209,7 +216,9 @@ describe('<Annotation />', () => {
         annotation={annotation}
         label={label}
         labelId={labelId}
-        getAnnotationSegments={() => { return segments; }}
+        getAnnotationSegments={() => {
+          return segments;
+        }}
         isSelected={false}
         onClick={() => {}}
         positionFrom={0}
@@ -239,7 +248,9 @@ describe('<Annotation />', () => {
         annotation={annotation}
         label={label}
         labelId={labelId}
-        getAnnotationSegments={() => { return segments; }}
+        getAnnotationSegments={() => {
+          return segments;
+        }}
         isSelected={false}
         onClick={() => {}}
         positionFrom={0}
@@ -267,7 +278,9 @@ describe('<Annotation />', () => {
         annotation={annotation}
         label={label}
         labelId={labelId}
-        getAnnotationSegments={() => { return segments; }}
+        getAnnotationSegments={() => {
+          return segments;
+        }}
         isSelected={false}
         onClick={() => {}}
         positionFrom={0}

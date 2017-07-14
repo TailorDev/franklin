@@ -7,7 +7,6 @@ const { describe, it } = global;
 
 import Loader from '../presenter';
 
-
 describe('<Loader />', () => {
   it('can be visible', () => {
     const wrapper = shallow(<Loader display />);

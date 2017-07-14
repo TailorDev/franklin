@@ -7,8 +7,7 @@ import {
 } from '../../modules/selection';
 import * as actions from '../../modules/label';
 
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const sequence = state.sequence;
   const label = state.label;
 
@@ -21,18 +20,14 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onNucleotideClick: (newIndex) => {
+  onNucleotideClick: newIndex => {
     dispatch(actions.clearSelectedAnnotation());
     dispatch(updateSelection(newIndex));
   },
   onAnnotationClick: (labelId, annotation, positionFrom) => {
     dispatch(actions.selectAnnotation(labelId, annotation));
-    dispatch(updateSelectionFrom(
-      annotation.positionFrom - positionFrom,
-    ));
-    dispatch(updateSelectionTo(
-      annotation.positionTo - positionFrom,
-    ));
+    dispatch(updateSelectionFrom(annotation.positionFrom - positionFrom));
+    dispatch(updateSelectionTo(annotation.positionTo - positionFrom));
   },
 });
 

@@ -10,13 +10,10 @@ import { App } from '../App';
 import Header from '../Header';
 
 describe('<App />', () => {
-
   const version = 'dummy';
 
   it('renders Header component', () => {
-    const wrapper = shallow(
-      <App version={version} dispatch={() => {}} />
-    );
+    const wrapper = shallow(<App version={version} dispatch={() => {}} />);
     expect(wrapper.find(Header)).to.have.length(1);
   });
 });

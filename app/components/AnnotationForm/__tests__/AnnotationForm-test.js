@@ -37,7 +37,7 @@ describe('<AnnotationForm />', () => {
   });
 
   it('updates annotation form with selection', () => {
-    const selections = [{from: 2, to: 4}];
+    const selections = [{ from: 2, to: 4 }];
     const wrapper = mount(
       <AnnotationForm
         sequence={sequence}
@@ -54,12 +54,14 @@ describe('<AnnotationForm />', () => {
 
     wrapper.setProps({ selections });
 
-    expect(wrapper.find(InputNumberWithInlineButton).get(0).props.value).to.equal(2);
+    expect(
+      wrapper.find(InputNumberWithInlineButton).get(0).props.value
+    ).to.equal(2);
     expect(wrapper.find(InputNumber).get(0).props.value).to.equal(4);
   });
 
   it('updates annotation form with partial selection', () => {
-    const selections = [{from: 2, to: undefined}];
+    const selections = [{ from: 2, to: undefined }];
     const wrapper = mount(
       <AnnotationForm
         sequence={sequence}
@@ -76,8 +78,12 @@ describe('<AnnotationForm />', () => {
 
     wrapper.setProps({ selections });
 
-    expect(wrapper.find(InputNumberWithInlineButton).get(0).props.value).to.equal(2);
-    expect(wrapper.find({placeholder:"To", type:"number", value:''})).to.have.length(1);
+    expect(
+      wrapper.find(InputNumberWithInlineButton).get(0).props.value
+    ).to.equal(2);
+    expect(
+      wrapper.find({ placeholder: 'To', type: 'number', value: '' })
+    ).to.have.length(1);
   });
 
   it('does not show remove button if no annotation is under edition', () => {
@@ -120,7 +126,7 @@ describe('<AnnotationForm />', () => {
   });
 
   it('disables position fields if more than one selection', () => {
-    const selections = [{ from: 1, to: 2}, { from: 1, to: 2 }];
+    const selections = [{ from: 1, to: 2 }, { from: 1, to: 2 }];
     const wrapper = mount(
       <AnnotationForm
         sequence={sequence}
@@ -141,7 +147,7 @@ describe('<AnnotationForm />', () => {
   });
 
   it('shows remove button if an annotation is under edition', () => {
-    const selections = [{from: 10, to: 20}];
+    const selections = [{ from: 10, to: 20 }];
     const current = {
       labelId: 123,
       annotationId: 456,
@@ -150,7 +156,7 @@ describe('<AnnotationForm />', () => {
         positionTo: 20,
         comment: '',
         displayTick: true,
-      }
+      },
     };
 
     const wrapper = mount(
@@ -169,14 +175,14 @@ describe('<AnnotationForm />', () => {
 
     wrapper.setProps({
       current,
-      selections
+      selections,
     });
 
     expect(wrapper.find('.remove')).to.have.length(1);
   });
 
   it('displays the Remove component on "remove" button click', () => {
-    const selections = [{from: 10, to: 20}];
+    const selections = [{ from: 10, to: 20 }];
     const current = {
       labelId: 123,
       annotationId: 456,
@@ -185,7 +191,7 @@ describe('<AnnotationForm />', () => {
         positionTo: 20,
         comment: '',
         displayTick: true,
-      }
+      },
     };
 
     const wrapper = mount(
@@ -204,7 +210,7 @@ describe('<AnnotationForm />', () => {
 
     wrapper.setProps({
       current,
-      selections
+      selections,
     });
 
     expect(wrapper.find('.remove')).to.have.length(1);
@@ -216,10 +222,7 @@ describe('<AnnotationForm />', () => {
   });
 
   it('should call onSubmit N times, but onSubmitDone once', () => {
-    const selections = [
-      {from: 1, to: 2},
-      {from: 10, to: 20},
-    ];
+    const selections = [{ from: 1, to: 2 }, { from: 10, to: 20 }];
     const spyOnSubmit = sinon.spy();
     const spyOnSubmitDone = sinon.spy();
 
@@ -239,7 +242,7 @@ describe('<AnnotationForm />', () => {
 
     wrapper.setProps({
       current: null,
-      selections
+      selections,
     });
 
     const e = { preventDefault: () => {} };

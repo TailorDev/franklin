@@ -5,7 +5,6 @@ import Fasta from '../fasta';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { Promise, beforeEach, afterEach, describe, it } = global;
 
-
 describe('utils/Fasta', () => {
   it('parses FASTA string', () => {
     const fasta = `
@@ -25,7 +24,9 @@ LDGSSFEEIARAKFPYGLPYGLHGCWIPKD`;
 
     expect(result.header).to.be.defined;
     expect(result.sequence).to.be.defined;
-    expect(result.header).to.equal('sp|Q8VY26|CCD8_ARATH Carotenoid cleavage dioxygenase 8, chloroplastic OS=Arabidopsis thaliana GN=CCD8 PE=1 SV=1');
+    expect(result.header).to.equal(
+      'sp|Q8VY26|CCD8_ARATH Carotenoid cleavage dioxygenase 8, chloroplastic OS=Arabidopsis thaliana GN=CCD8 PE=1 SV=1'
+    );
     expect(result.sequence.size).to.equal(570);
   });
 
@@ -38,7 +39,9 @@ MASLITTKAMMSHHHVLSSTRITTLYSDNSIGDQQIKTKPQVPHRLFARRIFGVTRAVIN`;
 
     expect(result.header).to.be.defined;
     expect(result.sequence).to.be.defined;
-    expect(result.header).to.equal('sp|Q8VY26|CCD8_ARATH Carotenoid cleavage dioxygenase 8, chloroplastic OS=Arabidopsis thaliana GN=CCD8 PE=1 SV=1');
+    expect(result.header).to.equal(
+      'sp|Q8VY26|CCD8_ARATH Carotenoid cleavage dioxygenase 8, chloroplastic OS=Arabidopsis thaliana GN=CCD8 PE=1 SV=1'
+    );
     expect(result.sequence.size).to.equal(60);
   });
 

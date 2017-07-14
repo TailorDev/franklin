@@ -4,14 +4,11 @@ import reducer, * as actions from '../notification';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-
 describe('modules/notification', () => {
   it('should return the initial state', () => {
     const state = reducer(undefined, {});
 
-    expect(state).to.have.all.keys([
-      'messages',
-    ]);
+    expect(state).to.have.all.keys(['messages']);
     expect(state.messages).to.be.empty;
   });
 

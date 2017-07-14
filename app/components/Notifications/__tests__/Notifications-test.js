@@ -9,11 +9,11 @@ const { describe, it } = global;
 import Notifications from '../presenter';
 import MessageBox from '../MessageBox';
 
-
 describe('<Notifications />', () => {
-
   it('renders nothing if no messages', () => {
-    const wrapper = shallow(<Notifications messages={[]} onMessageBoxClose={() => {}} />);
+    const wrapper = shallow(
+      <Notifications messages={[]} onMessageBoxClose={() => {}} />
+    );
 
     expect(wrapper.find('.message-boxes')).to.have.length(1);
     expect(wrapper.find('.message-box')).to.have.length(0);
@@ -25,13 +25,10 @@ describe('<Notifications />', () => {
         content: 'foo',
         level: 'error',
         count: 1,
-      }
+      },
     ];
     const wrapper = mount(
-      <Notifications
-        messages={messages}
-        onMessageBoxClose={() => {}}
-      />
+      <Notifications messages={messages} onMessageBoxClose={() => {}} />
     );
 
     expect(wrapper.find('.message-boxes')).to.have.length(1);
@@ -56,13 +53,10 @@ describe('<Notifications />', () => {
         content: 'lol',
         level: 'info',
         count: 1,
-      }
+      },
     ];
     const wrapper = mount(
-      <Notifications
-        messages={messages}
-        onMessageBoxClose={() => {}}
-      />
+      <Notifications messages={messages} onMessageBoxClose={() => {}} />
     );
 
     expect(wrapper.find('.message-boxes')).to.have.length(1);
@@ -70,8 +64,12 @@ describe('<Notifications />', () => {
     expect(wrapper.find('.message-box.warning')).to.have.length(1);
     expect(wrapper.find('.message-box.success')).to.have.length(1);
     expect(wrapper.find('.message-box.info')).to.have.length(1);
-    expect(wrapper.find('.message-box.warning').html()).to.contain('<p>foo</p>');
-    expect(wrapper.find('.message-box.success').html()).to.contain('<p>bar</p>');
+    expect(wrapper.find('.message-box.warning').html()).to.contain(
+      '<p>foo</p>'
+    );
+    expect(wrapper.find('.message-box.success').html()).to.contain(
+      '<p>bar</p>'
+    );
     expect(wrapper.find('.message-box.info').html()).to.contain('<p>lol</p>');
   });
 
@@ -93,25 +91,31 @@ describe('<Notifications />', () => {
         content: 'lol',
         level: 'info',
         count: 1,
-      }
+      },
     ];
     const wrapper = mount(
-      <Notifications
-        messages={messages}
-        onMessageBoxClose={spy}
-      />
+      <Notifications messages={messages} onMessageBoxClose={spy} />
     );
 
     // Close the info message
-    wrapper.find('.message-box.info').children('.close-button').simulate('click');
+    wrapper
+      .find('.message-box.info')
+      .children('.close-button')
+      .simulate('click');
     expect(spy.calledOnce).to.be.true;
 
     // Close the warning message
-    wrapper.find('.message-box.warning').children('.close-button').simulate('click');
+    wrapper
+      .find('.message-box.warning')
+      .children('.close-button')
+      .simulate('click');
     expect(spy.calledTwice).to.be.true;
 
     // Close the success message
-    wrapper.find('.message-box.success').children('.close-button').simulate('click');
+    wrapper
+      .find('.message-box.success')
+      .children('.close-button')
+      .simulate('click');
     expect(spy.calledThrice).to.be.true;
 
     // Check that the handler is called with proper arguments

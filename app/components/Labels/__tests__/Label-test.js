@@ -12,9 +12,7 @@ import LabelForm from '../LabelForm';
 import LabelTools from '../LabelTools';
 import Remove from '../../Remove';
 
-
 describe('<Label />', () => {
-
   it('renders a list item', () => {
     const label = {
       name: 'foo',

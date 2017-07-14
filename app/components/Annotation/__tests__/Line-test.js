@@ -7,9 +7,7 @@ const { describe, it } = global;
 
 import Line from '../Line';
 
-
 describe('<Line />', () => {
-
   it('renders itself', () => {
     const wrapper = shallow(
       <Line
@@ -49,15 +47,7 @@ describe('<Line />', () => {
 
   it('can render a tick for a reverse annotation', () => {
     const wrapper = shallow(
-      <Line
-        x1={0}
-        y1={0}
-        x2={1}
-        y2={1}
-        color={'#fff'}
-        hasTick
-        isReverse
-      />
+      <Line x1={0} y1={0} x2={1} y2={1} color={'#fff'} hasTick isReverse />
     );
 
     expect(wrapper.find('g')).to.have.length(1);

@@ -7,9 +7,7 @@ const { describe, it } = global;
 
 import InputNumber from '../';
 
-
 describe('<InputNumber />', () => {
-
   it('renders itself', () => {
     const wrapper = mount(
       <InputNumber

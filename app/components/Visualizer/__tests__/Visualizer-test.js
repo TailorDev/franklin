@@ -14,7 +14,6 @@ import Help from '../Help';
 import { defaultLabels } from '../../../defaults';
 
 describe('<Visualizer />', () => {
-
   const sequence = new Immutable.List('ATTTGCGTCG'.split(''));
 
   const mockStore = configureStore();
@@ -101,12 +100,12 @@ describe('<Visualizer />', () => {
 
     const listener = window.addEventListener.args[0][1];
 
-    expect(window.removeEventListener.calledWith('resize', listener)).to.be.true;
+    expect(window.removeEventListener.calledWith('resize', listener)).to.be
+      .true;
   });
 
   // SKIPPED
   it.skip('updates dimensions when receiving new props', () => {
-
     // Does not work because of:
     //  - https://github.com/airbnb/enzyme/issues/472
     //  - https://github.com/airbnb/enzyme/issues/183

@@ -26,6 +26,7 @@ export default function reducer(state = initialState, action = {}) {
     case CLEAR:
       return initialState;
 
-    default: return state;
+    default:
+      return state;
   }
 }

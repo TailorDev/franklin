@@ -4,7 +4,6 @@ import reducer, * as actions from '../search';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-
 describe('modules/search', () => {
   it('should return the initial state', () => {
     const state = reducer(undefined, {});

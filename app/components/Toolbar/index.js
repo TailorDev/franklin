@@ -4,18 +4,18 @@ import Toolbar from './presenter';
 import { changePositionFrom } from '../../modules/sequence';
 import * as actions from '../../modules/franklin';
 
-
-export const mapStateToProps = (state) => {
+export const mapStateToProps = state => {
   const sequence = state.sequence;
   const label = state.label;
   const exon = state.exon;
 
   let ntSequence = null;
   if (0 < sequence.sequence.size) {
-    ntSequence = (new Nt.Seq()).read(sequence.sequence.join(''));
+    ntSequence = new Nt.Seq().read(sequence.sequence.join(''));
   }
-  const hasSelection = (undefined !== state.selection.selections &&
-                        0 !== state.selection.selections.length);
+  const hasSelection =
+    undefined !== state.selection.selections &&
+    0 !== state.selection.selections.length;
 
   return {
     name: sequence.name,
@@ -29,7 +29,7 @@ export const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onPositionFromChange: (event) => {
+  onPositionFromChange: event => {
     let position = parseInt(event.target.value, 10);
 
     if (isNaN(position) || 1 > position) {

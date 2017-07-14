@@ -8,9 +8,8 @@ import { defaultSequence } from '../../defaults';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-
 describe('modules/sequence', () => {
-  const middlewares = [ thunk ];
+  const middlewares = [thunk];
   const mockStore = configureMockStore(middlewares);
 
   it('should return the initial state', () => {
@@ -71,9 +70,12 @@ describe('modules/sequence', () => {
     const content = {
       header: '',
       sequence: Immutable.List(),
-    }
+    };
 
-    const { header, sequence } = actions.checkUploadedFile(store.dispatch, content);
+    const { header, sequence } = actions.checkUploadedFile(
+      store.dispatch,
+      content
+    );
     expect(header).to.equal('');
     expect(store.getActions()[0].type).to.equal('franklin/notification/NOTIFY');
     expect(store.getActions()[0].level).to.equal('error');
@@ -83,14 +85,19 @@ describe('modules/sequence', () => {
     const store = mockStore({});
     const content = {
       header: '',
-      sequence: Immutable.List(['A','G']),
-    }
+      sequence: Immutable.List(['A', 'G']),
+    };
 
-    const { header, sequence } = actions.checkUploadedFile(store.dispatch, content);
+    const { header, sequence } = actions.checkUploadedFile(
+      store.dispatch,
+      content
+    );
     expect(header).to.equal('Unknown');
     expect(store.getActions()[0].type).to.equal('franklin/notification/NOTIFY');
     expect(store.getActions()[0].level).to.equal('warning');
-    expect(store.getActions()[0].message).to.equal('Undefined title set to unknown');
+    expect(store.getActions()[0].message).to.equal(
+      'Undefined title set to unknown'
+    );
   });
 
   it('handles empty sequence file', () => {
@@ -98,24 +105,34 @@ describe('modules/sequence', () => {
     const content = {
       header: 'name',
       sequence: Immutable.List([]),
-    }
+    };
 
-    const { header, sequence } = actions.checkUploadedFile(store.dispatch, content);
+    const { header, sequence } = actions.checkUploadedFile(
+      store.dispatch,
+      content
+    );
     expect(header).to.equal('name');
     expect(store.getActions()[0].type).to.equal('franklin/notification/NOTIFY');
     expect(store.getActions()[0].level).to.equal('error');
-    expect(store.getActions()[0].message).to.equal('No sequence found into the file');
+    expect(store.getActions()[0].message).to.equal(
+      'No sequence found into the file'
+    );
   });
 
   it('should close "upload" notifications when uploaded file is OK', () => {
     const store = mockStore({});
     const content = {
       header: 'name',
-      sequence: Immutable.List(['A','G']),
-    }
+      sequence: Immutable.List(['A', 'G']),
+    };
 
-    const { header, sequence } = actions.checkUploadedFile(store.dispatch, content);
+    const { header, sequence } = actions.checkUploadedFile(
+      store.dispatch,
+      content
+    );
     expect(header).to.equal('name');
-    expect(store.getActions()[0].type).to.equal('franklin/notification/CLOSE_CATEGORY');
+    expect(store.getActions()[0].type).to.equal(
+      'franklin/notification/CLOSE_CATEGORY'
+    );
   });
 });

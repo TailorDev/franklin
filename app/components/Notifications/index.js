@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Notifications from './presenter';
 import { close } from '../../modules/notification';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const notification = state.notification;
 
   return {
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onMessageBoxClose: (index) => {
+  onMessageBoxClose: index => {
     dispatch(close(index));
   },
 });

@@ -8,9 +8,8 @@ import { defaultfranklins } from '../../defaults';
 // see: https://github.com/mochajs/mocha/issues/1847
 const { describe, it } = global;
 
-
 describe('modules/franklin', () => {
-  const middlewares = [ thunk ];
+  const middlewares = [thunk];
   const mockStore = configureMockStore(middlewares);
 
   it('calls the default load actions', () => {

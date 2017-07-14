@@ -7,16 +7,9 @@ const { describe, it } = global;
 
 import PositionFrom from '../../PositionFrom';
 
-
 describe('<PositionFrom />', () => {
-
   it('renders itself', () => {
-    const wrapper = mount(
-      <PositionFrom
-        value={123}
-        onChange={() => {}}
-      />
-    );
+    const wrapper = mount(<PositionFrom value={123} onChange={() => {}} />);
 
     expect(wrapper.find('input[type="number"]')).to.have.length(1);
   });

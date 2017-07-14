@@ -8,11 +8,9 @@ import sinon from 'sinon';
 const { describe, it } = global;
 
 import Toolbar from '../presenter';
-import { mapStateToProps } from '../index';
-
+import { mapStateToProps } from '../index';
 
 describe('<Toolbar />', () => {
-
   const list = new Immutable.List();
 
   it('renders a panel', () => {
@@ -62,7 +60,7 @@ describe('<Toolbar />', () => {
     );
 
     expect(wrapper.find('.clear-selection').hasClass('hidden')).to.equal(true);
-  })
+  });
 
   it('should show the clear selection button', () => {
     const wrapper = shallow(
@@ -78,7 +76,7 @@ describe('<Toolbar />', () => {
     );
 
     expect(wrapper.find('.clear-selection').hasClass('hidden')).to.equal(false);
-  })
+  });
 
   it('clear the current selection', () => {
     const spy = sinon.spy();
@@ -97,7 +95,7 @@ describe('<Toolbar />', () => {
     expect(wrapper.find('.clear-selection')).to.have.length(1);
     wrapper.find('.clear-selection a').simulate('click');
     expect(spy.calledOnce).to.be.true;
-  })
+  });
 
   describe('mapStateToProps', () => {
     it('should return a null ntSequence when sequence is empty', () => {

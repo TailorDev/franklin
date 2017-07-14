@@ -7,15 +7,10 @@ const { describe, it } = global;
 
 import InlineButton from '../InlineButton';
 
-
 describe('<InlineButton />', () => {
-
   it('renders itself', () => {
     const wrapper = shallow(
-      <InlineButton
-        onChange={() => {}}
-        onClick={() => {}}
-      >
+      <InlineButton onChange={() => {}} onClick={() => {}}>
         Button text
       </InlineButton>
     );
@@ -26,11 +21,7 @@ describe('<InlineButton />', () => {
 
   it('has a button that can be disabled', () => {
     const wrapper = shallow(
-      <InlineButton
-        onChange={() => {}}
-        onClick={() => {}}
-        hasButtonDisabled
-      >
+      <InlineButton onChange={() => {}} onClick={() => {}} hasButtonDisabled>
         Button text
       </InlineButton>
     );

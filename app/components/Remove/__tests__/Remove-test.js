@@ -8,15 +8,10 @@ const { describe, it } = global;
 
 import Remove from '../';
 
-
 describe('<Remove />', () => {
-
   it('should render a remove dialog box', () => {
     const wrapper = shallow(
-      <Remove
-        onCancel={() => {}}
-        onRemove={() => {}}
-      >
+      <Remove onCancel={() => {}} onRemove={() => {}}>
         Foo
       </Remove>
     );
@@ -29,10 +24,7 @@ describe('<Remove />', () => {
   it('should fire cancel handler', () => {
     const spy = sinon.spy();
     const wrapper = shallow(
-      <Remove
-        onCancel={spy}
-        onRemove={() => {}}
-      >
+      <Remove onCancel={spy} onRemove={() => {}}>
         Foo
       </Remove>
     );
@@ -44,10 +36,7 @@ describe('<Remove />', () => {
   it('should fire deletion handler', () => {
     const spy = sinon.spy();
     const wrapper = shallow(
-      <Remove
-        onCancel={() => {}}
-        onRemove={spy}
-      >
+      <Remove onCancel={() => {}} onRemove={spy}>
         Foo
       </Remove>
     );

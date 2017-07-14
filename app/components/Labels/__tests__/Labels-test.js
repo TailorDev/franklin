@@ -10,12 +10,20 @@ const { describe, it } = global;
 import Labels from '../presenter';
 import Label from '../Label';
 
-
 describe('<Labels />', () => {
-
   const dummyLabels = Immutable.List([
-    { name: 'label 1', color: '#000', isActive: true, annotations: Immutable.List(), },
-    { name: 'label 2', color: '#fff', isActive: true, annotations: Immutable.List(), },
+    {
+      name: 'label 1',
+      color: '#000',
+      isActive: true,
+      annotations: Immutable.List(),
+    },
+    {
+      name: 'label 2',
+      color: '#fff',
+      isActive: true,
+      annotations: Immutable.List(),
+    },
   ]);
 
   it('renders a list of labels', () => {
@@ -48,17 +56,19 @@ describe('<Labels />', () => {
     wrapper.find('input[type="text"]').simulate('change', {
       persist: () => {},
       target: {
-        value: 'foo'
-      }
+        value: 'foo',
+      },
     });
     wrapper.find('.button.submit').simulate('click');
 
     expect(spy.calledOnce).to.be.true;
-    expect(spy.calledWith({
-      name: 'foo',
-      color: '#0F157B',
-      isActive: true,
-      annotations: Immutable.List(),
-    })).to.be.true;
+    expect(
+      spy.calledWith({
+        name: 'foo',
+        color: '#0F157B',
+        isActive: true,
+        annotations: Immutable.List(),
+      })
+    ).to.be.true;
   });
 });

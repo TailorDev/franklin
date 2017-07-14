@@ -10,9 +10,7 @@ const { describe, it } = global;
 import LabelEdit from '../LabelEdit';
 import LabelForm from '../LabelForm';
 
-
 describe('<LabelEdit />', () => {
-
   const dummyLabel = {
     name: 'foo',
     color: '#000',
@@ -59,17 +57,19 @@ describe('<LabelEdit />', () => {
     wrapper.find('input[type="text"]').simulate('change', {
       persist: () => {},
       target: {
-        value: 'bar'
-      }
+        value: 'bar',
+      },
     });
     wrapper.find('.button.submit').simulate('click');
 
     expect(spy.calledOnce).to.be.true;
-    expect(spy.calledWith({
-      name: 'bar',
-      color: '#000',
-      isActive: true,
-      annotations: Immutable.List() })
+    expect(
+      spy.calledWith({
+        name: 'bar',
+        color: '#000',
+        isActive: true,
+        annotations: Immutable.List(),
+      })
     ).to.be.true;
   });
 });

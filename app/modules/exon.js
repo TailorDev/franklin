@@ -51,13 +51,11 @@ export default function reducer(state = initialState, action = {}) {
 
     case UPDATE_AT:
       return {
-        exons: state.exons.update(action.index, () => (
-          {
-            name: action.exon.name,
-            positionFrom: action.exon.positionFrom,
-            positionTo: action.exon.positionTo,
-          }
-        )),
+        exons: state.exons.update(action.index, () => ({
+          name: action.exon.name,
+          positionFrom: action.exon.positionFrom,
+          positionTo: action.exon.positionTo,
+        })),
       };
 
     case REMOVE_AT:
@@ -65,6 +63,7 @@ export default function reducer(state = initialState, action = {}) {
         exons: state.exons.splice(action.index, 1),
       };
 
-    default: return state;
+    default:
+      return state;
   }
 }

@@ -9,9 +9,7 @@ const { describe, it } = global;
 import Exon from '../Exon';
 import ExonEdit from '../ExonEdit';
 
-
 describe('<Exon />', () => {
-
   const exon = {
     name: 'exon 1',
     positionFrom: 10,
@@ -71,12 +69,7 @@ describe('<Exon />', () => {
   it('can be edited', () => {
     const spy = sinon.spy();
     const wrapper = mount(
-      <Exon
-        exon={exon}
-        onEditExon={spy}
-        onRemoveExon={() => {}}
-        index={1}
-      />
+      <Exon exon={exon} onEditExon={spy} onRemoveExon={() => {}} index={1} />
     );
 
     wrapper.find('.properties').simulate('click');
@@ -121,12 +114,7 @@ describe('<Exon />', () => {
   it('can be deleted', () => {
     const spy = sinon.spy();
     const wrapper = mount(
-      <Exon
-        exon={exon}
-        onEditExon={() => {}}
-        onRemoveExon={spy}
-        index={1}
-      />
+      <Exon exon={exon} onEditExon={() => {}} onRemoveExon={spy} index={1} />
     );
 
     wrapper.find('.properties').simulate('click');

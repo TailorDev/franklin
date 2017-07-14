@@ -13,7 +13,6 @@ import Sequence from '../';
 import Nucleotide from '../../Nucleotide';
 
 describe('<Sequence />', () => {
-
   const sequence = new Immutable.List('ATTTGCGTCG'.split(''));
 
   const mockStore = configureStore();
@@ -33,7 +32,7 @@ describe('<Sequence />', () => {
       <Provider store={mockStore(initialState)}>
         <Sequence
           sequence={sequence}
-          visualizerMargin={{x: 10, y: 10}}
+          visualizerMargin={{ x: 10, y: 10 }}
           nucleotidesPerRow={5}
           nucleotidesRowHeight={50}
           nucleotideWidth={12}
@@ -54,7 +53,7 @@ describe('<Sequence />', () => {
       <Provider store={mockStore(initialState)}>
         <Sequence
           sequence={sequence}
-          visualizerMargin={{x: 10, y: 10}}
+          visualizerMargin={{ x: 10, y: 10 }}
           nucleotidesPerRow={80}
           nucleotidesRowHeight={50}
           nucleotideWidth={12}
@@ -77,7 +76,7 @@ describe('<Sequence />', () => {
       <Provider store={mockStore(initialState)}>
         <Sequence
           sequence={sequence}
-          visualizerMargin={{x: 10, y: 10}}
+          visualizerMargin={{ x: 10, y: 10 }}
           nucleotidesPerRow={80}
           nucleotidesRowHeight={50}
           nucleotideWidth={12}

@@ -2,7 +2,7 @@
  * Positionning utils
  */
 
- /**
+/**
   * Calculate a nucleotide coordinates given its position in the sequence and
   * container (Visualizer) constraints.
   *
@@ -14,12 +14,16 @@
   * @return {Object} coordinates - nucleotide coordinates {x: 0, y: 0}
   */
 export const getNucleotideCoordinates = (
-  index, visualizerMargin, nucleotidesPerRow, nucleotideWidth, rowHeight,
+  index,
+  visualizerMargin,
+  nucleotidesPerRow,
+  nucleotideWidth,
+  rowHeight
 ) => {
-  const x = visualizerMargin.x + (nucleotideWidth * (index % nucleotidesPerRow));
+  const x = visualizerMargin.x + nucleotideWidth * (index % nucleotidesPerRow);
 
   const currentRow = Math.trunc(index / nucleotidesPerRow);
-  const y = visualizerMargin.y + (rowHeight * currentRow);
+  const y = visualizerMargin.y + rowHeight * currentRow;
 
   return { x, y };
 };
@@ -40,30 +44,42 @@ export const getNucleotideCoordinates = (
  * @return {Object} coordinates - segment coordinates {x1: 0, x2: 0, y1: 0, y2: 0}
  */
 export const getAnnotationSegmentCoordinates = (
-  indexFrom, indexTo, currentTrack, visualizerMargin, nucleotidesPerRow,
-  nucleotideWidth, rowHeight, nucleotidesRowHeight, trackHeight,
+  indexFrom,
+  indexTo,
+  currentTrack,
+  visualizerMargin,
+  nucleotidesPerRow,
+  nucleotideWidth,
+  rowHeight,
+  nucleotidesRowHeight,
+  trackHeight
 ) => {
-  const { from, to } = indexFrom < indexTo ?
-    { from: indexFrom, to: indexTo } : { from: indexTo, to: indexFrom };
+  const { from, to } =
+    indexFrom < indexTo
+      ? { from: indexFrom, to: indexTo }
+      : { from: indexTo, to: indexFrom };
 
   const nucleotideFromCoordinates = getNucleotideCoordinates(
     from,
     visualizerMargin,
     nucleotidesPerRow,
     nucleotideWidth,
-    rowHeight,
+    rowHeight
   );
   const nucleotideToCoordinates = getNucleotideCoordinates(
     to,
     visualizerMargin,
     nucleotidesPerRow,
     nucleotideWidth,
-    rowHeight,
+    rowHeight
   );
 
-  const x1 = (nucleotideWidth / 2) + nucleotideFromCoordinates.x;
+  const x1 = nucleotideWidth / 2 + nucleotideFromCoordinates.x;
   const x2 = nucleotideWidth + nucleotideToCoordinates.x;
-  const y1 = nucleotidesRowHeight + nucleotideFromCoordinates.y + (trackHeight * currentTrack);
+  const y1 =
+    nucleotidesRowHeight +
+    nucleotideFromCoordinates.y +
+    trackHeight * currentTrack;
   const y2 = y1;
 
   return { x1, x2, y1, y2 };
@@ -72,12 +88,21 @@ export const getAnnotationSegmentCoordinates = (
 /**
  */
 export const getAnnotationSegments = (
-  indexFrom, indexTo, currentTrack, visualizerMargin, nucleotidesPerRow,
-  nucleotideWidth, rowHeight, nucleotidesRowHeight, trackHeight,
+  indexFrom,
+  indexTo,
+  currentTrack,
+  visualizerMargin,
+  nucleotidesPerRow,
+  nucleotideWidth,
+  rowHeight,
+  nucleotidesRowHeight,
+  trackHeight
 ) => {
   const segments = [];
-  const { from, to } = indexFrom < indexTo ?
-    { from: indexFrom, to: indexTo } : { from: indexTo, to: indexFrom };
+  const { from, to } =
+    indexFrom < indexTo
+      ? { from: indexFrom, to: indexTo }
+      : { from: indexTo, to: indexFrom };
 
   let start = from;
   for (let i = start + 1; i <= to; i++) {
@@ -98,7 +123,7 @@ export const getAnnotationSegments = (
       nucleotideWidth,
       rowHeight,
       nucleotidesRowHeight,
-      trackHeight,
-    ),
+      trackHeight
+    )
   );
 };

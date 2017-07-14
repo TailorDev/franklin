@@ -8,21 +8,15 @@ const { describe, it } = global;
 
 import LabelForm from '../LabelForm';
 
-
 describe('<LabelForm />', () => {
-
   const dummyLabel = {
     name: 'foo',
     color: '#000',
-    isActive: true
+    isActive: true,
   };
 
   it('renders a label form', () => {
-    const wrapper = shallow(
-      <LabelForm
-        onCancel={() => {}}
-      />
-    );
+    const wrapper = shallow(<LabelForm onCancel={() => {}} />);
 
     expect(wrapper.find('span.colorpicker-button')).to.have.length(1);
     expect(wrapper.find('input[type="text"]')).to.have.length(1);
@@ -31,12 +25,10 @@ describe('<LabelForm />', () => {
   });
 
   it('renders a new label form with defaults', () => {
-    const wrapper = shallow(
-      <LabelForm
-        onCancel={() => {}}
-      />
-    );
-    expect(wrapper.find('input[type="text"]').get(0).props.value.length).to.equal(0);
+    const wrapper = shallow(<LabelForm onCancel={() => {}} />);
+    expect(
+      wrapper.find('input[type="text"]').get(0).props.value.length
+    ).to.equal(0);
   });
 
   it('renders an edit label form with initial values', () => {
@@ -47,16 +39,14 @@ describe('<LabelForm />', () => {
         label={dummyLabel}
       />
     );
-    expect(wrapper.find('input[type="text"]').get(0).props.value).to.equal('foo');
+    expect(wrapper.find('input[type="text"]').get(0).props.value).to.equal(
+      'foo'
+    );
   });
 
   it('cancels label form display', () => {
     const spy = sinon.spy();
-    const wrapper = shallow(
-      <LabelForm
-        onCancel={spy}
-      />
-    );
+    const wrapper = shallow(<LabelForm onCancel={spy} />);
 
     wrapper.find('input[type="reset"]').simulate('click');
     expect(spy.calledOnce).to.be.true;
@@ -65,17 +55,14 @@ describe('<LabelForm />', () => {
   it('submits label creation form', () => {
     const spy = sinon.spy();
     const wrapper = shallow(
-      <LabelForm
-        onCreateNewLabel={spy}
-        onCancel={() => {}}
-      />
+      <LabelForm onCreateNewLabel={spy} onCancel={() => {}} />
     );
 
     wrapper.find('input[type="text"]').simulate('change', {
       persist: () => {},
       target: {
-        value: 'foo'
-      }
+        value: 'foo',
+      },
     });
     wrapper.find('input[type="submit"]').simulate('click');
     expect(spy.calledOnce).to.be.true;
@@ -84,18 +71,14 @@ describe('<LabelForm />', () => {
   it('submits label edition form', () => {
     const spy = sinon.spy();
     const wrapper = shallow(
-      <LabelForm
-        onEditLabel={spy}
-        onCancel={() => {}}
-        label={dummyLabel}
-      />
+      <LabelForm onEditLabel={spy} onCancel={() => {}} label={dummyLabel} />
     );
 
     wrapper.find('input[type="text"]').simulate('change', {
       persist: () => {},
       target: {
-        value: 'bar'
-      }
+        value: 'bar',
+      },
     });
     wrapper.find('input[type="submit"]').simulate('click');
     expect(spy.calledOnce).to.be.true;

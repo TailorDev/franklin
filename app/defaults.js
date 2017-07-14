@@ -1,6 +1,5 @@
 import Immutable from 'immutable';
 
-
 export const defaultSequence = new Immutable.List(
   [
     'ATGGTCACTCTAATCGCAGTCTGCAATTTACGTGTTTCCAACTTAACGCCCCCAAGTTAATAGCCGTAAT',
@@ -9,7 +8,9 @@ export const defaultSequence = new Immutable.List(
     'AAGTTGACCGTCGATGGCGATTTCACAAGTGACGTTTAAGTGGCGGGAACTTCTACTCACAAATCCCTGA',
     'GCCCTGTGATATGATTTATTTTATGGAGCCGTGATCCGGACGAAAAATGCACACACATTTCTACAAAAAT',
     'ATGTACATCGCGGTGCGATTGTGTCGCTTAAAGCACACGTACACCCACTGTCACACTCACACTCACATGC',
-  ].join('').split(''),
+  ]
+    .join('')
+    .split('')
 );
 
 export const defaultLabels = new Immutable.List([
@@ -48,40 +49,38 @@ export const defaultLabels = new Immutable.List([
     name: 'SNP',
     color: '#e04462',
     isActive: true,
-    annotations: new Immutable.List(
-      [
-        {
-          positionFrom: 104,
-          positionTo: 104,
-          comment: 'rs115543123',
-          displayTick: true,
-        },
-        {
-          positionFrom: 201,
-          positionTo: 202,
-          comment: 'rs115543124',
-          displayTick: true,
-        },
-        {
-          positionFrom: 340,
-          positionTo: 340,
-          comment: 'rs115543125',
-          displayTick: true,
-        },
-        {
-          positionFrom: 355,
-          positionTo: 355,
-          comment: 'rs115543126',
-          displayTick: true,
-        },
-        {
-          positionFrom: 374,
-          positionTo: 375,
-          comment: 'rs115543127',
-          displayTick: true,
-        },
-      ],
-    ),
+    annotations: new Immutable.List([
+      {
+        positionFrom: 104,
+        positionTo: 104,
+        comment: 'rs115543123',
+        displayTick: true,
+      },
+      {
+        positionFrom: 201,
+        positionTo: 202,
+        comment: 'rs115543124',
+        displayTick: true,
+      },
+      {
+        positionFrom: 340,
+        positionTo: 340,
+        comment: 'rs115543125',
+        displayTick: true,
+      },
+      {
+        positionFrom: 355,
+        positionTo: 355,
+        comment: 'rs115543126',
+        displayTick: true,
+      },
+      {
+        positionFrom: 374,
+        positionTo: 375,
+        comment: 'rs115543127',
+        displayTick: true,
+      },
+    ]),
   },
 ]);
 

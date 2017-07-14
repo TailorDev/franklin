@@ -65,14 +65,12 @@ function doCreateAnnotation(state, action) {
   }
 
   return {
-    labels: state.labels.update(action.labelId, v => (
-      {
-        name: v.name,
-        color: v.color,
-        isActive: v.isActive,
-        annotations: v.annotations.push(action.annotation),
-      }
-    )),
+    labels: state.labels.update(action.labelId, v => ({
+      name: v.name,
+      color: v.color,
+      isActive: v.isActive,
+      annotations: v.annotations.push(action.annotation),
+    })),
     selectedAnnotation: null,
   };
 }
@@ -86,19 +84,20 @@ function doUpdateAnnotation(state, action) {
     return state;
   }
 
-  if (null === annotationId || !state.labels.get(labelId).annotations.has(annotationId)) {
+  if (
+    null === annotationId ||
+    !state.labels.get(labelId).annotations.has(annotationId)
+  ) {
     return state;
   }
 
   return {
-    labels: state.labels.update(labelId, v => (
-      {
-        name: v.name,
-        color: v.color,
-        isActive: v.isActive,
-        annotations: v.annotations.update(annotationId, () => annotation),
-      }
-    )),
+    labels: state.labels.update(labelId, v => ({
+      name: v.name,
+      color: v.color,
+      isActive: v.isActive,
+      annotations: v.annotations.update(annotationId, () => annotation),
+    })),
     selectedAnnotation: null,
   };
 }
@@ -111,19 +110,20 @@ function doRemoveAnnotation(state, action) {
     return state;
   }
 
-  if (null === annotationId || !state.labels.get(labelId).annotations.has(annotationId)) {
+  if (
+    null === annotationId ||
+    !state.labels.get(labelId).annotations.has(annotationId)
+  ) {
     return state;
   }
 
   return {
-    labels: state.labels.update(labelId, v => (
-      {
-        name: v.name,
-        color: v.color,
-        isActive: v.isActive,
-        annotations: v.annotations.remove(annotationId),
-      }
-    )),
+    labels: state.labels.update(labelId, v => ({
+      name: v.name,
+      color: v.color,
+      isActive: v.isActive,
+      annotations: v.annotations.remove(annotationId),
+    })),
     selectedAnnotation: null,
   };
 }
@@ -136,9 +136,13 @@ function doSelectAnnotation(state, action) {
     return state;
   }
 
-  const annotationId = state.labels.get(labelId).annotations.findKey(v => (
-    v.positionFrom === annotation.positionFrom && v.positionTo === annotation.positionTo
-  ));
+  const annotationId = state.labels
+    .get(labelId)
+    .annotations.findKey(
+      v =>
+        v.positionFrom === annotation.positionFrom &&
+        v.positionTo === annotation.positionTo
+    );
 
   if (undefined === annotationId) {
     return state;
@@ -178,14 +182,12 @@ export default function reducer(state = initialState, action = {}) {
 
     case UPDATE_AT:
       return {
-        labels: state.labels.update(action.index, () => (
-          {
-            name: action.label.name,
-            color: action.label.color,
-            isActive: true,
-            annotations: action.label.annotations,
-          }
-        )),
+        labels: state.labels.update(action.index, () => ({
+          name: action.label.name,
+          color: action.label.color,
+          isActive: true,
+          annotations: action.label.annotations,
+        })),
         selectedAnnotation: null,
       };
 
@@ -197,14 +199,12 @@ export default function reducer(state = initialState, action = {}) {
 
     case TOGGLE_AT:
       return Object.assign({}, state, {
-        labels: state.labels.update(action.index, label => (
-          {
-            name: label.name,
-            color: label.color,
-            isActive: !label.isActive,
-            annotations: label.annotations,
-          }
-        )),
+        labels: state.labels.update(action.index, label => ({
+          name: label.name,
+          color: label.color,
+          isActive: !label.isActive,
+          annotations: label.annotations,
+        })),
       });
 
     case CREATE_ANNOTATION:
@@ -222,6 +222,7 @@ export default function reducer(state = initialState, action = {}) {
     case REMOVE_ANNOTATION:
       return doRemoveAnnotation(state, action);
 
-    default: return state;
+    default:
+      return state;
   }
 }

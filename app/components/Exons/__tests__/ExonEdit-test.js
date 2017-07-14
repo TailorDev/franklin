@@ -9,9 +9,7 @@ const { describe, it } = global;
 import ExonEdit from '../ExonEdit';
 import ExonForm from '../ExonForm';
 
-
 describe('<ExonEdit />', () => {
-
   const exon = {
     name: 'exon 1',
     positionFrom: 10,
@@ -60,28 +58,30 @@ describe('<ExonEdit />', () => {
     wrapper.find('input[type="number"]').at(0).simulate('change', {
       persist: () => {},
       target: {
-        value: 11
-      }
+        value: 11,
+      },
     });
     wrapper.find('input[type="number"]').at(1).simulate('change', {
       persist: () => {},
       target: {
-        value: 23
-      }
+        value: 23,
+      },
     });
     wrapper.find('input[type="text"]').simulate('change', {
       persist: () => {},
       target: {
-        value: 'exon 2'
-      }
+        value: 'exon 2',
+      },
     });
     wrapper.find('.button.submit').simulate('click');
 
     expect(spy.calledOnce).to.be.true;
-    expect(spy.calledWith({
-      name: 'exon 2',
-      positionFrom: 11,
-      positionTo: 23 })
+    expect(
+      spy.calledWith({
+        name: 'exon 2',
+        positionFrom: 11,
+        positionTo: 23,
+      })
     ).to.be.true;
   });
 });

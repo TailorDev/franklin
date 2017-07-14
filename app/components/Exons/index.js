@@ -15,10 +15,10 @@ function mapDispatchToProps(dispatch) {
     onEditExon: (index, exon) => {
       dispatch(actions.updateAt(index, exon));
     },
-    onRemoveExon: (index) => {
+    onRemoveExon: index => {
       dispatch(actions.removeAt(index));
     },
-    onCreateNewExon: (exon) => {
+    onCreateNewExon: exon => {
       dispatch(actions.create(exon));
     },
   };

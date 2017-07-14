@@ -8,14 +8,14 @@ const { describe, it } = global;
 
 import MessageBox from '../MessageBox';
 
-
 describe('<MessageBox />', () => {
-
   it('renders a message', () => {
     const message = {
       content: 'hello.',
     };
-    const wrapper = shallow(<MessageBox message={message} onClose={() => {}} index={0} />);
+    const wrapper = shallow(
+      <MessageBox message={message} onClose={() => {}} index={0} />
+    );
 
     expect(wrapper.find('.message-box')).to.have.length(1);
     expect(wrapper.text()).to.equal('hello.×');
@@ -26,7 +26,9 @@ describe('<MessageBox />', () => {
       content: 'hello.',
       level: 'info',
     };
-    const wrapper = shallow(<MessageBox message={message} onClose={() => {}} index={0} />);
+    const wrapper = shallow(
+      <MessageBox message={message} onClose={() => {}} index={0} />
+    );
 
     expect(wrapper.find('.message-box.info')).to.have.length(1);
     expect(wrapper.text()).to.equal('hello.×');

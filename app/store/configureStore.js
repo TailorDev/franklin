@@ -3,23 +3,22 @@ import thunk from 'redux-thunk';
 import Immutable from 'immutable';
 import rootReducer from '../modules/reducer';
 
-
 const middlewares = [thunk];
 
 if ('production' !== process.env.NODE_ENV) {
   const createLogger = require('redux-logger');
 
   const logger = createLogger({
-    stateTransformer: (state) => {
+    stateTransformer: state => {
       const newState = {};
 
-        for (const i of Object.keys(state)) {
-          if (Immutable.Iterable.isIterable(state[i])) {
-            newState[i] = state[i].toJS();
-          } else {
-            newState[i] = state[i];
-          }
+      for (const i of Object.keys(state)) {
+        if (Immutable.Iterable.isIterable(state[i])) {
+          newState[i] = state[i].toJS();
+        } else {
+          newState[i] = state[i];
         }
+      }
 
       return newState;
     },
@@ -33,7 +32,10 @@ export default function configureStore(initialState) {
   return createStoreWithMiddleware(
     rootReducer,
     initialState,
-    'production' !== process.env.NODE_ENV && 'undefined' !== typeof window &&
-    window.devToolsExtension ? window.devToolsExtension() : f => f,
+    'production' !== process.env.NODE_ENV &&
+    'undefined' !== typeof window &&
+    window.devToolsExtension
+      ? window.devToolsExtension()
+      : f => f
   );
 }

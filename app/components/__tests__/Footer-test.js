@@ -7,9 +7,7 @@ const { describe, it } = global;
 
 import Footer from '../Footer';
 
-
 describe('<Footer />', () => {
-
   const version = 'dummy version';
 
   it('renders a footer element', () => {

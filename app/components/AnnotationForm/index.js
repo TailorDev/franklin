@@ -34,10 +34,10 @@ function mapDispatchToProps(dispatch) {
     onSubmitDone: () => {
       dispatch(clearAll());
     },
-    updateSelectionFrom: (positionFrom) => {
+    updateSelectionFrom: positionFrom => {
       dispatch(updateSelectionFrom(positionFrom));
     },
-    updateSelectionTo: (positionTo) => {
+    updateSelectionTo: positionTo => {
       dispatch(updateSelectionTo(positionTo));
     },
     onRemove: (labelId, annotationId) => {

@@ -39,7 +39,7 @@ function doUpdate(state, action) {
 
   if (selected === from || selected === to) {
     return initialState;
-  } else if ((undefined === from) || (from && to)) {
+  } else if (undefined === from || (from && to)) {
     return {
       selections: [{ from: selected, to: undefined }],
     };
@@ -90,6 +90,7 @@ export default function reducer(state = initialState, action = {}) {
         selections: action.selections,
       };
 
-    default: return state;
+    default:
+      return state;
   }
 }
