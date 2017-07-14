@@ -217,10 +217,12 @@ class AnnotationForm extends Component {
             value={null !== this.state.annotationId ? 'Save' : 'Add'}
           />
           {null !== this.state.annotationId ?
-            <i
-              className="fa fa-trash remove"
+            <button
+              className="remove"
               onClick={this.toggleActionRemove}
-            /> : null
+            >
+              <i className="fa fa-trash" />
+            </button> : null
           }
         </form>
 
