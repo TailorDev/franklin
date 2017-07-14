@@ -1,4 +1,3 @@
-/* eslint import/no-named-as-default: 0 */
 import { combineReducers } from 'redux';
 
 import sequence from './sequence';

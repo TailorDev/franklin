@@ -1,4 +1,3 @@
-/* eslint global-require: 0 */
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import Immutable from 'immutable';
@@ -14,7 +13,7 @@ if ('production' !== process.env.NODE_ENV) {
     stateTransformer: (state) => {
       const newState = {};
 
-        for (const i of Object.keys(state)) { // eslint-disable-line
+        for (const i of Object.keys(state)) {
           if (Immutable.Iterable.isIterable(state[i])) {
             newState[i] = state[i].toJS();
           } else {

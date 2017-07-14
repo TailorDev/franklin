@@ -1,4 +1,3 @@
-/* eslint no-plusplus: 0 */
 /*
  * Positionning utils
  */

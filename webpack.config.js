@@ -61,14 +61,6 @@ const common = {
     rules: [
       {
         test: /\.jsx?$/,
-        enforce: 'pre',
-        use: [
-          { loader: 'eslint-loader' },
-        ],
-        include: [PATHS.app],
-      },
-      {
-        test: /\.jsx?$/,
         use: [
           { loader: 'babel-loader' },
         ],

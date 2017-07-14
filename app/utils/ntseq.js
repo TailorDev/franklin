@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 export var Nt = function() {
 
   'use strict';

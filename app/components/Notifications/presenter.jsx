@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-/* eslint react/no-unused-prop-types: 0 */
 import React from 'react';
 import MessageBox from './MessageBox';
 
