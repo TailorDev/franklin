@@ -1,4 +1,4 @@
 --require test/bootstrap.js
---compilers jsx?:babel-register
+--compilers jsx?:babel-core/register
 app/**/*-test.js
 app/**/**/*-test.js

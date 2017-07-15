@@ -188,7 +188,10 @@ describe('modules/label', () => {
         comment: 'Foo bar',
       };
 
-      state = reducer(undefined, actions.selectAnnotation(labelId, annotation));
+      const state = reducer(
+        undefined,
+        actions.selectAnnotation(labelId, annotation)
+      );
       expect(state.labels.size).to.be.empty;
       expect(state.selectedAnnotation).to.be.null;
     });

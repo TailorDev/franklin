@@ -33,9 +33,6 @@ const VERSION = (() => {
 
 const PORT = process.env.PORT || 3000;
 
-// Used to configure Babel (see: `.babelrc` file)
-process.env.BABEL_ENV = TARGET;
-
 // Common config, shared by all "targets"
 const common = {
   // Entry points are used to define "bundles"
@@ -138,9 +135,12 @@ if (TARGET === 'build') {
         // Extract CSS during build
         {
           test: /\.(css|scss)$/,
-          loader: ExtractTextPlugin.extract({
-            loader: 'css-loader!sass-loader',
-            fallbackLoader: 'style-loader',
+          use: ExtractTextPlugin.extract({
+            use: [
+              'css-loader',
+              'sass-loader',
+            ],
+            fallback: 'style-loader',
           }),
         }
       ]
@@ -152,11 +152,10 @@ if (TARGET === 'build') {
         }
       }),
       new CleanPlugin([ PATHS.build ]),
-      // Output extracted CSS to a file
       new ExtractTextPlugin({
         filename: '[name].[chunkhash].css',
       }),
-      // Minification with Uglify
+      new webpack.optimize.ModuleConcatenationPlugin(),
       new webpack.LoaderOptionsPlugin({
         minimize: true,
       }),
