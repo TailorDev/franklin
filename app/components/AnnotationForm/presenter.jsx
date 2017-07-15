@@ -141,10 +141,12 @@ class AnnotationForm extends Component {
     this.setState({ displayTick: !this.state.displayTick });
   }
 
-  toggleActionRemove() {
-    this.setState({
-      displayRemoveForm: !this.state.displayRemoveForm,
-    });
+  toggleActionRemove(event) {
+    event.preventDefault();
+
+    this.setState((prevState) => ({
+      displayRemoveForm: !prevState.displayRemoveForm,
+    }));
   }
 
   handleRemove() {
