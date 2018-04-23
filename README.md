@@ -15,6 +15,8 @@ play with SVGs, [React](https://facebook.github.io/react/), and
 
 ## Usage
 
+:warning: As of April 2018, our public instance is not UP anymore.
+
 Either install the project or use our public instance:
 https://franklin.lelab.tailordev.fr/.
 

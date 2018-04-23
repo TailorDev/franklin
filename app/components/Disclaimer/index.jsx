@@ -13,8 +13,8 @@ const Disclaimer = props => (
     <h2>Disclaimer</h2>
 
     <p>
-      <a href="https://franklin.lelab.tailordev.fr">Franklin</a> is a
-      Proof of Concept. It is not suitable for a realistic analysis (yet). You can&nbsp;
+      Franklin is a Proof of Concept. It is not suitable for a realistic
+      analysis (yet). You can&nbsp;
       <a href="https://tailordev.fr/blog/2016/06/09/le-lab-3-franklin-dna-sequence-annotation-tool">
         read the story behind it
       </a>,&nbsp;
